@@ -1,0 +1,18 @@
+//
+//  YSAppStoreConfig.xcconfig
+//  YSYBPatient_Test
+//
+//  Created by YJ on 17/5/8.
+//  Copyright © 2017年 YJ. All rights reserved.
+//
+
+//:configuration = Dev
+CODE_SIGN_IDENTITY =
+
+//:completeSettings = none
+
+//:configuration = Dev
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) APPSTORE=4
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "APPSTORE"
+
+//:completeSettings = none
