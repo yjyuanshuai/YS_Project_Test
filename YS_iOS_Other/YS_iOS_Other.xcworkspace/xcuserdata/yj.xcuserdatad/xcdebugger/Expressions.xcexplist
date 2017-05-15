@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__copy_helper_block_:YSOperationDetailUserVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_imagesArr">
+            </PersistentString>
+            <PersistentString
+               value = "response">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ImagePickerManager initQBImagePickerVC]:ImagePickerManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_QBImagePC">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ImagePickerManager initWithPickerType:listViewController:backMediaBlock:]:ImagePickerManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_QBImagePC">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AudioPlayerVC setCurrentIndex:]:AudioPlayerVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_audioArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OneSearchController createSearchBarInTableView]:OneSearchController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_ysSearchCon.searchBar.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AudioListVC analysisData]:AudioListVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_audioArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AudioViewController viewDidLoad]:AudioViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_webAudiosArr">
+            </PersistentString>
+            <PersistentString
+               value = "_localAudiosArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSOperationDetailUserVC operationQueue]:YSOperationDetailUserVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_imagesArr">
+            </PersistentString>
+            <PersistentString
+               value = "_failImagesArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AudioPlayerVC obtainCurrentSongList]:AudioPlayerVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_audioArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OneSearchController didPresentSearchController:]:OneSearchController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.edgesForExtendedLayout">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSOperationDetailUserVC obtainImage]:YSOperationDetailUserVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_imagesArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSPlayViewController createAVPlayer]:YSPlayViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_allTime.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CameraOrImageListVC tableView:didSelectRowAtIndexPath:]:CameraOrImageListVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageManager.QBImagePC">
+            </PersistentString>
+            <PersistentString
+               value = "imageManager.imagePickerCon">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSSearchBar layoutSubviews]:YSSearchBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds.size.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.textFeildContentInset.right">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSCustemSearchController searchBarTextDidBeginEditing:]:YSCustemSearchController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.active">
+            </PersistentString>
+            <PersistentString
+               value = "self.navigationController.navigationBar.hidden">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[YSTestDataBase initDBMigrationManager]:YSTestDataBase.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "hasMigrationsTable">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OneSearchController searchBarSearchButtonClicked:]:OneSearchController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_historyArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AudioListVC tableView:didSelectRowAtIndexPath:]:AudioListVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_audioArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
