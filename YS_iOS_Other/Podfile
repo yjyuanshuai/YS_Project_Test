@@ -1,0 +1,18 @@
+
+platform:ios,'8.3'
+target "YS_iOS_Other" do
+pod 'BaiduMapKit','3.0.0'
+pod 'Masonry','1.0.1'
+#pod 'AFNetworking','3.1.0'
+pod 'RESideMenu','4.0.7'
+pod 'QBImagePickerController','3.4.0'
+pod 'UITableView+FDTemplateLayoutCell','1.4'
+pod 'CocoaLumberjack','2.3.0'
+pod 'SDWebImage','3.8.1'
+pod 'FMDB','2.6.2'
+pod 'CocoaHTTPServer','2.3'
+pod 'FMDBMigrationManager','1.4.1'
+pod 'JSPatch'
+
+end
+
