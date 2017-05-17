@@ -119,13 +119,9 @@
 		3923F86F1E03D68C005A02D7 /* EmotionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3923F86E1E03D68C005A02D7 /* EmotionCollectionViewCell.m */; };
 		3923F8751E03EA9C005A02D7 /* ChatViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3923F8741E03EA9C005A02D7 /* ChatViewTableViewCell.m */; };
 		392621971D2365D700CF4C90 /* UIColor+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 392621961D2365D700CF4C90 /* UIColor+Image.m */; };
-		392651B11DE702C300B98D70 /* 浮诛.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AA1DE702C300B98D70 /* 浮诛.mp3 */; };
 		392651B21DE702C300B98D70 /* 离思.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AB1DE702C300B98D70 /* 离思.mp3 */; };
-		392651B31DE702C300B98D70 /* 青衣谣.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AC1DE702C300B98D70 /* 青衣谣.mp3 */; };
 		392651B41DE702C300B98D70 /* 青云志.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AD1DE702C300B98D70 /* 青云志.mp3 */; };
 		392651B51DE702C300B98D70 /* 如果我们不曾相遇.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AE1DE702C300B98D70 /* 如果我们不曾相遇.mp3 */; };
-		392651B61DE702C300B98D70 /* 时光笔墨.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AF1DE702C300B98D70 /* 时光笔墨.mp3 */; };
-		392651B71DE702C300B98D70 /* 英雄有路.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651B01DE702C300B98D70 /* 英雄有路.mp3 */; };
 		3926FB501D6557FD00E67C30 /* YSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3926FB4F1D6557FD00E67C30 /* YSButton.m */; };
 		3930F48A1E4B1098006D877F /* ImageTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3930F4891E4B1098006D877F /* ImageTextVC.m */; };
 		3932AA911E7250C20044D681 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3932AA701E7250C20044D681 /* AFHTTPSessionManager.m */; };
@@ -256,6 +252,7 @@
 		395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 395ACEA31D937D4F00C22165 /* UIView+UniformDistribution.m */; };
 		395ACEA81D9381B700C22165 /* JianShuNavAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 395ACEA71D9381B700C22165 /* JianShuNavAnimationViewController.m */; };
 		395E69591D128BE900CBDFE0 /* btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = 395E69581D128BE900CBDFE0 /* btn1.png */; };
+		395F3A021ECBF129004245CD /* systemsoundtest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 395F3A011ECBF129004245CD /* systemsoundtest.wav */; };
 		396DC5381E94FD3100AC9787 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC5371E94FD3100AC9787 /* VideoListVC.m */; };
 		396DC53B1E94FE2700AC9787 /* YSVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */; };
 		3985944E1D13F0B800863A14 /* SevenAppleLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3985944D1D13F0B800863A14 /* SevenAppleLocationViewController.m */; };
@@ -307,9 +304,6 @@
 		39C46B2C1E9646CB001A7AAB /* YSNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C46B2B1E9646CB001A7AAB /* YSNavController.m */; };
 		39C4F2461D910B9400E4FADE /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C4F2451D910B9400E4FADE /* libCocoaLumberjack.a */; };
 		39C6219F1D0EABDF00A34040 /* CollectionTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C6219E1D0EABDF00A34040 /* CollectionTestModel.m */; };
-		39CAB15C1D816DFD0078AFF5 /* 歌曲1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39CAB1591D816DFD0078AFF5 /* 歌曲1.mp3 */; };
-		39CAB15D1D816DFD0078AFF5 /* 歌曲2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39CAB15A1D816DFD0078AFF5 /* 歌曲2.mp3 */; };
-		39CAB15E1D816DFD0078AFF5 /* 歌曲3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 39CAB15B1D816DFD0078AFF5 /* 歌曲3.mp3 */; };
 		39CCA9931D488E6700B78FA9 /* Stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CCA9921D488E6700B78FA9 /* Stars@2x.png */; };
 		39D65A1E1E07BF8500FFCF78 /* ChatMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D65A1D1E07BF8500FFCF78 /* ChatMsgModel.m */; };
 		39D65A221E07C2E000FFCF78 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D65A211E07C2E000FFCF78 /* Utility.m */; };
@@ -518,13 +512,9 @@
 		3923F8741E03EA9C005A02D7 /* ChatViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewTableViewCell.m; sourceTree = "<group>"; };
 		392621951D2365D700CF4C90 /* UIColor+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Image.h"; sourceTree = "<group>"; };
 		392621961D2365D700CF4C90 /* UIColor+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Image.m"; sourceTree = "<group>"; };
-		392651AA1DE702C300B98D70 /* 浮诛.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "浮诛.mp3"; sourceTree = "<group>"; };
 		392651AB1DE702C300B98D70 /* 离思.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "离思.mp3"; sourceTree = "<group>"; };
-		392651AC1DE702C300B98D70 /* 青衣谣.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "青衣谣.mp3"; sourceTree = "<group>"; };
 		392651AD1DE702C300B98D70 /* 青云志.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "青云志.mp3"; sourceTree = "<group>"; };
 		392651AE1DE702C300B98D70 /* 如果我们不曾相遇.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "如果我们不曾相遇.mp3"; sourceTree = "<group>"; };
-		392651AF1DE702C300B98D70 /* 时光笔墨.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "时光笔墨.mp3"; sourceTree = "<group>"; };
-		392651B01DE702C300B98D70 /* 英雄有路.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "英雄有路.mp3"; sourceTree = "<group>"; };
 		3926FB4E1D6557FD00E67C30 /* YSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSButton.h; sourceTree = "<group>"; };
 		3926FB4F1D6557FD00E67C30 /* YSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSButton.m; sourceTree = "<group>"; };
 		3930F4881E4B1098006D877F /* ImageTextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTextVC.h; sourceTree = "<group>"; };
@@ -758,6 +748,7 @@
 		395ACEA61D9381B700C22165 /* JianShuNavAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JianShuNavAnimationViewController.h; sourceTree = "<group>"; };
 		395ACEA71D9381B700C22165 /* JianShuNavAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JianShuNavAnimationViewController.m; sourceTree = "<group>"; };
 		395E69581D128BE900CBDFE0 /* btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn1.png; path = Image/btn1.png; sourceTree = "<group>"; };
+		395F3A011ECBF129004245CD /* systemsoundtest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = systemsoundtest.wav; sourceTree = "<group>"; };
 		396DC5361E94FD3100AC9787 /* VideoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListVC.h; sourceTree = "<group>"; };
 		396DC5371E94FD3100AC9787 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
 		396DC5391E94FE2700AC9787 /* YSVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSVideoPlayerView.h; sourceTree = "<group>"; };
@@ -835,9 +826,6 @@
 		39C4F2451D910B9400E4FADE /* libCocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaLumberjack.a; path = "Pods/../build/Debug-iphoneos/CocoaLumberjack/libCocoaLumberjack.a"; sourceTree = "<group>"; };
 		39C6219D1D0EABDF00A34040 /* CollectionTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectionTestModel.h; path = YS_iOS_Other/Models/CollectionTestModel.h; sourceTree = SOURCE_ROOT; };
 		39C6219E1D0EABDF00A34040 /* CollectionTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectionTestModel.m; path = YS_iOS_Other/Models/CollectionTestModel.m; sourceTree = SOURCE_ROOT; };
-		39CAB1591D816DFD0078AFF5 /* 歌曲1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "歌曲1.mp3"; sourceTree = "<group>"; };
-		39CAB15A1D816DFD0078AFF5 /* 歌曲2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "歌曲2.mp3"; sourceTree = "<group>"; };
-		39CAB15B1D816DFD0078AFF5 /* 歌曲3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "歌曲3.mp3"; sourceTree = "<group>"; };
 		39CCA9921D488E6700B78FA9 /* Stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars@2x.png"; sourceTree = "<group>"; };
 		39D65A1C1E07BF8500FFCF78 /* ChatMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatMsgModel.h; path = YS_iOS_Other/Models/ChatMsgModel.h; sourceTree = SOURCE_ROOT; };
 		39D65A1D1E07BF8500FFCF78 /* ChatMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatMsgModel.m; path = YS_iOS_Other/Models/ChatMsgModel.m; sourceTree = SOURCE_ROOT; };
@@ -2337,17 +2325,11 @@
 		39FF1FBC1D585A3000463160 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				395F3A011ECBF129004245CD /* systemsoundtest.wav */,
 				395118E01D598063008E339D /* YS_iOS_Audio.plist */,
-				392651AA1DE702C300B98D70 /* 浮诛.mp3 */,
 				392651AB1DE702C300B98D70 /* 离思.mp3 */,
-				392651AC1DE702C300B98D70 /* 青衣谣.mp3 */,
 				392651AD1DE702C300B98D70 /* 青云志.mp3 */,
 				392651AE1DE702C300B98D70 /* 如果我们不曾相遇.mp3 */,
-				392651AF1DE702C300B98D70 /* 时光笔墨.mp3 */,
-				392651B01DE702C300B98D70 /* 英雄有路.mp3 */,
-				39CAB1591D816DFD0078AFF5 /* 歌曲1.mp3 */,
-				39CAB15A1D816DFD0078AFF5 /* 歌曲2.mp3 */,
-				39CAB15B1D816DFD0078AFF5 /* 歌曲3.mp3 */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -2507,7 +2489,6 @@
 				3923F82D1E0396DA005A02D7 /* Expression_5@2x.png in Resources */,
 				3923F8341E0396DA005A02D7 /* Expression_12@2x.png in Resources */,
 				3923F84C1E0396DA005A02D7 /* Expression_36@2x.png in Resources */,
-				39CAB15D1D816DFD0078AFF5 /* 歌曲2.mp3 in Resources */,
 				399129021D5C4D340099C279 /* tab_fiv_sel.png in Resources */,
 				39214A7C1D056A600019422D /* 4.jpg in Resources */,
 				39214A7B1D056A600019422D /* 3.jpg in Resources */,
@@ -2525,7 +2506,6 @@
 				3923F84A1E0396DA005A02D7 /* Expression_34@2x.png in Resources */,
 				3991290C1D5C4D340099C279 /* tab_two_sel.png in Resources */,
 				3923F8271E0396DA005A02D7 /* chatBubble_Sending_Solid@2x.png in Resources */,
-				392651B61DE702C300B98D70 /* 时光笔墨.mp3 in Resources */,
 				3923F8321E0396DA005A02D7 /* Expression_10@2x.png in Resources */,
 				3923F8261E0396DA005A02D7 /* chatBubble_Receiving_Solid@2x.png in Resources */,
 				393AACE01D4B372A0004C41D /* cm2_fm_btn_love@3x.png in Resources */,
@@ -2537,6 +2517,7 @@
 				39FF1FB11D582AEC00463160 /* cm2_icn_list_prs.png in Resources */,
 				39FF1FB91D582CEB00463160 /* cm2_icn_loop_prs@3x.png in Resources */,
 				399129031D5C4D340099C279 /* tab_fou_num.png in Resources */,
+				395F3A021ECBF129004245CD /* systemsoundtest.wav in Resources */,
 				399C4A661D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@3x.png in Resources */,
 				399C4A621D8FC63500D8E6F6 /* cm2_icn_one_prs@2x.png in Resources */,
 				39FF1FA21D582AE400463160 /* cm2_btn_pause.png in Resources */,
@@ -2556,7 +2537,6 @@
 				392651B51DE702C300B98D70 /* 如果我们不曾相遇.mp3 in Resources */,
 				3991290A1D5C4D340099C279 /* tab_thr_sel.png in Resources */,
 				39FF1FB81D582CEB00463160 /* cm2_icn_loop_prs@2x.png in Resources */,
-				39CAB15C1D816DFD0078AFF5 /* 歌曲1.mp3 in Resources */,
 				3923F8411E0396DA005A02D7 /* Expression_25@2x.png in Resources */,
 				39FF1FAF1D582AEC00463160 /* cm2_fm_btn_next_prs@2x.png in Resources */,
 				39214A771D056A600019422D /* 10.jpg in Resources */,
@@ -2567,7 +2547,6 @@
 				3923F8601E0396DA005A02D7 /* Expression_56@2x.png in Resources */,
 				3923F84B1E0396DA005A02D7 /* Expression_35@2x.png in Resources */,
 				393AACCD1D4B30A30004C41D /* audioPlayer_bg.jpg in Resources */,
-				392651B11DE702C300B98D70 /* 浮诛.mp3 in Resources */,
 				3923F8431E0396DA005A02D7 /* Expression_27@2x.png in Resources */,
 				39B218BA1D19175E008DD042 /* homeDirectiory.plist in Resources */,
 				3946CA391E962673003E0D5B /* TZImagePickerController.bundle in Resources */,
@@ -2583,7 +2562,6 @@
 				3923F82C1E0396DA005A02D7 /* Expression_4@2x.png in Resources */,
 				39FF1FAE1D582AEC00463160 /* cm2_fm_btn_next_prs.png in Resources */,
 				399C4A631D8FC63500D8E6F6 /* cm2_icn_one_prs@3x.png in Resources */,
-				39CAB15E1D816DFD0078AFF5 /* 歌曲3.mp3 in Resources */,
 				393AACF71D4B396F0004C41D /* cm2_icn_dlded_prs@2x.png in Resources */,
 				39FF1FB01D582AEC00463160 /* cm2_fm_btn_next_prs@3x.png in Resources */,
 				393AACE31D4B372A0004C41D /* cm2_fm_btn_loved_dis@3x.png in Resources */,
@@ -2618,7 +2596,6 @@
 				39214A761D056A600019422D /* 1.jpg in Resources */,
 				393AACF01D4B396F0004C41D /* cm2_icn_dld_dis.png in Resources */,
 				CC179A831DE16A300050D8EF /* Settings.bundle in Resources */,
-				392651B71DE702C300B98D70 /* 英雄有路.mp3 in Resources */,
 				399C4A651D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@2x.png in Resources */,
 				3923F8401E0396DA005A02D7 /* Expression_24@2x.png in Resources */,
 				39B218CB1D192794008DD042 /* TwoDocumentTableViewCell.xib in Resources */,
@@ -2653,7 +2630,6 @@
 				39214A1A1D05203B0019422D /* Main.storyboard in Resources */,
 				3923F84E1E0396DA005A02D7 /* Expression_38@2x.png in Resources */,
 				393AACE41D4B372A0004C41D /* cm2_fm_btn_loved.png in Resources */,
-				392651B31DE702C300B98D70 /* 青衣谣.mp3 in Resources */,
 				3948F2DC1D548C93002F1778 /* LocationStringFile.strings in Resources */,
 				393AACF81D4B396F0004C41D /* cm2_icn_dlded_prs@3x.png in Resources */,
 				3923F8571E0396DA005A02D7 /* Expression_47@2x.png in Resources */,

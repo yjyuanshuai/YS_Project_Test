@@ -115,20 +115,20 @@ static NSString * const AudioListCellID = @"AudioListCellID";
     
     }
     else if (_type == AudioListTypeLocalPlay_SystemSound) {
-        
+
+        _sectionTitleArr = [@[@"自定义音频", @"系统音频"] mutableCopy];
     }
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_audioArr count];
+    return [_sectionTitleArr count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_type == AudioListTypeLocalPlay_SystemSound ||
-        _type == AudioListTypeLocalPlay_Music ||
+    if (_type == AudioListTypeLocalPlay_Music ||
         _type == AudioListTypeLocalPlay_SystemMusic) {
         
         if ([_audioArr count] > 0) {
@@ -139,6 +139,10 @@ static NSString * const AudioListCellID = @"AudioListCellID";
         }
         return 0;
     }
+    else if (_type == AudioListTypeLocalPlay_SystemSound) {
+
+    }
+
     return [_audioArr[section] count];
 }
 
