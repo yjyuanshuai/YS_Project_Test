@@ -18,11 +18,12 @@
 
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) NSMutableArray * audioListArr;
-@property (nonatomic, assign) YSAudioType audioType;
+@property (nonatomic, assign) AudioListType audioType;
 @property (nonatomic, strong) AVAudioPlayer * ysAudioPlayer;    // AudioPlayer
 
 + (AudioPlayerVC *)defaultAudioVC;
-- (void)setAudioType:(YSAudioType)audioType
+
+- (void)setAudioType:(AudioListType)audioType
            audioList:(NSMutableArray *)audioList
         currentIndex:(NSInteger)currentIndex;
 

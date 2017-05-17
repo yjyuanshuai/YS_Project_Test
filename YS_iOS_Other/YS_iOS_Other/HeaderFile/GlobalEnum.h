@@ -14,19 +14,12 @@
 //
 typedef NS_ENUM(NSInteger, AudioListType)
 {
-    AudioListTypeLocalPlay_SystemSound,     // 本地播放音效
+    AudioListTypeLocalPlay_SystemSound,     // 系统音效
+    AudioListTypeLocalPlay_CustemSound,     // 本地自定义音效
     AudioListTypeLocalPlay_Music,           // 本地音乐
-    AudioListTypeLocalPlay_SystemMusic,     // 本地系统音频
+    AudioListTypeLocalPlay_LibraryMusic,    // 本地音乐库音频
     AudioListTypeLoaclMake,                 // 本地录制音频
     AudioListTypeWeb                        // 网络音乐播放
-};
-
-// 音频类型
-typedef NS_ENUM(NSInteger, YSAudioType)
-{
-    AudioType_SystemSound,
-    AudioType_CustemSound,
-    AudioType_Music
 };
 
 // 播放设置

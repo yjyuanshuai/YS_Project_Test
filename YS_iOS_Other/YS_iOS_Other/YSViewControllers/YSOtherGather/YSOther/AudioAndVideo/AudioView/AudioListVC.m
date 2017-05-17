@@ -62,7 +62,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
     _sectionTitleArr = [@[] mutableCopy];
     
     if (_type == AudioListTypeLocalPlay_SystemSound ||
-        _type == AudioListTypeLocalPlay_SystemMusic ||
+        _type == AudioListTypeLocalPlay_LibraryMusic ||
         _type == AudioListTypeLocalPlay_Music) {
         
         UIBarButtonItem * rightBtn = [[UIBarButtonItem alloc] initWithTitle:@"正在播放" style:UIBarButtonItemStylePlain target:self action:@selector(currentPlay)];
@@ -89,8 +89,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
 
 - (void)analysisData
 {
-    if (_type == AudioListTypeWeb ||
-        _type == AudioListTypeLocalPlay_Music) {
+    if (_type == AudioListTypeLocalPlay_Music) {
         
         NSString * path = [[NSBundle mainBundle] pathForResource:@"YS_iOS_Audio" ofType:@"plist"];
         NSArray * arr = [NSArray arrayWithContentsOfFile:path];
@@ -112,25 +111,26 @@ static NSString * const AudioListCellID = @"AudioListCellID";
         
         [_audioListTableView reloadData];
     }
-    else if (_type == AudioListTypeLocalPlay_SystemMusic) {
-    
+    else if (_type == AudioListTypeLocalPlay_LibraryMusic) {
+
     }
-    else if (_type == AudioListTypeLocalPlay_SystemSound) {
+    else if (_type == AudioListTypeLocalPlay_SystemSound || _type == AudioListTypeLocalPlay_CustemSound) {
 
         _sectionTitleArr = [@[@"自定义音频", @"系统音频"] mutableCopy];
 
         YSSongModel * custemSound = [[YSSongModel alloc] init];
-        custemSound.name = @"systemsoundtest";
+        custemSound.name = @"custemsound";
         custemSound.expandType = @"wav";
-        custemSound.audioType = AudioType_CustemSound;
+        custemSound.audioType = AudioListTypeLocalPlay_CustemSound;
 
         YSSongModel * systemSound = [[YSSongModel alloc] init];
         systemSound.name = @"system sound 1000";
-        systemSound.audioType = AudioType_SystemSound;
+        systemSound.audioType = AudioListTypeLocalPlay_SystemSound;
 
         [_audioArr addObject:@[custemSound]];
         [_audioArr addObject:@[systemSound]];
     }
+
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -142,7 +142,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (_type == AudioListTypeLocalPlay_Music ||
-        _type == AudioListTypeLocalPlay_SystemMusic) {
+        _type == AudioListTypeLocalPlay_LibraryMusic) {
         
         if ([_audioArr count] > 0) {
             if (section < [_audioArr count] - 1) {
@@ -159,7 +159,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_type == AudioListTypeLocalPlay_Music ||
-        _type == AudioListTypeLocalPlay_SystemMusic) {
+        _type == AudioListTypeLocalPlay_LibraryMusic) {
         
         NSArray * sectionArr = _audioArr[indexPath.section];
         if (indexPath.row < [sectionArr count]) {
@@ -219,6 +219,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
     
     switch (_type) {
         case AudioListTypeLocalPlay_SystemSound:
+        case AudioListTypeLocalPlay_CustemSound:
         {
             if (indexPath.section < [_audioArr count]) {
                 NSMutableArray * sectionArr = _audioArr[indexPath.section];
@@ -227,12 +228,12 @@ static NSString * const AudioListCellID = @"AudioListCellID";
 
                     if (indexPath.section == 0) {
                         AudioPlayerVC * systemSoundPlayer = [AudioPlayerVC defaultAudioVC];
-                        [systemSoundPlayer setAudioType:AudioType_CustemSound audioList:sectionArr currentIndex:indexPath.row];
+                        [systemSoundPlayer setAudioType:AudioListTypeLocalPlay_CustemSound audioList:sectionArr currentIndex:indexPath.row];
                         [self.navigationController pushViewController:systemSoundPlayer animated:YES];
                     }
                     else {
                         AudioPlayerVC * systemSoundPlayer = [AudioPlayerVC defaultAudioVC];
-                        [systemSoundPlayer setAudioType:AudioType_SystemSound audioList:sectionArr currentIndex:indexPath.row];
+                        [systemSoundPlayer setAudioType:AudioListTypeLocalPlay_SystemSound audioList:sectionArr currentIndex:indexPath.row];
                         [self.navigationController pushViewController:systemSoundPlayer animated:YES];
                     }
                 }
@@ -247,7 +248,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
                 [self storeCurrentPlayList:indexPath.section];
                 
                 AudioPlayerVC * audioPlayVC = [AudioPlayerVC defaultAudioVC];
-                [audioPlayVC setAudioType:AudioType_Music audioList:sectionArr currentIndex:indexPath.row];
+                [audioPlayVC setAudioType:AudioListTypeLocalPlay_Music audioList:sectionArr currentIndex:indexPath.row];
                 [self.navigationController pushViewController:audioPlayVC animated:YES];
                 
             }
@@ -263,9 +264,9 @@ static NSString * const AudioListCellID = @"AudioListCellID";
             }
         }
             break;
-        case AudioListTypeLocalPlay_SystemMusic:
+        case AudioListTypeLocalPlay_LibraryMusic:
         {
-            
+            // 
         }
             break;
         case AudioListTypeLoaclMake:
@@ -323,7 +324,7 @@ static NSString * const AudioListCellID = @"AudioListCellID";
 
         }
             break;
-        case AudioListTypeLocalPlay_SystemMusic:
+        case AudioListTypeLocalPlay_LibraryMusic:
         {
             
         }

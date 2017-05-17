@@ -8,10 +8,11 @@
 
 #import "AudioViewController.h"
 #import "AudioListVC.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "AudioPlayerVC.h"
+#import "YSSongModel.h"
 
-
-
-@interface AudioViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AudioViewController () <UITableViewDataSource, UITableViewDelegate, MPMediaPickerControllerDelegate>
 
 @property (nonatomic, strong) UITableView * audioTableView;
 
@@ -145,23 +146,32 @@
                 case 0:
                 {
                     type = AudioListTypeLocalPlay_SystemSound;
+
+                    AudioListVC * makeAudioVC = [[AudioListVC alloc] initWithTitle:_localAudiosArr[indexPath.row] audioListType:type];
+                    [self.navigationController pushViewController:makeAudioVC animated:YES];
                 }
                     break;
                 case 1:
                 {
                     type = AudioListTypeLocalPlay_Music;
+
+                    AudioListVC * makeAudioVC = [[AudioListVC alloc] initWithTitle:_localAudiosArr[indexPath.row] audioListType:type];
+                    [self.navigationController pushViewController:makeAudioVC animated:YES];
                 }
                     break;
                 case 2:
                 {
-                    type = AudioListTypeLocalPlay_SystemMusic;
+                    type = AudioListTypeLocalPlay_LibraryMusic;
+
+                    MPMediaPickerController * mpMediaPick = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeAnyAudio];
+                    mpMediaPick.delegate = self;
+                    mpMediaPick.prompt = @"从音乐库中选取播放音乐";
+                    mpMediaPick.allowsPickingMultipleItems = YES;    // 是否允许一次选多个
+                    [self presentViewController:mpMediaPick animated:YES completion:nil];
                 }
                     break;
                     
             }
-            
-            AudioListVC * makeAudioVC = [[AudioListVC alloc] initWithTitle:_localAudiosArr[indexPath.row] audioListType:type];
-            [self.navigationController pushViewController:makeAudioVC animated:YES];
         }
             break;
             
@@ -180,6 +190,31 @@
             break;
 
     }
+}
+
+#pragma mark - MPMediaPickerControllerDelegate
+- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
+{
+    NSMutableArray * itemArr = [NSMutableArray array];
+    for (MPMediaItem * item in [mediaItemCollection items]) {
+        YSSongModel * model = [[YSSongModel alloc] init];
+        model.url = [NSString stringWithFormat:@"%@", [item valueForProperty:MPMediaItemPropertyAssetURL]];
+        model.name = [item valueForProperty:MPMediaItemPropertyTitle];
+        [itemArr addObject:model];
+    }
+    AudioPlayerVC * audioPlayerVC = [AudioPlayerVC defaultAudioVC];
+    [audioPlayerVC setAudioType:AudioListTypeLocalPlay_LibraryMusic audioList:itemArr currentIndex:0];
+    [self.navigationController pushViewController:audioPlayerVC animated:YES];
+    [mediaPicker dismissViewControllerAnimated:NO completion:^{
+
+    }];
+}
+
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
+{
+    [mediaPicker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

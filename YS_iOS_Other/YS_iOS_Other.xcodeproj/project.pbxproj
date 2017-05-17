@@ -251,7 +251,7 @@
 		395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 395ACEA31D937D4F00C22165 /* UIView+UniformDistribution.m */; };
 		395ACEA81D9381B700C22165 /* JianShuNavAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 395ACEA71D9381B700C22165 /* JianShuNavAnimationViewController.m */; };
 		395E69591D128BE900CBDFE0 /* btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = 395E69581D128BE900CBDFE0 /* btn1.png */; };
-		395F3A021ECBF129004245CD /* systemsoundtest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 395F3A011ECBF129004245CD /* systemsoundtest.wav */; };
+		395F3A051ECC369F004245CD /* custemsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 395F3A041ECC369F004245CD /* custemsound.wav */; };
 		396DC5381E94FD3100AC9787 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC5371E94FD3100AC9787 /* VideoListVC.m */; };
 		396DC53B1E94FE2700AC9787 /* YSVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */; };
 		3985944E1D13F0B800863A14 /* SevenAppleLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3985944D1D13F0B800863A14 /* SevenAppleLocationViewController.m */; };
@@ -745,8 +745,8 @@
 		395ACEA61D9381B700C22165 /* JianShuNavAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JianShuNavAnimationViewController.h; sourceTree = "<group>"; };
 		395ACEA71D9381B700C22165 /* JianShuNavAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JianShuNavAnimationViewController.m; sourceTree = "<group>"; };
 		395E69581D128BE900CBDFE0 /* btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn1.png; path = Image/btn1.png; sourceTree = "<group>"; };
-		395F3A011ECBF129004245CD /* systemsoundtest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = systemsoundtest.wav; sourceTree = "<group>"; };
 		395F3A031ECBF8C5004245CD /* GlobalEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalEnum.h; path = HeaderFile/GlobalEnum.h; sourceTree = "<group>"; };
+		395F3A041ECC369F004245CD /* custemsound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = custemsound.wav; sourceTree = "<group>"; };
 		396DC5361E94FD3100AC9787 /* VideoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListVC.h; sourceTree = "<group>"; };
 		396DC5371E94FD3100AC9787 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
 		396DC5391E94FE2700AC9787 /* YSVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSVideoPlayerView.h; sourceTree = "<group>"; };
@@ -2322,7 +2322,7 @@
 		39FF1FBC1D585A3000463160 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				395F3A011ECBF129004245CD /* systemsoundtest.wav */,
+				395F3A041ECC369F004245CD /* custemsound.wav */,
 				395118E01D598063008E339D /* YS_iOS_Audio.plist */,
 				392651AB1DE702C300B98D70 /* 离思.mp3 */,
 				392651AD1DE702C300B98D70 /* 青云志.mp3 */,
@@ -2514,7 +2514,6 @@
 				39FF1FB11D582AEC00463160 /* cm2_icn_list_prs.png in Resources */,
 				39FF1FB91D582CEB00463160 /* cm2_icn_loop_prs@3x.png in Resources */,
 				399129031D5C4D340099C279 /* tab_fou_num.png in Resources */,
-				395F3A021ECBF129004245CD /* systemsoundtest.wav in Resources */,
 				399C4A661D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@3x.png in Resources */,
 				399C4A621D8FC63500D8E6F6 /* cm2_icn_one_prs@2x.png in Resources */,
 				39FF1FA21D582AE400463160 /* cm2_btn_pause.png in Resources */,
@@ -2596,6 +2595,7 @@
 				399C4A651D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@2x.png in Resources */,
 				3923F8401E0396DA005A02D7 /* Expression_24@2x.png in Resources */,
 				39B218CB1D192794008DD042 /* TwoDocumentTableViewCell.xib in Resources */,
+				395F3A051ECC369F004245CD /* custemsound.wav in Resources */,
 				3923F8461E0396DA005A02D7 /* Expression_30@2x.png in Resources */,
 				39FF1FA41D582AE400463160 /* cm2_btn_pause@3x.png in Resources */,
 				3923F83F1E0396DA005A02D7 /* Expression_23@2x.png in Resources */,
