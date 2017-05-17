@@ -12,7 +12,6 @@
 
 dispatch_queue_t serialQueue;
 
-
 static NSString * const ListCellID = @"ListCellID";
 
 @interface AudioPlayerVC ()<AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -52,9 +51,6 @@ static NSString * const ListCellID = @"ListCellID";
 @end
 
 @implementation AudioPlayerVC
-{
-    NSMutableArray * _audioArr;
-}
 
 + (AudioPlayerVC *)defaultAudioVC
 {
@@ -83,8 +79,8 @@ static NSString * const ListCellID = @"ListCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self obtainCurrentSongList];
+
+    // UI
     [self initUIAndData];
     [self createUI];
     [self createShapeLayer];
@@ -92,7 +88,8 @@ static NSString * const ListCellID = @"ListCellID";
     [self createDownBtn];
     [self createListTableView];
     [self createProgressView];
-    
+
+//    [self obtainCurrentSongList];
     [self playOnBackground];
     [self registNotification];
 }
@@ -156,113 +153,19 @@ static NSString * const ListCellID = @"ListCellID";
 }
 
 #pragma mark - 
-- (void)obtainCurrentSongList
-{
-    if (!_audioArr) {
-        _audioArr = [@[] mutableCopy];
-    }
-    
-    [_audioArr removeAllObjects];
-    
-    NSArray * songsArr = [[NSUserDefaults standardUserDefaults] objectForKey:UserAudioPlayList];
-    for (NSData * songData in songsArr) {
-        YSSongModel * model = [NSKeyedUnarchiver unarchiveObjectWithData:songData];
-        [_audioArr addObject:model];
-    }
-}
-
-- (void)playOnBackground
-{
-    NSError * error = nil;
-    NSError * activeError = nil;
-    
-    AVAudioSession * session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayback error:&error];
-    [session setActive:YES error:&activeError];
-    
-    if (error) {
-        DDLogInfo(@"-------- AVAudioSession setCategory error: %@", error.localizedDescription);
-    }
-    
-    if (activeError) {
-        DDLogInfo(@"-------- AVAudioSession setActive error: %@", activeError.localizedDescription);
-    }
-}
-
-- (void)createAVPlayer:(YSSongModel *)model
-{
-    if (_ysAudioPlayer) {
-        _ysAudioPlayer = nil;
-    }
-    
-    if (model != nil) {
-        _currentModel = model;
-    }
-    
-    // 判断音频是否已存入本地
-    NSString * path = [NSString stringWithFormat:@"%@.%@", _currentModel.name, _currentModel.expandType];
-    
-    if ([YSFileManager fileHasExist:[sbMedia_AudioDir stringByAppendingPathComponent:path]] && !_currentModel.hasDownload) {
-        _currentModel.hasDownload = YES;
-    }
-    else if (![YSFileManager fileHasExist:[sbMedia_AudioDir stringByAppendingPathComponent:path]] && _currentModel.hasDownload) {
-        _currentModel.hasDownload = NO;
-    }
-    
-    NSData * audioData = [NSData data];
-    __block NSError * playError = nil;
-    __block NSString * errorInfo = @"";
-    
-    if (_currentModel.hasDownload) {
-        audioData = (NSData *)[YSFileManager readDataFromFile:[sbMedia_AudioDir stringByAppendingPathComponent:path] dataType:[NSData class]];
-        errorInfo = @"AVAudioPlayer - Local - Error:";
-    }
-    else {
-        NSData * data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:_currentModel.url]];
-        // 存到本地
-        BOOL writeSuccess = [YSFileManager writeData:data toFile:[sbMedia_AudioDir stringByAppendingPathComponent:path]];
-        if (writeSuccess) {
-            audioData = (NSData *)[YSFileManager readDataFromFile:[sbMedia_AudioDir stringByAppendingPathComponent:path] dataType:[NSData class]];
-        }
-        errorInfo = @"AVAudioPlayer - Web - Error:";
-    }
-    
-    serialQueue = dispatch_queue_create("com.yjyuanshuai.auido", DISPATCH_QUEUE_SERIAL);
-    dispatch_async(serialQueue, ^{
-        
-        _ysAudioPlayer = [[AVAudioPlayer alloc] initWithData:audioData error:&playError];
-        //        _ysAudioPlayer.numberOfLoops = -1;      // 循环
-        _ysAudioPlayer.delegate = self;
-        [_ysAudioPlayer prepareToPlay];
-        [_ysAudioPlayer play];
-        
-        if (playError) {
-            NSLog(@"------------- %@ %@", errorInfo, playError.localizedDescription);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self creataTimer];
-            
-            NSString * str = [self turnIntoTimeWithTimeInterval:_ysAudioPlayer.duration];
-            _allTime.text = str;
-            _playProgress.maximumValue = _ysAudioPlayer.duration;
-            _downloadBtn.selected = YES;
-            [_listTableView reloadData];
-            self.title = _currentModel.name;
-            
-        });
-        
-    });
-
-}
-
-//- (void)updateSongInfo:(YSSongModel *)model
+//- (void)obtainCurrentSongList
 //{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        self.title = model.name;
-//        [_listTableView reloadData];
-//    });
+//    if (!_audioListArr) {
+//        _audioListArr = [@[] mutableCopy];
+//    }
+//    
+//    [_audioListArr removeAllObjects];
+//    
+//    NSArray * songsArr = [[NSUserDefaults standardUserDefaults] objectForKey:UserAudioPlayList];
+//    for (NSData * songData in songsArr) {
+//        YSSongModel * model = [NSKeyedUnarchiver unarchiveObjectWithData:songData];
+//        [_audioListArr addObject:model];
+//    }
 //}
 
 - (void)creataTimer
@@ -286,14 +189,59 @@ static NSString * const ListCellID = @"ListCellID";
 }
 
 #pragma mark - set
+- (void)setAudioType:(YSAudioType)audioType
+           audioList:(NSMutableArray *)audioList
+        currentIndex:(NSInteger)currentIndex
+{
+    self.audioType = audioType;
+    self.audioListArr = audioList;
+    self.currentIndex = currentIndex;
+}
+
 - (void)setCurrentIndex:(NSInteger)currentIndex
 {
+    if (!_audioListArr || [_audioListArr count]==0) {
+        _currentIndex = -1;
+    }
+    else {
+        if (currentIndex < [_audioListArr count]) {
+            _currentIndex = currentIndex;
+            if (_audioType == AudioType_Music) {
+                [self createAVPlayer:_audioListArr[_currentIndex]];
+            }
+            else if (_audioType == AudioType_SystemSound) {
+                [self playSystemSoundWithSoundID:1001];
+            }
+            else if (_audioType == AudioType_CustemSound) {
+                [self playCustemSound:_audioListArr[_currentIndex]];
+            }
+        }
+        else {
+            _currentIndex = 0;
+        }
+    }
+    /*
     _currentIndex = currentIndex;
     [self obtainCurrentSongList];
     
-    if (_currentIndex < [_audioArr count]) {
-        [self createAVPlayer:_audioArr[_currentIndex]];
+    if (_currentIndex < [_audioListArr count]) {
+        [self createAVPlayer:_audioListArr[_currentIndex]];
     }
+     */
+}
+
+- (void)setAudioListArr:(NSMutableArray *)audioListArr
+{
+    if (!_audioListArr) {
+        _audioListArr = [@[] mutableCopy];
+    }
+
+    _audioListArr = audioListArr;
+}
+
+- (void)setAudioType:(YSAudioType)audioType
+{
+    _audioType = audioType;
 }
 
 #pragma mark - time update
@@ -376,73 +324,19 @@ static NSString * const ListCellID = @"ListCellID";
     }
 }
 
-#pragma mark - AVAudioPlayerDelegate
-// 播放完成
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    if (flag) {
-        [self invalidTimer];
-        [_ysAudioPlayer stop];
-        _ysAudioPlayer = nil;
-        
-        
-        if (_settingType == AudioPlaySettingOne) {
-            
-            [self createAVPlayer:_audioArr[_currentIndex]];
-//            [self updateSongInfo:_audioArr[_currentIndex]];
-            
-        }
-        else if (_settingType == AudioPlaySettingList) {
-            
-            if (_currentIndex < [_audioArr count] - 1) {
-                _currentIndex++;
-            }
-            else {
-                _currentIndex = 0;
-            }
-            [self createAVPlayer:_audioArr[_currentIndex]];
-//            [self updateSongInfo:_audioArr[_currentIndex]];
-            
-        }
-        else if (_settingType == AudioPlaySettingAny){
-            
-            // 随机播放
-            NSInteger anyIndex = arc4random()%[_audioArr count];
-            while (anyIndex == _currentIndex) {
-                anyIndex = arc4random()%[_audioArr count];
-            }
-            _currentIndex = anyIndex;
-            
-            [self createAVPlayer:_audioArr[_currentIndex]];
-//            [self updateSongInfo:_audioArr[_currentIndex]];
-            
-        }
-        
-    }
-    else {
-        
-    }
-    
-}
-
-// 后台播放被打断, 继续恢复播放 (比如打电话...)
-- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags {
-    [self.ysAudioPlayer play];
-}
-
 #pragma mark - UI
 - (void)initUIAndData
 {
-    if ([_audioArr count] > 0) {
-        _currentModel = _audioArr[_currentIndex];
-        self.title = _currentModel.name;
-    }
-    else {
+//    if ([_audioListArr count] > 0) {
+//        _currentModel = _audioListArr[_currentIndex];
+//        self.title = _currentModel.name;
+//    }
+//    else {
         self.title = @"音乐播放";
-    }
-    
-    _settingType = AudioPlaySettingList;
-    _playStatus = AudioPlayStatusPlaying;
+//    }
+
+    _settingType    = AudioPlaySettingList;
+    _playStatus     = AudioPlayStatusPlaying;
 }
 
 - (void)createUI
@@ -707,6 +601,25 @@ static NSString * const ListCellID = @"ListCellID";
     }];
 }
 
+#pragma mark - 刷新UI
+- (void)uploadUIDataWithprogressMaxValue:(NSTimeInterval)maxTimeInterval
+                                   title:(NSString *)title
+{
+    NSString * str = [self turnIntoTimeWithTimeInterval:maxTimeInterval];
+    _allTime.text = str;
+    _playProgress.maximumValue = maxTimeInterval;
+    self.title = title;
+    [_listTableView reloadData];
+}
+
+- (NSString *)turnIntoTimeWithTimeInterval:(NSTimeInterval)timeInterval
+{
+    NSInteger min = floorf(timeInterval) / 60;
+    NSInteger sec = floorf(timeInterval) - min * 60;
+
+    return [NSString stringWithFormat:@"%.2ld:%.2ld", min, sec];
+}
+
 #pragma mark - click
 - (void)changeSliderValue:(id)sender
 {
@@ -813,16 +726,15 @@ static NSString * const ListCellID = @"ListCellID";
         _currentIndex--;
     }
     else {
-        _currentIndex = [_audioArr count] - 1;
+        _currentIndex = [_audioListArr count] - 1;
     }
-    [self createAVPlayer:_audioArr[_currentIndex]];
-//    [self updateSongInfo:_audioArr[_currentIndex]];
+    [self createAVPlayer:_audioListArr[_currentIndex]];
 }
 
 - (void)playNextSong
 {
     // 下一首
-    if (_currentIndex < [_audioArr count] - 1) {
+    if (_currentIndex < [_audioListArr count] - 1) {
         _currentIndex ++;
         
     }
@@ -830,14 +742,13 @@ static NSString * const ListCellID = @"ListCellID";
         _currentIndex = 0;
     }
     
-    [self createAVPlayer:_audioArr[_currentIndex]];
-//    [self updateSongInfo:_audioArr[_currentIndex]];
+    [self createAVPlayer:_audioListArr[_currentIndex]];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_audioArr count];
+    return [_audioListArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -850,17 +761,10 @@ static NSString * const ListCellID = @"ListCellID";
     else {
         cell.contentView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.8];
     }
-    
-    [cell setListCellContent:_audioArr[indexPath.row] time:@"" ];
-    
+    if (indexPath.row < [_audioListArr count]) {
+        [cell setListCellContent:_audioListArr[indexPath.row] time:@"" ];
+    }
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [tableView fd_heightForCellWithIdentifier:ListCellID cacheByIndexPath:indexPath configuration:^(id cell) {
-        [cell setListCellContent:_audioArr[indexPath.row] time:@""];
-    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -870,10 +774,8 @@ static NSString * const ListCellID = @"ListCellID";
     if (_currentIndex != indexPath.row) {
         
         _currentIndex = indexPath.row;
-        YSSongModel * model = _audioArr[indexPath.row];
+        YSSongModel * model = _audioListArr[indexPath.row];
         [self createAVPlayer:model];
-//        [self updateSongInfo:model];
-        
     }
 }
 
@@ -883,13 +785,160 @@ static NSString * const ListCellID = @"ListCellID";
     [cell setLayoutMargins:UIEdgeInsetsZero];
 }
 
-#pragma mark - private
-- (NSString *)turnIntoTimeWithTimeInterval:(NSTimeInterval)timeInterval
+#pragma mark - AVAudioPlayer
+- (void)playOnBackground
 {
-    NSInteger min = floorf(timeInterval) / 60;
-    NSInteger sec = floorf(timeInterval) - min * 60;
+    NSError * error = nil;
+    NSError * activeError = nil;
+
+    AVAudioSession * session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:&error];
+    [session setActive:YES error:&activeError];
+
+    if (error) {
+        DDLogInfo(@"-------- AVAudioSession setCategory error: %@", error.localizedDescription);
+    }
+
+    if (activeError) {
+        DDLogInfo(@"-------- AVAudioSession setActive error: %@", activeError.localizedDescription);
+    }
+}
+
+- (void)createAVPlayer:(YSSongModel *)model
+{
+    if (_ysAudioPlayer) {
+        _ysAudioPlayer = nil;
+    }
+
+    if (model != nil) {
+        _currentModel = model;
+    }
+
+    // 判断音频是否已存入本地
+    NSString * path = [NSString stringWithFormat:@"%@.%@", _currentModel.name, _currentModel.expandType];
+
+    if ([YSFileManager fileHasExist:[sbMedia_AudioDir stringByAppendingPathComponent:path]] && !_currentModel.hasDownload) {
+        _currentModel.hasDownload = YES;
+    }
+    else if (![YSFileManager fileHasExist:[sbMedia_AudioDir stringByAppendingPathComponent:path]] && _currentModel.hasDownload) {
+        _currentModel.hasDownload = NO;
+    }
+
+    NSData * audioData = [NSData data];
+    __block NSError * playError = nil;
+    __block NSString * errorInfo = @"";
+
+    if (_currentModel.hasDownload) {
+        audioData = (NSData *)[YSFileManager readDataFromFile:[sbMedia_AudioDir stringByAppendingPathComponent:path] dataType:[NSData class]];
+        errorInfo = @"AVAudioPlayer - Local - Error:";
+    }
+    else {
+        NSData * data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:_currentModel.url]];
+        // 存到本地
+        BOOL writeSuccess = [YSFileManager writeData:data toFile:[sbMedia_AudioDir stringByAppendingPathComponent:path]];
+        if (writeSuccess) {
+            audioData = (NSData *)[YSFileManager readDataFromFile:[sbMedia_AudioDir stringByAppendingPathComponent:path] dataType:[NSData class]];
+        }
+        errorInfo = @"AVAudioPlayer - Web - Error:";
+    }
+
+    serialQueue = dispatch_queue_create("com.yjyuanshuai.auido", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(serialQueue, ^{
+
+        _ysAudioPlayer = [[AVAudioPlayer alloc] initWithData:audioData error:&playError];
+        //        _ysAudioPlayer.numberOfLoops = -1;      // 循环
+        _ysAudioPlayer.delegate = self;
+        [_ysAudioPlayer prepareToPlay];
+        [_ysAudioPlayer play];
+
+        if (playError) {
+            NSLog(@"------------- %@ %@", errorInfo, playError.localizedDescription);
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self creataTimer];
+            _downloadBtn.selected = YES;
+            [self uploadUIDataWithprogressMaxValue:_ysAudioPlayer.duration title:_currentModel.name];
+        });
+    });
+
+}
+
+#pragma mark - AVAudioPlayerDelegate
+// 播放完成
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    if (flag) {
+        [self invalidTimer];
+        [_ysAudioPlayer stop];
+        _ysAudioPlayer = nil;
+
+
+        if (_settingType == AudioPlaySettingOne) {
+
+            [self createAVPlayer:_audioListArr[_currentIndex]];
+
+        }
+        else if (_settingType == AudioPlaySettingList) {
+
+            if (_currentIndex < [_audioListArr count] - 1) {
+                _currentIndex++;
+            }
+            else {
+                _currentIndex = 0;
+            }
+            [self createAVPlayer:_audioListArr[_currentIndex]];
+
+        }
+        else if (_settingType == AudioPlaySettingAny){
+
+            // 随机播放
+            NSInteger anyIndex = arc4random()%[_audioListArr count];
+            while (anyIndex == _currentIndex) {
+                anyIndex = arc4random()%[_audioListArr count];
+            }
+            _currentIndex = anyIndex;
+
+            [self createAVPlayer:_audioListArr[_currentIndex]];
+        }
+
+    }
+    else {
+
+    }
+
+}
+
+// 后台播放被打断, 继续恢复播放 (比如打电话...)
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags {
+    [self.ysAudioPlayer play];
+}
+
+#pragma mark - System Sound
+- (void)playSystemSoundWithSoundID:(NSInteger)soundId
+{
+    SystemSoundID playSoundId = soundId;
+    AudioServicesPlaySystemSound(playSoundId);
+}
+
+#pragma mark - Custem Sound
+- (void)playCustemSound:(YSSongModel *)songModel
+{
+    NSString * path = [[NSBundle mainBundle] pathForResource:songModel.name ofType:songModel.expandType];
+    NSURL * url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"%@.%@", songModel.name, songModel.expandType] withExtension:nil];
     
-    return [NSString stringWithFormat:@"%.2ld:%.2ld", min, sec];
+    SystemSoundID custemSoundId;
+    if (path) {
+        OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &custemSoundId);
+        if (error) {
+            DDLogInfo(@"--------- 自定义音效播放，失败。");
+        }
+    }
+
+    AudioServicesPlaySystemSoundWithCompletion(custemSoundId, ^{
+        // 播放回调
+        DDLogInfo(@"------- 自定义音效播放，回到");
+    });
 }
 
 @end

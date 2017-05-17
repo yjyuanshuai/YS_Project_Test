@@ -16,7 +16,8 @@
         _name           = dic[@"name"];
         _expandType     = dic[@"expand"];
         _url            = dic[@"url"];
-        _hasDownload    = dic[@"hasdownlaod"];
+        _hasDownload    = [dic[@"hasdownlaod"] boolValue];
+        _audioType      = [dic[@"audiotype"] integerValue];
     }
     return self;
 }
@@ -27,6 +28,7 @@
     [aCoder encodeObject:self.expandType forKey:@"expand"];
     [aCoder encodeObject:self.url forKey:@"url"];
     [aCoder encodeObject:@(self.hasDownload) forKey:@"hasdownlaod"];
+    [aCoder encodeObject:@(self.audioType) forKey:@"audiotype"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -37,6 +39,7 @@
         self.expandType     = [aDecoder decodeObjectForKey:@"expand"];
         self.url            = [aDecoder decodeObjectForKey:@"url"];
         self.hasDownload    = [[aDecoder decodeObjectForKey:@"hasdownlaod"] boolValue];
+        self.audioType      = [[aDecoder decodeObjectForKey:@"audiotype"] integerValue];
     }
     return self;
 }

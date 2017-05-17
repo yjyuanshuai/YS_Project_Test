@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GlobalEnum.h"
 
 @interface YSSongModel : NSObject <NSCoding>
 
@@ -15,6 +16,7 @@
 @property (nonatomic, copy) NSString * url;
 @property (nonatomic, assign) BOOL hasDownload;           // 本地是否缓存
 @property (nonatomic, copy) NSString * songerName;
+@property (nonatomic, assign) YSAudioType audioType;        // 文件类型（系统音效、自定义音效）
 
 - (instancetype)initWithWebSongDic:(NSDictionary *)dic;
 

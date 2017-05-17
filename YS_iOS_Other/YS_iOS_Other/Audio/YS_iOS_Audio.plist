@@ -4,40 +4,12 @@
 <array>
 	<dict>
 		<key>name</key>
-		<string>songlist2</string>
+		<string>本地歌曲</string>
 		<key>songs</key>
 		<array>
 			<dict>
-				<key>hasdownlaod</key>
-				<true/>
-				<key>expand</key>
-				<string>mp3</string>
-				<key>url</key>
-				<string></string>
-				<key>name</key>
-				<string>英雄有路</string>
-			</dict>
-			<dict>
-				<key>hasdownlaod</key>
-				<true/>
-				<key>expand</key>
-				<string>mp3</string>
-				<key>url</key>
-				<string></string>
-				<key>name</key>
-				<string>时光笔墨</string>
-			</dict>
-			<dict>
-				<key>hasdownlaod</key>
-				<true/>
-				<key>expand</key>
-				<string>mp3</string>
-				<key>url</key>
-				<string></string>
-				<key>name</key>
-				<string>浮诛</string>
-			</dict>
-			<dict>
+				<key>audiotype</key>
+				<string>2</string>
 				<key>hasdownlaod</key>
 				<true/>
 				<key>expand</key>
@@ -48,16 +20,8 @@
 				<string>离思</string>
 			</dict>
 			<dict>
-				<key>hasdownlaod</key>
-				<true/>
-				<key>expand</key>
-				<string>mp3</string>
-				<key>url</key>
-				<string></string>
-				<key>name</key>
-				<string>青衣谣</string>
-			</dict>
-			<dict>
+				<key>audiotype</key>
+				<string>2</string>
 				<key>hasdownlaod</key>
 				<true/>
 				<key>expand</key>
@@ -68,6 +32,8 @@
 				<string>青云志</string>
 			</dict>
 			<dict>
+				<key>audiotype</key>
+				<string>2</string>
 				<key>hasdownlaod</key>
 				<true/>
 				<key>expand</key>

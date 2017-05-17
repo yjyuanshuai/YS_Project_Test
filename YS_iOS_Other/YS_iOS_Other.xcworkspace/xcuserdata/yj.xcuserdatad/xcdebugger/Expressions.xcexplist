@@ -22,18 +22,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ImagePickerManager initWithPickerType:listViewController:backMediaBlock:]:ImagePickerManager.m">
+         contextName = "-[YSOperationDetailUserVC operationQueue]:YSOperationDetailUserVC.m">
          <PersistentStrings>
             <PersistentString
-               value = "_QBImagePC">
+               value = "_imagesArr">
+            </PersistentString>
+            <PersistentString
+               value = "_failImagesArr">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[AudioPlayerVC setCurrentIndex:]:AudioPlayerVC.m">
+         contextName = "-[ImagePickerManager initWithPickerType:listViewController:backMediaBlock:]:ImagePickerManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "_audioArr">
+               value = "_QBImagePC">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -46,10 +49,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[AudioListVC analysisData]:AudioListVC.m">
+         contextName = "-[AudioPlayerVC setCurrentIndex:]:AudioPlayerVC.m">
          <PersistentStrings>
             <PersistentString
                value = "_audioArr">
+            </PersistentString>
+            <PersistentString
+               value = "_audioListArr">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,13 +71,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[YSOperationDetailUserVC operationQueue]:YSOperationDetailUserVC.m">
+         contextName = "-[AudioListVC analysisData]:AudioListVC.m">
          <PersistentStrings>
             <PersistentString
-               value = "_imagesArr">
-            </PersistentString>
-            <PersistentString
-               value = "_failImagesArr">
+               value = "_audioArr">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

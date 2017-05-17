@@ -11,6 +11,7 @@
 #import "AudioOrVideoTableViewCell.h"
 #import "YSFileManager.h"
 #import "AudioPlayerVC.h"
+#import "GlobalEnum.h"
 
 static NSString * const AudioListCellID = @"AudioListCellID";
 
@@ -117,6 +118,18 @@ static NSString * const AudioListCellID = @"AudioListCellID";
     else if (_type == AudioListTypeLocalPlay_SystemSound) {
 
         _sectionTitleArr = [@[@"自定义音频", @"系统音频"] mutableCopy];
+
+        YSSongModel * custemSound = [[YSSongModel alloc] init];
+        custemSound.name = @"systemsoundtest";
+        custemSound.expandType = @"wav";
+        custemSound.audioType = AudioType_CustemSound;
+
+        YSSongModel * systemSound = [[YSSongModel alloc] init];
+        systemSound.name = @"system sound 1000";
+        systemSound.audioType = AudioType_SystemSound;
+
+        [_audioArr addObject:@[custemSound]];
+        [_audioArr addObject:@[systemSound]];
     }
 }
 
@@ -139,17 +152,13 @@ static NSString * const AudioListCellID = @"AudioListCellID";
         }
         return 0;
     }
-    else if (_type == AudioListTypeLocalPlay_SystemSound) {
-
-    }
 
     return [_audioArr[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_type == AudioListTypeLocalPlay_SystemSound ||
-        _type == AudioListTypeLocalPlay_Music ||
+    if (_type == AudioListTypeLocalPlay_Music ||
         _type == AudioListTypeLocalPlay_SystemMusic) {
         
         NSArray * sectionArr = _audioArr[indexPath.section];
@@ -169,8 +178,13 @@ static NSString * const AudioListCellID = @"AudioListCellID";
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             return cell;
         }
-        
-        return nil;
+    }
+    else if (_type == AudioListTypeLocalPlay_SystemSound) {
+        NSArray * sectionArr = _audioArr[indexPath.section];
+        AudioOrVideoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:AudioListCellID];
+        YSSongModel * songModel = sectionArr[indexPath.row];
+        [cell setCellContent:CellTypeAudio model:songModel];
+        return cell;
     }
     return nil;
 }
@@ -206,18 +220,34 @@ static NSString * const AudioListCellID = @"AudioListCellID";
     switch (_type) {
         case AudioListTypeLocalPlay_SystemSound:
         {
-            
+            if (indexPath.section < [_audioArr count]) {
+                NSMutableArray * sectionArr = _audioArr[indexPath.section];
+
+                if (indexPath.row < [sectionArr count]) {
+
+                    if (indexPath.section == 0) {
+                        AudioPlayerVC * systemSoundPlayer = [AudioPlayerVC defaultAudioVC];
+                        [systemSoundPlayer setAudioType:AudioType_CustemSound audioList:sectionArr currentIndex:indexPath.row];
+                        [self.navigationController pushViewController:systemSoundPlayer animated:YES];
+                    }
+                    else {
+                        AudioPlayerVC * systemSoundPlayer = [AudioPlayerVC defaultAudioVC];
+                        [systemSoundPlayer setAudioType:AudioType_SystemSound audioList:sectionArr currentIndex:indexPath.row];
+                        [self.navigationController pushViewController:systemSoundPlayer animated:YES];
+                    }
+                }
+            }
         }
             break;
         case AudioListTypeLocalPlay_Music:
         {
-            NSArray * sectionArr = _audioArr[indexPath.section];
+            NSMutableArray * sectionArr = _audioArr[indexPath.section];
             if (indexPath.row < [sectionArr count]) {
                 
                 [self storeCurrentPlayList:indexPath.section];
                 
                 AudioPlayerVC * audioPlayVC = [AudioPlayerVC defaultAudioVC];
-                audioPlayVC.currentIndex = indexPath.row;
+                [audioPlayVC setAudioType:AudioType_Music audioList:sectionArr currentIndex:indexPath.row];
                 [self.navigationController pushViewController:audioPlayVC animated:YES];
                 
             }
@@ -269,7 +299,6 @@ static NSString * const AudioListCellID = @"AudioListCellID";
             break;
         case AudioListTypeLocalPlay_Music:
         {
-            
             // 将本地音频文件 写入沙盒
             [YSFileManager createDirectToPath:sbMedia_AudioDir];
             
@@ -310,6 +339,17 @@ static NSString * const AudioListCellID = @"AudioListCellID";
         }
             break;
     }
+}
+
+- (NSMutableArray *)obtainCurrentSongList
+{
+    NSMutableArray * retArr = [NSMutableArray array];
+    NSArray * songsArr = [[NSUserDefaults standardUserDefaults] objectForKey:UserAudioPlayList];
+    for (NSData * songData in songsArr) {
+        YSSongModel * model = [NSKeyedUnarchiver unarchiveObjectWithData:songData];
+        [retArr addObject:model];
+    }
+    return retArr;
 }
 
 - (void)storeCurrentPlayList:(NSInteger)section

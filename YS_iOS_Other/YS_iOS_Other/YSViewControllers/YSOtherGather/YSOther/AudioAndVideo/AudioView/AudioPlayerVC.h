@@ -12,25 +12,18 @@
 
 #import "YSRootViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
-typedef NS_ENUM(NSInteger, AudioPlaySetting)
-{
-    AudioPlaySettingList,   // 按序播放
-    AudioPlaySettingAny,    // 随机播放
-    AudioPlaySettingOne     // 单首循环
-};
-
-typedef NS_ENUM(NSInteger, AudioPlayStatus)
-{
-    AudioPlayStatusPlaying,     // 正在播放
-    AudioPlayStatusPause        // 暂停
-};
+#import "GlobalEnum.h"
 
 @interface AudioPlayerVC : YSRootViewController
 
 @property (nonatomic, assign) NSInteger currentIndex;
-@property (nonatomic, strong) AVAudioPlayer * ysAudioPlayer;
+@property (nonatomic, strong) NSMutableArray * audioListArr;
+@property (nonatomic, assign) YSAudioType audioType;
+@property (nonatomic, strong) AVAudioPlayer * ysAudioPlayer;    // AudioPlayer
 
 + (AudioPlayerVC *)defaultAudioVC;
+- (void)setAudioType:(YSAudioType)audioType
+           audioList:(NSMutableArray *)audioList
+        currentIndex:(NSInteger)currentIndex;
 
 @end
