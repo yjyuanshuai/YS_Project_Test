@@ -44,8 +44,10 @@
     self.title = @"keychain";
     
     UIBarButtonItem * readBtn = [[UIBarButtonItem alloc] initWithTitle:@"读取" style:UIBarButtonItemStylePlain target:self action:@selector(clickToSee)];
-    UIBarButtonItem * saveBtn = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickToSave)];
-    self.navigationItem.rightBarButtonItems = @[readBtn, saveBtn];
+    self.navigationItem.rightBarButtonItem = readBtn;
+
+//    UIBarButtonItem * saveBtn = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickToSave)];
+//    self.navigationItem.rightBarButtonItems = @[readBtn, saveBtn];
 }
 
 - (void)createScrollView
@@ -193,6 +195,7 @@
     [_kcContentView addConstraints:content_c2];
 }
 
+/*
 - (void)clickToSave
 {
     NSString * name = @"初始account";
@@ -203,6 +206,7 @@
                           psaaword:password
                    psaawordService:KeyChainUserPassword];
 }
+ */
 
 - (void)clickToSee
 {
