@@ -759,7 +759,7 @@ static NSString * const ListCellID = @"ListCellID";
         cell.contentView.backgroundColor = [UIColor colorWithWhite:0.4 alpha:0.8];
     }
     if (indexPath.row < [_audioListArr count]) {
-        [cell setListCellContent:_audioListArr[indexPath.row] time:@"" ];
+        [cell setListCellContent:_audioListArr[indexPath.row] time:@""];
     }
     return cell;
 }

@@ -254,6 +254,8 @@
 		395F3A051ECC369F004245CD /* custemsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 395F3A041ECC369F004245CD /* custemsound.wav */; };
 		396DC5381E94FD3100AC9787 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC5371E94FD3100AC9787 /* VideoListVC.m */; };
 		396DC53B1E94FE2700AC9787 /* YSVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */; };
+		397D1FFE1ECD31E500920A72 /* YSBlueToothVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D1FFD1ECD31E500920A72 /* YSBlueToothVC.m */; };
+		397D20011ECD332500920A72 /* YSBlueToothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20001ECD332500920A72 /* YSBlueToothManager.m */; };
 		3985944E1D13F0B800863A14 /* SevenAppleLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3985944D1D13F0B800863A14 /* SevenAppleLocationViewController.m */; };
 		398594511D13F0D900863A14 /* SevenBaiduViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 398594501D13F0D900863A14 /* SevenBaiduViewController.m */; };
 		398594541D13F11900863A14 /* SevenGaoDeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 398594531D13F11900863A14 /* SevenGaoDeViewController.m */; };
@@ -751,6 +753,10 @@
 		396DC5371E94FD3100AC9787 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
 		396DC5391E94FE2700AC9787 /* YSVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSVideoPlayerView.h; sourceTree = "<group>"; };
 		396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSVideoPlayerView.m; sourceTree = "<group>"; };
+		397D1FFC1ECD31E500920A72 /* YSBlueToothVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSBlueToothVC.h; path = YSHareware/YSBlueToothVC.h; sourceTree = "<group>"; };
+		397D1FFD1ECD31E500920A72 /* YSBlueToothVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSBlueToothVC.m; path = YSHareware/YSBlueToothVC.m; sourceTree = "<group>"; };
+		397D1FFF1ECD332500920A72 /* YSBlueToothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSBlueToothManager.h; path = YSHareware/YSBlueToothManager.h; sourceTree = "<group>"; };
+		397D20001ECD332500920A72 /* YSBlueToothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSBlueToothManager.m; path = YSHareware/YSBlueToothManager.m; sourceTree = "<group>"; };
 		3985944C1D13F0B800863A14 /* SevenAppleLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SevenAppleLocationViewController.h; sourceTree = "<group>"; };
 		3985944D1D13F0B800863A14 /* SevenAppleLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SevenAppleLocationViewController.m; sourceTree = "<group>"; };
 		3985944F1D13F0D900863A14 /* SevenBaiduViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SevenBaiduViewController.h; sourceTree = "<group>"; };
@@ -1539,6 +1545,7 @@
 			children = (
 				394594B11D3879200017F4A3 /* YSHarewareViewController.h */,
 				394594B21D3879200017F4A3 /* YSHarewareViewController.m */,
+				397D1FFB1ECD319700920A72 /* BlueTooth */,
 			);
 			name = YSHarewareAndSystem;
 			path = ..;
@@ -1920,6 +1927,17 @@
 				3945949C1D3878950017F4A3 /* OneHorizontalTableViewController.m */,
 			);
 			name = OneHorizontalTableView;
+			sourceTree = "<group>";
+		};
+		397D1FFB1ECD319700920A72 /* BlueTooth */ = {
+			isa = PBXGroup;
+			children = (
+				397D1FFC1ECD31E500920A72 /* YSBlueToothVC.h */,
+				397D1FFD1ECD31E500920A72 /* YSBlueToothVC.m */,
+				397D1FFF1ECD332500920A72 /* YSBlueToothManager.h */,
+				397D20001ECD332500920A72 /* YSBlueToothManager.m */,
+			);
+			name = BlueTooth;
 			sourceTree = "<group>";
 		};
 		398100341DD1693300E398FB /* YSImageManager */ = {
@@ -2827,6 +2845,8 @@
 				3946CA411E962673003E0D5B /* UIView+Layout.m in Sources */,
 				39B269481E30AD8F0047D6A4 /* YSJSPatchManager.m in Sources */,
 				392621971D2365D700CF4C90 /* UIColor+Image.m in Sources */,
+				397D20011ECD332500920A72 /* YSBlueToothManager.m in Sources */,
+				397D1FFE1ECD31E500920A72 /* YSBlueToothVC.m in Sources */,
 				391A2E9F1E093D630075CFD3 /* FriendCircleVC.m in Sources */,
 				395562591D41C3550079CF6B /* MyKeyChainHelper.m in Sources */,
 				3932AA9D1E7250C20044D681 /* UIProgressView+AFNetworking.m in Sources */,

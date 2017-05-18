@@ -11,6 +11,8 @@
 // 1
 #import "CameraOrImageListVC.h"
 
+#import "YSBlueToothVC.h"
+
 //2
 #import "CanlenderViewController.h"
 
@@ -47,7 +49,7 @@ static NSString * const HarewareCellID = @"HarewareCellID";
     
     _sectionTitleArr = @[@"1 系统功能", @"2 其他"];
     
-    NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件"];
+    NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件", @"AirPlay"];
     NSArray * sectionTwo  = @[@"陀螺仪", @"加速器"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo] mutableCopy];
@@ -110,6 +112,7 @@ static NSString * const HarewareCellID = @"HarewareCellID";
             switch (indexPath.row) {
                 case 0:
                 {
+                    // 相机相册
                     CameraOrImageListVC * listVC = [[CameraOrImageListVC alloc] init];
                     listVC.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:listVC animated:YES];
@@ -117,20 +120,15 @@ static NSString * const HarewareCellID = @"HarewareCellID";
                     break;
                 case 1:
                 {
-                    
+                    // 闹钟
                 }
                     break;
                 case 2:
                 {
-                    
+                    // 健康
                 }
                     break;
                 case 3:
-                {
-                    
-                }
-                    break;
-                case 4:
                 {
                     // 日历事件
                     CanlenderViewController * canlenderVC = [[CanlenderViewController alloc] init];
@@ -138,17 +136,33 @@ static NSString * const HarewareCellID = @"HarewareCellID";
                     [self.navigationController pushViewController:canlenderVC animated:YES];
                 }
                     break;
+                case 4:
+                {
+                    // 硬件连接
+                }
+                    break;
                 case 5:
                 {
-                    
+                    // 蓝牙
+                    YSBlueToothVC * blueToothVC = [[YSBlueToothVC alloc] init];
+                    [self.navigationController pushViewController:blueToothVC animated:YES];
                 }
                     break;
                 case 6:
                 {
-                    
+                    // 耳机
                 }
                     break;
-                    
+                case 7:
+                {
+                    // 麦克风
+                }
+                    break;
+                case 8:
+                {
+                    // 邮件
+                }
+                    break;
             }
         }
             break;
