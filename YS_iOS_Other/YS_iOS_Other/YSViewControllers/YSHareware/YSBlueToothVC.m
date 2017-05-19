@@ -8,7 +8,11 @@
 
 #import "YSBlueToothVC.h"
 #import "YSBlueToothManager.h"
+#import "YSBluetoothTableViewCell.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+
+static NSString * const discover_cell_id = @"BLUETOOTH_DISCOVER_CELLID";
+static NSString * const vitural_cell_id = @"BLUETOOTH_VIRTUAL_CELLID";
 
 @interface YSBlueToothVC () <YSBluetoothManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -39,6 +43,9 @@
 {
     [super viewWillDisappear:animated];
     [[YSBlueToothManager sharedBlueToothManager] cbManagerStopScanAndDisconnectAllServices];
+
+    [_peripheralsArr removeAllObjects];
+    _peripheralsArr = nil;
 }
 
 - (void)dealloc
@@ -52,9 +59,8 @@
 
     _hasOpened = NO;
     _peripheralsArr = [NSMutableArray array];
-    _peripheralsArr = [NSMutableArray array];
 
-    [[YSBlueToothManager sharedBlueToothManager] setPeripheralContentStr:@"YJVirtualPeripheral" contentType:YSCBPeripheralConStrType_SubStr];
+//    [[YSBlueToothManager sharedBlueToothManager] setPeripheralContentStr:@"YJ" contentType:YSCBPeripheralConStrType_Prefix];
     [[YSBlueToothManager sharedBlueToothManager] cbManagerStartScan];
     [YSBlueToothManager sharedBlueToothManager].delegate = self;
 }
@@ -73,12 +79,18 @@
     [_bluetoothTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+
+    [_bluetoothTableView registerClass:[YSBluetoothTableViewCell class] forCellReuseIdentifier:discover_cell_id];
+    [_bluetoothTableView registerClass:[YSBluetoothTableViewCell class] forCellReuseIdentifier:vitural_cell_id];
 }
 
 #pragma mark - YSBluetoothManagerDelegate
-- (void)allDiscoverPeripherals:(NSMutableArray *)arr
+- (void)discoverNewPeripheral:(CBPeripheral *)per
 {
-    DDLogInfo(@"------ arr count: %d", [arr count]);
+    if (![_peripheralsArr containsObject:per]) {
+        [_peripheralsArr addObject:per];
+        [_bluetoothTableView reloadData];
+    }
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -95,47 +107,62 @@
     return [_vitualPeripheralsArr count];   // 正在虚拟的设备
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * const cell_id = @"BLUETOOTH_CELLID";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
-    if (cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_id];
+    YSBluetoothTableViewCell * bluetoothCell = (YSBluetoothTableViewCell *)cell;
+    if (indexPath.section == 0 && indexPath.row < [_peripheralsArr count]) {
+        CBPeripheral * per = _peripheralsArr[indexPath.row];
+        [bluetoothCell setPeripheralInfo:per];
     }
-
-    if (indexPath.section == 0) {
-        if (indexPath.row < [_peripheralsArr count]) {
-            CBPeripheral * per = _peripheralsArr[indexPath.row];
-            cell.textLabel.text = per.name;
-        }
-    }
-    else {
+    else if (indexPath.section == 1 && indexPath.row < [_vitualPeripheralsArr count]) {
         // 虚拟外设
     }
+}
 
-    return cell;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        YSBluetoothTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:discover_cell_id];
+        return cell;
+    }
+    else {
+        YSBluetoothTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:vitural_cell_id];
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * senctionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    UIView * senctionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
     UILabel * label = [[UILabel alloc] initWithFrame:senctionView.bounds];
     label.textAlignment = NSTextAlignmentLeft;
-    label.font = [UIFont systemFontOfSize:14.0];
+    label.font = YSFont_Sys(16.0);
     [senctionView addSubview:label];
 
     if (section == 0) {
-        label.text = @"发现的设备";
+        label.text = @"   发现的设备";
     }
     else {
-        label.text = @"虚拟的设备";
+        label.text = @"   虚拟的设备";
     }
     return senctionView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0 && indexPath.row < [_peripheralsArr count]) {
+        CBPeripheral * per = _peripheralsArr[indexPath.row];
+        [[YSBlueToothManager sharedBlueToothManager] cbManagerConnectWithPeripheral:per];
+    }
+    else {
+
+    }
 }
 
 @end

@@ -30,9 +30,10 @@ typedef NS_ENUM(NSInteger, YSCBPeripheralConStrType)
 /**
  中心模式
  */
-- (void)setPeripheralContentStr:(NSString *)contentStr
-                    contentType:(YSCBPeripheralConStrType)contentType;
+- (void)setcbCenPerContentStr:(NSString *)contentStr
+                  contentType:(YSCBPeripheralConStrType)contentType;
 - (void)cbManagerStartScan;
+- (void)cbManagerConnectWithPeripheral:(CBPeripheral *)per;
 - (void)cbManagerStopScanAndDisconnectAllServices;
 - (CBManagerState)obtainCBManagerState;
 
@@ -41,6 +42,7 @@ typedef NS_ENUM(NSInteger, YSCBPeripheralConStrType)
 
 @protocol YSBluetoothManagerDelegate <NSObject>
 
-- (void)allDiscoverPeripherals:(NSMutableArray *)arr;
+@optional
+- (void)discoverNewPeripheral:(CBPeripheral *)per;
 
 @end

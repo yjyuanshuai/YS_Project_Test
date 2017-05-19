@@ -20,21 +20,25 @@
 #import "YSBlueToothManager.h"
 #import "YSHudView.h"
 
-@interface YSBlueToothManager() <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface YSBlueToothManager() <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
 /**
  中心模式
  */
-@property (nonatomic, strong) CBCentralManager * cbManager;         // 中心管理者
-@property (nonatomic, strong) NSMutableArray * cbPeripheralArr;     // 连接到的外设组 <CBPeripheral *>
-@property (nonatomic, assign) CBManagerState cbManagerState;        // 蓝牙状态
-@property (nonatomic, copy) NSString * peripheralContentStr;
-@property (nonatomic, assign) YSCBPeripheralConStrType contentStrType;
+@property (nonatomic, strong) CBCentralManager * cbCenManager;         // 中心管理者
+@property (nonatomic, strong) NSMutableArray * cbCenPeripheralArr;     // 连接到的外设组 <CBPeripheral *>
+@property (nonatomic, assign) CBManagerState cbCenManagerState;        // 蓝牙状态
+@property (nonatomic, copy) NSString * cbCenPerContentStr;
+@property (nonatomic, assign) YSCBPeripheralConStrType cbCenContentStrType;
 
 
 /**
  外设模式（暂无）
  */
+@property (nonatomic, strong) CBPeripheralManager * cbPerManager;   // 外设模式
+@property (nonatomic, strong) NSMutableArray * cbPerCentralArr;        // 被连接到的中心者 <CBCentral *>
+@property (nonatomic, assign) CBPeripheralManagerState cbPerManagerState;
+@property (nonatomic, strong) NSMutableArray * cbPerServiceArr;     // 服务   <CBMutableService *>
 
 @end
 
@@ -54,22 +58,27 @@
 {
     self = [super init];
     if (self) {
-        _cbManager          = nil;
-        _cbManagerState     = CBManagerStateUnknown;
-        _cbPeripheralArr    = [NSMutableArray arrayWithCapacity:0];
-        _contentStrType     = YSCBPeripheralConStrType_None;
-        _peripheralContentStr = @"";
+        _cbCenManager          = nil;
+        _cbCenManagerState     = CBManagerStateUnknown;
+        _cbCenPeripheralArr    = [NSMutableArray arrayWithCapacity:0];
+        _cbCenContentStrType     = YSCBPeripheralConStrType_None;
+        _cbCenPerContentStr = @"";
+
+        _cbPerManager       = nil;
+        _cbPerManagerState  = CBPeripheralManagerStateUnknown;
+        _cbPerCentralArr    = [NSMutableArray arrayWithCapacity:0];
+        _cbPerServiceArr    = [NSMutableArray arrayWithCapacity:0];
     }
     return self;
 }
 
-#pragma mark - init 中心者模式
-- (CBCentralManager *)obtainCBManager
+#pragma mark - 中心者模式
+- (CBCentralManager *)cbCenManager
 {
-    if (!_cbManager) {
-        _cbManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    if (!_cbCenManager) {
+        _cbCenManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }
-    return _cbManager;
+    return _cbCenManager;
 }
 
 - (void)cbManagerStartScan
@@ -77,11 +86,11 @@
     // 搜索成功之后,会调用我们找到外设的代理方法
     // - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
 
-    if (!_cbManager) {
-        _cbManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    if (!_cbCenManager) {
+        _cbCenManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }
 
-    switch (_cbManagerState) {
+    switch (_cbCenManagerState) {
         case CBManagerStateUnknown:
         case CBManagerStateResetting:
         case CBManagerStateUnauthorized:
@@ -101,7 +110,7 @@
             break;
         case CBManagerStatePoweredOn:       // 蓝牙已开启
         {
-            [_cbManager scanForPeripheralsWithServices:nil
+            [_cbCenManager scanForPeripheralsWithServices:nil
                                                options:nil];
         }
             break;
@@ -110,21 +119,29 @@
     }
 }
 
+- (void)cbManagerConnectWithPeripheral:(CBPeripheral *)per
+{
+    if (_cbCenManager) {
+        [_cbCenManager connectPeripheral:per options:nil];
+    }
+}
+
 - (void)cbManagerStopScanAndDisconnectAllServices
 {
-    if (_cbManager) {
-        [_cbManager stopScan];
-        if ([_cbPeripheralArr count] > 0) {
-            for (CBPeripheral * per in _cbPeripheralArr) {
-                [_cbManager cancelPeripheralConnection:per];
+    if (_cbCenManager) {
+        [_cbCenManager stopScan];
+        if ([_cbCenPeripheralArr count] > 0) {
+            for (CBPeripheral * per in _cbCenPeripheralArr) {
+                [_cbCenManager cancelPeripheralConnection:per];
             }
         }
+        [_cbCenPeripheralArr removeAllObjects];
     }
 }
 
 - (CBManagerState)obtainCBManagerState
 {
-    return _cbManagerState;
+    return _cbCenManagerState;
 }
 
 //停止扫描并断开连接
@@ -136,72 +153,60 @@
     [centralManager cancelPeripheralConnection:peripheral];
 }
 
-//设置通知
--(void)notifyPeripheral:(CBPeripheral *)peripheral
-         characteristic:(CBCharacteristic *)characteristic{
-    NSLog(@"Notify %lu", (unsigned long)characteristic.properties);
-
-    //设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
-    [peripheral setNotifyValue:YES forCharacteristic:characteristic];
-}
-
-//取消通知
--(void)cancelNotifyPeripheral:(CBPeripheral *)peripheral
-               characteristic:(CBCharacteristic *)characteristic{
-
-    [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-}
-
-//写数据
--(void)writeCharacteristic:(CBPeripheral *)peripheral
-            characteristic:(CBCharacteristic *)characteristic
-                     value:(NSData *)value{
-
-    //打印出 characteristic 的权限，可以看到有很多种，这是一个NS_OPTIONS，就是可以同时用于好几个值，常见的有read，write，notify，indicate，知知道这几个基本就够用了，前连个是读写权限，后两个都是通知，两种不同的通知方式。
-    /*
-     typedef NS_OPTIONS(NSUInteger, CBCharacteristicProperties) {
-     CBCharacteristicPropertyBroadcast                                              = 0x01,
-     CBCharacteristicPropertyRead                                                   = 0x02,
-     CBCharacteristicPropertyWriteWithoutResponse                                   = 0x04,
-     CBCharacteristicPropertyWrite                                                  = 0x08,
-     CBCharacteristicPropertyNotify                                                 = 0x10,
-     CBCharacteristicPropertyIndicate                                               = 0x20,
-     CBCharacteristicPropertyAuthenticatedSignedWrites                              = 0x40,
-     CBCharacteristicPropertyExtendedProperties                                     = 0x80,
-     CBCharacteristicPropertyNotifyEncryptionRequired NS_ENUM_AVAILABLE(NA, 6_0)    = 0x100,
-     CBCharacteristicPropertyIndicateEncryptionRequired NS_ENUM_AVAILABLE(NA, 6_0)  = 0x200
-     };
-     */
-
-    NSLog(@"write %lu", (unsigned long)characteristic.properties);
-
-    //只有 characteristic.properties 有write的权限才可以写
-    if(characteristic.properties & CBCharacteristicPropertyWrite){
-        /*
-         最好一个type参数可以为CBCharacteristicWriteWithResponse或type:CBCharacteristicWriteWithResponse,区别是是否会有反馈
-         */
-        [peripheral writeValue:value forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }else{
-        NSLog(@"该字段不可写！");
-    }
-}
-
-- (void)setPeripheralContentStr:(NSString *)contentStr
+- (void)setcbCenPerContentStr:(NSString *)contentStr
                     contentType:(YSCBPeripheralConStrType)contentType
 {
-    _contentStrType = contentType;
-    _peripheralContentStr = contentStr;
+    _cbCenContentStrType = contentType;
+    _cbCenPerContentStr = contentStr;
 }
 
-#pragma mark - 外设模式（暂无）
+#pragma mark - 外设模式
+- (CBPeripheralManager *)cbPerManager
+{
+    if (!_cbPerManager) {
+        _cbPerManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+    }
+    return _cbPerManager;
+}
+/*
+- (void)cbPerManagerSetCharacteristic
+{
+    // characteristic 字段描述
+    CBUUID * CBUUIDCharacteristic = [CBUUID UUIDWithString:CBUUIDCharacteristicUserDescriptionString];
 
+    // 可通知的 Characteristic
+    CBMutableCharacteristic * notifyCharacteristc = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:notifyCharacteristcUUID] properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
+
+    // 可读写
+    CBMutableCharacteristic *readwriteCharacteristic = [[CBMutableCharacteristic alloc]initWithType:[CBUUID UUIDWithString:readwriteCharacteristicUUID] properties:CBCharacteristicPropertyWrite | CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable | CBAttributePermissionsWriteable];
+
+    // 设置description
+    CBMutableDescriptor *readwriteCharacteristicDescription1 = [[CBMutableDescriptor alloc]initWithType: CBUUIDCharacteristic value:@"name"];
+    [readwriteCharacteristic setDescriptors:@[readwriteCharacteristicDescription1]];
+
+    // 只读
+    CBMutableCharacteristic *readCharacteristic = [[CBMutableCharacteristic alloc]initWithType:[CBUUID UUIDWithString:readCharacteristicUUID] properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
+
+    //service1初始化并加入两个characteristics
+    CBMutableService *service1 = [[CBMutableService alloc]initWithType:[CBUUID UUIDWithString:ServiceUUID1] primary:YES];
+    [service1 setCharacteristics:@[notiyCharacteristic,readwriteCharacteristic]];
+
+    //service2初始化并加入一个characteristics
+    CBMutableService *service2 = [[CBMutableService alloc]initWithType:[CBUUID UUIDWithString:ServiceUUID2] primary:YES];
+    [service2 setCharacteristics:@[readCharacteristic]];
+
+    //添加后就会调用代理的- (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error
+    [peripheralManager addService:service1];
+    [peripheralManager addService:service2];
+}
+*/
 #pragma mark - CBCentralManagerDelegate
 /**
  判断蓝牙状态
  */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    _cbManagerState = central.state;
+    _cbCenManagerState = central.state;
 }
 
 
@@ -219,35 +224,33 @@
                   RSSI:(NSNumber *)RSSI
 {
     DDLogInfo(@"---------- 发现设备：%@ -------\t uuid：%@", peripheral.name, peripheral.identifier.UUIDString);
-    [_cbPeripheralArr addObject:peripheral];
 
+    if ([_cbCenPerContentStr isEqualToString:@""] ||
+        _cbCenPerContentStr == nil ||
+        _cbCenContentStrType == YSCBPeripheralConStrType_None) {
 
-    if ([_peripheralContentStr isEqualToString:@""] ||
-        _peripheralContentStr == nil ||
-        _contentStrType == YSCBPeripheralConStrType_None) {
-
-        [central connectPeripheral:peripheral options:nil];
+        [self checkHasAddedAndConnect:central peripheral:peripheral];
     }
     else {
-        switch (_contentStrType) {
+        switch (_cbCenContentStrType) {
             case YSCBPeripheralConStrType_Prefix:
             {
-                if ([peripheral.name hasPrefix:_peripheralContentStr]) {
-                    [central connectPeripheral:peripheral options:nil];
+                if ([peripheral.name hasPrefix:_cbCenPerContentStr]) {
+                    [self checkHasAddedAndConnect:central peripheral:peripheral];
                 }
             }
                 break;
             case YSCBPeripheralConStrType_SufFix:
             {
-                if ([peripheral.name hasSuffix:_peripheralContentStr]) {
-                    [central connectPeripheral:peripheral options:nil];
+                if ([peripheral.name hasSuffix:_cbCenPerContentStr]) {
+                    [self checkHasAddedAndConnect:central peripheral:peripheral];
                 }
             }
                 break;
             case YSCBPeripheralConStrType_SubStr:
             {
-                if ([peripheral.name containsString:_peripheralContentStr]) {
-                    [central connectPeripheral:peripheral options:nil];
+                if ([peripheral.name containsString:_cbCenPerContentStr]) {
+                    [self checkHasAddedAndConnect:central peripheral:peripheral];
                 }
             }
                 break;
@@ -257,6 +260,19 @@
         }
     }
 
+}
+
+// 自定义
+- (void)checkHasAddedAndConnect:(CBCentralManager *)central peripheral:(CBPeripheral *)per
+{
+    if (![_cbCenPeripheralArr containsObject:per]) {
+
+        [_cbCenPeripheralArr addObject:per];
+
+        if (_delegate && [_delegate respondsToSelector:@selector(discoverNewPeripheral:)]) {
+            [_delegate discoverNewPeripheral:per];
+        }
+    }
 }
 
 /**
@@ -351,5 +367,131 @@
 //{
 //
 //}
+
+
+
+#pragma mark - CBPeripheralManagerDelegate
+
+//peripheralManager状态改变
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral{
+    _cbPerManagerState = (CBPeripheralManagerState)peripheral.state;
+}
+
+// 添加 service
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error
+{
+    if (error) {
+        DDLogInfo(@"-------- bluetooth add service error!");
+    }
+
+    //添加服务后可以在此向外界发出通告 调用完这个方法后会调用代理的
+    //(void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
+//    [peripheral startAdvertising:@{CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:ServiceUUID1],[CBUUID UUIDWithString:ServiceUUID2]],
+//                                   CBAdvertisementDataLocalNameKey : LocalNameKey
+//                                          }
+//     ];
+}
+
+// 发动 adveristing
+- (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error
+{
+
+}
+
+// 订阅 characteristic
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
+{
+    DDLogInfo(@"------ 订阅了 %@ 的数据", characteristic.UUID);
+
+    // 可以在此发送数据
+}
+
+// 取消订阅 characteristic
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic
+{
+    DDLogInfo(@"------ 取消订阅 %@ 的数据", characteristic.UUID);
+
+    // 再次取消发送
+}
+
+// 读 characteristics 请求
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
+{
+    //判断是否有读数据的权限
+    if (request.characteristic.properties & CBCharacteristicPropertyRead) {
+        NSData *data = request.characteristic.value;
+        [request setValue:data];
+        //对请求作出成功响应
+        [peripheral respondToRequest:request withResult:CBATTErrorSuccess];
+    }else{
+        [peripheral respondToRequest:request withResult:CBATTErrorWriteNotPermitted];
+    }
+}
+
+// 写 characteristics 请求
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
+{
+    CBATTRequest *request = requests[0];
+    //判断是否有写数据的权限
+    if (request.characteristic.properties & CBCharacteristicPropertyWrite) {
+        //需要转换成CBMutableCharacteristic对象才能进行写值
+        CBMutableCharacteristic * c =(CBMutableCharacteristic *)request.characteristic;
+        c.value = request.value;
+        [peripheral respondToRequest:request withResult:CBATTErrorSuccess];
+    }else{
+        [peripheral respondToRequest:request withResult:CBATTErrorWriteNotPermitted];
+    }
+}
+
+#pragma mark -
+//设置通知
+-(void)notifyPeripheral:(CBPeripheral *)peripheral
+         characteristic:(CBCharacteristic *)characteristic{
+    NSLog(@"Notify %lu", (unsigned long)characteristic.properties);
+
+    //设置通知，数据通知会进入：didUpdateValueForCharacteristic方法
+    [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+}
+
+//取消通知
+-(void)cancelNotifyPeripheral:(CBPeripheral *)peripheral
+               characteristic:(CBCharacteristic *)characteristic{
+
+    [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+}
+
+//写数据
+-(void)writeCharacteristic:(CBPeripheral *)peripheral
+            characteristic:(CBCharacteristic *)characteristic
+                     value:(NSData *)value
+{
+    //打印出 characteristic 的权限，可以看到有很多种，这是一个NS_OPTIONS，就是可以同时用于好几个值，常见的有read，write，notify，indicate，知知道这几个基本就够用了，前连个是读写权限，后两个都是通知，两种不同的通知方式。
+    /*
+     typedef NS_OPTIONS(NSUInteger, CBCharacteristicProperties) {
+     CBCharacteristicPropertyBroadcast                                              = 0x01,
+     CBCharacteristicPropertyRead                                                   = 0x02,
+     CBCharacteristicPropertyWriteWithoutResponse                                   = 0x04,
+     CBCharacteristicPropertyWrite                                                  = 0x08,
+     CBCharacteristicPropertyNotify                                                 = 0x10,
+     CBCharacteristicPropertyIndicate                                               = 0x20,
+     CBCharacteristicPropertyAuthenticatedSignedWrites                              = 0x40,
+     CBCharacteristicPropertyExtendedProperties                                     = 0x80,
+     CBCharacteristicPropertyNotifyEncryptionRequired NS_ENUM_AVAILABLE(NA, 6_0)    = 0x100,
+     CBCharacteristicPropertyIndicateEncryptionRequired NS_ENUM_AVAILABLE(NA, 6_0)  = 0x200
+     };
+     */
+
+    NSLog(@"write %lu", (unsigned long)characteristic.properties);
+
+    //只有 characteristic.properties 有write的权限才可以写
+    if(characteristic.properties & CBCharacteristicPropertyWrite){
+        /*
+         最好一个type参数可以为CBCharacteristicWriteWithResponse或type:CBCharacteristicWriteWithResponse,区别是是否会有反馈
+         */
+        [peripheral writeValue:value forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }else{
+        NSLog(@"该字段不可写！");
+    }
+}
 
 @end

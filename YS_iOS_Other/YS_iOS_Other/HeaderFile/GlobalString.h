@@ -29,9 +29,9 @@
 /*-------------------------------------------*/
 #pragma mark - 颜色
 
-#define YSColorRGB(red, green, blue) [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1.0]
+#define YSColorRGB(redValue, greenValue, blueValue) [UIColor colorWithRed:redValue/255.0 green:greenValue/255.0 blue:blueValue/255.0 alpha:1.0]
 
-#define YSColorRGBAlpha(red, green, blue, alpha) [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:alpha]
+#define YSColorRGBAlpha(redValue, greenValue, blueValue, alphaValue) [UIColor colorWithRed:redValue/255.0 green:greenValue/255.0 blue:blueValue/255.0 alpha:alphaValue]
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0] 
 
