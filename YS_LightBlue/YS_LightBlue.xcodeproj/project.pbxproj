@@ -7,25 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395DED7B1ED28F8100B1736D /* YSRootVC.m */; };
 		397D20111ECD9C8000920A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20101ECD9C8000920A72 /* main.m */; };
 		397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20131ECD9C8000920A72 /* AppDelegate.m */; };
-		397D20171ECD9C8000920A72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20161ECD9C8000920A72 /* ViewController.m */; };
 		397D201A1ECD9C8000920A72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397D20181ECD9C8000920A72 /* Main.storyboard */; };
 		397D201C1ECD9C8000920A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397D201B1ECD9C8000920A72 /* Assets.xcassets */; };
 		397D201F1ECD9C8000920A72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397D201D1ECD9C8000920A72 /* LaunchScreen.storyboard */; };
+		398BF44D1ED2B63E0099BB2C /* YSFirstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */; };
+		C7E20488D265A0424E4C9393 /* libPods-YS_LightBlue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		054C1826680BCC1F17BEBAA4 /* Pods-YS_LightBlue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_LightBlue.release.xcconfig"; path = "Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue.release.xcconfig"; sourceTree = "<group>"; };
+		395DED7A1ED28F8100B1736D /* YSRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRootVC.h; sourceTree = "<group>"; };
+		395DED7B1ED28F8100B1736D /* YSRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRootVC.m; sourceTree = "<group>"; };
 		397D200C1ECD9C8000920A72 /* YS_LightBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YS_LightBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		397D20101ECD9C8000920A72 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		397D20121ECD9C8000920A72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		397D20131ECD9C8000920A72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		397D20151ECD9C8000920A72 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		397D20161ECD9C8000920A72 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		397D20121ECD9C8000920A72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
+		397D20131ECD9C8000920A72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../AppDelegate.m; sourceTree = "<group>"; };
 		397D20191ECD9C8000920A72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		397D201B1ECD9C8000920A72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		397D201E1ECD9C8000920A72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		397D20201ECD9C8000920A72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		398BF4481ED2B3860099BB2C /* YSGlobalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGlobalInfo.h; sourceTree = "<group>"; };
+		398BF4491ED2B45F0099BB2C /* YS_LightBluePCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YS_LightBluePCH.pch; sourceTree = "<group>"; };
+		398BF44B1ED2B63E0099BB2C /* YSFirstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSFirstPageVC.h; sourceTree = "<group>"; };
+		398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageVC.m; sourceTree = "<group>"; };
+		BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YS_LightBlue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBD1A09355094611714B86C9 /* Pods-YS_LightBlue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_LightBlue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +42,136 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E20488D265A0424E4C9393 /* libPods-YS_LightBlue.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D6E370174558560A386706E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		395DED6D1ED28F4A00B1736D /* YS_Class */ = {
+			isa = PBXGroup;
+			children = (
+				395DED6E1ED28F4A00B1736D /* Item */,
+				395DED6F1ED28F4A00B1736D /* Main */,
+				395DED701ED28F4A00B1736D /* Model */,
+			);
+			path = YS_Class;
+			sourceTree = "<group>";
+		};
+		395DED6E1ED28F4A00B1736D /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				398BF44A1ED2B61D0099BB2C /* FirstPage */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		395DED6F1ED28F4A00B1736D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				397D20121ECD9C8000920A72 /* AppDelegate.h */,
+				397D20131ECD9C8000920A72 /* AppDelegate.m */,
+				395DED7A1ED28F8100B1736D /* YSRootVC.h */,
+				395DED7B1ED28F8100B1736D /* YSRootVC.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		395DED701ED28F4A00B1736D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		395DED711ED28F4A00B1736D /* YS_Common */ = {
+			isa = PBXGroup;
+			children = (
+				395DED721ED28F4A00B1736D /* YS_Category */,
+				395DED731ED28F4A00B1736D /* YS_Lib */,
+				395DED741ED28F4A00B1736D /* YS_SupportFile */,
+				395DED751ED28F4A00B1736D /* YS_Tool */,
+			);
+			path = YS_Common;
+			sourceTree = "<group>";
+		};
+		395DED721ED28F4A00B1736D /* YS_Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YS_Category;
+			sourceTree = "<group>";
+		};
+		395DED731ED28F4A00B1736D /* YS_Lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YS_Lib;
+			sourceTree = "<group>";
+		};
+		395DED741ED28F4A00B1736D /* YS_SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				398BF4481ED2B3860099BB2C /* YSGlobalInfo.h */,
+				398BF4491ED2B45F0099BB2C /* YS_LightBluePCH.pch */,
+			);
+			path = YS_SupportFile;
+			sourceTree = "<group>";
+		};
+		395DED751ED28F4A00B1736D /* YS_Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YS_Tool;
+			sourceTree = "<group>";
+		};
+		395DED761ED28F4A00B1736D /* YS_Resource */ = {
+			isa = PBXGroup;
+			children = (
+				395DED771ED28F4A00B1736D /* YS_Audio */,
+				395DED781ED28F4A00B1736D /* YS_Image */,
+				395DED791ED28F4A00B1736D /* YS_Video */,
+			);
+			path = YS_Resource;
+			sourceTree = "<group>";
+		};
+		395DED771ED28F4A00B1736D /* YS_Audio */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YS_Audio;
+			sourceTree = "<group>";
+		};
+		395DED781ED28F4A00B1736D /* YS_Image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YS_Image;
+			sourceTree = "<group>";
+		};
+		395DED791ED28F4A00B1736D /* YS_Video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YS_Video;
+			sourceTree = "<group>";
+		};
 		397D20031ECD9C8000920A72 = {
 			isa = PBXGroup;
 			children = (
 				397D200E1ECD9C8000920A72 /* YS_LightBlue */,
 				397D200D1ECD9C8000920A72 /* Products */,
+				7BE10895B9AD912FE757575C /* Pods */,
+				0D6E370174558560A386706E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +186,9 @@
 		397D200E1ECD9C8000920A72 /* YS_LightBlue */ = {
 			isa = PBXGroup;
 			children = (
-				397D20121ECD9C8000920A72 /* AppDelegate.h */,
-				397D20131ECD9C8000920A72 /* AppDelegate.m */,
-				397D20151ECD9C8000920A72 /* ViewController.h */,
-				397D20161ECD9C8000920A72 /* ViewController.m */,
-				397D20181ECD9C8000920A72 /* Main.storyboard */,
-				397D201B1ECD9C8000920A72 /* Assets.xcassets */,
-				397D201D1ECD9C8000920A72 /* LaunchScreen.storyboard */,
-				397D20201ECD9C8000920A72 /* Info.plist */,
+				395DED711ED28F4A00B1736D /* YS_Common */,
+				395DED6D1ED28F4A00B1736D /* YS_Class */,
+				395DED761ED28F4A00B1736D /* YS_Resource */,
 				397D200F1ECD9C8000920A72 /* Supporting Files */,
 			);
 			path = YS_LightBlue;
@@ -74,9 +197,31 @@
 		397D200F1ECD9C8000920A72 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				397D20181ECD9C8000920A72 /* Main.storyboard */,
+				397D201B1ECD9C8000920A72 /* Assets.xcassets */,
+				397D201D1ECD9C8000920A72 /* LaunchScreen.storyboard */,
+				397D20201ECD9C8000920A72 /* Info.plist */,
 				397D20101ECD9C8000920A72 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		398BF44A1ED2B61D0099BB2C /* FirstPage */ = {
+			isa = PBXGroup;
+			children = (
+				398BF44B1ED2B63E0099BB2C /* YSFirstPageVC.h */,
+				398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */,
+			);
+			name = FirstPage;
+			sourceTree = "<group>";
+		};
+		7BE10895B9AD912FE757575C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FBD1A09355094611714B86C9 /* Pods-YS_LightBlue.debug.xcconfig */,
+				054C1826680BCC1F17BEBAA4 /* Pods-YS_LightBlue.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,9 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 397D20231ECD9C8000920A72 /* Build configuration list for PBXNativeTarget "YS_LightBlue" */;
 			buildPhases = (
+				3483074885AE9A390B74B8ED /* [CP] Check Pods Manifest.lock */,
 				397D20081ECD9C8000920A72 /* Sources */,
 				397D20091ECD9C8000920A72 /* Frameworks */,
 				397D200A1ECD9C8000920A72 /* Resources */,
+				A71108A4C07BB4C8250E95A6 /* [CP] Embed Pods Frameworks */,
+				6FBDED638813810A2CA2697A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,13 +294,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3483074885AE9A390B74B8ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6FBDED638813810A2CA2697A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A71108A4C07BB4C8250E95A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		397D20081ECD9C8000920A72 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				397D20171ECD9C8000920A72 /* ViewController.m in Sources */,
+				398BF44D1ED2B63E0099BB2C /* YSFirstPageVC.m in Sources */,
 				397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */,
+				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
 				397D20111ECD9C8000920A72 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,10 +468,16 @@
 		};
 		397D20241ECD9C8000920A72 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBD1A09355094611714B86C9 /* Pods-YS_LightBlue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				App_Display_Name = "开发";
 				DEVELOPMENT_TEAM = MNH692X4AB;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YS_LightBlue/YS_Common/YS_SupportFile/YS_LightBluePCH.pch";
 				INFOPLIST_FILE = YS_LightBlue/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yjyuanshuai.YS-LightBlue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -283,10 +486,16 @@
 		};
 		397D20251ECD9C8000920A72 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 054C1826680BCC1F17BEBAA4 /* Pods-YS_LightBlue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				App_Display_Name = "正式";
 				DEVELOPMENT_TEAM = MNH692X4AB;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YS_LightBlue/YS_Common/YS_SupportFile/YS_LightBluePCH.pch";
 				INFOPLIST_FILE = YS_LightBlue/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yjyuanshuai.YS-LightBlue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -312,6 +521,7 @@
 				397D20251ECD9C8000920A72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

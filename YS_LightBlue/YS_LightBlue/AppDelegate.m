@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "YSFirstPageVC.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+
+    YSFirstPageVC * firstPage = [[YSFirstPageVC alloc] init];
+    UINavigationController * navCon = [[UINavigationController alloc] initWithRootViewController:firstPage];
+    self.window.rootViewController = navCon;
+
     return YES;
 }
 
