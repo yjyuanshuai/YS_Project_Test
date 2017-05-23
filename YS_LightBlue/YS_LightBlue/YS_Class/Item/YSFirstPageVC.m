@@ -7,6 +7,9 @@
 //
 
 #import "YSFirstPageVC.h"
+#import "YSFirstPageTableViewCell.h"
+
+static NSString * const PeripheralCellID = @"PeripheralCellID";
 
 @interface YSFirstPageVC () <UITableViewDelegate, UITableViewDataSource>
 
@@ -49,6 +52,8 @@
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
+
+    [_tableView registerClass:[YSFirstPageTableViewCell class] forCellReuseIdentifier:PeripheralCellID];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -67,6 +72,12 @@
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YSFirstPageTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:PeripheralCellID];
+
+    return cell;
+}
 
 
 @end

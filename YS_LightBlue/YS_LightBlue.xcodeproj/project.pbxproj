@@ -14,6 +14,13 @@
 		397D201C1ECD9C8000920A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397D201B1ECD9C8000920A72 /* Assets.xcassets */; };
 		397D201F1ECD9C8000920A72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 397D201D1ECD9C8000920A72 /* LaunchScreen.storyboard */; };
 		398BF44D1ED2B63E0099BB2C /* YSFirstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */; };
+		39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930D5D1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m */; };
+		39930D631ED4200700FD7C36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39930D651ED4200700FD7C36 /* InfoPlist.strings */; };
+		39930D691ED4213100FD7C36 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39930D6B1ED4213100FD7C36 /* Localizable.strings */; };
+		39930D701ED423B700FD7C36 /* YSLocalizableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930D6F1ED423B700FD7C36 /* YSLocalizableTool.m */; };
+		39930DA01ED4334700FD7C36 /* YSLightBlue.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39930D9F1ED4334700FD7C36 /* YSLightBlue.bundle */; };
+		39930DA41ED4370E00FD7C36 /* YSPeripheralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930DA31ED4370E00FD7C36 /* YSPeripheralModel.m */; };
+		39930DA81ED437FE00FD7C36 /* NSString+YSStringDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */; };
 		C7E20488D265A0424E4C9393 /* libPods-YS_LightBlue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +40,22 @@
 		398BF4491ED2B45F0099BB2C /* YS_LightBluePCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YS_LightBluePCH.pch; sourceTree = "<group>"; };
 		398BF44B1ED2B63E0099BB2C /* YSFirstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSFirstPageVC.h; sourceTree = "<group>"; };
 		398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageVC.m; sourceTree = "<group>"; };
+		39930D5C1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSFirstPageTableViewCell.h; sourceTree = "<group>"; };
+		39930D5D1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageTableViewCell.m; sourceTree = "<group>"; };
+		39930D5F1ED41ED800FD7C36 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		39930D601ED41ED800FD7C36 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		39930D641ED4200700FD7C36 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		39930D661ED4201300FD7C36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		39930D6A1ED4213100FD7C36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		39930D6C1ED4213200FD7C36 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		39930D6E1ED423B700FD7C36 /* YSLocalizableTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSLocalizableTool.h; sourceTree = "<group>"; };
+		39930D6F1ED423B700FD7C36 /* YSLocalizableTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSLocalizableTool.m; sourceTree = "<group>"; };
+		39930D9F1ED4334700FD7C36 /* YSLightBlue.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YSLightBlue.bundle; sourceTree = "<group>"; };
+		39930DA11ED434F800FD7C36 /* YSGlobalSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGlobalSetting.h; sourceTree = "<group>"; };
+		39930DA21ED4370E00FD7C36 /* YSPeripheralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPeripheralModel.h; sourceTree = "<group>"; };
+		39930DA31ED4370E00FD7C36 /* YSPeripheralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSPeripheralModel.m; sourceTree = "<group>"; };
+		39930DA61ED437FE00FD7C36 /* NSString+YSStringDo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YSStringDo.h"; sourceTree = "<group>"; };
+		39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YSStringDo.m"; sourceTree = "<group>"; };
 		BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YS_LightBlue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD1A09355094611714B86C9 /* Pods-YS_LightBlue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_LightBlue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +112,8 @@
 		395DED701ED28F4A00B1736D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				39930DA21ED4370E00FD7C36 /* YSPeripheralModel.h */,
+				39930DA31ED4370E00FD7C36 /* YSPeripheralModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,6 +132,7 @@
 		395DED721ED28F4A00B1736D /* YS_Category */ = {
 			isa = PBXGroup;
 			children = (
+				39930DA51ED437FE00FD7C36 /* NSString */,
 			);
 			path = YS_Category;
 			sourceTree = "<group>";
@@ -121,7 +147,9 @@
 		395DED741ED28F4A00B1736D /* YS_SupportFile */ = {
 			isa = PBXGroup;
 			children = (
+				39930D9F1ED4334700FD7C36 /* YSLightBlue.bundle */,
 				398BF4481ED2B3860099BB2C /* YSGlobalInfo.h */,
+				39930DA11ED434F800FD7C36 /* YSGlobalSetting.h */,
 				398BF4491ED2B45F0099BB2C /* YS_LightBluePCH.pch */,
 			);
 			path = YS_SupportFile;
@@ -130,6 +158,7 @@
 		395DED751ED28F4A00B1736D /* YS_Tool */ = {
 			isa = PBXGroup;
 			children = (
+				39930D6D1ED4239300FD7C36 /* YSLocalizable */,
 			);
 			path = YS_Tool;
 			sourceTree = "<group>";
@@ -202,6 +231,8 @@
 				397D201D1ECD9C8000920A72 /* LaunchScreen.storyboard */,
 				397D20201ECD9C8000920A72 /* Info.plist */,
 				397D20101ECD9C8000920A72 /* main.m */,
+				39930D651ED4200700FD7C36 /* InfoPlist.strings */,
+				39930D6B1ED4213100FD7C36 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -211,8 +242,28 @@
 			children = (
 				398BF44B1ED2B63E0099BB2C /* YSFirstPageVC.h */,
 				398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */,
+				39930D5C1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.h */,
+				39930D5D1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m */,
 			);
 			name = FirstPage;
+			sourceTree = "<group>";
+		};
+		39930D6D1ED4239300FD7C36 /* YSLocalizable */ = {
+			isa = PBXGroup;
+			children = (
+				39930D6E1ED423B700FD7C36 /* YSLocalizableTool.h */,
+				39930D6F1ED423B700FD7C36 /* YSLocalizableTool.m */,
+			);
+			path = YSLocalizable;
+			sourceTree = "<group>";
+		};
+		39930DA51ED437FE00FD7C36 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				39930DA61ED437FE00FD7C36 /* NSString+YSStringDo.h */,
+				39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */,
+			);
+			path = NSString;
 			sourceTree = "<group>";
 		};
 		7BE10895B9AD912FE757575C /* Pods */ = {
@@ -270,6 +321,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 397D20031ECD9C8000920A72;
 			productRefGroup = 397D200D1ECD9C8000920A72 /* Products */;
@@ -286,8 +338,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39930D691ED4213100FD7C36 /* Localizable.strings in Resources */,
 				397D201F1ECD9C8000920A72 /* LaunchScreen.storyboard in Resources */,
+				39930D631ED4200700FD7C36 /* InfoPlist.strings in Resources */,
 				397D201C1ECD9C8000920A72 /* Assets.xcassets in Resources */,
+				39930DA01ED4334700FD7C36 /* YSLightBlue.bundle in Resources */,
 				397D201A1ECD9C8000920A72 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,9 +403,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				398BF44D1ED2B63E0099BB2C /* YSFirstPageVC.m in Sources */,
+				39930DA81ED437FE00FD7C36 /* NSString+YSStringDo.m in Sources */,
 				397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */,
+				39930DA41ED4370E00FD7C36 /* YSPeripheralModel.m in Sources */,
+				39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */,
 				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
 				397D20111ECD9C8000920A72 /* main.m in Sources */,
+				39930D701ED423B700FD7C36 /* YSLocalizableTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +420,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				397D20191ECD9C8000920A72 /* Base */,
+				39930D5F1ED41ED800FD7C36 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -369,8 +429,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				397D201E1ECD9C8000920A72 /* Base */,
+				39930D601ED41ED800FD7C36 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		39930D651ED4200700FD7C36 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				39930D641ED4200700FD7C36 /* zh-Hans */,
+				39930D661ED4201300FD7C36 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		39930D6B1ED4213100FD7C36 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				39930D6A1ED4213100FD7C36 /* en */,
+				39930D6C1ED4213200FD7C36 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -380,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -428,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
