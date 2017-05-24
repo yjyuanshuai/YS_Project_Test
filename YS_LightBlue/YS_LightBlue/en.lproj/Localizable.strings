@@ -9,3 +9,8 @@
 
 "noname" = "NO Named";
 "services" = "%@ Services";
+"create_virtual" = "Create Virtual Peripheral";
+"firstpage_section_per" = "Peripherals";
+"firstpage_section_vir" = "Virtual Peripherals";
+"sortbaritem_title" = "Sort";
+"filterbaritem_title" = "Filter";

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391F6D8F1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */; };
+		391F6D931ED568AC007A04A6 /* YSBlueToothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F6D921ED568AC007A04A6 /* YSBlueToothManager.m */; };
 		395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395DED7B1ED28F8100B1736D /* YSRootVC.m */; };
 		397D20111ECD9C8000920A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20101ECD9C8000920A72 /* main.m */; };
 		397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20131ECD9C8000920A72 /* AppDelegate.m */; };
@@ -19,13 +21,16 @@
 		39930D691ED4213100FD7C36 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39930D6B1ED4213100FD7C36 /* Localizable.strings */; };
 		39930D701ED423B700FD7C36 /* YSLocalizableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930D6F1ED423B700FD7C36 /* YSLocalizableTool.m */; };
 		39930DA01ED4334700FD7C36 /* YSLightBlue.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39930D9F1ED4334700FD7C36 /* YSLightBlue.bundle */; };
-		39930DA41ED4370E00FD7C36 /* YSPeripheralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930DA31ED4370E00FD7C36 /* YSPeripheralModel.m */; };
 		39930DA81ED437FE00FD7C36 /* NSString+YSStringDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */; };
 		C7E20488D265A0424E4C9393 /* libPods-YS_LightBlue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		054C1826680BCC1F17BEBAA4 /* Pods-YS_LightBlue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_LightBlue.release.xcconfig"; path = "Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue.release.xcconfig"; sourceTree = "<group>"; };
+		391F6D8D1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSFirstPageAddVirtualCell.h; sourceTree = "<group>"; };
+		391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageAddVirtualCell.m; sourceTree = "<group>"; };
+		391F6D911ED568AC007A04A6 /* YSBlueToothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBlueToothManager.h; sourceTree = "<group>"; };
+		391F6D921ED568AC007A04A6 /* YSBlueToothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBlueToothManager.m; sourceTree = "<group>"; };
 		395DED7A1ED28F8100B1736D /* YSRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRootVC.h; sourceTree = "<group>"; };
 		395DED7B1ED28F8100B1736D /* YSRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRootVC.m; sourceTree = "<group>"; };
 		397D200C1ECD9C8000920A72 /* YS_LightBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YS_LightBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,8 +57,6 @@
 		39930D6F1ED423B700FD7C36 /* YSLocalizableTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSLocalizableTool.m; sourceTree = "<group>"; };
 		39930D9F1ED4334700FD7C36 /* YSLightBlue.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YSLightBlue.bundle; sourceTree = "<group>"; };
 		39930DA11ED434F800FD7C36 /* YSGlobalSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGlobalSetting.h; sourceTree = "<group>"; };
-		39930DA21ED4370E00FD7C36 /* YSPeripheralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPeripheralModel.h; sourceTree = "<group>"; };
-		39930DA31ED4370E00FD7C36 /* YSPeripheralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSPeripheralModel.m; sourceTree = "<group>"; };
 		39930DA61ED437FE00FD7C36 /* NSString+YSStringDo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YSStringDo.h"; sourceTree = "<group>"; };
 		39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YSStringDo.m"; sourceTree = "<group>"; };
 		BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YS_LightBlue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +81,15 @@
 				BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		391F6D901ED568AC007A04A6 /* YSToothBlue */ = {
+			isa = PBXGroup;
+			children = (
+				391F6D911ED568AC007A04A6 /* YSBlueToothManager.h */,
+				391F6D921ED568AC007A04A6 /* YSBlueToothManager.m */,
+			);
+			path = YSToothBlue;
 			sourceTree = "<group>";
 		};
 		395DED6D1ED28F4A00B1736D /* YS_Class */ = {
@@ -112,8 +124,6 @@
 		395DED701ED28F4A00B1736D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				39930DA21ED4370E00FD7C36 /* YSPeripheralModel.h */,
-				39930DA31ED4370E00FD7C36 /* YSPeripheralModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,6 +168,7 @@
 		395DED751ED28F4A00B1736D /* YS_Tool */ = {
 			isa = PBXGroup;
 			children = (
+				391F6D901ED568AC007A04A6 /* YSToothBlue */,
 				39930D6D1ED4239300FD7C36 /* YSLocalizable */,
 			);
 			path = YS_Tool;
@@ -244,6 +255,8 @@
 				398BF44C1ED2B63E0099BB2C /* YSFirstPageVC.m */,
 				39930D5C1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.h */,
 				39930D5D1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m */,
+				391F6D8D1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.h */,
+				391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */,
 			);
 			name = FirstPage;
 			sourceTree = "<group>";
@@ -403,10 +416,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				398BF44D1ED2B63E0099BB2C /* YSFirstPageVC.m in Sources */,
+				391F6D8F1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m in Sources */,
 				39930DA81ED437FE00FD7C36 /* NSString+YSStringDo.m in Sources */,
 				397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */,
-				39930DA41ED4370E00FD7C36 /* YSPeripheralModel.m in Sources */,
 				39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */,
+				391F6D931ED568AC007A04A6 /* YSBlueToothManager.m in Sources */,
 				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
 				397D20111ECD9C8000920A72 /* main.m in Sources */,
 				39930D701ED423B700FD7C36 /* YSLocalizableTool.m in Sources */,

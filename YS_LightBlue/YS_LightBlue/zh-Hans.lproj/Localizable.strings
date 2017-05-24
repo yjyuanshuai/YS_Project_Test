@@ -8,3 +8,8 @@
 
 "noname" = "未命名";
 "services" = "%@ 个服务";
+"create_virtual" = "新建虚拟蓝牙外设";
+"firstpage_section_per" = "扫描到的外设";
+"firstpage_section_vir" = "虚拟的外设";
+"sortbaritem_title" = "排序";
+"filterbaritem_title" = "文件";

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "YSFirstPageVC.h"
+#import "YSBlueToothManager.h"
 
 @interface AppDelegate ()
 
@@ -26,6 +27,9 @@
     YSFirstPageVC * firstPage = [[YSFirstPageVC alloc] init];
     UINavigationController * navCon = [[UINavigationController alloc] initWithRootViewController:firstPage];
     self.window.rootViewController = navCon;
+
+    [UINavigationBar appearance].tintColor = YS_Default_BlueColor;
+    
 
     return YES;
 }

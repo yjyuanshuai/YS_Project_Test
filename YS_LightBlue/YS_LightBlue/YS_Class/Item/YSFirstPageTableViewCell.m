@@ -7,8 +7,8 @@
 //
 
 #import "YSFirstPageTableViewCell.h"
-#import "YSPeripheralModel.h"
 #import "NSString+YSStringDo.h"
+#import "YSBlueToothManager.h"
 
 @implementation YSFirstPageTableViewCell
 
@@ -16,6 +16,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
         _leftBtn = [UIButton new];
         [_leftBtn addTarget:self action:@selector(clickLeftBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_leftBtn];
@@ -35,7 +38,7 @@
 
         [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(15);
-            make.size.mas_equalTo(CGSizeMake(40, 40));
+            make.size.mas_equalTo(CGSizeMake(20, 20));
             make.centerY.equalTo(self.contentView);
         }];
 
@@ -61,18 +64,16 @@
         _leftBtn.userInteractionEnabled = NO;
         [_leftBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     }
-    else if (model.perType == YSPeripheralType_VirtualSel) {
+    else if (model.perType == YSPeripheralType_Virtual) {
         _leftBtn.userInteractionEnabled = YES;
+        _indexPath = indexPath;
         [_leftBtn setImage:[UIImage imageNamed:@"virtual_unselected"] forState:UIControlStateNormal];
-    }
-    else {
-        _leftBtn.userInteractionEnabled = YES;
-        [_leftBtn setImage:[UIImage imageNamed:@"add_virtual"] forState:UIControlStateNormal];
     }
 
     if (![model.perName isBlank]) {
         _nameLabel.text = model.perName;
     }
+    
     if ([model.perServicesNum integerValue] > 0) {
         _servicesLabel.text = [NSString stringWithFormat:[YSLocalizableTool ys_localizedStringWithKey:@"services"], model.perServicesNum];
     }
@@ -80,7 +81,9 @@
 
 - (void)clickLeftBtn:(UIButton *)btn
 {
-
+    if (_delegate && [_delegate respondsToSelector:@selector(openOrCloseVirtualPer:)]) {
+        [_delegate openOrCloseVirtualPer:_indexPath];
+    }
 }
 
 @end
