@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+//@class MBProgressHUD;
 
 typedef NS_ENUM(NSUInteger, YSLoadViewType)
 {
@@ -34,18 +35,15 @@ typedef NS_ENUM(NSUInteger, YSLoadViewType)
 @property (nonatomic, assign) NSTimeInterval overTimeInterval;              // 超时时间
 @property (nonatomic, strong) UIViewController * blongToViewController;
 @property (nonatomic, copy)   NSString * msgText;                           // 提示语句（如超时 / 数据加载出错等）
-
 @property (nonatomic, strong) UIView * ysCustomView;
 
-#pragma mark - instance method -
 
+#pragma mark - class method
 
-#pragma mark - class method -
 + (instancetype)showInViewController:(UIViewController *)viewController;
 
 + (void)hideInViewController:(UIViewController *)viewController;
 + (void)hideInViewController:(UIViewController *)viewController finishBlock:(void (^)(void))block;
-
 + (void)hideInViewController:(UIViewController *)viewController msgHUDTitle:(NSString *)msg;
 + (void)hideInViewController:(UIViewController *)viewController msgHUDTitle:(NSString *)msg finishBlock:(void (^)(void))block;
 

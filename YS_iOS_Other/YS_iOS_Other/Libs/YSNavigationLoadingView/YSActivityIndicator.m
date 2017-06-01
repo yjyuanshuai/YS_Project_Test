@@ -190,19 +190,19 @@
     }
 }
 
-#pragma mark - 超时
+// 超时
 - (void)overTime
 {
     [YSActivityIndicator hideInViewController:_blongToViewController msgHUDTitle:@"操作超时，请重试!"];
 }
 
-#pragma mark - 置空
+// 置空
 - (void)setBlongViewNil
 {
     _blongToViewController = nil;
 }
 
-#pragma mark - layout
+#pragma mark - layoutSubviews
 - (void)layoutSubviews
 {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -210,65 +210,76 @@
     
     CGFloat maxWidth    = self.frame.size.width;
     CGFloat maxHeight   = self.frame.size.height;
-    
-    if (_ysType == YSLoadViewTypeSystemActIndicatorDefault) {
-        
-        CGSize titleSize = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
-        CGFloat titleHeight = MIN(titleSize.height, 30);
-        CGFloat titleWidth = MIN(titleSize.width, maxWidth-35);
-        CGFloat space_left = (maxWidth - 30 - 5 - titleWidth)/2;
-        _ysAcitityIndicator.frame = CGRectMake(space_left, (maxHeight - 30)/2, 30, 30);
-        _titleLabel.frame = CGRectMake(space_left+30+5, (maxHeight - titleHeight)/2, titleWidth, titleHeight);
-        
-    } else if (_ysType == YSLoadViewTypeSystemActIndicatorDetail) {
-        
-        CGSize titleSize    = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
-        CGSize descSize     = [_descStr sizeWithAttributes:@{NSFontAttributeName:_descFont}];
-        
-        CGFloat titleHeight = MIN(titleSize.height, 30);
-        CGFloat descHeight  = MIN(descSize.height, maxHeight - titleHeight);
-        
-        CGFloat labelWidth  = MAX(titleSize.width, descSize.width);
-        labelWidth = MIN(labelWidth, maxWidth-35);
-        
-        CGFloat space_left = (maxWidth - 30 - 5 - labelWidth)/2;
-        
-        _ysAcitityIndicator.frame = CGRectMake(space_left, (maxHeight - 30)/2, 30, 30);
-        _titleLabel.frame = CGRectMake(space_left+30+5, (maxHeight - titleHeight - descHeight)/2, labelWidth, titleHeight);
-        _descLabel.frame = CGRectMake(space_left+30+5, CGRectGetMaxY(_titleLabel.frame), labelWidth, descHeight);
-        
-    } else if (_ysType == YSLoadViewTypeTextDefault) {
-        
-        CGSize titleSize = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
-        
-        CGFloat titleHeight = MIN(titleSize.height, 30);
-        _titleLabel.frame = CGRectMake(0, (maxHeight - titleHeight)/2, maxWidth, titleHeight);
-    
-    } else if (_ysType == YSLoadViewTypeTextDetail) {
-        
-        CGSize titleSize    = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
-        CGSize descSize     = [_descStr sizeWithAttributes:@{NSFontAttributeName:_descFont}];
-        
-        CGFloat titleHeight = MIN(titleSize.height, 30);
-        CGFloat descHeight  = MIN(descSize.height, maxHeight - titleHeight);
-        
-        _titleLabel.frame = CGRectMake(0, (maxHeight - titleHeight - descHeight)/2, maxWidth, titleHeight);
-        
-        _descLabel.frame = CGRectMake(0, CGRectGetMaxY(_titleLabel.frame), maxWidth, descHeight);
-        
-    } else if (_ysType == YSLoadViewTypeCustom) {
 
-        CGFloat custemViewHeight = _ysCustomView.frame.size.height;
-        CGFloat custemViewWidth = _ysCustomView.frame.size.width;
-
-        if (custemViewHeight > maxHeight || custemViewHeight <= 0) {
-            custemViewHeight = maxHeight;
+    switch (_ysType) {
+        case YSLoadViewTypeSystemActIndicatorDefault:
+        {
+            CGSize titleSize = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
+            CGFloat titleHeight = MIN(titleSize.height, 30);
+            CGFloat titleWidth = MIN(titleSize.width, maxWidth-35);
+            CGFloat space_left = (maxWidth - 30 - 5 - titleWidth)/2;
+            _ysAcitityIndicator.frame = CGRectMake(space_left, (maxHeight - 30)/2, 30, 30);
+            _titleLabel.frame = CGRectMake(space_left+30+5, (maxHeight - titleHeight)/2, titleWidth, titleHeight);
         }
-        if (custemViewWidth > maxWidth || custemViewWidth <= 0) {
-            custemViewWidth = maxWidth;
-        }
+            break;
+        case YSLoadViewTypeSystemActIndicatorDetail:
+        {
+            CGSize titleSize    = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
+            CGSize descSize     = [_descStr sizeWithAttributes:@{NSFontAttributeName:_descFont}];
 
-        _ysCustomView.frame = CGRectMake(_ysCustomView.frame.origin.x, _ysCustomView.frame.origin.y, custemViewWidth, custemViewHeight);
+            CGFloat titleHeight = MIN(titleSize.height, 30);
+            CGFloat descHeight  = MIN(descSize.height, maxHeight - titleHeight);
+
+            CGFloat labelWidth  = MAX(titleSize.width, descSize.width);
+            labelWidth = MIN(labelWidth, maxWidth-35);
+
+            CGFloat space_left = (maxWidth - 30 - 5 - labelWidth)/2;
+
+            _ysAcitityIndicator.frame = CGRectMake(space_left, (maxHeight - 30)/2, 30, 30);
+            _titleLabel.frame = CGRectMake(space_left+30+5, (maxHeight - titleHeight - descHeight)/2, labelWidth, titleHeight);
+            _descLabel.frame = CGRectMake(space_left+30+5, CGRectGetMaxY(_titleLabel.frame), labelWidth, descHeight);
+        }
+            break;
+        case YSLoadViewTypeTextDefault:
+        {
+            CGSize titleSize = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
+
+            CGFloat titleHeight = MIN(titleSize.height, 30);
+            _titleLabel.frame = CGRectMake(0, (maxHeight - titleHeight)/2, maxWidth, titleHeight);
+        }
+            break;
+        case YSLoadViewTypeTextDetail:
+        {
+            CGSize titleSize    = [_titleStr sizeWithAttributes:@{NSFontAttributeName:_titleFont}];
+            CGSize descSize     = [_descStr sizeWithAttributes:@{NSFontAttributeName:_descFont}];
+
+            CGFloat titleHeight = MIN(titleSize.height, 30);
+            CGFloat descHeight  = MIN(descSize.height, maxHeight - titleHeight);
+
+            _titleLabel.frame = CGRectMake(0, (maxHeight - titleHeight - descHeight)/2, maxWidth, titleHeight);
+
+            _descLabel.frame = CGRectMake(0, CGRectGetMaxY(_titleLabel.frame), maxWidth, descHeight);
+        }
+            break;
+        case YSLoadViewTypeCustom:
+        {
+            CGFloat custemViewHeight = _ysCustomView.frame.size.height;
+            CGFloat custemViewWidth = _ysCustomView.frame.size.width;
+
+            if (custemViewHeight > maxHeight || custemViewHeight <= 0) {
+                custemViewHeight = maxHeight;
+            }
+            if (custemViewWidth > maxWidth || custemViewWidth <= 0) {
+                custemViewWidth = maxWidth;
+            }
+
+            _ysCustomView.frame = CGRectMake(_ysCustomView.frame.origin.x, _ysCustomView.frame.origin.y, custemViewWidth, custemViewHeight);
+
+        }
+            break;
+
+        default:
+            break;
     }
 }
 
@@ -370,45 +381,56 @@
 
 - (void)updateLoadingView
 {
-    if (_ysType == YSLoadViewTypeSystemActIndicatorDefault) {
-        
-        if (!_ysAcitityIndicator.isAnimating) {
-            [_ysAcitityIndicator startAnimating];
-        }
-        
-        [_descLabel removeFromSuperview];
-        _descLabel = nil;
-        
-    } else if (_ysType == YSLoadViewTypeSystemActIndicatorDetail) {
-        
-        if (!_ysAcitityIndicator.isAnimating) {
-            [_ysAcitityIndicator startAnimating];
-        }
-    
-    } else if (_ysType == YSLoadViewTypeCustom) {
-        
-        [_ysAcitityIndicator removeFromSuperview];
-        _ysAcitityIndicator = nil;
-        [_descLabel removeFromSuperview];
-        _descLabel = nil;
-        [_titleLabel removeFromSuperview];
-        _titleLabel = nil;
+    switch (_ysType) {
+        case YSLoadViewTypeSystemActIndicatorDefault:
+        {
+            if (!_ysAcitityIndicator.isAnimating) {
+                [_ysAcitityIndicator startAnimating];
+            }
 
-        if (_ysCustomView) {
-            [self addSubview:_ysCustomView];
+            [_descLabel removeFromSuperview];
+            _descLabel = nil;
         }
-        
-    } else if (_ysType == YSLoadViewTypeTextDefault) {
-    
-        [_ysAcitityIndicator removeFromSuperview];
-        _ysAcitityIndicator = nil;
-        [_descLabel removeFromSuperview];
-        _descLabel = nil;
-        
-    } else if (_ysType == YSLoadViewTypeTextDetail) {
-        
-        [_ysAcitityIndicator removeFromSuperview];
-        _ysAcitityIndicator = nil;
+            break;
+        case YSLoadViewTypeSystemActIndicatorDetail:
+        {
+            if (!_ysAcitityIndicator.isAnimating) {
+                [_ysAcitityIndicator startAnimating];
+            }
+        }
+            break;
+        case YSLoadViewTypeCustom:
+        {
+            [_ysAcitityIndicator removeFromSuperview];
+            _ysAcitityIndicator = nil;
+            [_descLabel removeFromSuperview];
+            _descLabel = nil;
+            [_titleLabel removeFromSuperview];
+            _titleLabel = nil;
+
+            if (_ysCustomView) {
+                [self addSubview:_ysCustomView];
+            }
+
+        }
+            break;
+        case YSLoadViewTypeTextDefault:
+        {
+            [_ysAcitityIndicator removeFromSuperview];
+            _ysAcitityIndicator = nil;
+            [_descLabel removeFromSuperview];
+            _descLabel = nil;
+        }
+            break;
+        case YSLoadViewTypeTextDetail:
+        {
+            [_ysAcitityIndicator removeFromSuperview];
+            _ysAcitityIndicator = nil;
+        }
+            break;
+
+        default:
+            break;
     }
 }
 

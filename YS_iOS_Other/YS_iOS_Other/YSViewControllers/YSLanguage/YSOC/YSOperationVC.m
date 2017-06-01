@@ -66,14 +66,16 @@
     YSActivityIndicator * acti = [YSActivityIndicator showInViewController:self];
     acti.ysType = YSLoadViewTypeCustom;
     acti.ysCustomView = cusView;
+    acti.backgroundColor = [UIColor redColor];
     acti.overTimeInterval = 10;
 
 
 
-    UIButton * rightTest = [UIButton buttonWithType:UIButtonTypeSystem];
-    rightTest.frame = CGRectMake(0, 0, 100, 30);
-    [rightTest setTitle:@"哈哈疯狂拉升的规划gas刚卡死点火开关" forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightTest];
+//    UIButton * rightTest = [UIButton buttonWithType:UIButtonTypeSystem];
+//    rightTest.frame = CGRectMake(0, 0, 80, 30);
+//    rightTest.backgroundColor = [UIColor yellowColor];
+//    [rightTest setTitle:@"哈哈疯狂拉升的规划gas刚卡死点火开关" forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightTest];
 }
 
 
