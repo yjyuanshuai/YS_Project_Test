@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//@class MBProgressHUD;
 
 typedef NS_ENUM(NSUInteger, YSLoadViewType)
 {

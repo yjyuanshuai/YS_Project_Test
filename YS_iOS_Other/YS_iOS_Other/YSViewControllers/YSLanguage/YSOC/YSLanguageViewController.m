@@ -53,15 +53,13 @@ static NSString * const LanguageCellID = @"LanguageCellID";
 - (void)initUIAndData
 {
     self.title = @"语言";
-    
+
     _sectionTitleArr = @[@"1 线程", @"2 触摸"];
     
     NSArray * sectionOne    = @[@"GCD", @"NSOperation", @"NSThread", @"test"];
     NSArray * sectionTwo    = @[@"手势", @"自定义手势", @"触摸"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo] mutableCopy];
-    
-//    NSURLSessionUploadTask
 }
 
 - (void)createTableView
@@ -76,6 +74,8 @@ static NSString * const LanguageCellID = @"LanguageCellID";
     
     [_languageTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:LanguageCellID];
 }
+
+
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

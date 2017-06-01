@@ -16,7 +16,7 @@
     NSTimer * _loadingTimer;
 }
 
-#pragma mark - class method -
+#pragma mark - class method
 
 + (instancetype)showInViewController:(UIViewController *)viewController
 {
@@ -66,8 +66,9 @@
             indicator.msgText = msg;
             [indicator showHUD:msg];
         }
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+        dispatch_time_t t = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC));
+        dispatch_after(t, dispatch_get_main_queue(), ^{
             
             viewController.navigationItem.titleView = nil;
             
@@ -111,6 +112,7 @@
 - (void)dealloc
 {
     [self unregisterKVO];
+    [self setBlongViewNil];
 }
 
 #pragma mark - private method
@@ -129,7 +131,7 @@
     _descLabel.font             = _descFont;
     _descLabel.textColor        = _descTextColor;
     _descLabel.text             = _descStr;
-    _descLabel.lineBreakMode   = NSLineBreakByTruncatingMiddle;
+    _descLabel.lineBreakMode   = NSLineBreakByTruncatingTail;
     [self addSubview:_descLabel];
 }
 
@@ -255,9 +257,18 @@
         _descLabel.frame = CGRectMake(0, CGRectGetMaxY(_titleLabel.frame), maxWidth, descHeight);
         
     } else if (_ysType == YSLoadViewTypeCustom) {
-        
-        //自定义的
-        
+
+        CGFloat custemViewHeight = _ysCustomView.frame.size.height;
+        CGFloat custemViewWidth = _ysCustomView.frame.size.width;
+
+        if (custemViewHeight > maxHeight || custemViewHeight <= 0) {
+            custemViewHeight = maxHeight;
+        }
+        if (custemViewWidth > maxWidth || custemViewWidth <= 0) {
+            custemViewWidth = maxWidth;
+        }
+
+        _ysCustomView.frame = CGRectMake(_ysCustomView.frame.origin.x, _ysCustomView.frame.origin.y, custemViewWidth, custemViewHeight);
     }
 }
 
@@ -265,7 +276,17 @@
 
 - (NSArray *)propertyArr
 {
-    NSArray * propertyArr = @[@"ysActivityIndicatorStyle", @"ysType", @"titleStr", @"titleFont", @"titleTextColor",  @"descStr", @"descFont", @"descTextColor", @"ysCustomView", @"msgText"];
+    NSArray * propertyArr = @[@"ysActivityIndicatorStyle",
+                              @"ysType",
+                              @"titleStr",
+                              @"titleFont",
+                              @"titleTextColor",
+                              @"descStr",
+                              @"descFont",
+                              @"descTextColor",
+                              @"ysCustomView",
+                              @"msgText",
+                              @"overTimeInterval"];
     return propertyArr;
 }
 
@@ -301,44 +322,50 @@
 
 - (void)updateUIWithKeyPath:(NSString *)keyPath
 {
-    if ([keyPath isEqualToString:@"ysType"] || [keyPath isEqualToString:@"ysCustomView"]) {
-        
-        [self updateLoadingView];
-        
-    } else if ([keyPath isEqualToString:@"titleStr"]) {
-        
-        _titleLabel.text = self.titleStr;
-    
-    } else if ([keyPath isEqualToString:@"titleFont"]) {
-        
-        _titleLabel.font = self.titleFont;
-    
-    } else if ([keyPath isEqualToString:@"titleTextColor"]) {
-        
-        _titleLabel.textColor = self.titleTextColor;
-    
-    } else if ([keyPath isEqualToString:@"descStr"]) {
-        
-        _descLabel.text = self.descStr;
-        
-    } else if ([keyPath isEqualToString:@"descFont"]) {
-        
-        _descLabel.font = self.descFont;
-        
-    } else if ([keyPath isEqualToString:@"descTextColor"]) {
-        
-        _descLabel.textColor = self.descTextColor;
-        
-    } else if ([keyPath isEqualToString:@"ysActivityIndicatorStyle"]) {
-        
-        if (_ysAcitityIndicator != nil) {
-            
-            [_ysAcitityIndicator setActivityIndicatorViewStyle:self.ysActivityIndicatorStyle];
-            
-        }
+    if ([keyPath isEqualToString:@"overTimeInterval"]) {
+        [self initTimer];
     }
-    
-    [self setNeedsLayout];
+    else {
+        if ([keyPath isEqualToString:@"ysType"] ||
+            [keyPath isEqualToString:@"ysCustomView"]) {
+
+            [self updateLoadingView];
+
+        } else if ([keyPath isEqualToString:@"titleStr"]) {
+
+            _titleLabel.text = self.titleStr;
+
+        } else if ([keyPath isEqualToString:@"titleFont"]) {
+
+            _titleLabel.font = self.titleFont;
+
+        } else if ([keyPath isEqualToString:@"titleTextColor"]) {
+
+            _titleLabel.textColor = self.titleTextColor;
+
+        } else if ([keyPath isEqualToString:@"descStr"]) {
+
+            _descLabel.text = self.descStr;
+
+        } else if ([keyPath isEqualToString:@"descFont"]) {
+
+            _descLabel.font = self.descFont;
+
+        } else if ([keyPath isEqualToString:@"descTextColor"]) {
+
+            _descLabel.textColor = self.descTextColor;
+
+        } else if ([keyPath isEqualToString:@"ysActivityIndicatorStyle"]) {
+
+            if (_ysAcitityIndicator != nil) {
+
+                [_ysAcitityIndicator setActivityIndicatorViewStyle:self.ysActivityIndicatorStyle];
+                
+            }
+        }
+        
+        [self setNeedsLayout];
+    }
 }
 
 - (void)updateLoadingView
@@ -350,6 +377,7 @@
         }
         
         [_descLabel removeFromSuperview];
+        _descLabel = nil;
         
     } else if (_ysType == YSLoadViewTypeSystemActIndicatorDetail) {
         
@@ -360,18 +388,27 @@
     } else if (_ysType == YSLoadViewTypeCustom) {
         
         [_ysAcitityIndicator removeFromSuperview];
+        _ysAcitityIndicator = nil;
         [_descLabel removeFromSuperview];
+        _descLabel = nil;
         [_titleLabel removeFromSuperview];
+        _titleLabel = nil;
+
+        if (_ysCustomView) {
+            [self addSubview:_ysCustomView];
+        }
         
     } else if (_ysType == YSLoadViewTypeTextDefault) {
     
         [_ysAcitityIndicator removeFromSuperview];
+        _ysAcitityIndicator = nil;
         [_descLabel removeFromSuperview];
+        _descLabel = nil;
         
     } else if (_ysType == YSLoadViewTypeTextDetail) {
         
         [_ysAcitityIndicator removeFromSuperview];
-    
+        _ysAcitityIndicator = nil;
     }
 }
 

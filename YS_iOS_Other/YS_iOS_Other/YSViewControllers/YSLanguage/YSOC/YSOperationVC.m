@@ -7,8 +7,8 @@
 //
 
 #import "YSOperationVC.h"
+#import "YSActivityIndicator.h"
 #import "YSOperationDetailUserVC.h"
-#import "YSActivityIndicatorManager.h"
 
 @interface YSOperationVC () <UITableViewDelegate, UITableViewDataSource>
 
@@ -39,6 +39,8 @@
     self.title = @"NSOperation";
     
     _titleArr = @[@"Invocation", @"Block", @"自定义"];
+
+    [self addActivity];
 }
 
 - (void)createTableView
@@ -55,6 +57,25 @@
         make.edges.equalTo(self.view);
     }];
 }
+
+- (void)addActivity
+{
+    UIView * cusView = [UIView new];
+    cusView.backgroundColor = [UIColor redColor];
+
+    YSActivityIndicator * acti = [YSActivityIndicator showInViewController:self];
+    acti.ysType = YSLoadViewTypeCustom;
+    acti.ysCustomView = cusView;
+    acti.overTimeInterval = 10;
+
+
+
+    UIButton * rightTest = [UIButton buttonWithType:UIButtonTypeSystem];
+    rightTest.frame = CGRectMake(0, 0, 100, 30);
+    [rightTest setTitle:@"哈哈疯狂拉升的规划gas刚卡死点火开关" forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightTest];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
