@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, YSPeripheralType)
 @property (nonatomic, assign) BOOL perWorking;              // 真实外设（YES-已连接）；虚拟外设（YES-已开启）
 
 @property (nonatomic, strong) CBPeripheral * per;           // 外设
-@property (nonatomic, strong) NSDictionary * perDataDic;
+@property (nonatomic, strong) NSDictionary * perDataDic;    //
 
 @end
 
@@ -49,6 +49,8 @@ typedef NS_ENUM(NSInteger, YSPeripheralType)
 + (instancetype)sharedYSBlueToothManager;
 
 #pragma mark - central（中心者模式）
+
+@property (nonatomic, assign, readonly) BOOL cbStartScan;
 
 - (void)setcbCenPerContentStr:(NSString *)contentStr
                   contentType:(YSCBPeripheralConStrType)contentType;

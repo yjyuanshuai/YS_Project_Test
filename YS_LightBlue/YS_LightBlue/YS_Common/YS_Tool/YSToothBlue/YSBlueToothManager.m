@@ -102,11 +102,12 @@
 {
     self = [super init];
     if (self) {
-        _cbCenManager          = nil;
-        _cbCenManagerState     = CBManagerStateUnknown;
-        _cbCenPeripheralArr    = [NSMutableArray arrayWithCapacity:0];
-        _cbCenContentStrType     = YSCBPeripheralConStrType_None;
-        _cbCenPerContentStr = @"";
+        _cbCenManager           = nil;
+        _cbCenManagerState      = CBManagerStateUnknown;
+        _cbCenPeripheralArr     = [NSMutableArray arrayWithCapacity:0];
+        _cbCenContentStrType    = YSCBPeripheralConStrType_None;
+        _cbCenPerContentStr     = @"";
+        _cbStartScan            = NO;
 
         _cbPerManager       = nil;
         _cbPerManagerState  = CBPeripheralManagerStateUnknown;
@@ -149,34 +150,7 @@
         _cbCenManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }
 
-    switch (_cbCenManagerState) {
-        case CBManagerStateUnknown:
-        case CBManagerStateResetting:
-        case CBManagerStateUnauthorized:
-        {
-            NSLog(@"------ Bluetooth State Unknow");
-        }
-            break;
-        case CBManagerStateUnsupported:     // 不支持蓝牙
-        {
-            NSLog(@"------ Bluetooth State Unsupported");
-        }
-            break;
-        case CBManagerStatePoweredOff:      // 蓝牙未开启
-        {
-            NSLog(@"------ Bluetooth State Off");
-        }
-            break;
-        case CBManagerStatePoweredOn:       // 蓝牙已开启
-        {
-            NSLog(@"------ Bluetooth State On");
-            [_cbCenManager scanForPeripheralsWithServices:nil
-                                               options:nil];
-        }
-            break;
-        default:
-            break;
-    }
+    _cbStartScan = YES;
 }
 
 
@@ -197,7 +171,10 @@
 - (void)cbManagerStopScanAndDisconnectAllServices
 {
     if (_cbCenManager) {
+
         [_cbCenManager stopScan];
+        _cbStartScan = NO;
+
         if ([_cbCenPeripheralArr count] > 0) {
             for (CBPeripheral * per in _cbCenPeripheralArr) {
                 [_cbCenManager cancelPeripheralConnection:per];
@@ -268,6 +245,37 @@
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
     _cbCenManagerState = central.state;
+
+    switch (_cbCenManagerState) {
+        case CBManagerStateUnsupported:     // 不支持蓝牙
+        {
+            NSLog(@"------ Bluetooth State Unsupported");
+        }
+            break;
+        case CBManagerStatePoweredOff:      // 蓝牙未开启
+        {
+            NSLog(@"------ Bluetooth State Off");
+        }
+            break;
+        case CBManagerStatePoweredOn:       // 蓝牙已开启
+        {
+            NSLog(@"------ Bluetooth State On");
+
+            if (_cbStartScan) {
+                [_cbCenManager scanForPeripheralsWithServices:nil
+                                                      options:nil];
+            }
+        }
+            break;
+        case CBManagerStateUnknown:
+        case CBManagerStateResetting:
+        case CBManagerStateUnauthorized:
+        default:
+        {
+            NSLog(@"------ Bluetooth State Unknow");
+        }
+            break;
+    }
 }
 
 
@@ -284,7 +292,7 @@
      advertisementData:(NSDictionary<NSString *, id> *)advertisementData
                   RSSI:(NSNumber *)RSSI
 {
-    NSLog(@"---------- 发现设备：%@ -------\t uuid：%@", peripheral.name, peripheral.identifier.UUIDString);
+//    NSLog(@"---------- 发现设备：%@ -------\t uuid：%@", peripheral.name, peripheral.identifier.UUIDString);
 
     if ([_cbCenPerContentStr isEqualToString:@""] ||
         _cbCenPerContentStr == nil ||
@@ -330,13 +338,17 @@
 {
     YSPeripheralModel * model = [[YSPeripheralModel alloc] initWithCBPeripheral:per rssi:rssi data:data];
 
-    if (![_cbCenPeripheralArr containsObject:model]) {
-
-        [_cbCenPeripheralArr addObject:model];
-
-        if (_delegate && [_delegate respondsToSelector:@selector(discoverNewPeripheral:)]) {
-            [_delegate discoverNewPeripheral:model];
+    for (YSPeripheralModel * conModel in _cbCenPeripheralArr) {
+        if ([conModel.per.identifier.UUIDString isEqualToString:per.identifier.UUIDString]) {
+            return;
         }
+    }
+
+    [_cbCenPeripheralArr addObject:model];
+    NSLog(@"---------- 搜索到设备：%@ -------- uuid: %@", per.name, per.identifier.UUIDString);
+
+    if (_delegate && [_delegate respondsToSelector:@selector(discoverNewPeripheral:)]) {
+        [_delegate discoverNewPeripheral:model];
     }
 }
 

@@ -8,6 +8,7 @@
 
 "noname" = "未命名";
 "services" = "%@ 个服务";
+"service_num" = "0";
 "create_virtual" = "新建虚拟蓝牙外设";
 "firstpage_section_per" = "扫描到的外设";
 "firstpage_section_vir" = "虚拟的外设";

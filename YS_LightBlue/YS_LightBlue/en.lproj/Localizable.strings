@@ -9,6 +9,7 @@
 
 "noname" = "NO Named";
 "services" = "%@ Services";
+"service_num" = "NO";
 "create_virtual" = "Create Virtual Peripheral";
 "firstpage_section_per" = "Peripherals";
 "firstpage_section_vir" = "Virtual Peripherals";

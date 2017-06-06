@@ -1,21 +1,16 @@
 //
-//  YSFirstPageTableViewCell.m
+//  YSFirstPageVirtualCell.m
 //  YS_LightBlue
 //
-//  Created by YJ on 17/5/23.
+//  Created by YJ on 17/6/5.
 //  Copyright © 2017年 YJ. All rights reserved.
 //
 
-#import "YSFirstPageTableViewCell.h"
+#import "YSFirstPageVirtualCell.h"
 #import "NSString+YSStringDo.h"
 #import "YSBlueToothManager.h"
 
-@implementation YSFirstPageTableViewCell
-{
-    CAShapeLayer * _bottemLayer;    // 底部layer
-    CAShapeLayer * _updateLayer;    // 更新的layer
-    CAShapeLayer * _colorLayer;     // 控制颜色的layer
-}
+@implementation YSFirstPageVirtualCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,15 +19,9 @@
 
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        _signStrengthView = [UIView new];
-        [self.contentView addSubview:_signStrengthView];
-
-        _signStrengthLabel = [UILabel new];
-        _signStrengthLabel.textColor = [UIColor blackColor];
-        _signStrengthLabel.font = YS_Font(12.0);
-        _signStrengthLabel.textAlignment = NSTextAlignmentCenter;
-        _signStrengthLabel.text = @"---";
-        [self.contentView addSubview:_signStrengthLabel];
+        _leftBtn = [UIButton new];
+        [_leftBtn addTarget:self action:@selector(clickLeftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_leftBtn];
 
         _nameLabel = [UILabel new];
         _nameLabel.text = [YSLocalizableTool ys_localizedStringWithKey:@"noname"];
@@ -48,21 +37,15 @@
         _servicesLabel.font = YS_Font(14.0);
         [self.contentView addSubview:_servicesLabel];
 
-        [_signStrengthView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(15);
-            make.top.equalTo(self.contentView).offset(10);
-            make.size.mas_equalTo(CGSizeMake(40, 40));
-        }];
-
-        [_signStrengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_signStrengthView.mas_bottom).offset(10);
-            make.left.equalTo(_signStrengthView);
-            make.right.equalTo(_signStrengthView);
+            make.size.mas_equalTo(CGSizeMake(20, 20));
+            make.centerY.equalTo(self.contentView);
         }];
 
         [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(10);
-            make.left.equalTo(_signStrengthView.mas_right).offset(10);
+            make.left.equalTo(_leftBtn.mas_right).offset(10);
             make.right.equalTo(self.contentView).offset(-15);
         }];
 
@@ -76,8 +59,11 @@
     return self;
 }
 
-- (void)setFirstPageCell:(YSPeripheralModel *)model
+- (void)setFirstPageVirtualCell:(YSPeripheralModel *)model indexPath:(NSIndexPath *)indexPath
 {
+    _leftBtn.userInteractionEnabled = YES;
+    _indexPath = indexPath;
+    [_leftBtn setImage:[UIImage imageNamed:@"virtual_unselected"] forState:UIControlStateNormal];
 
     if (![model.perName isBlank]) {
         _nameLabel.text = model.perName;
@@ -85,7 +71,7 @@
     else {
         _nameLabel.text = [YSLocalizableTool ys_localizedStringWithKey:@"noname"];
     }
-    
+
     if ([model.perServicesNum integerValue] > 0) {
         _servicesLabel.text = [NSString stringWithFormat:[YSLocalizableTool ys_localizedStringWithKey:@"services"], model.perServicesNum];
     }
@@ -94,31 +80,11 @@
     }
 }
 
-- (void)drawSignStrength
+- (void)clickLeftBtn:(UIButton *)btn
 {
-
-
-}
-
-// 底部
-- (CAShapeLayer *)setBottemLayer
-{
-    UIBezierPath * path = [UIBezierPath bezierPathWithRect:_signStrengthView.bounds];
-
-    _bottemLayer = [[CAShapeLayer alloc] init];
-    _bottemLayer.frame = _signStrengthView.bounds;
-    _bottemLayer.path = path.CGPath;
-    _bottemLayer.lineCap = kCALineCapButt;
-    _bottemLayer.lineDashPattern = @[@(5), @(10)];
-    _bottemLayer.lineWidth = 15;
-    _bottemLayer.strokeColor = YS_Default_GrayColor.CGColor;
-    _bottemLayer.fillColor = [UIColor redColor].CGColor;
-    return _bottemLayer;
-}
-
-- (CAShapeLayer *)setUpdateLayer
-{
-    return _updateLayer;
+    if (_delegate && [_delegate respondsToSelector:@selector(openOrCloseVirtualPer:)]) {
+        [_delegate openOrCloseVirtualPer:_indexPath];
+    }
 }
 
 @end

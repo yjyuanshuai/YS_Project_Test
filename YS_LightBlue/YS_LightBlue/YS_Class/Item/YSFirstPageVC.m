@@ -9,6 +9,7 @@
 #import "YSFirstPageVC.h"
 #import "YSFirstPageTableViewCell.h"
 #import "YSFirstPageAddVirtualCell.h"
+#import "YSFirstPageVirtualCell.h"
 #import "YSBlueToothManager.h"
 
 static NSString * const PeripheralCellID = @"PeripheralCellID";
@@ -69,24 +70,13 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
     [self.view addSubview:_tableView];
 
     [_tableView registerClass:[YSFirstPageTableViewCell class] forCellReuseIdentifier:PeripheralCellID];
-    [_tableView registerClass:[YSFirstPageTableViewCell class] forCellReuseIdentifier:VirtualPeripheralCellID];
+    [_tableView registerClass:[YSFirstPageVirtualCell class] forCellReuseIdentifier:VirtualPeripheralCellID];
     [_tableView registerClass:[YSFirstPageAddVirtualCell class] forCellReuseIdentifier:AddVirtualPeripheralCellID];
 }
 
 - (void)scanBlueToothPeripherals
 {
-    [[YSBlueToothManager sharedYSBlueToothManager] cbCenManager];
-    
-    if ([[YSBlueToothManager sharedYSBlueToothManager] obtainCBManagerState] == CBManagerStatePoweredOn) {
-        [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStartScan];
-    }
-    else if ([[YSBlueToothManager sharedYSBlueToothManager] obtainCBManagerState] == CBManagerStatePoweredOff) {
-        NSLog(@"------- State Off");
-    }
-    else {
-        NSLog(@"------- State UnKnowed");
-    }
-
+    [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStartScan];
     [YSBlueToothManager sharedYSBlueToothManager].delegate = self;
 }
 
@@ -129,16 +119,22 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 {
     if (indexPath.section == 0) {
         YSFirstPageTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:PeripheralCellID];
-
+        if (indexPath.row < [_peripheralsArr count]) {
+            [cell setFirstPageCell:_peripheralsArr[indexPath.row]];
+        }
         return cell;
     }
     else {
         if (indexPath.row == [_virturalPersArr count]) {
             YSFirstPageAddVirtualCell * cell = [tableView dequeueReusableCellWithIdentifier:AddVirtualPeripheralCellID];
+
             return cell;
         }
         else {
-            YSFirstPageTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:VirtualPeripheralCellID];
+            YSFirstPageVirtualCell * cell = [tableView dequeueReusableCellWithIdentifier:VirtualPeripheralCellID];
+            if (indexPath.row < [_virturalPersArr count]) {
+                [cell setFirstPageVirtualCell:_virturalPersArr[indexPath.row] indexPath:indexPath];
+            }
             return cell;
         }
     }
