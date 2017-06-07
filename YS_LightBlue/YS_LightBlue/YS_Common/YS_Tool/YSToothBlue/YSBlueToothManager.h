@@ -56,6 +56,7 @@ typedef NS_ENUM(NSInteger, YSPeripheralType)
                   contentType:(YSCBPeripheralConStrType)contentType;
 - (void)cbManagerStartScan;
 - (void)cbManagerConnectWithPeripheral:(CBPeripheral *)per;
+- (void)cbManagerStopScan;
 - (void)cbManagerStopScanAndDisconnectAllServices;
 - (CBCentralManager *)cbCenManager;
 - (CBManagerState)obtainCBManagerState;
@@ -69,5 +70,10 @@ typedef NS_ENUM(NSInteger, YSPeripheralType)
 
 @optional
 - (void)discoverNewPeripheral:(YSPeripheralModel *)perModel;
+- (void)updatePeripheral:(YSPeripheralModel *)perModel;
+
+- (void)connectPeripheralSuccess:(YSPeripheralModel *)perModel;
+- (void)discoverServices:(NSArray *)services;
+- (void)discoverCharacters:(NSArray *)serviceCharacters;
 
 @end

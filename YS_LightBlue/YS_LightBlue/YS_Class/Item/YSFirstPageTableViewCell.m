@@ -14,7 +14,7 @@
 {
     CAShapeLayer * _bottemLayer;    // 底部layer
     CAShapeLayer * _updateLayer;    // 更新的layer
-    CAShapeLayer * _colorLayer;     // 控制颜色的layer
+    CAGradientLayer * _colorLayer;     // 控制颜色的layer
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -51,11 +51,11 @@
         [_signStrengthView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(15);
             make.top.equalTo(self.contentView).offset(10);
-            make.size.mas_equalTo(CGSizeMake(40, 40));
+            make.size.mas_equalTo(CGSizeMake(35, 35));
         }];
 
         [_signStrengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_signStrengthView.mas_bottom).offset(10);
+            make.top.equalTo(_signStrengthView.mas_bottom);
             make.left.equalTo(_signStrengthView);
             make.right.equalTo(_signStrengthView);
         }];
@@ -72,12 +72,23 @@
             make.right.equalTo(_nameLabel);
             make.bottom.equalTo(self.contentView).offset(-15);
         }];
+
+        [self drawSignStrength];
     }
     return self;
 }
 
 - (void)setFirstPageCell:(YSPeripheralModel *)model
 {
+    if ([model.perSignStrength integerValue] >= 40) {
+        self.selectionStyle = UITableViewCellSelectionStyleDefault;
+        _signStrengthLabel.text = model.perSignStrength;
+    }
+    else {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        _signStrengthLabel.text = model.perSignStrength;
+    }
+    [self resetTransaction:model.perSignStrength];
 
     if (![model.perName isBlank]) {
         _nameLabel.text = model.perName;
@@ -94,10 +105,18 @@
     }
 }
 
+#pragma mark - 动画
 - (void)drawSignStrength
 {
+    [self setBottemLayer];
+    [self setUpdateLayer];
+    [self setColorLayer];
 
+    [_bottemLayer addSublayer:_updateLayer];
+    [_updateLayer setMask:_colorLayer];
+    [_signStrengthView.layer addSublayer:_bottemLayer];
 
+    _signStrengthView.backgroundColor = [UIColor redColor];
 }
 
 // 底部
@@ -118,7 +137,61 @@
 
 - (CAShapeLayer *)setUpdateLayer
 {
+    UIBezierPath * path = [UIBezierPath bezierPathWithRect:_signStrengthView.bounds];
+
+    _updateLayer = [[CAShapeLayer alloc] init];
+    _updateLayer.frame = _signStrengthView.bounds;
+    _updateLayer.path = path.CGPath;
+    _updateLayer.strokeStart = 0;
+    _updateLayer.strokeEnd = 0;
+    _updateLayer.lineWidth = 15;
+    _updateLayer.lineCap = kCALineCapButt;
+    _updateLayer.lineDashPattern = @[@(5), @(10)];
+    _updateLayer.strokeColor = [UIColor redColor].CGColor;
+    _updateLayer.fillColor = [UIColor clearColor].CGColor;
+
     return _updateLayer;
+}
+
+- (CAGradientLayer *)setColorLayer
+{
+    NSArray * colors = @[(id)[UIColor redColor].CGColor, (id)[UIColor greenColor].CGColor, (id)[UIColor purpleColor].CGColor];
+
+    UIBezierPath * path = [UIBezierPath bezierPathWithRect:_signStrengthView.bounds];
+
+    _colorLayer = [CAGradientLayer layer];
+    _colorLayer.shadowPath = path.CGPath;
+    _colorLayer.frame = _signStrengthView.bounds;
+    _colorLayer.startPoint = CGPointMake(0, 1);
+    _colorLayer.endPoint = CGPointMake(1, 0);
+    [_colorLayer setColors:colors];
+    return _colorLayer;
+}
+
+- (void)resetTransaction:(NSString *)signStrength
+{
+    NSInteger signStrengthInt = [signStrength integerValue];
+    NSInteger percent = signStrengthInt / 100.0;
+    if (percent >= 0 && percent <= 1) {
+
+        // 复原
+        [CATransaction begin];
+        [CATransaction setDisableActions:NO];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        [CATransaction setAnimationDuration:0];
+        _updateLayer.strokeEnd = 0;
+        [CATransaction commit];
+
+
+
+        [CATransaction begin];
+        [CATransaction setDisableActions:NO];
+        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        [CATransaction setAnimationDuration:2.f];
+        _updateLayer.strokeEnd = percent;
+        [CATransaction commit];
+
+    }
 }
 
 @end

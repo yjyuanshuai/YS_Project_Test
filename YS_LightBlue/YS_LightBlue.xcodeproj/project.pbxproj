@@ -23,6 +23,9 @@
 		39930D701ED423B700FD7C36 /* YSLocalizableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930D6F1ED423B700FD7C36 /* YSLocalizableTool.m */; };
 		39930DA01ED4334700FD7C36 /* YSLightBlue.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 39930D9F1ED4334700FD7C36 /* YSLightBlue.bundle */; };
 		39930DA81ED437FE00FD7C36 /* NSString+YSStringDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */; };
+		39E270561EE68B0A00EF3C4D /* YSBTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E270551EE68B0A00EF3C4D /* YSBTCentralManager.m */; };
+		39E2705A1EE68CFF00EF3C4D /* YSBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E270591EE68CFF00EF3C4D /* YSBluetooth.m */; };
+		39E2705E1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E2705D1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m */; };
 		C7E20488D265A0424E4C9393 /* libPods-YS_LightBlue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +65,13 @@
 		39930DA11ED434F800FD7C36 /* YSGlobalSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGlobalSetting.h; sourceTree = "<group>"; };
 		39930DA61ED437FE00FD7C36 /* NSString+YSStringDo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YSStringDo.h"; sourceTree = "<group>"; };
 		39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YSStringDo.m"; sourceTree = "<group>"; };
+		39E270541EE68B0A00EF3C4D /* YSBTCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBTCentralManager.h; sourceTree = "<group>"; };
+		39E270551EE68B0A00EF3C4D /* YSBTCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBTCentralManager.m; sourceTree = "<group>"; };
+		39E270571EE68B3700EF3C4D /* YSBTDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBTDefine.h; sourceTree = "<group>"; };
+		39E270581EE68CFF00EF3C4D /* YSBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBluetooth.h; sourceTree = "<group>"; };
+		39E270591EE68CFF00EF3C4D /* YSBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBluetooth.m; sourceTree = "<group>"; };
+		39E2705C1EE6A77E00EF3C4D /* YSPeripheralDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPeripheralDetailVC.h; sourceTree = "<group>"; };
+		39E2705D1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSPeripheralDetailVC.m; sourceTree = "<group>"; };
 		BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YS_LightBlue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD1A09355094611714B86C9 /* Pods-YS_LightBlue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_LightBlue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				398BF44A1ED2B61D0099BB2C /* FirstPage */,
+				39E2705B1EE6A73000EF3C4D /* PeriphalDetail */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -171,6 +182,7 @@
 		395DED751ED28F4A00B1736D /* YS_Tool */ = {
 			isa = PBXGroup;
 			children = (
+				39E270531EE68ACE00EF3C4D /* YSBluetooth2.0 */,
 				391F6D901ED568AC007A04A6 /* YSToothBlue */,
 				39930D6D1ED4239300FD7C36 /* YSLocalizable */,
 			);
@@ -282,6 +294,27 @@
 				39930DA71ED437FE00FD7C36 /* NSString+YSStringDo.m */,
 			);
 			path = NSString;
+			sourceTree = "<group>";
+		};
+		39E270531EE68ACE00EF3C4D /* YSBluetooth2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				39E270571EE68B3700EF3C4D /* YSBTDefine.h */,
+				39E270581EE68CFF00EF3C4D /* YSBluetooth.h */,
+				39E270591EE68CFF00EF3C4D /* YSBluetooth.m */,
+				39E270541EE68B0A00EF3C4D /* YSBTCentralManager.h */,
+				39E270551EE68B0A00EF3C4D /* YSBTCentralManager.m */,
+			);
+			path = YSBluetooth2.0;
+			sourceTree = "<group>";
+		};
+		39E2705B1EE6A73000EF3C4D /* PeriphalDetail */ = {
+			isa = PBXGroup;
+			children = (
+				39E2705C1EE6A77E00EF3C4D /* YSPeripheralDetailVC.h */,
+				39E2705D1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m */,
+			);
+			name = PeriphalDetail;
 			sourceTree = "<group>";
 		};
 		7BE10895B9AD912FE757575C /* Pods */ = {
@@ -422,13 +455,16 @@
 			files = (
 				398BF44D1ED2B63E0099BB2C /* YSFirstPageVC.m in Sources */,
 				3918FB851EE5496100977FDE /* YSFirstPageVirtualCell.m in Sources */,
+				39E270561EE68B0A00EF3C4D /* YSBTCentralManager.m in Sources */,
 				391F6D8F1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m in Sources */,
 				39930DA81ED437FE00FD7C36 /* NSString+YSStringDo.m in Sources */,
 				397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */,
 				39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */,
 				391F6D931ED568AC007A04A6 /* YSBlueToothManager.m in Sources */,
 				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
+				39E2705E1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m in Sources */,
 				397D20111ECD9C8000920A72 /* main.m in Sources */,
+				39E2705A1EE68CFF00EF3C4D /* YSBluetooth.m in Sources */,
 				39930D701ED423B700FD7C36 /* YSLocalizableTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

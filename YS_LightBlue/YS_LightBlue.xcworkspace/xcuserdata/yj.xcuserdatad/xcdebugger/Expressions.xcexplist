@@ -3,18 +3,32 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[YSBlueToothManager checkHasAddedAndConnect:peripheral:rssi:data:]:YSBlueToothManager.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_cbCenPeripheralArr">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[YSFirstPageVC discoverNewPeripheral:]:YSFirstPageVC.m">
          <PersistentStrings>
             <PersistentString
                value = "_peripheralsArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSBlueToothManager centralManager:didDiscoverPeripheral:advertisementData:RSSI:]:YSBlueToothManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_cbCenPerContentStr">
+            </PersistentString>
+            <PersistentString
+               value = "peripheral.name">
+            </PersistentString>
+            <PersistentString
+               value = "_cbCenContentStrType">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[YSBlueToothManager checkHasAddedAndConnect:peripheral:rssi:data:]:YSBlueToothManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_cbCenPeripheralArr">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
