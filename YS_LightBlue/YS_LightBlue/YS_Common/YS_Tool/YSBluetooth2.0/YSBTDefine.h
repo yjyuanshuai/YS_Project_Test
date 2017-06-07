@@ -12,6 +12,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+
+//>>>>>>>>>>>>>>>>  YSBTCentralManager  <<<<<<<<<<<<<<<//
+
+#define YSBluetoothRestore @"YSBluetoothRestore"
+
+
+//>>>>>>>>>>>>>>>>    <<<<<<<<<<<<<<<//
+
+
+//>>>>>>>>>>>>>>>>    <<<<<<<<<<<<<<<//
+
 #endif /* YSBTDefine_h */
 
 

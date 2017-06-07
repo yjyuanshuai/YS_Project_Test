@@ -11,6 +11,9 @@
 
 @interface YSBTCentralManager : NSObject
 
+@property (nonatomic, strong) CBCentralManager * cbCenManager;
+@property (nonatomic, strong) NSMutableArray * cbCenPersArr;
+
 
 
 @end
