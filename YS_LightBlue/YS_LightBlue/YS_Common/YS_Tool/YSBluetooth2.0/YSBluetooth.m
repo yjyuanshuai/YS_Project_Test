@@ -32,4 +32,26 @@
     return self;
 }
 
+#pragma mark - set block
+- (void)setYSBTCenMana_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
+{
+    if (block) {
+        _ysBTCallBack.updateStateBlock = block;
+    }
+}
+
+- (void)setYSBTCenMan_DiscoverPeripheralBlock:(YSBTCenMan_DiscoverPeripheralBlock)block
+{
+    if (block) {
+        _ysBTCallBack.discoverPeripheralBlock = block;
+    }
+}
+
+- (void)setYSBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
+{
+    if (block) {
+        _ysBTCallBack.disconnectPeripheralBlock = block;
+    }
+}
+
 @end

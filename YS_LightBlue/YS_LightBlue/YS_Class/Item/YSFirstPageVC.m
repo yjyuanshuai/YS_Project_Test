@@ -77,9 +77,11 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 
 - (void)scanBlueToothPeripherals
 {
-    [[YSBlueToothManager sharedYSBlueToothManager] setcbCenPerContentStr:@"YJ" contentType:YSCBPeripheralConStrType_Prefix];
-    [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStartScan];
-    [YSBlueToothManager sharedYSBlueToothManager].delegate = self;
+//    [[YSBlueToothManager sharedYSBlueToothManager] setcbCenPerContentStr:@"YJ" contentType:YSCBPeripheralConStrType_Prefix];
+//    [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStartScan];
+//    [YSBlueToothManager sharedYSBlueToothManager].delegate = self;
+
+    
 }
 
 - (void)clickSort:(UIBarButtonItem *)sort
@@ -92,36 +94,36 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 
 }
 
-#pragma mark - YSBluetoothManagerDelegate
-- (void)discoverNewPeripheral:(YSPeripheralModel *)perModel
-{
-    if (![_peripheralsArr containsObject:perModel]) {
-        [_peripheralsArr addObject:perModel];
-        [_tableView reloadData];
-    }
-}
+//#pragma mark - YSBluetoothManagerDelegate
+//- (void)discoverNewPeripheral:(YSPeripheralModel *)perModel
+//{
+//    if (![_peripheralsArr containsObject:perModel]) {
+//        [_peripheralsArr addObject:perModel];
+//        [_tableView reloadData];
+//    }
+//}
+//
+//- (void)updatePeripheral:(YSPeripheralModel *)perModel
+//{
+//    for (int i = 0; i < [_peripheralsArr count]; i++) {
+//        YSPeripheralModel * model = _peripheralsArr[i];
+//        if ([model.per.identifier.UUIDString isEqualToString:perModel.per.identifier.UUIDString]) {
+//            [_peripheralsArr replaceObjectAtIndex:i withObject:perModel];
+//            
+//            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+//            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//
+//            NSLog(@"------ update: %@", perModel.perName);
+//            break;
+//        }
+//    }
+//}
 
-- (void)updatePeripheral:(YSPeripheralModel *)perModel
-{
-    for (int i = 0; i < [_peripheralsArr count]; i++) {
-        YSPeripheralModel * model = _peripheralsArr[i];
-        if ([model.per.identifier.UUIDString isEqualToString:perModel.per.identifier.UUIDString]) {
-            [_peripheralsArr replaceObjectAtIndex:i withObject:perModel];
-            
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-            NSLog(@"------ update: %@", perModel.perName);
-            break;
-        }
-    }
-}
-
-- (void)connectPeripheralSuccess:(YSPeripheralModel *)perModel
-{
-    YSPeripheralDetailVC * perDetailVC = [[YSPeripheralDetailVC alloc] initWithPerModel:perModel];
-    [self.navigationController pushViewController:perDetailVC animated:YES];
-}
+//- (void)connectPeripheralSuccess:(YSPeripheralModel *)perModel
+//{
+//    YSPeripheralDetailVC * perDetailVC = [[YSPeripheralDetailVC alloc] initWithPerModel:perModel];
+//    [self.navigationController pushViewController:perDetailVC animated:YES];
+//}
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -200,11 +202,11 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
     if (indexPath.section == 0) {
         if (indexPath.row < [_peripheralsArr count]) {
             
-            [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStopScan];
-            YSPeripheralModel * model = _peripheralsArr[indexPath.row];
-
-            NSLog(@"----- 正在连接：%@", model.perName);
-            [[YSBlueToothManager sharedYSBlueToothManager] cbManagerConnectWithPeripheral:model.per];
+//            [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStopScan];
+//            YSPeripheralModel * model = _peripheralsArr[indexPath.row];
+//
+//            NSLog(@"----- 正在连接：%@", model.perName);
+//            [[YSBlueToothManager sharedYSBlueToothManager] cbManagerConnectWithPeripheral:model.per];
         }
     }
     else {

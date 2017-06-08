@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YSBTDefine.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 // ---------- block 定义 ---------- //
 typedef void(^YSBTCenMan_UpdateStateBlock)(CBCentralManager * central);
@@ -18,19 +18,31 @@ typedef void(^YSBTCenMan_DisconnectPeripheralBlock)(CBCentralManager * central, 
 
 
 typedef void(^YSBTCenMan_DiscoverServicesBlock)(CBPeripheral * peripheral, NSError * error);
-typedef void(^YSBTCenMan_DiscoverIncludedServicesBlock)(CBPeripheral * peripheral, CBService * service, NSError * error);
+//typedef void(^YSBTCenMan_DiscoverIncludedServicesBlock)(CBPeripheral * peripheral, CBService * service, NSError * error);
 typedef void(^YSBTCenMan_DiscoverCharacteristicsBlock)(CBPeripheral * peripheral, CBService * service, NSError * error);
-typedef void(^YSBTCenMan_UpdateValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
-typedef void(^YSBTCenMan_WriteValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
+//typedef void(^YSBTCenMan_UpdateValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
+//typedef void(^YSBTCenMan_WriteValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
 typedef void(^YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
-typedef void(^YSBTCenMan_UpdateValueForDescriptorBlock)(CBPeripheral * peripheral, CBDescriptor * descriptor, NSError * error);
-typedef void(^YSBTCenMan_WriteValueForDescriptorBlock)(CBPeripheral * peripheral, CBDescriptor * descriptor, NSError * error);
+//typedef void(^YSBTCenMan_UpdateValueForDescriptorBlock)(CBPeripheral * peripheral, CBDescriptor * descriptor, NSError * error);
+//typedef void(^YSBTCenMan_WriteValueForDescriptorBlock)(CBPeripheral * peripheral, CBDescriptor * descriptor, NSError * error);
 typedef void(^YSBTCenMan_UpdateNotificationStateForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
 //typedef void(^YSBTCenMan_)();
 
 
 @interface YSBTCallBack : NSObject
 
-@property (nonatomic, strong) YSBTCenMan_UpdateStateBlock updateState;
+@property (nonatomic, strong) YSBTCenMan_UpdateStateBlock               updateStateBlock;
+@property (nonatomic, strong) YSBTCenMan_DiscoverPeripheralBlock        discoverPeripheralBlock;
+@property (nonatomic, strong) YSBTCenMan_ConnectPeripheralBlock         connectPeripheralBlock;
+@property (nonatomic, strong) YSBTCenMan_FailToConnectPeripheralBlock   failToConnectPeripheralBlock;
+@property (nonatomic, strong) YSBTCenMan_DisconnectPeripheralBlock      disconnectPeripheralBlock;
+
+@property (nonatomic, strong) YSBTCenMan_DiscoverServicesBlock          discoverServicesBlock;
+@property (nonatomic, strong) YSBTCenMan_DiscoverCharacteristicsBlock   discoverCharacteristicsBlock;
+@property (nonatomic, strong) YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock discoverDescripitorsForCharacterBlock;
+@property (nonatomic, strong) YSBTCenMan_UpdateNotificationStateForCharacteristicBlock updateNotificationStateBlock;
+
++ (instancetype)defaultYSBTCenManCallBack;
++ (instancetype)defaultYSBTPerManCallBack;
 
 @end

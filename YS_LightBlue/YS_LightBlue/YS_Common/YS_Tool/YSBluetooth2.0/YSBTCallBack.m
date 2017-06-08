@@ -19,4 +19,14 @@
     return self;
 }
 
++ (instancetype)defaultYSBTCenManCallBack
+{
+    return nil;
+}
+
++ (instancetype)defaultYSBTPerManCallBack
+{
+    return nil;
+}
+
 @end

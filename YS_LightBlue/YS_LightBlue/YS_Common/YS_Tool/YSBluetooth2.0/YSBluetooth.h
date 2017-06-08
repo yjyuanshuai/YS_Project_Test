@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class YSBTCentralManager;
 @class YSBTPeripheralManager;
-@class YSBTCallBack;
+#import "YSBTCallBack.h"
 
 @interface YSBluetooth : NSObject
 
@@ -17,5 +17,8 @@
 @property (nonatomic, strong) YSBTPeripheralManager * ysBTPerManager;
 @property (nonatomic, strong) YSBTCallBack * ysBTCallBack;
 
+- (void)setYSBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
+- (void)setYSBTCenMan_DiscoverPeripheralBlock:(YSBTCenMan_DiscoverPeripheralBlock)block;
+- (void)setYSBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
 
 @end
