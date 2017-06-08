@@ -7,6 +7,9 @@
 //
 
 #import "YSBluetooth.h"
+#import "YSBTCallBack.h"
+#import "YSBTCentralManager.h"
+#import "YSBTPeripheralManager.h"
 
 @implementation YSBluetooth
 
@@ -24,7 +27,7 @@
 {
     self = [super init];
     if (self) {
-
+        _ysBTCallBack = [[YSBTCallBack alloc] init];
     }
     return self;
 }

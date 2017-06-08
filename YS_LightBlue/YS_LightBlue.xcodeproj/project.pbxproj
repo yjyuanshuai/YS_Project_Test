@@ -27,6 +27,8 @@
 		39E270561EE68B0A00EF3C4D /* YSBTCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E270551EE68B0A00EF3C4D /* YSBTCentralManager.m */; };
 		39E2705A1EE68CFF00EF3C4D /* YSBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E270591EE68CFF00EF3C4D /* YSBluetooth.m */; };
 		39E2705E1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E2705D1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m */; };
+		39FB5BA31EE8E08300A154E8 /* YSBTCallBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FB5BA21EE8E08300A154E8 /* YSBTCallBack.m */; };
+		39FB5BA61EE8E32200A154E8 /* YSBTPeripheralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FB5BA51EE8E32200A154E8 /* YSBTPeripheralManager.m */; };
 		C7E20488D265A0424E4C9393 /* libPods-YS_LightBlue.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,10 @@
 		39E270591EE68CFF00EF3C4D /* YSBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBluetooth.m; sourceTree = "<group>"; };
 		39E2705C1EE6A77E00EF3C4D /* YSPeripheralDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPeripheralDetailVC.h; sourceTree = "<group>"; };
 		39E2705D1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSPeripheralDetailVC.m; sourceTree = "<group>"; };
+		39FB5BA11EE8E08300A154E8 /* YSBTCallBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBTCallBack.h; sourceTree = "<group>"; };
+		39FB5BA21EE8E08300A154E8 /* YSBTCallBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBTCallBack.m; sourceTree = "<group>"; };
+		39FB5BA41EE8E32200A154E8 /* YSBTPeripheralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBTPeripheralManager.h; sourceTree = "<group>"; };
+		39FB5BA51EE8E32200A154E8 /* YSBTPeripheralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBTPeripheralManager.m; sourceTree = "<group>"; };
 		BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YS_LightBlue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD1A09355094611714B86C9 /* Pods-YS_LightBlue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_LightBlue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YS_LightBlue/Pods-YS_LightBlue.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,8 +313,12 @@
 				392545631EE7953A003DA5B4 /* YSBluetoothModel.m */,
 				39E270581EE68CFF00EF3C4D /* YSBluetooth.h */,
 				39E270591EE68CFF00EF3C4D /* YSBluetooth.m */,
+				39FB5BA11EE8E08300A154E8 /* YSBTCallBack.h */,
+				39FB5BA21EE8E08300A154E8 /* YSBTCallBack.m */,
 				39E270541EE68B0A00EF3C4D /* YSBTCentralManager.h */,
 				39E270551EE68B0A00EF3C4D /* YSBTCentralManager.m */,
+				39FB5BA41EE8E32200A154E8 /* YSBTPeripheralManager.h */,
+				39FB5BA51EE8E32200A154E8 /* YSBTPeripheralManager.m */,
 			);
 			path = YSBluetooth2.0;
 			sourceTree = "<group>";
@@ -467,7 +477,9 @@
 				392545641EE7953A003DA5B4 /* YSBluetoothModel.m in Sources */,
 				39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */,
 				391F6D931ED568AC007A04A6 /* YSBlueToothManager.m in Sources */,
+				39FB5BA31EE8E08300A154E8 /* YSBTCallBack.m in Sources */,
 				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
+				39FB5BA61EE8E32200A154E8 /* YSBTPeripheralManager.m in Sources */,
 				39E2705E1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m in Sources */,
 				397D20111ECD9C8000920A72 /* main.m in Sources */,
 				39E2705A1EE68CFF00EF3C4D /* YSBluetooth.m in Sources */,

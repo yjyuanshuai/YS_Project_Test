@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+@class YSBTCentralManager;
+@class YSBTPeripheralManager;
+@class YSBTCallBack;
 
 @interface YSBluetooth : NSObject
+
+@property (nonatomic, strong) YSBTCentralManager * ysBTCenManager;
+@property (nonatomic, strong) YSBTPeripheralManager * ysBTPerManager;
+@property (nonatomic, strong) YSBTCallBack * ysBTCallBack;
+
 
 @end

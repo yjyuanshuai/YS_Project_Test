@@ -57,7 +57,7 @@
             NSLog(@">>>>>> Bluetooth PowerOn, Start Scanf...");
 
             // 开始扫描外设
-            [central scanForPeripheralsWithServices:nil options:nil];
+//            [central scanForPeripheralsWithServices:nil options:nil];
         }
             break;
             
@@ -65,6 +65,7 @@
             NSLog(@">>>>>> Bluetooth Unknowed State.");
             break;
     }
+
 }
 
 /**
@@ -75,7 +76,7 @@
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
-
+    
 }
 
 
