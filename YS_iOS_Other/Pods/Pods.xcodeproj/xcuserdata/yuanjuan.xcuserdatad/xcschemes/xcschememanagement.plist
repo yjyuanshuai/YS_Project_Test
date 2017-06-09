@@ -29,6 +29,16 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>FMDBMigrationManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>JSPatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -112,6 +122,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>682B558AE9A9D05EDC4BFC0A098BEF81</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6D1BA99FFE811297A4D4544D6276D593</key>
 		<dict>
 			<key>primary</key>
@@ -132,12 +147,52 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>78E28AC7459DFA1025BE1FF642928E68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>836DFAC4991D5A8A67EC74731AF5639A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8642CC820CE8C5B88C113D7F47AF4BC3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>98F897E99A3D4DC89248778E20788522</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B0B02A3E4C7A9F00CA4A23639F0A8A75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C92FE3681884E565A5AB3C622863B4C8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CA69D72DC702AD788CEA6A5DC3545B47</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +208,26 @@
 			<true/>
 		</dict>
 		<key>D8E6B8DE91B1EC34594F125B25860D1E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDCFA96378885DFD6CF96E7387FC3CDF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E3DA52AC8DCD231685CA51E9B3171C58</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E8FBAB4723C6E41DC74C7005DD429DBE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB1B608CA194B526EEF0EC7ADC16F3B0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
