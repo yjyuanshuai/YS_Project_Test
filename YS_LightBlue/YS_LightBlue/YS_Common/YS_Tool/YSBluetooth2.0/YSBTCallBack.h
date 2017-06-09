@@ -42,7 +42,7 @@ typedef void(^YSBTCenMan_UpdateNotificationStateForCharacteristicBlock)(CBPeriph
 @property (nonatomic, strong) YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock discoverDescripitorsForCharacterBlock;
 @property (nonatomic, strong) YSBTCenMan_UpdateNotificationStateForCharacteristicBlock updateNotificationStateBlock;
 
-+ (instancetype)defaultYSBTCenManCallBack;
-+ (instancetype)defaultYSBTPerManCallBack;
+
+
 
 @end

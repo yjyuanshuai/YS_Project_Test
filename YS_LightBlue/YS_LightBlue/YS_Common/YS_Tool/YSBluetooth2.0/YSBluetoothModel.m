@@ -8,18 +8,18 @@
 
 #import "YSBluetoothModel.h"
 
-@implementation YSCharacteristicModel
-
-
-
-@end
-
-@implementation YSServiceModel
-
-
-
-@end
-
-@implementation YSPeripheralModel
-
-@end
+//@implementation YSCharacteristicModel
+//
+//
+//
+//@end
+//
+//@implementation YSServiceModel
+//
+//
+//
+//@end
+//
+//@implementation YSPeripheralModel
+//
+//@end

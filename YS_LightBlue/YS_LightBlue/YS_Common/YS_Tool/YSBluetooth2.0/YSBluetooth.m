@@ -27,30 +27,41 @@
 {
     self = [super init];
     if (self) {
-        _ysBTCallBack = [[YSBTCallBack alloc] init];
+        
     }
     return self;
 }
 
-#pragma mark - set block
-- (void)setYSBTCenMana_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
+- (YSBTCentralManager *)getYSBTCenManager
 {
+    if (!_ysBTCenManager) {
+        _ysBTCenManager = [[YSBTCentralManager alloc] init];
+    }
+    return _ysBTCenManager;
+}
+
+#pragma mark - set block
+- (void)setYSBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
+{
+    [self getYSBTCenManager];
     if (block) {
-        _ysBTCallBack.updateStateBlock = block;
+        _ysBTCenManager.cenManCallBack.updateStateBlock = block;
     }
 }
 
 - (void)setYSBTCenMan_DiscoverPeripheralBlock:(YSBTCenMan_DiscoverPeripheralBlock)block
 {
+    [self getYSBTCenManager];
     if (block) {
-        _ysBTCallBack.discoverPeripheralBlock = block;
+        _ysBTCenManager.cenManCallBack.discoverPeripheralBlock = block;
     }
 }
 
 - (void)setYSBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
 {
+    [self getYSBTCenManager];
     if (block) {
-        _ysBTCallBack.disconnectPeripheralBlock = block;
+        _ysBTCenManager.cenManCallBack.disconnectPeripheralBlock = block;
     }
 }
 

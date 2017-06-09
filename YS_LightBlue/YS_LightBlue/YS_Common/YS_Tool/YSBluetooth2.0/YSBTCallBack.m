@@ -8,25 +8,20 @@
 
 #import "YSBTCallBack.h"
 
+static NSString * YSBTPerManCallBackKey = @"YSBTPerManCallBackKey";
+static NSString * YSBTCenManCallBackKey = @"YSBTCenManCallBackKey";
+
 @implementation YSBTCallBack
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        
+
     }
     return self;
 }
 
-+ (instancetype)defaultYSBTCenManCallBack
-{
-    return nil;
-}
 
-+ (instancetype)defaultYSBTPerManCallBack
-{
-    return nil;
-}
 
 @end

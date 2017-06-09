@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class YSBTCallBack;
 @class CBCentralManager;
 
 @interface YSBTCentralManager : NSObject
 
+@property (nonatomic, strong) YSBTCallBack * cenManCallBack;
 @property (nonatomic, strong) CBCentralManager * cbCenManager;
 @property (nonatomic, strong) NSMutableArray * cbCenPersArr;
 

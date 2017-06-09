@@ -123,6 +123,10 @@
 		392651B41DE702C300B98D70 /* 青云志.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AD1DE702C300B98D70 /* 青云志.mp3 */; };
 		392651B51DE702C300B98D70 /* 如果我们不曾相遇.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AE1DE702C300B98D70 /* 如果我们不曾相遇.mp3 */; };
 		3926FB501D6557FD00E67C30 /* YSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3926FB4F1D6557FD00E67C30 /* YSButton.m */; };
+		39294BF91EEA940C0039538F /* YSMenuControllerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39294BF81EEA940C0039538F /* YSMenuControllerVC.m */; };
+		39294BFC1EEA95360039538F /* YSMenuLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 39294BFB1EEA95360039538F /* YSMenuLabel.m */; };
+		39294BFF1EEA954C0039538F /* YSMenuTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39294BFE1EEA954C0039538F /* YSMenuTextView.m */; };
+		39294C041EEAA9F90039538F /* YSMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 39294C031EEAA9F90039538F /* YSMenuButton.m */; };
 		3930F48A1E4B1098006D877F /* ImageTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3930F4891E4B1098006D877F /* ImageTextVC.m */; };
 		3932AA911E7250C20044D681 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3932AA701E7250C20044D681 /* AFHTTPSessionManager.m */; };
 		3932AA921E7250C20044D681 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3932AA731E7250C20044D681 /* AFNetworkReachabilityManager.m */; };
@@ -519,6 +523,14 @@
 		392651AE1DE702C300B98D70 /* 如果我们不曾相遇.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "如果我们不曾相遇.mp3"; sourceTree = "<group>"; };
 		3926FB4E1D6557FD00E67C30 /* YSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSButton.h; sourceTree = "<group>"; };
 		3926FB4F1D6557FD00E67C30 /* YSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSButton.m; sourceTree = "<group>"; };
+		39294BF71EEA940C0039538F /* YSMenuControllerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMenuControllerVC.h; sourceTree = "<group>"; };
+		39294BF81EEA940C0039538F /* YSMenuControllerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMenuControllerVC.m; sourceTree = "<group>"; };
+		39294BFA1EEA95360039538F /* YSMenuLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMenuLabel.h; sourceTree = "<group>"; };
+		39294BFB1EEA95360039538F /* YSMenuLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMenuLabel.m; sourceTree = "<group>"; };
+		39294BFD1EEA954C0039538F /* YSMenuTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMenuTextView.h; sourceTree = "<group>"; };
+		39294BFE1EEA954C0039538F /* YSMenuTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMenuTextView.m; sourceTree = "<group>"; };
+		39294C021EEAA9F90039538F /* YSMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMenuButton.h; sourceTree = "<group>"; };
+		39294C031EEAA9F90039538F /* YSMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMenuButton.m; sourceTree = "<group>"; };
 		3930F4881E4B1098006D877F /* ImageTextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTextVC.h; sourceTree = "<group>"; };
 		3930F4891E4B1098006D877F /* ImageTextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTextVC.m; sourceTree = "<group>"; };
 		3932AA6F1E7250C20044D681 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -1094,6 +1106,7 @@
 				39FEC0B91D1B73080036DAB3 /* CustemSearchBar */,
 				39B218AD1D18E0BE008DD042 /* OneUIapplicationSeting */,
 				390DCE391DD3136100D8F733 /* YSAlertController */,
+				39294BF61EEA93A60039538F /* MenuController */,
 			);
 			name = YSUI;
 			sourceTree = "<group>";
@@ -1192,6 +1205,22 @@
 				3926FB4F1D6557FD00E67C30 /* YSButton.m */,
 			);
 			path = YSButton;
+			sourceTree = "<group>";
+		};
+		39294BF61EEA93A60039538F /* MenuController */ = {
+			isa = PBXGroup;
+			children = (
+				39294BF71EEA940C0039538F /* YSMenuControllerVC.h */,
+				39294BF81EEA940C0039538F /* YSMenuControllerVC.m */,
+				39294BFA1EEA95360039538F /* YSMenuLabel.h */,
+				39294BFB1EEA95360039538F /* YSMenuLabel.m */,
+				39294BFD1EEA954C0039538F /* YSMenuTextView.h */,
+				39294BFE1EEA954C0039538F /* YSMenuTextView.m */,
+				39294C021EEAA9F90039538F /* YSMenuButton.h */,
+				39294C031EEAA9F90039538F /* YSMenuButton.m */,
+			);
+			name = MenuController;
+			path = YSUI/MenuController;
 			sourceTree = "<group>";
 		};
 		3932AA6D1E7250C20044D681 /* AFN */ = {
@@ -2783,6 +2812,7 @@
 				39333BF11DE2CE9A00035157 /* FirstSimpleView.m in Sources */,
 				399129121D5C87250099C279 /* YSCustemGesture.m in Sources */,
 				39333BE71DE2CE6C00035157 /* YSOtherViewController.m in Sources */,
+				39294C041EEAA9F90039538F /* YSMenuButton.m in Sources */,
 				390C59391DE432970087990C /* YSSongModel.m in Sources */,
 				3932AA9C1E7250C20044D681 /* UIImageView+AFNetworking.m in Sources */,
 				3946CA381E962673003E0D5B /* TZImageManager.m in Sources */,
@@ -2858,6 +2888,7 @@
 				394563F11ECED83400EDFF0E /* YSBluetoothTableViewCell.m in Sources */,
 				39C25E141E528B6700D3415F /* PhotoCollectionViewCell.m in Sources */,
 				39333C1B1DE2CF0000035157 /* ImagesShowViewController.m in Sources */,
+				39294BFC1EEA95360039538F /* YSMenuLabel.m in Sources */,
 				39D65A281E07E0A200FFCF78 /* YSTestDataBase.m in Sources */,
 				39214A111D05203B0019422D /* main.m in Sources */,
 				3932AA9E1E7250C20044D681 /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -2865,9 +2896,11 @@
 				3946CA3C1E962673003E0D5B /* TZPhotoPreviewCell.m in Sources */,
 				390DCE3C1DD313A000D8F733 /* YSAlertController.m in Sources */,
 				39FAEA951DE5714A000B37E0 /* YSDDLogManager.m in Sources */,
+				39294BF91EEA940C0039538F /* YSMenuControllerVC.m in Sources */,
 				3945949D1D3878950017F4A3 /* OneHorizontalTableViewCell.m in Sources */,
 				394594B31D3879200017F4A3 /* YSHarewareViewController.m in Sources */,
 				39B218CA1D192794008DD042 /* TwoDocumentTableViewCell.m in Sources */,
+				39294BFF1EEA954C0039538F /* YSMenuTextView.m in Sources */,
 				39C6219F1D0EABDF00A34040 /* CollectionTestModel.m in Sources */,
 				39D65A221E07C2E000FFCF78 /* Utility.m in Sources */,
 				3949E2701D1A2DA30016BFF6 /* YSUserDefaults.m in Sources */,

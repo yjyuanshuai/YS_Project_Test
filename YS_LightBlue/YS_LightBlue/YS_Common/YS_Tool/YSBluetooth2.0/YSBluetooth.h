@@ -15,7 +15,8 @@
 
 @property (nonatomic, strong) YSBTCentralManager * ysBTCenManager;
 @property (nonatomic, strong) YSBTPeripheralManager * ysBTPerManager;
-@property (nonatomic, strong) YSBTCallBack * ysBTCallBack;
+
++ (instancetype)sharesYSBluetooth;
 
 - (void)setYSBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
 - (void)setYSBTCenMan_DiscoverPeripheralBlock:(YSBTCenMan_DiscoverPeripheralBlock)block;

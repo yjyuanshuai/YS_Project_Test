@@ -13,6 +13,8 @@
 #import "YSBlueToothManager.h"
 #import "YSPeripheralDetailVC.h"
 
+#import "YSBluetooth.h"
+
 static NSString * const PeripheralCellID = @"PeripheralCellID";
 static NSString * const VirtualPeripheralCellID = @"VirtualPeripheralCellID";
 static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellID";
@@ -81,7 +83,26 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 //    [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStartScan];
 //    [YSBlueToothManager sharedYSBlueToothManager].delegate = self;
 
-    
+    [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_UpdateStateBlock:^(CBCentralManager *central) {
+        switch (central.state) {
+            case CBManagerStatePoweredOff:
+            {
+                NSLog(@"------- Power Off");
+            }
+                break;
+           case CBManagerStatePoweredOn:
+            {
+                NSLog(@"-------- Power On");
+            }
+                break;
+                
+            default:
+            {
+                NSLog(@"-------- Power Unknow");
+            }
+                break;
+        }
+    }];
 }
 
 - (void)clickSort:(UIBarButtonItem *)sort

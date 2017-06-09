@@ -8,6 +8,7 @@
 
 #import "YSBTCentralManager.h"
 #import "YSBTDefine.h"
+#import "YSBTCallBack.h"
 
 @interface YSBTCentralManager() <CBCentralManagerDelegate, CBPeripheralDelegate>
 
@@ -38,6 +39,8 @@
             // 非后台
             _cbCenManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         }
+
+        _cenManCallBack = [[YSBTCallBack alloc] init];
     }
     return self;
 }
@@ -66,6 +69,14 @@
             break;
     }
 
+    if (_cenManCallBack.updateStateBlock) {
+        _cenManCallBack.updateStateBlock(central);
+    }
+}
+
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *,id> *)dict
+{
+    // [[CBCentralManager alloc] initWithDelegate:self queue:nil options:options] 必需
 }
 
 /**
@@ -76,7 +87,9 @@
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    
+    if (_cenManCallBack.discoverPeripheralBlock) {
+        _cenManCallBack.discoverPeripheralBlock(central, peripheral, advertisementData, RSSI);
+    }
 }
 
 
@@ -85,7 +98,9 @@
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-
+    if (_cenManCallBack.connectPeripheralBlock) {
+        _cenManCallBack.connectPeripheralBlock(central, peripheral);
+    }
 }
 
 
@@ -94,7 +109,9 @@
  */
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error
 {
-
+    if (_cenManCallBack.failToConnectPeripheralBlock) {
+        _cenManCallBack.failToConnectPeripheralBlock(central, peripheral, error);
+    }
 }
 
 
@@ -103,7 +120,9 @@
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error
 {
-
+    if (_cenManCallBack.disconnectPeripheralBlock) {
+        _cenManCallBack.disconnectPeripheralBlock(central, peripheral, error);
+    }
 }
 
 #pragma mark - CBPeripheralDelegate

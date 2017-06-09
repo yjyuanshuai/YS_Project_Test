@@ -31,6 +31,9 @@
 #import "YSAlertController.h"
 
 
+// 6 UIMenuController
+#import "YSMenuControllerVC.h"
+
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * otherTableView;
@@ -61,18 +64,20 @@
     self.title = @"UI控件";
     self.tabBarItem.title = @"UI";
     
-    _sectionTitle = @[@"1 选择", @"2 滚动", @"3 搜索", @"4 Application", @"5 AlertController"];
+    _sectionTitle = @[@"1 选择", @"2 滚动", @"3 搜索", @"4 Application", @"5 Alert Controller", @"6 Menu Controller"];
     NSArray * sectionOne    = @[@"Picker"];
     NSArray * sectionTwo    = @[@"CollectionView", @"横向tableView"];
     NSArray * sectionThree  = @[@"UISearchDisplayController", @"UISearchController", @"自定义SearchBar"];
     NSArray * sectionFour   = @[@"UIApplicaton一些设置"];
     NSArray * sectionFive   = @[@"AlertController"];
+    NSArray * sectionSix    = @[@"Menu Controller"];
+
     
     if (_sectionCellContent == nil) {
         _sectionCellContent = [NSMutableArray array];
     }
     
-    _sectionCellContent = [@[sectionOne, sectionTwo, sectionThree, sectionFour, sectionFive] mutableCopy];
+    _sectionCellContent = [@[sectionOne, sectionTwo, sectionThree, sectionFour, sectionFive, sectionSix] mutableCopy];
 }
 
 - (void)initTableView
@@ -192,6 +197,13 @@
                 alertCon.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:alertCon animated:YES];
             }
+        }
+            break;
+        case 5:
+        {
+            YSMenuControllerVC * menuVC = [[YSMenuControllerVC alloc] init];
+            menuVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:menuVC animated:YES];
         }
             break;
         default:

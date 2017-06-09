@@ -13,7 +13,7 @@
 
 /**
     特征 model
- */
+
 @interface YSCharacteristicModel : NSObject
 
 @property (nonatomic, strong) NSString * cuuid;
@@ -21,11 +21,11 @@
 @property (nonatomic, strong) CBCharacteristic * cbCharacteristic;
 
 @end
-
+*/
 
 /**
     服务 model
- */
+
 @interface YSServiceModel : NSObject
 
 @property (nonatomic, strong) NSString * suuid;
@@ -34,11 +34,11 @@
 @property (nonatomic, strong) CBService * cbService;
 
 @end
-
+*/
 
 /**
     外设 model
- */
+
 @interface YSPeripheralModel : NSObject
 
 @property (nonatomic, strong) NSString * pname;     // 外设名
@@ -49,6 +49,6 @@
 @property (nonatomic, strong) CBPeripheral * cbPeripheral;
 
 @end
-
+*/
 
 
