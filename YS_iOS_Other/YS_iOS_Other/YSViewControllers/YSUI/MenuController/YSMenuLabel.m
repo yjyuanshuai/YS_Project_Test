@@ -15,29 +15,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
-
-//        UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(clickLongGesure:)];
-//        [longGesure setMinimumPressDuration:0.4];
-//        [self addGestureRecognizer:longGesure];
     }
     return self;
 }
-
-/*
-- (void)clickLongGesure:(UILongPressGestureRecognizer *)gesure
-{
-    if (_delegate && [_delegate respondsToSelector:@selector(showMenu)]) {
-        [_delegate showMenu];
-
-        UIMenuController * menu = [UIMenuController sharedMenuController];
-        UIMenuItem * menuItem = [[UIMenuItem alloc] initWithTitle:@"自定义" action:@selector(custemItem:)];
-        [menu setMenuItems:@[menuItem]];
-        [menu setTargetRect:self.frame inView:self];
-        [menu setMenuVisible:YES animated:YES];
-        [menu update];
-    }
-}
- */
 
 #pragma mark -
 
@@ -49,6 +29,16 @@
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
     return (action == @selector(custemItem:));
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+
 }
 
 @end

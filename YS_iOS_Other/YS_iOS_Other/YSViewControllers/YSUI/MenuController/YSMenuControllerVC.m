@@ -43,17 +43,17 @@
     self.title = @"Menu Controller";
 
     _menuLabel = [[YSMenuLabel alloc] initWithFrame:CGRectMake(10, 10, 150, 50)];
-    _menuLabel.text = @"长按显示Menu";
+    _menuLabel.text = @"长按label显示Menu";
     _menuLabel.font = YSFont_Sys(15);
     _menuLabel.textAlignment = NSTextAlignmentCenter;
     _menuLabel.delegate = self;
     _menuLabel.backgroundColor = [UIColor greenColor];
-    UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(clickLongGesure)];
-    [longGesure setMinimumPressDuration:0.4];
-    [_menuLabel addGestureRecognizer:longGesure];
+//    UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(clickLongGesure)];
+//    [_menuLabel addGestureRecognizer:longGesure];
     [self.view addSubview:_menuLabel];
 
     _menuBtn = [[YSMenuButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_menuLabel.frame) + 10, 10, kScreenWidth - CGRectGetMaxX(_menuLabel.frame) - 20, 50)];
+    [_menuBtn setTitle:@"按钮" forState:UIControlStateNormal];
     [_menuBtn addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
     _menuBtn.backgroundColor = [UIColor purpleColor];
     [self.view addSubview:_menuBtn];
@@ -68,8 +68,6 @@
 
 - (void)KeyboardWillShow
 {
-    DDLogInfo(@" ------------ KeyboardWillShow");
-    
     [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
 }
 

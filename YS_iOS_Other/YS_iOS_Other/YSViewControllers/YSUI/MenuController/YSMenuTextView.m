@@ -9,19 +9,19 @@
 #import "YSMenuTextView.h"
 
 @implementation YSMenuTextView
-
+@synthesize overrideNext;
 
 - (UIResponder *)nextResponder
 {
-    if (_overrideNext != nil) {
-        return _overrideNext;
+    if (overrideNext != nil) {
+        return overrideNext;
     }
     return [super nextResponder];
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    if (_overrideNext != nil) {
+    if (overrideNext != nil) {
         return NO;
     }
     return [super canPerformAction:action withSender:sender];
