@@ -48,8 +48,8 @@
     _menuLabel.textAlignment = NSTextAlignmentCenter;
     _menuLabel.delegate = self;
     _menuLabel.backgroundColor = [UIColor greenColor];
-//    UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(clickLongGesure)];
-//    [_menuLabel addGestureRecognizer:longGesure];
+    UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(clickLongGesure)];
+    [_menuLabel addGestureRecognizer:longGesure];
     [self.view addSubview:_menuLabel];
 
     _menuBtn = [[YSMenuButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_menuLabel.frame) + 10, 10, kScreenWidth - CGRectGetMaxX(_menuLabel.frame) - 20, 50)];
