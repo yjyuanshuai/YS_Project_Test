@@ -11,6 +11,7 @@ msgTime text,
 msgType integer,
 userName text,
 userHeadImage text,
-msgData text,
+msgContentStr text,
+msgContentData text,
 isSelfSend integer
 );

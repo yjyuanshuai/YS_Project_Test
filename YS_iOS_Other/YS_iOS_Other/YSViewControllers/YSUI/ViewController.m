@@ -33,6 +33,7 @@
 
 // 6 UIMenuController
 #import "YSMenuControllerVC.h"
+#import "ChatViewController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -70,7 +71,7 @@
     NSArray * sectionThree  = @[@"UISearchDisplayController", @"UISearchController", @"自定义SearchBar"];
     NSArray * sectionFour   = @[@"UIApplicaton一些设置"];
     NSArray * sectionFive   = @[@"AlertController"];
-    NSArray * sectionSix    = @[@"Menu Controller"];
+    NSArray * sectionSix    = @[@"Menu Controller-UI控件", @"Menu Controller-TableviewCell"];
 
     
     if (_sectionCellContent == nil) {
@@ -201,9 +202,16 @@
             break;
         case 5:
         {
-            YSMenuControllerVC * menuVC = [[YSMenuControllerVC alloc] init];
-            menuVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:menuVC animated:YES];
+            if (indexPath.row == 0) {
+                YSMenuControllerVC * menuVC = [[YSMenuControllerVC alloc] init];
+                menuVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:menuVC animated:YES];
+            }
+            else if (indexPath.row == 1) {
+                ChatViewController * cellMenuVC = [[ChatViewController alloc] init];
+                cellMenuVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:cellMenuVC animated:YES];
+            }
         }
             break;
         default:

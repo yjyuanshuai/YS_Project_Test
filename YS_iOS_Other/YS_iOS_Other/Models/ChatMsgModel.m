@@ -10,4 +10,19 @@
 
 @implementation ChatMsgModel
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _msgId = @"";
+        _msgTime = @"";
+        _msgType = ChatMsgTypeNone;
+        _userName = @"";
+        _userHeadImage = @"";
+        _msgContentData = [NSData data];
+        _isSelfSend = NO;
+    }
+    return self;
+}
+
 @end

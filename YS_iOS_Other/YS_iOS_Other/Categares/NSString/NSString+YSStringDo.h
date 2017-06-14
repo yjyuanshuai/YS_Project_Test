@@ -44,6 +44,12 @@
                                   font:(UIFont *)font
                              miniWidth:(CGFloat)miniWidth;
 
+/**
+ *
+ */
+- (CGSize)calculateSizeWithMaxSize:(CGSize)maxSize
+                           minSize:(CGSize)minSize
+                              font:(UIFont *)font;
 
 
 @end

@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSInteger, ChatMsgType)
 {
+    ChatMsgTypeNone,
     ChatMsgTypeText,
     ChatMsgTypeImage,
     ChatMsgTypeAudio,
@@ -18,12 +19,12 @@ typedef NS_ENUM(NSInteger, ChatMsgType)
 
 @interface ChatMsgModel : NSObject
 
-@property (nonatomic, copy) NSString * msgId;
+@property (nonatomic, copy) NSString * msgId;           //
 @property (nonatomic, copy) NSString * msgTime;
-@property (nonatomic, assign) ChatMsgType msgType;
+@property (nonatomic, assign) ChatMsgType msgType;      //
 @property (nonatomic, copy) NSString * userName;
 @property (nonatomic, copy) NSString * userHeadImage;
-@property (nonatomic, copy) NSString * msgData;
-@property (nonatomic, assign) BOOL isSelfSend;
+@property (nonatomic, strong) NSData * msgContentData;
+@property (nonatomic, assign) BOOL isSelfSend;          // YES - 自己；NO - 他人
 
 @end

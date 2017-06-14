@@ -65,10 +65,10 @@
                                      options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                   attributes:@{NSFontAttributeName:curFont}
                                      context:nil].size;
-    if (rect.height < miniHeight) {
+    if (ceil(rect.height) < miniHeight) {
         return miniHeight;
     }
-    return rect.height;
+    return ceil(rect.height);
 }
 
 
@@ -82,10 +82,28 @@
                                      options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                   attributes:@{NSFontAttributeName:curFont}
                                      context:nil].size;
-    if (rect.width < miniWidth) {
+    if (ceil(rect.width) < miniWidth) {
         return miniWidth;
     }
-    return rect.width;
+    return ceil(rect.width);
+}
+
+- (CGSize)calculateSizeWithMaxSize:(CGSize)maxSize minSize:(CGSize)minSize font:(UIFont *)font
+{
+    UIFont * curFont = font;
+    if (!font) {
+        font = [UIFont systemFontOfSize:16.0];
+    }
+
+    CGSize rect = [self boundingRectWithSize:CGSizeMake(maxSize.width, maxSize.height)
+                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                  attributes:@{NSFontAttributeName:curFont}
+                                     context:nil].size;
+
+    CGFloat width = ceil(rect.width);
+    CGFloat height = ceil(rect.height);
+
+    return CGSizeMake(width, height);
 }
 
 

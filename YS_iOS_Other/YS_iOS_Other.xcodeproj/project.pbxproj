@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3901E7A51EEFCA4A003681FD /* ChatViewTextMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3901E7A41EEFCA4A003681FD /* ChatViewTextMsgCell.m */; };
+		3901E7A81EEFCA7E003681FD /* ChatViewSuperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3901E7A71EEFCA7E003681FD /* ChatViewSuperCell.m */; };
 		390C59391DE432970087990C /* YSSongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 390C59381DE432970087990C /* YSSongModel.m */; };
 		390C593C1DE4393C0087990C /* AudioListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 390C593B1DE4393C0087990C /* AudioListVC.m */; };
 		390DCE3C1DD313A000D8F733 /* YSAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390DCE3B1DD313A000D8F733 /* YSAlertController.m */; };
@@ -117,7 +119,6 @@
 		3923F8641E0396DA005A02D7 /* Expression_60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3923F8251E0396DA005A02D7 /* Expression_60@2x.png */; };
 		3923F86C1E03BE09005A02D7 /* EmotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3923F86B1E03BE09005A02D7 /* EmotionView.m */; };
 		3923F86F1E03D68C005A02D7 /* EmotionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3923F86E1E03D68C005A02D7 /* EmotionCollectionViewCell.m */; };
-		3923F8751E03EA9C005A02D7 /* ChatViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3923F8741E03EA9C005A02D7 /* ChatViewTableViewCell.m */; };
 		392621971D2365D700CF4C90 /* UIColor+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 392621961D2365D700CF4C90 /* UIColor+Image.m */; };
 		392651B21DE702C300B98D70 /* 离思.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AB1DE702C300B98D70 /* 离思.mp3 */; };
 		392651B41DE702C300B98D70 /* 青云志.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 392651AD1DE702C300B98D70 /* 青云志.mp3 */; };
@@ -187,6 +188,7 @@
 		393AACF61D4B396F0004C41D /* cm2_icn_dlded_prs.png in Resources */ = {isa = PBXBuildFile; fileRef = 393AACED1D4B396F0004C41D /* cm2_icn_dlded_prs.png */; };
 		393AACF71D4B396F0004C41D /* cm2_icn_dlded_prs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 393AACEE1D4B396F0004C41D /* cm2_icn_dlded_prs@2x.png */; };
 		393AACF81D4B396F0004C41D /* cm2_icn_dlded_prs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 393AACEF1D4B396F0004C41D /* cm2_icn_dlded_prs@3x.png */; };
+		3942A5761EEF8DC000C14E95 /* YSMenuTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3942A5751EEF8DC000C14E95 /* YSMenuTextField.m */; };
 		394563F11ECED83400EDFF0E /* YSBluetoothTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 394563F01ECED83400EDFF0E /* YSBluetoothTableViewCell.m */; };
 		394594501D3875A70017F4A3 /* YSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945944D1D3875A70017F4A3 /* YSRootViewController.m */; };
 		394594511D3875A70017F4A3 /* YSTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945944F1D3875A70017F4A3 /* YSTabBarController.m */; };
@@ -371,6 +373,10 @@
 
 /* Begin PBXFileReference section */
 		2091E4EB0EA5E6D414D65CEA /* Pods-YS_iOS_Other.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_iOS_Other.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YS_iOS_Other/Pods-YS_iOS_Other.debug.xcconfig"; sourceTree = "<group>"; };
+		3901E7A31EEFCA4A003681FD /* ChatViewTextMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewTextMsgCell.h; sourceTree = "<group>"; };
+		3901E7A41EEFCA4A003681FD /* ChatViewTextMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewTextMsgCell.m; sourceTree = "<group>"; };
+		3901E7A61EEFCA7E003681FD /* ChatViewSuperCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewSuperCell.h; sourceTree = "<group>"; };
+		3901E7A71EEFCA7E003681FD /* ChatViewSuperCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewSuperCell.m; sourceTree = "<group>"; };
 		390C59371DE432970087990C /* YSSongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSSongModel.h; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSOther/AudioAndVideo/PlayerView/YSSongModel.h; sourceTree = SOURCE_ROOT; };
 		390C59381DE432970087990C /* YSSongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSSongModel.m; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSOther/AudioAndVideo/PlayerView/YSSongModel.m; sourceTree = SOURCE_ROOT; };
 		390C593A1DE4393C0087990C /* AudioListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioListVC.h; sourceTree = "<group>"; };
@@ -514,8 +520,6 @@
 		3923F86B1E03BE09005A02D7 /* EmotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionView.m; sourceTree = "<group>"; };
 		3923F86D1E03D68C005A02D7 /* EmotionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionCollectionViewCell.h; sourceTree = "<group>"; };
 		3923F86E1E03D68C005A02D7 /* EmotionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionCollectionViewCell.m; sourceTree = "<group>"; };
-		3923F8731E03EA9C005A02D7 /* ChatViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewTableViewCell.h; sourceTree = "<group>"; };
-		3923F8741E03EA9C005A02D7 /* ChatViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewTableViewCell.m; sourceTree = "<group>"; };
 		392621951D2365D700CF4C90 /* UIColor+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Image.h"; sourceTree = "<group>"; };
 		392621961D2365D700CF4C90 /* UIColor+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Image.m"; sourceTree = "<group>"; };
 		392651AB1DE702C300B98D70 /* 离思.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "离思.mp3"; sourceTree = "<group>"; };
@@ -634,6 +638,8 @@
 		393E98C81D3F10A800D10561 /* GlobalString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalString.h; path = HeaderFile/GlobalString.h; sourceTree = "<group>"; };
 		393E98CE1D3F1A2700D10561 /* IntroduceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroduceFile.h; path = HeaderFile/IntroduceFile.h; sourceTree = "<group>"; };
 		393E98CF1D3F1A4D00D10561 /* YSSetting.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSSetting.pch; path = HeaderFile/YSSetting.pch; sourceTree = "<group>"; };
+		3942A5741EEF8DC000C14E95 /* YSMenuTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMenuTextField.h; sourceTree = "<group>"; };
+		3942A5751EEF8DC000C14E95 /* YSMenuTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMenuTextField.m; sourceTree = "<group>"; };
 		394563EF1ECED83400EDFF0E /* YSBluetoothTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSBluetoothTableViewCell.h; path = YSHareware/YSBluetoothTableViewCell.h; sourceTree = "<group>"; };
 		394563F01ECED83400EDFF0E /* YSBluetoothTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSBluetoothTableViewCell.m; path = YSHareware/YSBluetoothTableViewCell.m; sourceTree = "<group>"; };
 		3945944C1D3875A70017F4A3 /* YSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRootViewController.h; sourceTree = "<group>"; };
@@ -1153,8 +1159,10 @@
 				39A108BE1E028985000D7839 /* TextAttachmentViewController.m */,
 				3923F7DD1E038D27005A02D7 /* ChatViewController.h */,
 				3923F7DE1E038D27005A02D7 /* ChatViewController.m */,
-				3923F8731E03EA9C005A02D7 /* ChatViewTableViewCell.h */,
-				3923F8741E03EA9C005A02D7 /* ChatViewTableViewCell.m */,
+				3901E7A61EEFCA7E003681FD /* ChatViewSuperCell.h */,
+				3901E7A71EEFCA7E003681FD /* ChatViewSuperCell.m */,
+				3901E7A31EEFCA4A003681FD /* ChatViewTextMsgCell.h */,
+				3901E7A41EEFCA4A003681FD /* ChatViewTextMsgCell.m */,
 				3930F4881E4B1098006D877F /* ImageTextVC.h */,
 				3930F4891E4B1098006D877F /* ImageTextVC.m */,
 				391A2E9D1E093D630075CFD3 /* FriendCircleVC.h */,
@@ -1216,6 +1224,8 @@
 				39294BFB1EEA95360039538F /* YSMenuLabel.m */,
 				39294BFD1EEA954C0039538F /* YSMenuTextView.h */,
 				39294BFE1EEA954C0039538F /* YSMenuTextView.m */,
+				3942A5741EEF8DC000C14E95 /* YSMenuTextField.h */,
+				3942A5751EEF8DC000C14E95 /* YSMenuTextField.m */,
 				39294C021EEAA9F90039538F /* YSMenuButton.h */,
 				39294C031EEAA9F90039538F /* YSMenuButton.m */,
 			);
@@ -2754,7 +2764,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3923F8751E03EA9C005A02D7 /* ChatViewTableViewCell.m in Sources */,
 				39D65A251E07CB2A00FFCF78 /* YSImageAndTextSort.m in Sources */,
 				395ACE751D9377D800C22165 /* TwoDemotionViewController.m in Sources */,
 				3921489D1DDEDCE100EBCFC1 /* GestureCollectionViewCell.m in Sources */,
@@ -2809,6 +2818,7 @@
 				3946B9C51E2DEF7200BA7F95 /* JSonViewController.m in Sources */,
 				3994B10A1E77D8A600142754 /* YSOperationDetailCollectionViewCell.m in Sources */,
 				392148A21DDEDCE100EBCFC1 /* YSTouchViewController.m in Sources */,
+				3901E7A51EEFCA4A003681FD /* ChatViewTextMsgCell.m in Sources */,
 				39333BF11DE2CE9A00035157 /* FirstSimpleView.m in Sources */,
 				399129121D5C87250099C279 /* YSCustemGesture.m in Sources */,
 				39333BE71DE2CE6C00035157 /* YSOtherViewController.m in Sources */,
@@ -2839,6 +2849,7 @@
 				3932AA971E7250C20044D681 /* AFAutoPurgingImageCache.m in Sources */,
 				395ACE741D9377D800C22165 /* ThreeDemotionViewController.m in Sources */,
 				3921489C1DDEDCE100EBCFC1 /* GestureCollectionReusableView.m in Sources */,
+				3942A5761EEF8DC000C14E95 /* YSMenuTextField.m in Sources */,
 				3932AA991E7250C20044D681 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3946CA331E962673003E0D5B /* NSBundle+TZImagePicker.m in Sources */,
 				3921488C1DDED3EB00EBCFC1 /* YSOtherGatherVC.m in Sources */,
@@ -2882,6 +2893,7 @@
 				392621971D2365D700CF4C90 /* UIColor+Image.m in Sources */,
 				397D20011ECD332500920A72 /* YSBlueToothManager.m in Sources */,
 				397D1FFE1ECD31E500920A72 /* YSBlueToothVC.m in Sources */,
+				3901E7A81EEFCA7E003681FD /* ChatViewSuperCell.m in Sources */,
 				391A2E9F1E093D630075CFD3 /* FriendCircleVC.m in Sources */,
 				395562591D41C3550079CF6B /* MyKeyChainHelper.m in Sources */,
 				3932AA9D1E7250C20044D681 /* UIProgressView+AFNetworking.m in Sources */,

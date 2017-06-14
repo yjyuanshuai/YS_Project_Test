@@ -18,8 +18,8 @@
     
     FMDatabaseQueue * dbQueue = [YSTestDataBase getDBQueue];
     [dbQueue inDatabase:^(FMDatabase *db) {
-        NSString * insertStr = [NSString stringWithFormat:@"replace into %@(msgId, msgTime, msgType, userName, userHeadImage, msgData, isSelfSend) values(?,?,?,?,?,?,?)", TABLE_CHATMSG];
-        insertSuc = [db executeUpdate:insertStr, model.msgId, model.msgTime, @(model.msgType), model.userName, model.userHeadImage, model.msgData, @(model.isSelfSend)];
+        NSString * insertStr = [NSString stringWithFormat:@"replace into %@(msgId, msgTime, msgType, userName, userHeadImage, msgContentData, isSelfSend) values(?,?,?,?,?,?,?)", TABLE_CHATMSG];
+        insertSuc = [db executeUpdate:insertStr, model.msgId, model.msgTime, @(model.msgType), model.userName, model.userHeadImage, model.msgContentData, @(model.isSelfSend)];
     }];
     [dbQueue close];
     
@@ -82,9 +82,11 @@
     [queue inDatabase:^(FMDatabase *db) {
         NSString * queryStr = @"";
         if (model) {
-            queryStr = [NSString stringWithFormat:@"select * from %@ where msgTime < %@ order by msgTime desc limit %d", TABLE_CHATMSG, model.msgTime, (int)limit];
+//            queryStr = [NSString stringWithFormat:@"select * from %@ where msgTime < %@ order by msgTime desc limit %d", TABLE_CHATMSG, model.msgTime, (int)limit];
+            queryStr = [NSString stringWithFormat:@"select * from %@ where msgTime < %@ order by msgTime limit %d", TABLE_CHATMSG, model.msgTime, (int)limit];
         }
         else {
+//            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime desc limit %d", TABLE_CHATMSG, (int)limit];
             queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime desc limit %d", TABLE_CHATMSG, (int)limit];
         }
         FMResultSet * ret = [db executeQuery:queryStr];
@@ -107,7 +109,7 @@
     model.msgType       = [ret intForColumn:@"msgType"];
     model.userName      = [ret stringForColumn:@"userName"];
     model.userHeadImage = [ret stringForColumn:@"userHeadImage"];
-    model.msgData       = [ret stringForColumn:@"msgData"];
+    model.msgContentData= [ret dataForColumn:@"msgContentData"];
     model.isSelfSend    = [ret stringForColumn:@"isSelfSend"];
     return model;
 }
