@@ -38,5 +38,6 @@ typedef NS_ENUM(NSInteger, FunctionType)
 - (void)registFirstRespon;
 - (void)clearChatText;
 - (NSString *)getChatText;
+- (BOOL)chatTextViewISFirstReponder;
 
 @end

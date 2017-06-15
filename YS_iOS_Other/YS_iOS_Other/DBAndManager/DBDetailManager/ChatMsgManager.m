@@ -82,12 +82,12 @@
     [queue inDatabase:^(FMDatabase *db) {
         NSString * queryStr = @"";
         if (model) {
-//            queryStr = [NSString stringWithFormat:@"select * from %@ where msgTime < %@ order by msgTime desc limit %d", TABLE_CHATMSG, model.msgTime, (int)limit];
-            queryStr = [NSString stringWithFormat:@"select * from %@ where msgTime < %@ order by msgTime limit %d", TABLE_CHATMSG, model.msgTime, (int)limit];
+//            queryStr = [NSString stringWithFormat:@"select * from %@ where msgTime < %@ order by msgTime limit %d", TABLE_CHATMSG, model.msgTime, (int)limit];
+            queryStr = [NSString stringWithFormat:@"select * from (select * from %@ where msgTime < %@ order by msgTime desc limit %d) order by msgTime", TABLE_CHATMSG, model.msgTime, (int)limit];
         }
         else {
-//            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime desc limit %d", TABLE_CHATMSG, (int)limit];
-            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime limit %d", TABLE_CHATMSG, (int)limit];
+//            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime limit %d", TABLE_CHATMSG, (int)limit];
+            queryStr = [NSString stringWithFormat:@"select * from (select * from %@ order by msgTime desc limit %d) order by msgTime", TABLE_CHATMSG, (int)limit];
         }
         FMResultSet * ret = [db executeQuery:queryStr];
         while ([ret next]) {

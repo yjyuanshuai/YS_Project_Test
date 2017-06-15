@@ -44,7 +44,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self moveTableViewWithBottemSpace:0];
+    [self cancelFocusWithAnimation:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -107,7 +107,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     
 //    [_messageTableView setTransform:CGAffineTransformMakeRotation(-M_PI)];      // 倒置
     
-    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelFocus)];
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelFocusWithAnimation:)];
     [_messageTableView addGestureRecognizer:tapGesture];
 }
 
@@ -126,7 +126,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [self cancelFocus];
+    [self cancelFocusWithAnimation:YES];
 }
 
 #pragma mark - ChatBottemViewDelegate
@@ -165,7 +165,6 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
         
         if (insert) {
             // 2 刷新界面
-//            [_messageDataArr insertObject:model atIndex:0];
             [_messageDataArr addObject:model];
             [_messageTableView reloadData];
             NSIndexPath * lastIndexPath = [NSIndexPath indexPathForRow:[_messageDataArr count]-1 inSection:0];
@@ -173,7 +172,6 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
             
             // 3 清除输入
             [_chatBottemView clearChatText];
-//            [self cancelFocus];
         }
         else {
             [YSHudView yiBaoHUDStopOrShowWithMsg:@"数据插入失败，请重试！" finsh:nil];
@@ -191,6 +189,10 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 {
     ChatViewTextMsgCell * cell = [tableView dequeueReusableCellWithIdentifier:ChatViewTextMsgCellID];
     [cell setChatMsgCell:_messageDataArr[indexPath.row] indexPath:indexPath];
+
+    UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesureAction:)];
+    [cell addGestureRecognizer:longGesure];
+
     return cell;
 }
 
@@ -204,26 +206,49 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     return height;
 }
 
-- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)longGesureAction:(UILongPressGestureRecognizer *)longGesure
 {
-    UIMenuItem * deleteItem = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteMenu:)];
-    UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"粘贴" action:@selector(copyMenu:)];
-    [[UIMenuController sharedMenuController] setMenuItems:@[deleteItem, copyItem]];
-    ChatViewSuperCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-    [[UIMenuController sharedMenuController] setTargetRect:cell.msgBgBtn.frame inView:tableView];
-    [[UIMenuController sharedMenuController] update];
+    if (longGesure.state == UIGestureRecognizerStateBegan) {
 
-    return YES;
+        ChatViewTextMsgCell * cell = (ChatViewTextMsgCell *)longGesure.view;
+        UIMenuController * menu = [UIMenuController sharedMenuController];
+        if ([_chatBottemView chatTextViewISFirstReponder]) {
+            
+        }
+        else {
+            [cell becomeFirstResponder];
+        }
+
+        UIMenuItem * deleteItem = [[UIMenuItem alloc] initWithTitle:@"cus删除" action:@selector(deleteMenu:)];
+        UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"cus粘贴" action:@selector(copyMenu:)];
+        [menu setMenuItems:@[deleteItem, copyItem]];
+        [menu setTargetRect:cell.msgBgBtn.frame inView:cell];
+        [menu setMenuVisible:YES animated:YES];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillHidden) name:UIMenuControllerWillHideMenuNotification object:nil];
+    }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+- (void)MenuWillHidden
 {
-    return YES;
+    [[UIMenuController sharedMenuController] setMenuItems:nil];
 }
 
-- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(deleteMenu:) || action == @selector(copyMenu:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)deleteMenu:(UIMenuController *)menu
 {
-    
+    DDLogInfo(@"----- viewcontroller delete");
+}
+
+- (void)copyMenu:(UIMenuController *)menu
+{
+    DDLogInfo(@"----- viewcontroller copy");
 }
 
 #pragma mark -
@@ -265,16 +290,23 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     }];
 }
 
-- (void)cancelFocus
+- (void)cancelFocusWithAnimation:(BOOL)animation
 {
     [_chatBottemView registFirstRespon];
-    
-    [UIView animateWithDuration:0.5 animations:^{
 
+    if (animation) {
+        [UIView animateWithDuration:0.5 animations:^{
+
+            [self moveChatBottemViewWithOriginY:kScreenHeightNo64 - [_chatBottemView getBottemViewHeight]];
+            [self moveTableViewWithBottemSpace:0];
+            [self moveEmotionViewWithHeight:[_emotionView getEmotionViewHeight] originY:kScreenHeightNo64 isHidden:YES];
+        }];
+    }
+    else {
         [self moveChatBottemViewWithOriginY:kScreenHeightNo64 - [_chatBottemView getBottemViewHeight]];
         [self moveTableViewWithBottemSpace:0];
         [self moveEmotionViewWithHeight:[_emotionView getEmotionViewHeight] originY:kScreenHeightNo64 isHidden:YES];
-    }];
+    }
 }
 
 - (void)moveTableViewWithBottemSpace:(CGFloat)funHeight

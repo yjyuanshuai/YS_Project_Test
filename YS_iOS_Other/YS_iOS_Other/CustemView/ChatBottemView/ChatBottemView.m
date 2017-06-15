@@ -70,6 +70,11 @@ static CGFloat const TextViewContentInset = 4;
     return _chatTextView.text;
 }
 
+- (BOOL)chatTextViewISFirstReponder
+{
+    return [_chatTextView isFirstResponder];
+}
+
 #pragma mark -
 - (void)checkFrame:(CGRect)frame
 {

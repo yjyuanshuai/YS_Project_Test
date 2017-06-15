@@ -69,6 +69,10 @@
     return CGSizeMake(size.width, size.height + 4);
 }
 
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
     if (action == @selector(deleteMenu:) || action == @selector(copyMenu:)) {
         return YES;
@@ -76,18 +80,14 @@
     return NO;
 }
 
-- (BOOL)canBecomeFirstResponder {
-    return YES;
-}
-
 - (void)deleteMenu:(UIMenuController *)menu
 {
-    DDLogInfo(@"----- delete");
+    DDLogInfo(@"----- cell delete");
 }
 
 - (void)copyMenu:(UIMenuController *)menu
 {
-    DDLogInfo(@"----- copy");
+    DDLogInfo(@"----- cell copy");
 }
 
 @end
