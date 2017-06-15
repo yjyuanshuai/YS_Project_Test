@@ -3123,7 +3123,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/CocoaLumberjack",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yjyuanshuai.ysTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yjyuanshuai.yjoctest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3147,7 +3147,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/CocoaLumberjack",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yjyuanshuai.ysTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yjyuanshuai.yjoctest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

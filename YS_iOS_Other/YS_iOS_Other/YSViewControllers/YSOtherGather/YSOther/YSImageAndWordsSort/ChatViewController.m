@@ -213,7 +213,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
         ChatViewTextMsgCell * cell = (ChatViewTextMsgCell *)longGesure.view;
         UIMenuController * menu = [UIMenuController sharedMenuController];
         if ([_chatBottemView chatTextViewISFirstReponder]) {
-            
+
         }
         else {
             [cell becomeFirstResponder];
