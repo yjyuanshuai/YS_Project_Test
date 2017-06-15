@@ -9,7 +9,6 @@
 #import "ChatViewController.h"
 #import "ChatBottemView.h"
 #import "EmotionView.h"
-//#import "ChatViewTableViewCell.h"
 #import "ChatViewTextMsgCell.h"
 #import "NSDate+Utilities.h"
 #import "ChatMsgModel.h"
@@ -24,12 +23,13 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 @property (nonatomic, strong) UITableView * messageTableView;
 @property (nonatomic, strong) ChatBottemView * chatBottemView;
 @property (nonatomic, strong) EmotionView * emotionView;
+@property (nonatomic, strong) NSMutableArray * messageDataArr;
 
 @end
 
 @implementation ChatViewController
 {
-    NSMutableArray * _messageDataArr;
+
 }
 
 - (void)viewDidLoad {
@@ -39,6 +39,18 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     [self initUIAndData];
     [self createTableView];
     [self createEmoView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self moveTableViewWithBottemSpace:0];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,7 +93,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 
 - (void)createTableView
 {
-    _messageTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _messageTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeightNo64 - 85) style:UITableViewStylePlain];
     _messageTableView.delegate = self;
     _messageTableView.dataSource = self;
     _messageTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -90,19 +102,13 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 //    _messageTableView.showsVerticalScrollIndicator = NO;
     _messageTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.view addSubview:_messageTableView];
-    
-    [_messageTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 85, 0));
-    }];
-    
+
     [_messageTableView registerClass:[ChatViewTextMsgCell class] forCellReuseIdentifier:ChatViewTextMsgCellID];
     
 //    [_messageTableView setTransform:CGAffineTransformMakeRotation(-M_PI)];      // 倒置
     
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelFocus)];
     [_messageTableView addGestureRecognizer:tapGesture];
-
-    _messageTableView.backgroundColor = [UIColor redColor];
 }
 
 #pragma mark -
@@ -128,7 +134,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 {
     if (functionType == FunctionType_Emotion) {
         
-        [self focusMoveKeybordOrFunctionView:0.5 animationCurve:nil moveHeight:[_emotionView getEmotionViewHeight] functionType:FunctionType_Emotion];
+        [self focusMoveKeybordOrFunctionView:0.3 animationCurve:nil moveHeight:[_emotionView getEmotionViewHeight] functionType:FunctionType_Emotion];
         
     }
 }
@@ -162,10 +168,12 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 //            [_messageDataArr insertObject:model atIndex:0];
             [_messageDataArr addObject:model];
             [_messageTableView reloadData];
+            NSIndexPath * lastIndexPath = [NSIndexPath indexPathForRow:[_messageDataArr count]-1 inSection:0];
+            [_messageTableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             
             // 3 清除输入
             [_chatBottemView clearChatText];
-            [self cancelFocus];
+//            [self cancelFocus];
         }
         else {
             [YSHudView yiBaoHUDStopOrShowWithMsg:@"数据插入失败，请重试！" finsh:nil];
@@ -182,13 +190,40 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ChatViewTextMsgCell * cell = [tableView dequeueReusableCellWithIdentifier:ChatViewTextMsgCellID];
-    [cell setChatMsgCell:_messageDataArr[indexPath.row]];
+    [cell setChatMsgCell:_messageDataArr[indexPath.row] indexPath:indexPath];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{  
+    CGFloat height = 0;
+    ChatMsgModel * model = _messageDataArr[indexPath.row];
+    if (model.msgType == ChatMsgTypeText) {
+        height = [ChatViewTextMsgCell getChatViewTableViewHeight:_messageDataArr[indexPath.row]];
+    }
+    return height;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [ChatViewTextMsgCell getChatViewTableViewHeight:_messageDataArr[indexPath.row]];
+    UIMenuItem * deleteItem = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteMenu:)];
+    UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"粘贴" action:@selector(copyMenu:)];
+    [[UIMenuController sharedMenuController] setMenuItems:@[deleteItem, copyItem]];
+    ChatViewSuperCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    [[UIMenuController sharedMenuController] setTargetRect:cell.msgBgBtn.frame inView:tableView];
+    [[UIMenuController sharedMenuController] update];
+
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    
 }
 
 #pragma mark -
@@ -212,9 +247,9 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
         
         if (functionType == FunctionType_Emotion) {
             // 表情键盘
-
-            [self moveChatBottemViewWithHeight:[_chatBottemView getBottemViewHeight] originY:kScreenHeightNo64 - [_chatBottemView getBottemViewHeight] - height];
-            [self moveTableViewWithBottemSpace:height + [_chatBottemView getBottemViewHeight]];
+            CGFloat ChatBottemViewHeight = kScreenHeightNo64 - [_chatBottemView getBottemViewHeight] - height;
+            [self moveChatBottemViewWithOriginY:ChatBottemViewHeight];
+            [self moveTableViewWithBottemSpace:height];
             [self moveEmotionViewWithHeight:height originY:kScreenHeightNo64 - height isHidden:NO];
         }
         
@@ -223,9 +258,10 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
             [UIView setAnimationBeginsFromCurrentState:YES];
             [UIView setAnimationCurve:[curve intValue]];
 
-            [self moveChatBottemViewWithHeight:[_chatBottemView getBottemViewHeight] originY:kScreenHeightNo64 - height - [_chatBottemView getBottemViewHeight]];
-            [self moveTableViewWithBottemSpace:height + [_chatBottemView getBottemViewHeight]];
+            [self moveChatBottemViewWithOriginY:kScreenHeightNo64 - height - [_chatBottemView getBottemViewHeight]];
+            [self moveTableViewWithBottemSpace:height];
         }
+
     }];
 }
 
@@ -233,28 +269,26 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 {
     [_chatBottemView registFirstRespon];
     
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
 
-        [self moveChatBottemViewWithHeight:kScreenHeightNo64 - [_chatBottemView getBottemViewHeight] originY:[_chatBottemView getBottemViewHeight]];
-        [self moveTableViewWithBottemSpace:[_chatBottemView getBottemViewHeight]];
+        [self moveChatBottemViewWithOriginY:kScreenHeightNo64 - [_chatBottemView getBottemViewHeight]];
+        [self moveTableViewWithBottemSpace:0];
         [self moveEmotionViewWithHeight:[_emotionView getEmotionViewHeight] originY:kScreenHeightNo64 isHidden:YES];
     }];
 }
 
-- (void)moveTableViewWithBottemSpace:(CGFloat)bottemSpace
+- (void)moveTableViewWithBottemSpace:(CGFloat)funHeight
 {
-    [_messageTableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, bottemSpace, 0));
-    }];
+    CGFloat bottemSpace = funHeight + [_chatBottemView getBottemViewHeight];
+    _messageTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeightNo64 - bottemSpace);
 
     NSIndexPath * lastIndexPath = [NSIndexPath indexPathForRow:[_messageDataArr count]-1 inSection:0];
-    [_messageTableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [_messageTableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
-- (void)moveChatBottemViewWithHeight:(CGFloat)viewHeight
-                             originY:(CGFloat)originY
+- (void)moveChatBottemViewWithOriginY:(CGFloat)originY
 {
-    _chatBottemView.frame = CGRectMake(0, originY, kScreenWidth, viewHeight);
+    _chatBottemView.frame = CGRectMake(0, originY, kScreenWidth, [_chatBottemView getBottemViewHeight]);
     _chatBottemView.currentFrame = _chatBottemView.frame;
 }
 

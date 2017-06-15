@@ -26,13 +26,13 @@ typedef NS_ENUM(NSInteger, FunctionType)
 
 @interface ChatBottemView : UIView <UITextViewDelegate>
 
+@property (nonatomic, strong) UIImageView * chatBgImageView;    // 
 @property (nonatomic, strong) UITextView * chatTextView;        // 输入框
 @property (nonatomic, strong) UIButton * emotionBtn;            // 表情按钮
 @property (nonatomic, strong) UIButton * photoBtn;              // 相册
 @property (nonatomic, weak) id<ChatBottemViewDelegate> delegate;
 @property (nonatomic, assign) CGRect currentFrame;
 
-- (instancetype)initWithFrame:(CGRect)frame;
 - (CGFloat)getBottemViewHeight;
 - (void)receviceEmoStr:(id)model;
 - (void)registFirstRespon;

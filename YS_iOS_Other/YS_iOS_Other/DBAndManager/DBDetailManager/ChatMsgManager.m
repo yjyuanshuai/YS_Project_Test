@@ -87,7 +87,7 @@
         }
         else {
 //            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime desc limit %d", TABLE_CHATMSG, (int)limit];
-            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime desc limit %d", TABLE_CHATMSG, (int)limit];
+            queryStr = [NSString stringWithFormat:@"select * from %@ order by msgTime limit %d", TABLE_CHATMSG, (int)limit];
         }
         FMResultSet * ret = [db executeQuery:queryStr];
         while ([ret next]) {

@@ -9,6 +9,7 @@
 #import "ChatViewTextMsgCell.h"
 #import "ChatMsgModel.h"
 #import "NSString+YSStringDo.h"
+#import "NSAttributedString+YSAttrStrCategory.h"
 #import "YSImageAndTextSort.h"
 
 @implementation ChatViewTextMsgCell
@@ -26,7 +27,7 @@
     return self;
 }
 
-- (void)setChatMsgCell:(ChatMsgModel *)model
+- (void)setChatMsgCell:(ChatMsgModel *)model indexPath:(NSIndexPath *)indexPath
 {
     self.msgTimeLabel.text = model.msgTime;
     self.userNameLabel.text = model.userName;
@@ -56,16 +57,37 @@
     if (model.msgType == ChatMsgTypeText) {
         contentHeight = [ChatViewTextMsgCell getChatViewTextCellHeight:model].height;
     }
-    CGFloat height = 10 + 20 + 10 + 20 + contentHeight + 23;
+    CGFloat height = 10 + 20 + 10 + 20 + contentHeight + 23 + 10;
     return height;
 }
 
 + (CGSize)getChatViewTextCellHeight:(ChatMsgModel *)model
 {
     NSString * msgContentStr = [[NSString alloc] initWithData:model.msgContentData encoding:NSUTF8StringEncoding];
-    CGSize size = [msgContentStr calculateSizeWithMaxSize:CGSizeMake(kScreenWidth - 80 - 45 - 10 - 25, CGFLOAT_MAX) minSize:CGSizeMake(0, 0) font:YSFont_Sys(16)];
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithString:msgContentStr attributes:@{NSFontAttributeName:YSFont_Sys(16)}];
+    CGSize size = [attrStr calculateSizeWithMaxSize:CGSizeMake(kScreenWidth - 80 - 45 - 10 - 25, CGFLOAT_MAX) minSize:CGSizeMake(0, 0)];
     return CGSizeMake(size.width, size.height + 4);
 }
 
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(deleteMenu:) || action == @selector(copyMenu:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)deleteMenu:(UIMenuController *)menu
+{
+    DDLogInfo(@"----- delete");
+}
+
+- (void)copyMenu:(UIMenuController *)menu
+{
+    DDLogInfo(@"----- copy");
+}
 
 @end

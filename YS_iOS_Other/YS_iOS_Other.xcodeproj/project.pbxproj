@@ -294,6 +294,7 @@
 		399C4A651D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 399C4A5F1D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@2x.png */; };
 		399C4A661D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 399C4A601D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@3x.png */; };
 		39A108BF1E028985000D7839 /* TextAttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A108BE1E028985000D7839 /* TextAttachmentViewController.m */; };
+		39B097041EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B097031EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.m */; };
 		39B218B41D1911BE008DD042 /* TwoDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B218B31D1911BE008DD042 /* TwoDocumentViewController.m */; };
 		39B218B71D19126C008DD042 /* docImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B218B61D19126C008DD042 /* docImage.png */; };
 		39B218BA1D19175E008DD042 /* homeDirectiory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39B218B91D19175E008DD042 /* homeDirectiory.plist */; };
@@ -821,6 +822,8 @@
 		399C4A601D8FC63500D8E6F6 /* cm2_icn_shuffle_prs@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm2_icn_shuffle_prs@3x.png"; sourceTree = "<group>"; };
 		39A108BD1E028985000D7839 /* TextAttachmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextAttachmentViewController.h; sourceTree = "<group>"; };
 		39A108BE1E028985000D7839 /* TextAttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextAttachmentViewController.m; sourceTree = "<group>"; };
+		39B097021EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+YSAttrStrCategory.h"; sourceTree = "<group>"; };
+		39B097031EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+YSAttrStrCategory.m"; sourceTree = "<group>"; };
 		39B218B21D1911BE008DD042 /* TwoDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoDocumentViewController.h; sourceTree = "<group>"; };
 		39B218B31D1911BE008DD042 /* TwoDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoDocumentViewController.m; sourceTree = "<group>"; };
 		39B218B61D19126C008DD042 /* docImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = docImage.png; sourceTree = "<group>"; };
@@ -1923,6 +1926,7 @@
 		395E69531D1279E600CBDFE0 /* Categares */ = {
 			isa = PBXGroup;
 			children = (
+				39B097011EF0E23700605D85 /* NSAttributedString */,
 				395ACEA11D937D4F00C22165 /* UIView+UniformDistribute */,
 				39E311401D643F8700A631EA /* NSDateCategory */,
 				39BBEA641D5DA42E00F192F2 /* UIImage */,
@@ -2138,6 +2142,15 @@
 			);
 			name = emotionImages;
 			path = Image/emotionImages;
+			sourceTree = "<group>";
+		};
+		39B097011EF0E23700605D85 /* NSAttributedString */ = {
+			isa = PBXGroup;
+			children = (
+				39B097021EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.h */,
+				39B097031EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.m */,
+			);
+			path = NSAttributedString;
 			sourceTree = "<group>";
 		};
 		39B218AD1D18E0BE008DD042 /* OneUIapplicationSeting */ = {
@@ -2926,6 +2939,7 @@
 				39333C201DE2CFA900035157 /* AddIconToDesktopVC.m in Sources */,
 				39DB4C861D5AD75D009D2B1F /* YSEnDecryptionMethod.m in Sources */,
 				390C593C1DE4393C0087990C /* AudioListVC.m in Sources */,
+				39B097041EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.m in Sources */,
 				394B6D921E0A19F000206CBB /* JSAndOCMethodListVC.m in Sources */,
 				395ACE731D9377D800C22165 /* PresentViewController.m in Sources */,
 				39FCB8DD1D66E81C00195C20 /* FileOrCodeViewController.m in Sources */,

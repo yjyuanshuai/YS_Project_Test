@@ -22,7 +22,6 @@
     return self;
 }
 
-#pragma mark -
 - (void)createSubViews
 {
     _msgTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 20)];
@@ -54,6 +53,8 @@
     [_msgBgBtn setBackgroundImage:image forState:UIControlStateHighlighted];
     [self.contentView addSubview:_msgBgBtn];
 }
+
+#pragma mark -
 
 
 @end

@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UILabel * userNameLabel;
 @property (nonatomic, strong) UIButton * msgBgBtn;
 
-- (void)setChatMsgCell:(ChatMsgModel *)model;
+- (void)setChatMsgCell:(ChatMsgModel *)model indexPath:(NSIndexPath *)indexPath;
 + (CGFloat)getChatViewTableViewHeight:(ChatMsgModel *)model;
 
 @end

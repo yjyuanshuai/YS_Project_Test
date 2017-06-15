@@ -8,18 +8,25 @@
 
 #import "ChatBottemView.h"
 #import "NSString+YSStringDo.h"
+#import "NSAttributedString+YSAttrStrCategory.h"
 #import "YSImageAndTextSort.h"
 
 static CGFloat const ConstHeight = 45;
-static CGFloat const TextViewMinHeight = 40;
+static CGFloat const TextViewMinHeight = 35;
 static CGFloat const TextViewMaxHeight = 100;
+static CGFloat const TextViewContentInset = 4;
 
 @implementation ChatBottemView
+{
+//    NSMutableString * _chatTextViewStr;
+    NSMutableAttributedString * _chatTextViewAttrStr;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
+
+        _chatTextViewAttrStr = [[NSMutableAttributedString alloc] init];
         [self checkFrame:frame];
         [self createSubViews];
         
@@ -84,15 +91,21 @@ static CGFloat const TextViewMaxHeight = 100;
 
 - (void)createSubViews
 {
+    self.chatBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, TextViewMinHeight)];
+    [self addSubview:self.chatBgImageView];
+
     self.chatTextView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, TextViewMinHeight)];
     self.chatTextView.delegate = self;
-    self.chatTextView.contentInset = UIEdgeInsetsMake(3, 3, 3, 3);
     self.chatTextView.font = YSFont_Sys(16);
+    self.chatTextView.textContainerInset = UIEdgeInsetsMake(TextViewContentInset, 0, TextViewContentInset, 0);
     self.chatTextView.showsHorizontalScrollIndicator = NO;
+    self.chatTextView.showsVerticalScrollIndicator = NO;
     self.chatTextView.alwaysBounceHorizontal = NO;
     self.chatTextView.bounces = NO;
     self.chatTextView.clipsToBounds = YES;
     self.chatTextView.layer.cornerRadius = 3;
+    self.chatTextView.autocorrectionType = UITextAutocorrectionTypeNo;  // 设置自动纠错方式
+    self.chatTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;    // 设置自动大写方式
     [self addSubview:self.chatTextView];
     
     self.emotionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -116,18 +129,15 @@ static CGFloat const TextViewMaxHeight = 100;
 
 - (void)updateUI
 {
-    NSString * currentText = _chatTextView.text;
-    
-    CGFloat currentHeight = [currentText calculateHeightWithMaxWidth:_chatTextView.frame.size.width font:_chatTextView.font miniHeight:TextViewMinHeight];
-    if (currentHeight > TextViewMaxHeight) {
-        currentHeight = TextViewMaxHeight;
-    }
-    
+    CGFloat contentWidth = _chatTextView.frame.size.width;
+    CGFloat textHeight = [_chatTextView.text calculateHeightWithMaxWidth:contentWidth font:_chatTextView.font miniHeight:TextViewMinHeight] + 2*TextViewContentInset;
+    textHeight = (textHeight > TextViewMaxHeight) ? TextViewMaxHeight: textHeight;
+
     __weak typeof(self) weakSelf = self;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        weakSelf.frame = CGRectMake(0, _currentFrame.origin.y - (currentHeight - TextViewMinHeight), _currentFrame.size.width, currentHeight + ConstHeight);
-        weakSelf.chatTextView.frame = CGRectMake(5, 5, kScreenWidth - 10, currentHeight);
+        weakSelf.frame = CGRectMake(0, _currentFrame.origin.y - (textHeight - TextViewMinHeight), _currentFrame.size.width, textHeight + ConstHeight);
+        weakSelf.chatTextView.frame = CGRectMake(5, 5, kScreenWidth - 10, textHeight);
         weakSelf.emotionBtn.frame = CGRectMake(5, CGRectGetMaxY(weakSelf.chatTextView.frame) + 5, 30, 30);
     });
 }
@@ -140,7 +150,6 @@ static CGFloat const TextViewMaxHeight = 100;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-//    NSAttributedString * imageAttrStr = [YSImageAndTextSort textAttach:text attributDic:@{NSFontAttributeName:} emoArr:[EmotionFileAnalysis sharedEmotionFile].emoArr originY:-8];
     return YES;
 }
 
@@ -148,5 +157,13 @@ static CGFloat const TextViewMaxHeight = 100;
 {
     [self updateUI];
 }
+
+/*
+ NSRange emotionRange = NSMakeRange(0, 0);
+ [_chatTextViewAttrStr deleteCharactersInRange:emotionRange];
+
+ NSMutableAttributedString * textAttrStr = [YSImageAndTextSort textAttach:text attributDic:@{NSFontAttributeName:textView.font} emoArr:[EmotionFileAnalysis sharedEmotionFile].emoArr originY:-8];
+ [_chatTextViewAttrStr appendAttributedString:textAttrStr];
+ */
 
 @end
