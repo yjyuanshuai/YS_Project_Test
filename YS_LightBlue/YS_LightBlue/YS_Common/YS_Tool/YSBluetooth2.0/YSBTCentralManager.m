@@ -58,9 +58,9 @@
         case CBManagerStatePoweredOn:
         {
             NSLog(@">>>>>> Bluetooth PowerOn, Start Scanf...");
-
-            // 开始扫描外设
-//            [central scanForPeripheralsWithServices:nil options:nil];
+            if (_cenManCallBack.isStartScan) {
+                [central scanForPeripheralsWithServices:_cenManCallBack.CBUUIDS options:_cenManCallBack.option];
+            }
         }
             break;
             

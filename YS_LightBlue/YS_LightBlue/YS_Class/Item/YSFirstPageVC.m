@@ -10,7 +10,7 @@
 #import "YSFirstPageTableViewCell.h"
 #import "YSFirstPageAddVirtualCell.h"
 #import "YSFirstPageVirtualCell.h"
-#import "YSBlueToothManager.h"
+#import "YSBluetoothModel.h"
 #import "YSPeripheralDetailVC.h"
 
 #import "YSBluetooth.h"
@@ -19,7 +19,7 @@ static NSString * const PeripheralCellID = @"PeripheralCellID";
 static NSString * const VirtualPeripheralCellID = @"VirtualPeripheralCellID";
 static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellID";
 
-@interface YSFirstPageVC () <UITableViewDelegate, UITableViewDataSource, YSBluetoothManagerDelegate>
+@interface YSFirstPageVC () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
 
@@ -79,30 +79,39 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 
 - (void)scanBlueToothPeripherals
 {
-//    [[YSBlueToothManager sharedYSBlueToothManager] setcbCenPerContentStr:@"YJ" contentType:YSCBPeripheralConStrType_Prefix];
-//    [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStartScan];
-//    [YSBlueToothManager sharedYSBlueToothManager].delegate = self;
+    __weak typeof(self) weakSelf = self;
 
     [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_UpdateStateBlock:^(CBCentralManager *central) {
-        switch (central.state) {
-            case CBManagerStatePoweredOff:
-            {
-                NSLog(@"------- Power Off");
-            }
-                break;
-           case CBManagerStatePoweredOn:
-            {
-                NSLog(@"-------- Power On");
-            }
-                break;
-                
-            default:
-            {
-                NSLog(@"-------- Power Unknow");
-            }
-                break;
+    }];
+
+    [[YSBluetooth sharesYSBluetooth] ysBTCenManStartScanWithCBUUIDs:nil option:nil discoverPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *rssi) {
+
+        YSPeripheralModel * model = [[YSPeripheralModel alloc] init];
+        model.cbPeripheral = peripheral;
+        model.pname = peripheral.name;
+        model.puuid = peripheral.identifier.UUIDString;
+        model.pServicesNum = [NSString stringWithFormat:@"%ld", [peripheral.services count]];
+
+        if ([weakSelf updateCBManPeropheral:model]) {
+            [weakSelf.peripheralsArr addObject:model];
+            [weakSelf.tableView reloadData];
         }
     }];
+}
+
+// NO：已存在
+- (BOOL)updateCBManPeropheral:(YSPeripheralModel *)model
+{
+    __weak typeof(self) weakSelf = self;
+
+    for (int i = 0; i < [weakSelf.peripheralsArr count]; i++) {
+        YSPeripheralModel * inModel = [weakSelf.peripheralsArr objectAtIndex:i];
+        if ([inModel.puuid isEqualToString:model.puuid]) {
+            [weakSelf.peripheralsArr replaceObjectAtIndex:i withObject:inModel];
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (void)clickSort:(UIBarButtonItem *)sort
@@ -114,37 +123,6 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 {
 
 }
-
-//#pragma mark - YSBluetoothManagerDelegate
-//- (void)discoverNewPeripheral:(YSPeripheralModel *)perModel
-//{
-//    if (![_peripheralsArr containsObject:perModel]) {
-//        [_peripheralsArr addObject:perModel];
-//        [_tableView reloadData];
-//    }
-//}
-//
-//- (void)updatePeripheral:(YSPeripheralModel *)perModel
-//{
-//    for (int i = 0; i < [_peripheralsArr count]; i++) {
-//        YSPeripheralModel * model = _peripheralsArr[i];
-//        if ([model.per.identifier.UUIDString isEqualToString:perModel.per.identifier.UUIDString]) {
-//            [_peripheralsArr replaceObjectAtIndex:i withObject:perModel];
-//            
-//            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-//            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//
-//            NSLog(@"------ update: %@", perModel.perName);
-//            break;
-//        }
-//    }
-//}
-
-//- (void)connectPeripheralSuccess:(YSPeripheralModel *)perModel
-//{
-//    YSPeripheralDetailVC * perDetailVC = [[YSPeripheralDetailVC alloc] initWithPerModel:perModel];
-//    [self.navigationController pushViewController:perDetailVC animated:YES];
-//}
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

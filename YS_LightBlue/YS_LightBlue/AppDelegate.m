@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "YSFirstPageVC.h"
-#import "YSBlueToothManager.h"
 
 @interface AppDelegate ()
 

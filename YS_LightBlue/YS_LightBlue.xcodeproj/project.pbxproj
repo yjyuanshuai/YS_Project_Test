@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3918FB851EE5496100977FDE /* YSFirstPageVirtualCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3918FB841EE5496100977FDE /* YSFirstPageVirtualCell.m */; };
 		391F6D8F1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */; };
-		391F6D931ED568AC007A04A6 /* YSBlueToothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F6D921ED568AC007A04A6 /* YSBlueToothManager.m */; };
 		392545641EE7953A003DA5B4 /* YSBluetoothModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 392545631EE7953A003DA5B4 /* YSBluetoothModel.m */; };
 		395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395DED7B1ED28F8100B1736D /* YSRootVC.m */; };
 		397D20111ECD9C8000920A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20101ECD9C8000920A72 /* main.m */; };
@@ -38,8 +37,6 @@
 		3918FB841EE5496100977FDE /* YSFirstPageVirtualCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageVirtualCell.m; sourceTree = "<group>"; };
 		391F6D8D1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSFirstPageAddVirtualCell.h; sourceTree = "<group>"; };
 		391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageAddVirtualCell.m; sourceTree = "<group>"; };
-		391F6D911ED568AC007A04A6 /* YSBlueToothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBlueToothManager.h; sourceTree = "<group>"; };
-		391F6D921ED568AC007A04A6 /* YSBlueToothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBlueToothManager.m; sourceTree = "<group>"; };
 		392545621EE7953A003DA5B4 /* YSBluetoothModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBluetoothModel.h; sourceTree = "<group>"; };
 		392545631EE7953A003DA5B4 /* YSBluetoothModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBluetoothModel.m; sourceTree = "<group>"; };
 		395DED7A1ED28F8100B1736D /* YSRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRootVC.h; sourceTree = "<group>"; };
@@ -103,15 +100,6 @@
 				BBF691C10B76B7B7F1514F4A /* libPods-YS_LightBlue.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		391F6D901ED568AC007A04A6 /* YSToothBlue */ = {
-			isa = PBXGroup;
-			children = (
-				391F6D911ED568AC007A04A6 /* YSBlueToothManager.h */,
-				391F6D921ED568AC007A04A6 /* YSBlueToothManager.m */,
-			);
-			path = YSToothBlue;
 			sourceTree = "<group>";
 		};
 		395DED6D1ED28F4A00B1736D /* YS_Class */ = {
@@ -192,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				39E270531EE68ACE00EF3C4D /* YSBluetooth2.0 */,
-				391F6D901ED568AC007A04A6 /* YSToothBlue */,
 				39930D6D1ED4239300FD7C36 /* YSLocalizable */,
 			);
 			path = YS_Tool;
@@ -476,7 +463,6 @@
 				397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */,
 				392545641EE7953A003DA5B4 /* YSBluetoothModel.m in Sources */,
 				39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */,
-				391F6D931ED568AC007A04A6 /* YSBlueToothManager.m in Sources */,
 				39FB5BA31EE8E08300A154E8 /* YSBTCallBack.m in Sources */,
 				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
 				39FB5BA61EE8E32200A154E8 /* YSBTPeripheralManager.m in Sources */,

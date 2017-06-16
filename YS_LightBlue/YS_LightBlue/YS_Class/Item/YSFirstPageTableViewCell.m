@@ -8,7 +8,7 @@
 
 #import "YSFirstPageTableViewCell.h"
 #import "NSString+YSStringDo.h"
-#import "YSBlueToothManager.h"
+#import "YSBluetoothModel.h"
 
 @implementation YSFirstPageTableViewCell
 {
@@ -80,25 +80,25 @@
 
 - (void)setFirstPageCell:(YSPeripheralModel *)model
 {
-    if ([model.perSignStrength integerValue] >= 40) {
+    if ([model.prssi integerValue] >= 40) {
         self.selectionStyle = UITableViewCellSelectionStyleDefault;
-        _signStrengthLabel.text = model.perSignStrength;
+        _signStrengthLabel.text = model.prssi;
     }
     else {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        _signStrengthLabel.text = model.perSignStrength;
+        _signStrengthLabel.text = model.prssi;
     }
-    [self resetTransaction:model.perSignStrength];
+    [self resetTransaction:model.prssi];
 
-    if (![model.perName isBlank]) {
-        _nameLabel.text = model.perName;
+    if (![model.pname isBlank]) {
+        _nameLabel.text = model.pname;
     }
     else {
         _nameLabel.text = [YSLocalizableTool ys_localizedStringWithKey:@"noname"];
     }
     
-    if ([model.perServicesNum integerValue] > 0) {
-        _servicesLabel.text = [NSString stringWithFormat:[YSLocalizableTool ys_localizedStringWithKey:@"services"], model.perServicesNum];
+    if ([model.pServicesNum integerValue] > 0) {
+        _servicesLabel.text = [NSString stringWithFormat:[YSLocalizableTool ys_localizedStringWithKey:@"services"], model.pServicesNum];
     }
     else {
         _servicesLabel.text = [NSString stringWithFormat:[YSLocalizableTool ys_localizedStringWithKey:@"services"], [YSLocalizableTool ys_localizedStringWithKey:@"service_num"]];

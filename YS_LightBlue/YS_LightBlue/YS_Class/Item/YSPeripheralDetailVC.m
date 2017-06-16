@@ -7,6 +7,7 @@
 //
 
 #import "YSPeripheralDetailVC.h"
+#import "YSBluetoothModel.h"
 
 @interface YSPeripheralDetailVC ()
 

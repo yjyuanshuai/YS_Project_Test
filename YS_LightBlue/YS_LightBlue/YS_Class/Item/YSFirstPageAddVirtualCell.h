@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class YSPeripheralModel;
 
 @interface YSFirstPageAddVirtualCell : UITableViewCell
 

@@ -18,8 +18,14 @@
 
 + (instancetype)sharesYSBluetooth;
 
+#pragma mark - block
 - (void)setYSBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
-- (void)setYSBTCenMan_DiscoverPeripheralBlock:(YSBTCenMan_DiscoverPeripheralBlock)block;
+- (void)ysBTCenManStartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
+                                option:(NSDictionary *)option
+                   discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block;
 - (void)setYSBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
+
+#pragma mark - 
+;
 
 @end

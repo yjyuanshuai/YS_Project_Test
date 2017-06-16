@@ -49,9 +49,18 @@
     }
 }
 
-- (void)setYSBTCenMan_DiscoverPeripheralBlock:(YSBTCenMan_DiscoverPeripheralBlock)block
+- (void)ysBTCenManStartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
+                                option:(NSDictionary *)option
+                   discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block
 {
     [self getYSBTCenManager];
+    _ysBTCenManager.cenManCallBack.isStartScan = YES;
+    if (!cbuuids) {
+        _ysBTCenManager.cenManCallBack.CBUUIDS = cbuuids;
+    }
+    if (!option) {
+        _ysBTCenManager.cenManCallBack.option = option;
+    }
     if (block) {
         _ysBTCenManager.cenManCallBack.discoverPeripheralBlock = block;
     }
@@ -64,5 +73,9 @@
         _ysBTCenManager.cenManCallBack.disconnectPeripheralBlock = block;
     }
 }
+
+#pragma mark - set
+
+
 
 @end
