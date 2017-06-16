@@ -54,7 +54,26 @@
     [self.contentView addSubview:_msgBgBtn];
 }
 
-#pragma mark -
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(deleteMenu:) || action == @selector(copyMenu:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)deleteMenu:(UIMenuController *)menu
+{
+    DDLogInfo(@"----- cell delete");
+}
+
+- (void)copyMenu:(UIMenuController *)menu
+{
+    DDLogInfo(@"----- cell copy");
+}
 
 
 @end

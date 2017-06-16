@@ -29,7 +29,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 
 @implementation ChatViewController
 {
-
+    ChatViewSuperCell * _menuShowCell;
 }
 
 - (void)viewDidLoad {
@@ -67,6 +67,7 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 {
     self.title = @"聊天界面";
     _messageDataArr = [ChatMsgManager queryChatMsgsWithLimit:20 currentModel:nil];
+    _menuShowCell = nil;
     
     UIBarButtonItem * deleteAll = [[UIBarButtonItem alloc] initWithTitle:@"删除记录" style:UIBarButtonItemStylePlain target:self action:@selector(deleteAllHistory)];
     self.navigationItem.rightBarButtonItem = deleteAll;
@@ -189,10 +190,6 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
 {
     ChatViewTextMsgCell * cell = [tableView dequeueReusableCellWithIdentifier:ChatViewTextMsgCellID];
     [cell setChatMsgCell:_messageDataArr[indexPath.row] indexPath:indexPath];
-
-    UILongPressGestureRecognizer * longGesure = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesureAction:)];
-    [cell addGestureRecognizer:longGesure];
-
     return cell;
 }
 
@@ -206,49 +203,44 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     return height;
 }
 
-- (void)longGesureAction:(UILongPressGestureRecognizer *)longGesure
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (longGesure.state == UIGestureRecognizerStateBegan) {
+    _menuShowCell = [tableView cellForRowAtIndexPath:indexPath];
 
-        ChatViewTextMsgCell * cell = (ChatViewTextMsgCell *)longGesure.view;
-        UIMenuController * menu = [UIMenuController sharedMenuController];
-        if ([_chatBottemView chatTextViewISFirstReponder]) {
+    UIMenuController * menu = [UIMenuController sharedMenuController];
+    UIMenuItem * deleteItem = [[UIMenuItem alloc] initWithTitle:@"cus删除" action:@selector(deleteMenu:)];
+    UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"cus粘贴" action:@selector(copyMenu:)];
+    [menu setMenuItems:@[deleteItem, copyItem]];
 
-        }
-        else {
-            [cell becomeFirstResponder];
-        }
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillHidden) name:UIMenuControllerWillHideMenuNotification object:nil];
 
-        UIMenuItem * deleteItem = [[UIMenuItem alloc] initWithTitle:@"cus删除" action:@selector(deleteMenu:)];
-        UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"cus粘贴" action:@selector(copyMenu:)];
-        [menu setMenuItems:@[deleteItem, copyItem]];
-        [menu setTargetRect:cell.msgBgBtn.frame inView:cell];
-        [menu setMenuVisible:YES animated:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillShow) name: UIMenuControllerWillShowMenuNotification object:nil];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillHidden) name:UIMenuControllerWillHideMenuNotification object:nil];
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+
+}
+
+- (void)MenuWillShow
+{
+    if (_menuShowCell) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIMenuControllerWillShowMenuNotification object:nil];
+        [[UIMenuController sharedMenuController] setTargetRect:_menuShowCell.msgBgBtn.frame inView:_menuShowCell];
+        [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];  // 若这句不加，menu还是加在cell边缘。
     }
 }
 
 - (void)MenuWillHidden
 {
     [[UIMenuController sharedMenuController] setMenuItems:nil];
-}
-
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    if (action == @selector(deleteMenu:) || action == @selector(copyMenu:)) {
-        return YES;
-    }
-    return NO;
-}
-
-- (void)deleteMenu:(UIMenuController *)menu
-{
-    DDLogInfo(@"----- viewcontroller delete");
-}
-
-- (void)copyMenu:(UIMenuController *)menu
-{
-    DDLogInfo(@"----- viewcontroller copy");
 }
 
 #pragma mark -
@@ -314,8 +306,10 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     CGFloat bottemSpace = funHeight + [_chatBottemView getBottemViewHeight];
     _messageTableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeightNo64 - bottemSpace);
 
-    NSIndexPath * lastIndexPath = [NSIndexPath indexPathForRow:[_messageDataArr count]-1 inSection:0];
-    [_messageTableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    if ([_messageDataArr count] > 0) {
+        NSIndexPath * lastIndexPath = [NSIndexPath indexPathForRow:[_messageDataArr count]-1 inSection:0];
+        [_messageTableView scrollToRowAtIndexPath:lastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
 }
 
 - (void)moveChatBottemViewWithOriginY:(CGFloat)originY

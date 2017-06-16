@@ -9,8 +9,8 @@
 #import "YSMenuTextView.h"
 
 @implementation YSMenuTextView
-@synthesize overrideNext;
 
+/*
 - (UIResponder *)nextResponder
 {
     if (overrideNext != nil) {
@@ -19,12 +19,41 @@
     return [super nextResponder];
 }
 
+ */
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self resetMenuForTextView];
+    }
+    return self;
+}
+
+- (void)resetMenuForTextView
+{
+    UIMenuItem * cusMenu1 = [[UIMenuItem alloc] initWithTitle:@"tex复制" action:@selector(cusMenuItemSelector:)];
+    [[UIMenuController sharedMenuController] setMenuItems:@[cusMenu1]];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillHidden) name:UIMenuControllerWillHideMenuNotification object:nil];
+}
+
+- (void)cusMenuItemSelector:(UIMenuController *)menu
+{
+    DDLogInfo(@"------- text view custem menu item.");
+}
+
+- (void)MenuWillHidden
+{
+    [self resetMenuForTextView];
+}
+
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    if (overrideNext != nil) {
-        return NO;
+    if (action == @selector(cusMenuItemSelector:)) {
+        return YES;
     }
-    return [super canPerformAction:action withSender:sender];
+    return NO;
 }
 
 @end

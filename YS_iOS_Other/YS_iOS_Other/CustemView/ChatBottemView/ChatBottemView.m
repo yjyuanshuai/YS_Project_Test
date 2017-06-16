@@ -10,15 +10,15 @@
 #import "NSString+YSStringDo.h"
 #import "NSAttributedString+YSAttrStrCategory.h"
 #import "YSImageAndTextSort.h"
+#import "YSMenuTextView.h"
 
 static CGFloat const ConstHeight = 45;
-static CGFloat const TextViewMinHeight = 35;
+static CGFloat const TextViewMinHeight = 32;
 static CGFloat const TextViewMaxHeight = 100;
-static CGFloat const TextViewContentInset = 4;
+static CGFloat const TextViewContentInset = 6;
 
 @implementation ChatBottemView
 {
-//    NSMutableString * _chatTextViewStr;
     NSMutableAttributedString * _chatTextViewAttrStr;
 }
 
@@ -96,10 +96,7 @@ static CGFloat const TextViewContentInset = 4;
 
 - (void)createSubViews
 {
-    self.chatBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, TextViewMinHeight)];
-    [self addSubview:self.chatBgImageView];
-
-    self.chatTextView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, TextViewMinHeight)];
+    self.chatTextView = [[YSMenuTextView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, TextViewMinHeight)];
     self.chatTextView.delegate = self;
     self.chatTextView.font = YSFont_Sys(16);
     self.chatTextView.textContainerInset = UIEdgeInsetsMake(TextViewContentInset, 0, TextViewContentInset, 0);
@@ -135,8 +132,9 @@ static CGFloat const TextViewContentInset = 4;
 - (void)updateUI
 {
     CGFloat contentWidth = _chatTextView.frame.size.width;
-    CGFloat textHeight = [_chatTextView.text calculateHeightWithMaxWidth:contentWidth font:_chatTextView.font miniHeight:TextViewMinHeight] + 2*TextViewContentInset;
-    textHeight = (textHeight > TextViewMaxHeight) ? TextViewMaxHeight: textHeight;
+    CGFloat textHeight = [_chatTextView.text calculateHeightWithMaxWidth:contentWidth font:_chatTextView.font miniHeight:TextViewMinHeight];
+    textHeight = (textHeight > TextViewMinHeight) ? (textHeight+2*TextViewContentInset) : TextViewMinHeight;
+    textHeight = (textHeight > TextViewMaxHeight) ? TextViewMaxHeight : textHeight;
 
     __weak typeof(self) weakSelf = self;
     
@@ -155,12 +153,13 @@ static CGFloat const TextViewContentInset = 4;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    [self updateUI];
     return YES;
 }
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    [self updateUI];
+
 }
 
 /*

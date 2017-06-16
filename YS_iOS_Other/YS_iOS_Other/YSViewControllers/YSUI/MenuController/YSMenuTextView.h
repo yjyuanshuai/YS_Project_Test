@@ -10,6 +10,6 @@
 
 @interface YSMenuTextView : UITextView
 
-@property (nonatomic, weak) UIResponder * overrideNext;
+//@property (nonatomic, weak) UIResponder * overrideNext;
 
 @end
