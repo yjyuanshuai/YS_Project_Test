@@ -81,11 +81,9 @@
 - (void)setFirstPageCell:(YSPeripheralModel *)model
 {
     if ([model.prssi integerValue] >= 40) {
-        self.selectionStyle = UITableViewCellSelectionStyleDefault;
         _signStrengthLabel.text = model.prssi;
     }
     else {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _signStrengthLabel.text = model.prssi;
     }
     [self resetTransaction:model.prssi];

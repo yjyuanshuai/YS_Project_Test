@@ -34,7 +34,13 @@ typedef void(^YSBTCenMan_UpdateNotificationStateForCharacteristicBlock)(CBPeriph
 #pragma mark - cen property
 @property (nonatomic, assign) BOOL isStartScan;
 @property (nonatomic, strong) NSArray * CBUUIDS;
-@property (nonatomic, strong) NSDictionary * option;
+@property (nonatomic, strong) NSDictionary * scanOptions;
+
+@property (nonatomic, assign) BOOL isConnectPeripheral;
+@property (nonatomic, strong) NSDictionary * connectPeripheralOptions;
+
+//@property (nonatomic, assign) BOOL is
+
 
 #pragma mark - cen delegate block
 @property (nonatomic, strong) YSBTCenMan_UpdateStateBlock               updateStateBlock;

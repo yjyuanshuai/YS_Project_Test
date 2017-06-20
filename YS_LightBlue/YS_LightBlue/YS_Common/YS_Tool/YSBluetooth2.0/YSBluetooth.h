@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class YSBTCentralManager;
 @class YSBTPeripheralManager;
+@class YSPeripheralModel;
 #import "YSBTCallBack.h"
 
 @interface YSBluetooth : NSObject
@@ -19,11 +20,18 @@
 + (instancetype)sharesYSBluetooth;
 
 #pragma mark - block
-- (void)setYSBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
-- (void)ysBTCenManStartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
-                                option:(NSDictionary *)option
-                   discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block;
-- (void)setYSBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
+- (void)ysBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
+
+- (void)ysBTCenMan_StartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
+                                   options:(NSDictionary *)options
+                       discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block;
+
+- (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
+                                options:(NSDictionary *)options
+                           successBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
+                              failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock;
+
+- (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
 
 #pragma mark - 
 ;

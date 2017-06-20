@@ -82,9 +82,10 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
     __weak typeof(self) weakSelf = self;
 
     [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_UpdateStateBlock:^(CBCentralManager *central) {
+
     }];
 
-    [[YSBluetooth sharesYSBluetooth] ysBTCenManStartScanWithCBUUIDs:nil option:nil discoverPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *rssi) {
+    [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_StartScanWithCBUUIDs:nil options:nil discoverPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *rssi) {
 
         YSPeripheralModel * model = [[YSPeripheralModel alloc] init];
         model.cbPeripheral = peripheral;
@@ -200,12 +201,16 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 
     if (indexPath.section == 0) {
         if (indexPath.row < [_peripheralsArr count]) {
-            
-//            [[YSBlueToothManager sharedYSBlueToothManager] cbManagerStopScan];
-//            YSPeripheralModel * model = _peripheralsArr[indexPath.row];
-//
-//            NSLog(@"----- 正在连接：%@", model.perName);
-//            [[YSBlueToothManager sharedYSBlueToothManager] cbManagerConnectWithPeripheral:model.per];
+
+            YSPeripheralModel * model = _peripheralsArr[indexPath.row];
+            [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_ConnectPeripheral:model options:nil successBlock:^(CBCentralManager *central, CBPeripheral *peripheral) {
+
+                YSPeripheralDetailVC * detailVC = [[YSPeripheralDetailVC alloc] initWithPerModel:model];
+                [self.navigationController pushViewController:detailVC animated:YES];
+
+            } failBlock:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
+
+            }];
         }
     }
     else {

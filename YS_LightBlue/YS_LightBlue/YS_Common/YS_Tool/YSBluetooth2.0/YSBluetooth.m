@@ -10,6 +10,7 @@
 #import "YSBTCallBack.h"
 #import "YSBTCentralManager.h"
 #import "YSBTPeripheralManager.h"
+#import "YSBluetoothModel.h"
 
 @implementation YSBluetooth
 
@@ -41,32 +42,40 @@
 }
 
 #pragma mark - set block
-- (void)setYSBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
+- (void)ysBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
 {
     [self getYSBTCenManager];
-    if (block) {
-        _ysBTCenManager.cenManCallBack.updateStateBlock = block;
-    }
+    _ysBTCenManager.cenManCallBack.updateStateBlock = block;
 }
 
-- (void)ysBTCenManStartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
-                                option:(NSDictionary *)option
-                   discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block
+- (void)ysBTCenMan_StartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
+                                   options:(NSDictionary *)options
+                       discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block
 {
     [self getYSBTCenManager];
     _ysBTCenManager.cenManCallBack.isStartScan = YES;
-    if (!cbuuids) {
-        _ysBTCenManager.cenManCallBack.CBUUIDS = cbuuids;
-    }
-    if (!option) {
-        _ysBTCenManager.cenManCallBack.option = option;
-    }
-    if (block) {
-        _ysBTCenManager.cenManCallBack.discoverPeripheralBlock = block;
-    }
+    _ysBTCenManager.cenManCallBack.CBUUIDS = cbuuids;
+    _ysBTCenManager.cenManCallBack.scanOptions = options;
+    _ysBTCenManager.cenManCallBack.discoverPeripheralBlock = block;
 }
 
-- (void)setYSBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
+- (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
+                             options:(NSDictionary *)options
+                        successBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
+                           failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock
+{
+    [self getYSBTCenManager];
+
+    if (peripheral && peripheral.cbPeripheral) {
+        _ysBTCenManager.cenManCallBack.isConnectPeripheral = YES;
+        [_ysBTCenManager ysConnectPeripheral:peripheral.cbPeripheral options:options];
+    }
+    
+    _ysBTCenManager.cenManCallBack.connectPeripheralBlock = successblock;
+    _ysBTCenManager.cenManCallBack.failToConnectPeripheralBlock = failBlock;
+}
+
+- (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
 {
     [self getYSBTCenManager];
     if (block) {

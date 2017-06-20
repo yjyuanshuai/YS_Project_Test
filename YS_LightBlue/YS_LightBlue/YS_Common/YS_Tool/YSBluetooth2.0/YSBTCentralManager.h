@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 @class YSBTCallBack;
+@class CBPeripheral;
 @class CBCentralManager;
 
 @interface YSBTCentralManager : NSObject
 
 @property (nonatomic, strong) YSBTCallBack * cenManCallBack;
 @property (nonatomic, strong) CBCentralManager * cbCenManager;
-@property (nonatomic, strong) NSMutableArray * cbCenPersArr;
+@property (nonatomic, strong) NSMutableArray * cbCenMan_discoverPers;
+@property (nonatomic, strong) NSMutableArray * cbCenMan_connectPers;
 
-
+//- (void)ysStartScanPeripheralsWithCBUUIDs:(NSArray *)cbuuids options:(NSDictionary *)options;
+- (void)ysConnectPeripheral:(CBPeripheral *)peripheral options:(NSDictionary *)options;
 
 @end

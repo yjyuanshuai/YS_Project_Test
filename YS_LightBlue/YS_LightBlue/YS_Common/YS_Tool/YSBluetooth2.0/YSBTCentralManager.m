@@ -41,9 +41,27 @@
         }
 
         _cenManCallBack = [[YSBTCallBack alloc] init];
+        _cbCenMan_discoverPers = [NSMutableArray array];
+        _cbCenMan_connectPers = [NSMutableArray array];
     }
     return self;
 }
+#pragma mark - private
+- (void)ysStartScanPeripheralsWithCBUUIDs:(NSArray *)cbuuids options:(NSDictionary *)options
+{
+    if (_cenManCallBack.isStartScan) {
+        [_cbCenManager scanForPeripheralsWithServices:cbuuids options:options];
+    }
+}
+
+- (void)ysConnectPeripheral:(CBPeripheral *)peripheral options:(NSDictionary *)options
+{
+    if (_cenManCallBack.isConnectPeripheral) {
+        [_cbCenManager connectPeripheral:peripheral options:options];
+    }
+}
+
+
 
 #pragma mark - CBCentralManagerDelegate
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
@@ -57,15 +75,15 @@
 
         case CBManagerStatePoweredOn:
         {
-            NSLog(@">>>>>> Bluetooth PowerOn, Start Scanf...");
+            NSLog(@">>>>>> Bluetooth PowerOn.");
             if (_cenManCallBack.isStartScan) {
-                [central scanForPeripheralsWithServices:_cenManCallBack.CBUUIDS options:_cenManCallBack.option];
+                [self ysStartScanPeripheralsWithCBUUIDs:_cenManCallBack.CBUUIDS options:_cenManCallBack.scanOptions];
             }
         }
             break;
             
         default:
-            NSLog(@">>>>>> Bluetooth Unknowed State.");
+            NSLog(@">>>>>> Bluetooth State Is not On/Off.");
             break;
     }
 
@@ -87,20 +105,27 @@
  */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    [_cbCenMan_discoverPers addObject:peripheral];
+
     if (_cenManCallBack.discoverPeripheralBlock) {
         _cenManCallBack.discoverPeripheralBlock(central, peripheral, advertisementData, RSSI);
     }
-}
 
+
+}
 
 /**
  连接外设
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    [_cbCenMan_connectPers addObject:peripheral];
+
     if (_cenManCallBack.connectPeripheralBlock) {
         _cenManCallBack.connectPeripheralBlock(central, peripheral);
     }
+
+    peripheral.delegate = self;
 }
 
 
