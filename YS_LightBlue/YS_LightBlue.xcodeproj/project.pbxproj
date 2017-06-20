@@ -10,6 +10,7 @@
 		3918FB851EE5496100977FDE /* YSFirstPageVirtualCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3918FB841EE5496100977FDE /* YSFirstPageVirtualCell.m */; };
 		391F6D8F1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */; };
 		392545641EE7953A003DA5B4 /* YSBluetoothModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 392545631EE7953A003DA5B4 /* YSBluetoothModel.m */; };
+		393F19A21EF93E25006E81BE /* YSCharacterDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 393F19A11EF93E25006E81BE /* YSCharacterDetail.m */; };
 		395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395DED7B1ED28F8100B1736D /* YSRootVC.m */; };
 		397D20111ECD9C8000920A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20101ECD9C8000920A72 /* main.m */; };
 		397D20141ECD9C8000920A72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20131ECD9C8000920A72 /* AppDelegate.m */; };
@@ -39,6 +40,8 @@
 		391F6D8E1ED55B1C007A04A6 /* YSFirstPageAddVirtualCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSFirstPageAddVirtualCell.m; sourceTree = "<group>"; };
 		392545621EE7953A003DA5B4 /* YSBluetoothModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSBluetoothModel.h; sourceTree = "<group>"; };
 		392545631EE7953A003DA5B4 /* YSBluetoothModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSBluetoothModel.m; sourceTree = "<group>"; };
+		393F19A01EF93E25006E81BE /* YSCharacterDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCharacterDetail.h; sourceTree = "<group>"; };
+		393F19A11EF93E25006E81BE /* YSCharacterDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCharacterDetail.m; sourceTree = "<group>"; };
 		395DED7A1ED28F8100B1736D /* YSRootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRootVC.h; sourceTree = "<group>"; };
 		395DED7B1ED28F8100B1736D /* YSRootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRootVC.m; sourceTree = "<group>"; };
 		397D200C1ECD9C8000920A72 /* YS_LightBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YS_LightBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +105,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		393F199F1EF93D80006E81BE /* CharacterDetail */ = {
+			isa = PBXGroup;
+			children = (
+				393F19A01EF93E25006E81BE /* YSCharacterDetail.h */,
+				393F19A11EF93E25006E81BE /* YSCharacterDetail.m */,
+			);
+			name = CharacterDetail;
+			sourceTree = "<group>";
+		};
 		395DED6D1ED28F4A00B1736D /* YS_Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,7 @@
 			children = (
 				398BF44A1ED2B61D0099BB2C /* FirstPage */,
 				39E2705B1EE6A73000EF3C4D /* PeriphalDetail */,
+				393F199F1EF93D80006E81BE /* CharacterDetail */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -465,6 +478,7 @@
 				39930D5E1ED41BCF00FD7C36 /* YSFirstPageTableViewCell.m in Sources */,
 				39FB5BA31EE8E08300A154E8 /* YSBTCallBack.m in Sources */,
 				395DED7C1ED28F8100B1736D /* YSRootVC.m in Sources */,
+				393F19A21EF93E25006E81BE /* YSCharacterDetail.m in Sources */,
 				39FB5BA61EE8E32200A154E8 /* YSBTPeripheralManager.m in Sources */,
 				39E2705E1EE6A77E00EF3C4D /* YSPeripheralDetailVC.m in Sources */,
 				397D20111ECD9C8000920A72 /* main.m in Sources */,

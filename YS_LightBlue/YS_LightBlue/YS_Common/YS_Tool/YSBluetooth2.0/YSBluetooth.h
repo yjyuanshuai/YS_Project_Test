@@ -20,20 +20,31 @@
 + (instancetype)sharesYSBluetooth;
 
 #pragma mark - block
-- (void)ysBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
+// 外设
++ (void)ysBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block;
 
-- (void)ysBTCenMan_StartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
++ (void)ysBTCenMan_StartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
                                    options:(NSDictionary *)options
                        discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block;
 
-- (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
++ (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
                                 options:(NSDictionary *)options
                            successBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
                               failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock;
 
-- (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
++ (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
+
+// 服务
++ (void)ysBTCenMan_DiscoverServicesWithCBUUIDs:(NSArray *)cbuuids
+                         discoverServicesBlock:(YSBTCenMan_DiscoverServicesBlock)block;
+
+// 特征
++ (void)ysBTCenMan_DiscoverCharactersWithCBUUIDs:(NSArray *)cbuuids
+                         discoverCharactersBlock:(YSBTCenMan_DiscoverCharacteristicsBlock)block;
+
++ (void)ysBTCenMan_;
 
 #pragma mark - 
-;
+
 
 @end

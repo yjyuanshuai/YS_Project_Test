@@ -17,10 +17,18 @@ static NSString * YSBTCenManCallBackKey = @"YSBTCenManCallBackKey";
 {
     self = [super init];
     if (self) {
-        _isStartScan = NO;
-        _CBUUIDS = nil;
+        _isDiscoverPeripherals = NO;
+        _discoverPerCBUUIDs = nil;
         _scanOptions = nil;
+
+        _isConnectPeripheral = NO;
         _connectPeripheralOptions = nil;
+
+        _isDiscoverServices = NO;
+        _discoverPerCBUUIDs = nil;
+
+        _isDiscoverCharacters = NO;
+        
     }
     return self;
 }

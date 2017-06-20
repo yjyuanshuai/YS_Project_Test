@@ -81,38 +81,49 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 {
     __weak typeof(self) weakSelf = self;
 
-    [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_UpdateStateBlock:^(CBCentralManager *central) {
+    [YSBluetooth ysBTCenMan_UpdateStateBlock:^(CBCentralManager *central) {
 
     }];
 
-    [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_StartScanWithCBUUIDs:nil options:nil discoverPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *rssi) {
+    NSDictionary *scanForPeripheralsWithOptions = @{};//@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES};
 
-        YSPeripheralModel * model = [[YSPeripheralModel alloc] init];
-        model.cbPeripheral = peripheral;
-        model.pname = peripheral.name;
-        model.puuid = peripheral.identifier.UUIDString;
-        model.pServicesNum = [NSString stringWithFormat:@"%ld", [peripheral.services count]];
+    [YSBluetooth ysBTCenMan_StartScanWithCBUUIDs:nil options:scanForPeripheralsWithOptions discoverPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *rssi) {
 
-        if ([weakSelf updateCBManPeropheral:model]) {
-            [weakSelf.peripheralsArr addObject:model];
-            [weakSelf.tableView reloadData];
+        if (peripheral.name.length > 0) {
+            YSPeripheralModel * model = [[YSPeripheralModel alloc] init];
+            model.cbPeripheral = peripheral;
+            model.pname = peripheral.name;
+            model.puuid = peripheral.identifier.UUIDString;
+            model.pServicesNum = [NSString stringWithFormat:@"%ld", [peripheral.services count]];
+            model.prssi = [NSString stringWithFormat:@"%@", rssi];
+
+            int index = [weakSelf updateCBManPeropheral:model];
+            if (index < 0) {
+                int insertIndex = (int)[weakSelf.peripheralsArr count];
+                [weakSelf.peripheralsArr addObject:model];
+
+                NSIndexPath * indexPath = [NSIndexPath indexPathForRow:insertIndex inSection:0];
+                [weakSelf.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }
     }];
 }
 
 // NO：已存在
-- (BOOL)updateCBManPeropheral:(YSPeripheralModel *)model
+- (int)updateCBManPeropheral:(YSPeripheralModel *)model
 {
     __weak typeof(self) weakSelf = self;
+    int index = -1;
 
     for (int i = 0; i < [weakSelf.peripheralsArr count]; i++) {
         YSPeripheralModel * inModel = [weakSelf.peripheralsArr objectAtIndex:i];
         if ([inModel.puuid isEqualToString:model.puuid]) {
             [weakSelf.peripheralsArr replaceObjectAtIndex:i withObject:inModel];
-            return NO;
+            index = i;
+            break;
         }
     }
-    return YES;
+    return index;
 }
 
 - (void)clickSort:(UIBarButtonItem *)sort
@@ -203,13 +214,14 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
         if (indexPath.row < [_peripheralsArr count]) {
 
             YSPeripheralModel * model = _peripheralsArr[indexPath.row];
-            [[YSBluetooth sharesYSBluetooth] setYSBTCenMan_ConnectPeripheral:model options:nil successBlock:^(CBCentralManager *central, CBPeripheral *peripheral) {
+
+            [YSBluetooth ysBTCenMan_ConnectPeripheral:model options:nil successBlock:^(CBCentralManager *central, CBPeripheral *peripheral) {
 
                 YSPeripheralDetailVC * detailVC = [[YSPeripheralDetailVC alloc] initWithPerModel:model];
                 [self.navigationController pushViewController:detailVC animated:YES];
 
             } failBlock:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
-
+                NSLog(@"------ connect peripheral %@ fail!", peripheral.name);
             }];
         }
     }

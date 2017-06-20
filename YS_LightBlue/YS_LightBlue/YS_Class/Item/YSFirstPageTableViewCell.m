@@ -73,20 +73,16 @@
             make.bottom.equalTo(self.contentView).offset(-15);
         }];
 
-        [self drawSignStrength];
+//        [self drawSignStrength];
+        _signStrengthView.backgroundColor = [UIColor redColor];
+        _signStrengthLabel.backgroundColor = [UIColor yellowColor];
     }
     return self;
 }
 
 - (void)setFirstPageCell:(YSPeripheralModel *)model
 {
-    if ([model.prssi integerValue] >= 40) {
-        _signStrengthLabel.text = model.prssi;
-    }
-    else {
-        _signStrengthLabel.text = model.prssi;
-    }
-    [self resetTransaction:model.prssi];
+    _signStrengthLabel.text = model.prssi;
 
     if (![model.pname isBlank]) {
         _nameLabel.text = model.pname;

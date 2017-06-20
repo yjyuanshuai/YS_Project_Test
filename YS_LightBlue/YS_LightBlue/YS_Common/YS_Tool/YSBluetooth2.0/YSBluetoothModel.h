@@ -29,8 +29,9 @@
 @interface YSServiceModel : NSObject
 
 @property (nonatomic, strong) NSString * suuid;
-@property (nonatomic, strong) NSMutableArray <YSCharacteristicModel *> * characteristics;
+@property (nonatomic, assign) BOOL isPrimary;
 
+@property (nonatomic, strong) CBPeripheral * cbBlongToPer;
 @property (nonatomic, strong) CBService * cbService;
 
 @end

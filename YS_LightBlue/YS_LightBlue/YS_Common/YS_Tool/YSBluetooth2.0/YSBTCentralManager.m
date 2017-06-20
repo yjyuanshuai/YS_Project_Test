@@ -49,7 +49,7 @@
 #pragma mark - private
 - (void)ysStartScanPeripheralsWithCBUUIDs:(NSArray *)cbuuids options:(NSDictionary *)options
 {
-    if (_cenManCallBack.isStartScan) {
+    if (_cenManCallBack.isDiscoverPeripherals) {
         [_cbCenManager scanForPeripheralsWithServices:cbuuids options:options];
     }
 }
@@ -60,7 +60,6 @@
         [_cbCenManager connectPeripheral:peripheral options:options];
     }
 }
-
 
 
 #pragma mark - CBCentralManagerDelegate
@@ -76,8 +75,8 @@
         case CBManagerStatePoweredOn:
         {
             NSLog(@">>>>>> Bluetooth PowerOn.");
-            if (_cenManCallBack.isStartScan) {
-                [self ysStartScanPeripheralsWithCBUUIDs:_cenManCallBack.CBUUIDS options:_cenManCallBack.scanOptions];
+            if (_cenManCallBack.isDiscoverPeripherals) {
+                [self ysStartScanPeripheralsWithCBUUIDs:_cenManCallBack.discoverPerCBUUIDs options:_cenManCallBack.scanOptions];
             }
         }
             break;
@@ -110,8 +109,6 @@
     if (_cenManCallBack.discoverPeripheralBlock) {
         _cenManCallBack.discoverPeripheralBlock(central, peripheral, advertisementData, RSSI);
     }
-
-
 }
 
 /**
@@ -125,9 +122,15 @@
         _cenManCallBack.connectPeripheralBlock(central, peripheral);
     }
 
-    peripheral.delegate = self;
+    if (_cenManCallBack.isDiscoverServices) {
+        NSArray * cbuuids = nil;
+        if ([_cenManCallBack.discoverServicesCBUUIDs count] > 0) {
+            cbuuids = _cenManCallBack.discoverServicesCBUUIDs;
+        }
+        [peripheral discoverServices:cbuuids];
+        peripheral.delegate = self;
+    }
 }
-
 
 /**
  连接失败
@@ -138,7 +141,6 @@
         _cenManCallBack.failToConnectPeripheralBlock(central, peripheral, error);
     }
 }
-
 
 /**
  断开连接
@@ -156,7 +158,20 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error
 {
+    if (error) {
+        NSLog(@">>>>>> Bluetooth discover service error!\n peripheral: %@ \n error: %@", peripheral.identifier.UUIDString, error.localizedDescription);
+        return;
+    }
 
+    for (CBService * service in peripheral.services) {
+        if (_cenManCallBack.discoverServicesBlock) {
+            _cenManCallBack.discoverServicesBlock(peripheral, service, error);
+            
+            if (_cenManCallBack.isDiscoverCharacters) {
+                [peripheral discoverCharacteristics:_cenManCallBack.discoverCharactersCBUUIDs forService:service];
+            }
+        }
+    }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(nullable NSError *)error
@@ -169,7 +184,14 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
+    if (error) {
+        NSLog(@">>>>>> Bluetooth discover character error!\n service: %@ \n error: %@", service.UUID, error.localizedDescription);
+        return;
+    }
 
+    if (_cenManCallBack.discoverCharacteristicsBlock) {
+        _cenManCallBack.discoverCharacteristicsBlock(service, service.characteristics, error);
+    }
 }
 
 

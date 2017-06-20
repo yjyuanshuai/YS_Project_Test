@@ -24,6 +24,7 @@
     return instance;
 }
 
+
 - (instancetype)init
 {
     self = [super init];
@@ -42,45 +43,64 @@
 }
 
 #pragma mark - set block
-- (void)ysBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
+// 外设
++ (void)ysBTCenMan_UpdateStateBlock:(YSBTCenMan_UpdateStateBlock)block
 {
-    [self getYSBTCenManager];
-    _ysBTCenManager.cenManCallBack.updateStateBlock = block;
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.updateStateBlock = block;
 }
 
-- (void)ysBTCenMan_StartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
++ (void)ysBTCenMan_StartScanWithCBUUIDs:(NSArray <CBUUID *> *)cbuuids
                                    options:(NSDictionary *)options
                        discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block
 {
-    [self getYSBTCenManager];
-    _ysBTCenManager.cenManCallBack.isStartScan = YES;
-    _ysBTCenManager.cenManCallBack.CBUUIDS = cbuuids;
-    _ysBTCenManager.cenManCallBack.scanOptions = options;
-    _ysBTCenManager.cenManCallBack.discoverPeripheralBlock = block;
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.isDiscoverPeripherals = YES;
+    cenMan.cenManCallBack.discoverPerCBUUIDs = cbuuids;
+    cenMan.cenManCallBack.scanOptions = options;
+    cenMan.cenManCallBack.discoverPeripheralBlock = block;
 }
 
-- (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
++ (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
                              options:(NSDictionary *)options
                         successBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
                            failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock
 {
-    [self getYSBTCenManager];
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
 
     if (peripheral && peripheral.cbPeripheral) {
-        _ysBTCenManager.cenManCallBack.isConnectPeripheral = YES;
-        [_ysBTCenManager ysConnectPeripheral:peripheral.cbPeripheral options:options];
+        cenMan.cenManCallBack.isConnectPeripheral = YES;
+        [cenMan ysConnectPeripheral:peripheral.cbPeripheral options:options];
     }
     
-    _ysBTCenManager.cenManCallBack.connectPeripheralBlock = successblock;
-    _ysBTCenManager.cenManCallBack.failToConnectPeripheralBlock = failBlock;
+    cenMan.cenManCallBack.connectPeripheralBlock = successblock;
+    cenMan.cenManCallBack.failToConnectPeripheralBlock = failBlock;
 }
 
-- (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
++ (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
 {
-    [self getYSBTCenManager];
-    if (block) {
-        _ysBTCenManager.cenManCallBack.disconnectPeripheralBlock = block;
-    }
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.disconnectPeripheralBlock = block;
+}
+
+// 服务
++ (void)ysBTCenMan_DiscoverServicesWithCBUUIDs:(NSArray *)cbuuids
+                         discoverServicesBlock:(YSBTCenMan_DiscoverServicesBlock)block
+{
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.isDiscoverServices = YES;
+    cenMan.cenManCallBack.discoverServicesCBUUIDs = cbuuids;
+    cenMan.cenManCallBack.discoverServicesBlock = block;
+}
+
+// 特征
++ (void)ysBTCenMan_DiscoverCharactersWithCBUUIDs:(NSArray *)cbuuids
+                         discoverCharactersBlock:(YSBTCenMan_DiscoverCharacteristicsBlock)block
+{
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.isDiscoverCharacters = YES;
+    cenMan.cenManCallBack.discoverCharactersCBUUIDs = cbuuids;
+    cenMan.cenManCallBack.discoverCharacteristicsBlock = block;
 }
 
 #pragma mark - set
