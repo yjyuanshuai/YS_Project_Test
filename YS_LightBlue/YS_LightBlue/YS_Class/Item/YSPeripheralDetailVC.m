@@ -9,6 +9,7 @@
 #import "YSPeripheralDetailVC.h"
 #import "YSBluetoothModel.h"
 #import "YSBluetooth.h"
+#import "YSCharacterDetail.h"
 
 static NSString * const PerDetailInfoCellID = @"PerDetailInfoCellID";
 
@@ -41,6 +42,11 @@ static NSString * const PerDetailInfoCellID = @"PerDetailInfoCellID";
     [self obtainBluetoothServices];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)initUIAndData
 {
     self.title = _model.pname;
@@ -69,13 +75,18 @@ static NSString * const PerDetailInfoCellID = @"PerDetailInfoCellID";
 
     [YSBluetooth ysBTCenMan_DiscoverServicesWithCBUUIDs:nil
                                   discoverServicesBlock:^(CBPeripheral *peripheral, CBService *service, NSError *error) {
-
-//                                      [weakSelf.sectionTitlesArr addObject:service];
-//                                      [weakSelf.deviceDetailTableView reloadData];
                                   }];
 
     [YSBluetooth ysBTCenMan_DiscoverCharactersWithCBUUIDs:nil
-                                  discoverCharactersBlock:^(CBService *service, NSArray *charactersArr, NSError *error) {
+                                  discoverCharactersBlock:^(CBPeripheral * peripheral, CBService *service, NSArray *charactersArr, NSError *error) {
+
+                                      YSPeripheralModel * per = [[YSPeripheralModel alloc] init];
+                                      per.pname = peripheral.name;
+                                      per.prssi = weakSelf.model.prssi;
+                                      per.pServicesNum = [NSString stringWithFormat:@"%ld", [peripheral.services count]];
+                                      per.puuid = peripheral.identifier.UUIDString;
+                                      per.cbPeripheral = peripheral;
+                                      weakSelf.model = per;
 
                                       [weakSelf.sectionTitlesArr addObject:service];
                                       [weakSelf.contentsArr addObject:charactersArr];
@@ -111,6 +122,16 @@ static NSString * const PerDetailInfoCellID = @"PerDetailInfoCellID";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (indexPath.section < [_contentsArr count]) {
+        NSArray * characters = _contentsArr[indexPath.section];
+        if (indexPath.row < [characters count]) {
+            CBCharacteristic * character = characters[indexPath.row];
+
+            YSCharacterDetail * detailVC = [[YSCharacterDetail alloc] initWithPeripheral:self.model.cbPeripheral character:character];
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

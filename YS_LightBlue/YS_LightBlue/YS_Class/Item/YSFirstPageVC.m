@@ -90,6 +90,7 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
     [YSBluetooth ysBTCenMan_StartScanWithCBUUIDs:nil options:scanForPeripheralsWithOptions discoverPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *rssi) {
 
         if (peripheral.name.length > 0) {
+
             YSPeripheralModel * model = [[YSPeripheralModel alloc] init];
             model.cbPeripheral = peripheral;
             model.pname = peripheral.name;
@@ -118,6 +119,8 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
     for (int i = 0; i < [weakSelf.peripheralsArr count]; i++) {
         YSPeripheralModel * inModel = [weakSelf.peripheralsArr objectAtIndex:i];
         if ([inModel.puuid isEqualToString:model.puuid]) {
+//        CBPeripheral * inModel = weakSelf.peripheralsArr[i];
+//        if ([inModel.identifier.UUIDString isEqualToString:model.identifier.UUIDString]) {
             [weakSelf.peripheralsArr replaceObjectAtIndex:i withObject:inModel];
             index = i;
             break;
@@ -215,7 +218,7 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
 
             YSPeripheralModel * model = _peripheralsArr[indexPath.row];
 
-            [YSBluetooth ysBTCenMan_ConnectPeripheral:model options:nil successBlock:^(CBCentralManager *central, CBPeripheral *peripheral) {
+            YSBluetooth * bluetooth = [YSBluetooth ysBTCenMan_ConnectPeripheralSuccessBlock:^(CBCentralManager *central, CBPeripheral *peripheral) {
 
                 YSPeripheralDetailVC * detailVC = [[YSPeripheralDetailVC alloc] initWithPerModel:model];
                 [self.navigationController pushViewController:detailVC animated:YES];
@@ -223,6 +226,8 @@ static NSString * const AddVirtualPeripheralCellID = @"AddVirtualPeripheralCellI
             } failBlock:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
                 NSLog(@"------ connect peripheral %@ fail!", peripheral.name);
             }];
+
+            bluetooth.beginConnnected(nil, model);
         }
     }
     else {

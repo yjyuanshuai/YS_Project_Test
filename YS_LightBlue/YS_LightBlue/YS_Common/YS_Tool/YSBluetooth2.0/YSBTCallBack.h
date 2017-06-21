@@ -20,8 +20,8 @@ typedef void(^YSBTCenMan_DisconnectPeripheralBlock)(CBCentralManager * central, 
 typedef void(^YSBTCenMan_DiscoverServicesBlock)(CBPeripheral * peripheral, CBService * service, NSError * error);
 //typedef void(^YSBTCenMan_DiscoverIncludedServicesBlock)(CBPeripheral * peripheral, CBService * service, NSError * error);
 // 特征
-typedef void(^YSBTCenMan_DiscoverCharacteristicsBlock)(CBService * service, NSArray * charactersArr, NSError * error);
-//typedef void(^YSBTCenMan_UpdateValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
+typedef void(^YSBTCenMan_DiscoverCharacteristicsBlock)(CBPeripheral * peripheral, CBService * service, NSArray * charactersArr, NSError * error);
+typedef void(^YSBTCenMan_UpdateValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
 //typedef void(^YSBTCenMan_WriteValueForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
 typedef void(^YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock)(CBPeripheral * peripheral, CBCharacteristic * characteristic, NSError * error);
 
@@ -57,8 +57,6 @@ typedef void(^YSBTCenMan_UpdateNotificationStateForCharacteristicBlock)(CBPeriph
 @property (nonatomic, assign) BOOL isDiscoverCharacters;
 @property (nonatomic, strong) NSArray * discoverCharactersCBUUIDs;
 
-//@property (nonatomic, assign) BOOL 
-
 #pragma mark - cen delegate block
 @property (nonatomic, strong) YSBTCenMan_UpdateStateBlock               updateStateBlock;
 @property (nonatomic, strong) YSBTCenMan_DiscoverPeripheralBlock        discoverPeripheralBlock;
@@ -69,6 +67,10 @@ typedef void(^YSBTCenMan_UpdateNotificationStateForCharacteristicBlock)(CBPeriph
 @property (nonatomic, strong) YSBTCenMan_DiscoverServicesBlock          discoverServicesBlock;
 
 @property (nonatomic, strong) YSBTCenMan_DiscoverCharacteristicsBlock   discoverCharacteristicsBlock;
+@property (nonatomic, strong) YSBTCenMan_UpdateValueForCharacteristicBlock updateCharacteristicValueBlock;
+
+
+
 @property (nonatomic, strong) YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock discoverDescripitorsForCharacterBlock;
 @property (nonatomic, strong) YSBTCenMan_UpdateNotificationStateForCharacteristicBlock updateNotificationStateBlock;
 

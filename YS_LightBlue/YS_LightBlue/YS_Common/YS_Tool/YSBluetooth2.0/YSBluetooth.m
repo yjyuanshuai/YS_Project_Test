@@ -61,20 +61,14 @@
     cenMan.cenManCallBack.discoverPeripheralBlock = block;
 }
 
-+ (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
-                             options:(NSDictionary *)options
-                        successBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
++ (YSBluetooth *)ysBTCenMan_ConnectPeripheralSuccessBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
                            failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock
 {
     YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
-
-    if (peripheral && peripheral.cbPeripheral) {
-        cenMan.cenManCallBack.isConnectPeripheral = YES;
-        [cenMan ysConnectPeripheral:peripheral.cbPeripheral options:options];
-    }
-    
+    cenMan.cenManCallBack.isConnectPeripheral = YES;
     cenMan.cenManCallBack.connectPeripheralBlock = successblock;
     cenMan.cenManCallBack.failToConnectPeripheralBlock = failBlock;
+    return [YSBluetooth sharesYSBluetooth];
 }
 
 + (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block
@@ -93,7 +87,7 @@
     cenMan.cenManCallBack.discoverServicesBlock = block;
 }
 
-// 特征
+// 发现特征
 + (void)ysBTCenMan_DiscoverCharactersWithCBUUIDs:(NSArray *)cbuuids
                          discoverCharactersBlock:(YSBTCenMan_DiscoverCharacteristicsBlock)block
 {
@@ -103,7 +97,70 @@
     cenMan.cenManCallBack.discoverCharacteristicsBlock = block;
 }
 
-#pragma mark - set
+// 读取特征
++ (YSBluetooth *)ysBRCenMan_ReadCharactersBlock:(YSBTCenMan_UpdateValueForCharacteristicBlock)block
+{
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.isUpdateCharacterValue = YES;
+    cenMan.cenManCallBack.updateCharacteristicValueBlock = block;
+    return [YSBluetooth sharesYSBluetooth];
+}
+
+// 特征描述
++ (YSBluetooth *)ysBTCenMan_DiscoverDescriptForCharacterBlock:(YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock)block
+{
+    YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+    cenMan.cenManCallBack.isDiscoverDescreptionForCharacter = YES;
+    return [YSBluetooth sharesYSBluetooth];
+}
+
+#pragma mark - 链式函数
+- (YSBluetooth * (^)(NSDictionary * options, YSPeripheralModel * peripheral))beginConnnected
+{
+    YSBluetooth * (^beginConnect)(NSDictionary * options, YSPeripheralModel * peripheral) = ^(NSDictionary * options, YSPeripheralModel * peripheral){
+
+        YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+        if (cenMan.cenManCallBack.isConnectPeripheral && peripheral && peripheral.cbPeripheral) {
+            [cenMan ysCenManStopScan];
+            [cenMan ysConnectPeripheral:peripheral.cbPeripheral options:options];
+        }
+        else {
+            NSLog(@"------ %s connect peripheral error!", __func__);
+        }
+        return self;
+    };
+    return beginConnect;
+}
+
+- (YSBluetooth * (^)(CBPeripheral * per, CBCharacteristic * character))updateCharacterValue
+{
+    YSBluetooth * (^updateCharacterBlock)() = ^(CBPeripheral * per, CBCharacteristic * character){
+        YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+        if (cenMan.cenManCallBack.isUpdateCharacterValue) {
+            [cenMan ysUpdateCharacterValue:per character:character];
+        }
+        else {
+            NSLog(@"------ %s update characteristic error!", __func__);
+        }
+        return self;
+    };
+    return updateCharacterBlock;
+}
+
+- (YSBluetooth * (^)(CBPeripheral * per, CBCharacteristic * character))discoverDescriptForCharacter
+{
+    YSBluetooth * (^discoverCharaterBlock)() = ^(CBPeripheral * per, CBCharacteristic * character){
+        YSBTCentralManager * cenMan = [[YSBluetooth sharesYSBluetooth] getYSBTCenManager];
+        if (cenMan.cenManCallBack.isDiscoverDescreptionForCharacter && per) {
+            [cenMan ysDiscoverDesciptForCharacteristic:character peripheral:per];
+        }
+        else {
+            NSLog(@"------ %s discover characteristic descript error!", __func__);
+        }
+        return self;
+    };
+    return discoverCharaterBlock;
+}
 
 
 

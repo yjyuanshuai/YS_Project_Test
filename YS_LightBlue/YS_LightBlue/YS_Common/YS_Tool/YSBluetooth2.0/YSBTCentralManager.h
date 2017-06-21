@@ -10,6 +10,7 @@
 @class YSBTCallBack;
 @class CBPeripheral;
 @class CBCentralManager;
+@class CBCharacteristic;
 
 @interface YSBTCentralManager : NSObject
 
@@ -20,5 +21,6 @@
 
 //- (void)ysStartScanPeripheralsWithCBUUIDs:(NSArray *)cbuuids options:(NSDictionary *)options;
 - (void)ysConnectPeripheral:(CBPeripheral *)peripheral options:(NSDictionary *)options;
+- (void)ysCenManStopScan;
 
 @end

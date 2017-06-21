@@ -7,16 +7,33 @@
 //
 
 #import "YSCharacterDetail.h"
+#import "YSBluetooth.h"
 
 @interface YSCharacterDetail ()
+
+@property (nonatomic, strong) CBPeripheral * currentPer;
+@property (nonatomic, strong) CBCharacteristic * currentCharacter;
 
 @end
 
 @implementation YSCharacterDetail
 
+- (instancetype)initWithPeripheral:(CBPeripheral *)per character:(CBCharacteristic *)character
+{
+    self = [super init];
+    if (self) {
+        _currentPer = per;
+        _currentCharacter = character;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    [self initUIAndData];
+    [self readCharacter];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +41,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initUIAndData
+{
+    self.title = [NSString stringWithFormat:@"%@", _currentCharacter.UUID];
 }
-*/
+
+- (void)readCharacter
+{
+//    __weak typeof(self) weakSelf = self;
+
+    [YSBluetooth ysBRCenMan_ReadCharactersBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSError *error) {
+
+        NSLog(@"++++++ %@", characteristic.value);
+
+    }].updateCharacterValue(_currentPer, _currentCharacter);
+
+    [YSBluetooth ysBTCenMan_DiscoverDescriptForCharacterBlock:^(CBPeripheral *peripheral, CBCharacteristic *characteristic, NSError *error) {
+
+        NSLog(@"------ %@", characteristic.descriptors);
+
+    }].discoverDescriptForCharacter(_currentPer, _currentCharacter);
+}
+
 
 @end

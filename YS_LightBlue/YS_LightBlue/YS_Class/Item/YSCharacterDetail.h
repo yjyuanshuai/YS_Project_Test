@@ -7,7 +7,11 @@
 //
 
 #import "YSRootVC.h"
+@class CBPeripheral;
+@class CBCharacteristic;
 
 @interface YSCharacterDetail : YSRootVC
+
+- (instancetype)initWithPeripheral:(CBPeripheral *)per character:(CBCharacteristic *)character;
 
 @end

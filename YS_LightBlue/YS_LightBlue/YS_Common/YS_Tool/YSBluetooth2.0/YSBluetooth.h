@@ -27,10 +27,8 @@
                                    options:(NSDictionary *)options
                        discoverPeripherals:(YSBTCenMan_DiscoverPeripheralBlock)block;
 
-+ (void)ysBTCenMan_ConnectPeripheral:(YSPeripheralModel *)peripheral
-                                options:(NSDictionary *)options
-                           successBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
-                              failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock;
++ (YSBluetooth *)ysBTCenMan_ConnectPeripheralSuccessBlock:(YSBTCenMan_ConnectPeripheralBlock)successblock
+                                                failBlock:(YSBTCenMan_FailToConnectPeripheralBlock)failBlock;
 
 + (void)ysBTCenMan_DisconnectPeripheralBlock:(YSBTCenMan_DisconnectPeripheralBlock)block;
 
@@ -41,10 +39,15 @@
 // 特征
 + (void)ysBTCenMan_DiscoverCharactersWithCBUUIDs:(NSArray *)cbuuids
                          discoverCharactersBlock:(YSBTCenMan_DiscoverCharacteristicsBlock)block;
+// 读取特征
++ (YSBluetooth *)ysBRCenMan_ReadCharactersBlock:(YSBTCenMan_UpdateValueForCharacteristicBlock)block;
 
-+ (void)ysBTCenMan_;
+// 特征描述
++ (YSBluetooth *)ysBTCenMan_DiscoverDescriptForCharacterBlock:(YSBTCenMan_DiscoverDescriptorsForCharacteristicBlock)block;
 
 #pragma mark - 
-
+- (YSBluetooth * (^)(NSDictionary * options, YSPeripheralModel * peripheral))beginConnnected;
+- (YSBluetooth * (^)(CBPeripheral * per, CBCharacteristic * character))updateCharacterValue;
+- (YSBluetooth * (^)(CBPeripheral * per, CBCharacteristic * character))discoverDescriptForCharacter;
 
 @end
