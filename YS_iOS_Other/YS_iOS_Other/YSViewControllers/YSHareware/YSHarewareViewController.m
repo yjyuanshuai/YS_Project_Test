@@ -12,6 +12,7 @@
 #import "CameraOrImageListVC.h"
 
 #import "YSBlueToothVC.h"
+#import "YS3DTouchVC.h"
 
 //2
 #import "CanlenderViewController.h"
@@ -49,7 +50,7 @@ static NSString * const HarewareCellID = @"HarewareCellID";
     
     _sectionTitleArr = @[@"1 系统功能", @"2 其他"];
     
-    NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件", @"AirPlay"];
+    NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件", @"AirPlay", @"3D Touch"];
     NSArray * sectionTwo  = @[@"陀螺仪", @"加速器"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo] mutableCopy];
@@ -161,6 +162,18 @@ static NSString * const HarewareCellID = @"HarewareCellID";
                 case 8:
                 {
                     // 邮件
+                }
+                    break;
+                case 9:
+                {
+                    // AirPlay
+                }
+                    break;
+                case 10:
+                {
+                    // 3D Touch
+                    YS3DTouchVC * threeDTouchVC = [[YS3DTouchVC alloc] init];
+                    [self.navigationController pushViewController:threeDTouchVC animated:YES];
                 }
                     break;
             }

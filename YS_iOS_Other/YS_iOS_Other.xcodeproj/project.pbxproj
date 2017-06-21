@@ -261,6 +261,7 @@
 		395F3A051ECC369F004245CD /* custemsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 395F3A041ECC369F004245CD /* custemsound.wav */; };
 		396DC5381E94FD3100AC9787 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC5371E94FD3100AC9787 /* VideoListVC.m */; };
 		396DC53B1E94FE2700AC9787 /* YSVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */; };
+		39758C9B1EFA68480044EDC7 /* YS3DTouchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39758C9A1EFA68480044EDC7 /* YS3DTouchVC.m */; };
 		397D1FFE1ECD31E500920A72 /* YSBlueToothVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D1FFD1ECD31E500920A72 /* YSBlueToothVC.m */; };
 		397D20011ECD332500920A72 /* YSBlueToothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D20001ECD332500920A72 /* YSBlueToothManager.m */; };
 		3985944E1D13F0B800863A14 /* SevenAppleLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3985944D1D13F0B800863A14 /* SevenAppleLocationViewController.m */; };
@@ -775,6 +776,8 @@
 		396DC5371E94FD3100AC9787 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
 		396DC5391E94FE2700AC9787 /* YSVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSVideoPlayerView.h; sourceTree = "<group>"; };
 		396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSVideoPlayerView.m; sourceTree = "<group>"; };
+		39758C991EFA68480044EDC7 /* YS3DTouchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YS3DTouchVC.h; sourceTree = "<group>"; };
+		39758C9A1EFA68480044EDC7 /* YS3DTouchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YS3DTouchVC.m; sourceTree = "<group>"; };
 		397D1FFC1ECD31E500920A72 /* YSBlueToothVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSBlueToothVC.h; path = YSHareware/YSBlueToothVC.h; sourceTree = "<group>"; };
 		397D1FFD1ECD31E500920A72 /* YSBlueToothVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSBlueToothVC.m; path = YSHareware/YSBlueToothVC.m; sourceTree = "<group>"; };
 		397D1FFF1ECD332500920A72 /* YSBlueToothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSBlueToothManager.h; path = YSHareware/YSBlueToothManager.h; sourceTree = "<group>"; };
@@ -1591,6 +1594,7 @@
 				394594B11D3879200017F4A3 /* YSHarewareViewController.h */,
 				394594B21D3879200017F4A3 /* YSHarewareViewController.m */,
 				397D1FFB1ECD319700920A72 /* BlueTooth */,
+				39758C981EFA68480044EDC7 /* 3DTouch */,
 			);
 			name = YSHarewareAndSystem;
 			path = ..;
@@ -1973,6 +1977,16 @@
 				3945949C1D3878950017F4A3 /* OneHorizontalTableViewController.m */,
 			);
 			name = OneHorizontalTableView;
+			sourceTree = "<group>";
+		};
+		39758C981EFA68480044EDC7 /* 3DTouch */ = {
+			isa = PBXGroup;
+			children = (
+				39758C991EFA68480044EDC7 /* YS3DTouchVC.h */,
+				39758C9A1EFA68480044EDC7 /* YS3DTouchVC.m */,
+			);
+			name = 3DTouch;
+			path = YSHareware/3DTouch;
 			sourceTree = "<group>";
 		};
 		397D1FFB1ECD319700920A72 /* BlueTooth */ = {
@@ -2882,6 +2896,7 @@
 				394640431D45AE5700124587 /* SQLDetailViewController.m in Sources */,
 				3932AA961E7250C20044D681 /* AFURLSessionManager.m in Sources */,
 				3932AA981E7250C20044D681 /* AFImageDownloader.m in Sources */,
+				39758C9B1EFA68480044EDC7 /* YS3DTouchVC.m in Sources */,
 				3946CA351E962673003E0D5B /* TZAssetModel.m in Sources */,
 				392327551DDD58B900AB4401 /* NavigationSearchController.m in Sources */,
 				39BBEA671D5DA46500F192F2 /* UIImage+YSImageCategare.m in Sources */,

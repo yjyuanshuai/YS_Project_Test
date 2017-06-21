@@ -14,6 +14,7 @@
 #import "YSVideoPlayerView.h"
 #import "YSEnDecryptionMethod.h"
 #import "YSNavController.h"
+#import "YS3DTouchVC.h"
 
 @interface AppDelegate ()
 
@@ -232,6 +233,40 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     return YES;
+}
+
+
+/**
+ 3D Touch 快捷功能
+ */
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
+{
+    NSString * type = shortcutItem.type;
+
+    BOOL hasLogin = [[[NSUserDefaults standardUserDefaults] objectForKey:HasLogin] boolValue];
+    if (!hasLogin) {
+        YSNavController * loginNav = [YSNavController sharedYSTabBarController];
+        [loginNav saveAccountOrPassWord];
+        self.window.rootViewController = loginNav;
+    }
+    else {
+        if ([type isEqualToString:@"com.yjyuanshuai.ui"]) {
+            YSTabBarController * ysTabBarCon = [YSTabBarController sharedYSTabBarController];
+            ysTabBarCon.selectedIndex = 0;
+            self.window.rootViewController = ysTabBarCon;
+        }
+        else if ([type isEqualToString:@"com.yjyuanshuai.3dtouch"]) {
+            YSTabBarController * ysTabBarCon = [YSTabBarController sharedYSTabBarController];
+            ysTabBarCon.selectedIndex = 4;
+
+            YSNavController * otherNav = [ysTabBarCon.childViewControllers objectAtIndex:4];
+            YS3DTouchVC * threeDTouchVC = [[YS3DTouchVC alloc] init];
+            [otherNav hidesBottomBarWhenPushed];
+            [otherNav pushViewController:threeDTouchVC animated:YES];
+
+            self.window.rootViewController = ysTabBarCon;
+        }
+    }
 }
 
 #pragma mark - -----------------------------------

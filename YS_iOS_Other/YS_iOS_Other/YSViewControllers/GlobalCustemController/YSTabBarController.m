@@ -72,6 +72,7 @@ NSInteger const TabBarTag = 20160715;
 
 - (void)createViewController
 {
+    // Language
     YSLanguageViewController * languageVC = [[YSLanguageViewController alloc] init];
     languageVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:_tabbarItemTitles[0]
                                                           image:[self deleteMaskImage:@"tab_thr_num"]
@@ -79,7 +80,8 @@ NSInteger const TabBarTag = 20160715;
     languageVC.tabBarItem.title = _tabbarItemTitles[0];
     _languageNavCon = [[YSNavController alloc] initWithRootViewController:languageVC];
     _languageNavCon.navigationItem.title = _navItemTitles[0];
-    
+
+    // UI
     ViewController * uiVC = [[ViewController alloc] init];
     uiVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:_tabbarItemTitles[1]
                                                     image:[self deleteMaskImage:@"tab_one_num"]
@@ -87,7 +89,8 @@ NSInteger const TabBarTag = 20160715;
     uiVC.tabBarItem.title = _tabbarItemTitles[1];
     _uiNavCon = [[YSNavController alloc] initWithRootViewController:uiVC];
     _uiNavCon.navigationItem.title = _navItemTitles[1];
-    
+
+    // Data
     YSSaveDataViewController * savedataVC = [[YSSaveDataViewController alloc] init];
     savedataVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:_tabbarItemTitles[2]
                                                           image:[self deleteMaskImage:@"tab_two_num"]
@@ -95,7 +98,8 @@ NSInteger const TabBarTag = 20160715;
     savedataVC.tabBarItem.title = _tabbarItemTitles[2];
     _saveDataNavCon = [[YSNavController alloc] initWithRootViewController:savedataVC];
     _saveDataNavCon.navigationItem.title = _navItemTitles[2];
-    
+
+    // Net
     YSWebViewController * webVC = [[YSWebViewController alloc] init];
     webVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:_tabbarItemTitles[3]
                                                      image:[self deleteMaskImage:@"tab_fou_num"]
@@ -103,7 +107,8 @@ NSInteger const TabBarTag = 20160715;
     webVC.tabBarItem.title = _tabbarItemTitles[3];
     _webNavCon = [[YSNavController alloc] initWithRootViewController:webVC];
     _webNavCon.navigationItem.title = _navItemTitles[3];
-    
+
+    // Other
     YSOtherGatherVC * otherVC = [[YSOtherGatherVC alloc] init];
     otherVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:_tabbarItemTitles[5]
                                                        image:[self deleteMaskImage:@"tab_six_num"]
