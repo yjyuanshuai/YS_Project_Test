@@ -12,6 +12,7 @@
 #import "YSTabBarController.h"
 #import "YSRegisterViewController.h"
 #import "MyKeyChainHelper.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 
 @interface YSLoginViewController ()
 
@@ -25,20 +26,6 @@
 
 @implementation YSLoginViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self.navigationController setNavigationBarHidden:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -46,6 +33,21 @@
     [self createScrollView];
     [self createNameAndPassWord];
     [self saveAccountOrPassWord];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self.navigationController setNavigationBarHidden:YES];
+    [self setTouchID];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,6 +139,70 @@
         _nameTextFeild.text = name;
         
         _passWordTextFeild.text = @"";
+    }
+}
+
+- (void)setTouchID
+{
+    // 获取上下文
+    LAContext * lacontext = [[LAContext alloc] init];
+    
+    NSError * canEvaluateError = nil;
+    NSString * reasonStr = @"Touch ID Test";
+    BOOL canEvaluate = [lacontext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&canEvaluateError];
+    if (canEvaluate) {
+        [lacontext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:reasonStr reply:^(BOOL success, NSError * _Nullable error) {
+
+            if (success) {
+                // 这步是异步的
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    YSTabBarController * ysTabBarCon = [YSTabBarController sharedYSTabBarController];
+                    ysTabBarCon.selectedIndex = 0;
+                    [UIApplication sharedApplication].keyWindow.rootViewController = ysTabBarCon;
+                });
+
+            }
+            else {
+                switch (error.code) {
+                    case LAErrorSystemCancel:
+                    {
+                        NSLog(@"------- LAErrorSystemCancel");
+                    }
+                        break;
+                    case LAErrorUserCancel:
+                    {
+                        NSLog(@"------- LAErrorUserCancel");
+                    }
+                        break;
+                    case LAErrorUserFallback:
+                    {
+                        NSLog(@"------- LAErrorUserFallback");
+                    }
+                        break;
+                    default:
+                        NSLog(@"------- Authentication failed");
+                        break;
+                }
+            }
+        }];
+    }
+    else {
+        switch (canEvaluateError.code) {
+            case LAErrorTouchIDNotEnrolled:
+            {
+                NSLog(@"------- LAErrorTouchIDNotEnrolled");
+            }
+                break;
+            case LAErrorPasscodeNotSet:
+            {
+                NSLog(@"------- LAErrorPasscodeNotSet");
+            }
+                break;
+                
+            default:
+                NSLog(@"------- TouchID not available");
+                break;
+        }
     }
 }
 

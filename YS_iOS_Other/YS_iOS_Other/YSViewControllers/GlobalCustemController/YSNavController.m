@@ -17,29 +17,29 @@
 
 @implementation YSNavController
 
-+ (instancetype)sharedYSTabBarController
-{
-    static YSNavController * instance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        YSLoginViewController * instanceLoginVC = [[YSLoginViewController alloc] init];
-        instance = [[YSNavController alloc] initWithRootViewController:instanceLoginVC];
-        
-    });
-    return instance;
-}
+//+ (instancetype)sharedYSTabBarController
+//{
+//    static YSNavController * instance;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        
+//        YSLoginViewController * instanceLoginVC = [[YSLoginViewController alloc] init];
+//        instance = [[YSNavController alloc] initWithRootViewController:instanceLoginVC];
+//        
+//    });
+//    return instance;
+//}
 
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
-{
-    self = [super initWithRootViewController:rootViewController];
-    if (self) {
-        if ([rootViewController isKindOfClass:[YSLoginViewController class]]) {
-            _loginVC = (YSLoginViewController *)rootViewController;
-        }
-    }
-    return self;
-}
+//- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+//{
+//    self = [super initWithRootViewController:rootViewController];
+//    if (self) {
+//        if ([rootViewController isKindOfClass:[YSLoginViewController class]]) {
+//            _loginVC = (YSLoginViewController *)rootViewController;
+//        }
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,12 +51,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)saveAccountOrPassWord
-{
-    if (_loginVC) {
-        [_loginVC saveAccountOrPassWord];
-    }
-}
+//- (void)saveAccountOrPassWord
+//{
+//    if (_loginVC) {
+//        [_loginVC saveAccountOrPassWord];
+//    }
+//}
 
 #pragma mark - 
 - (BOOL)shouldAutorotate

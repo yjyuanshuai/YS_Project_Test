@@ -22,6 +22,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__copy_helper_block_:CanlenderViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "hasRoot">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CanlenderViewController tableView:cellForRowAtIndexPath:]:CanlenderViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_event">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[YSPlayViewController createAVPlayer]:YSPlayViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -172,6 +188,14 @@
          <PersistentStrings>
             <PersistentString
                value = "_QBImagePC">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CanlenderViewController fetchCalenfarEvent]:CanlenderViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self checkCalendarRoot]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

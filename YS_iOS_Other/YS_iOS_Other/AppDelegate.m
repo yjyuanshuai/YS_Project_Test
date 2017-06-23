@@ -13,6 +13,7 @@
 #import "YSTestDataBase.h"
 #import "YSVideoPlayerView.h"
 #import "YSEnDecryptionMethod.h"
+#import "YSLoginViewController.h"
 #import "YSNavController.h"
 #import "YS3DTouchVC.h"
 
@@ -245,8 +246,9 @@
 
     BOOL hasLogin = [[[NSUserDefaults standardUserDefaults] objectForKey:HasLogin] boolValue];
     if (!hasLogin) {
-        YSNavController * loginNav = [YSNavController sharedYSTabBarController];
-        [loginNav saveAccountOrPassWord];
+        YSLoginViewController * instanceLoginVC = [[YSLoginViewController alloc] init];
+        YSNavController * loginNav = [[YSNavController alloc] initWithRootViewController:instanceLoginVC];
+        [instanceLoginVC saveAccountOrPassWord];
         self.window.rootViewController = loginNav;
     }
     else {
@@ -305,7 +307,8 @@
     [YSDDLogManager shareDDLogManager];
     
     // 热修复
-    
+
+    // 登录逻辑
     BOOL hasLogin = [[[NSUserDefaults standardUserDefaults] objectForKey:HasLogin] boolValue];
     if (hasLogin) {
         YSTabBarController * ysTabBarCon = [YSTabBarController sharedYSTabBarController];
@@ -313,8 +316,9 @@
         self.window.rootViewController = ysTabBarCon;
     }
     else {
-        YSNavController * loginNav = [YSNavController sharedYSTabBarController];
-        [loginNav saveAccountOrPassWord];
+        YSLoginViewController * instanceLoginVC = [[YSLoginViewController alloc] init];
+        YSNavController * loginNav = [[YSNavController alloc] initWithRootViewController:instanceLoginVC];
+        [instanceLoginVC saveAccountOrPassWord];
         self.window.rootViewController = loginNav;
     }
 }

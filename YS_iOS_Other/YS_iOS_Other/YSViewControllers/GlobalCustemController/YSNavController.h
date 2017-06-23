@@ -10,7 +10,7 @@
 
 @interface YSNavController : UINavigationController
 
-+ (instancetype)sharedYSTabBarController;
-- (void)saveAccountOrPassWord;
+//+ (instancetype)sharedYSTabBarController;
+//- (void)saveAccountOrPassWord;
 
 @end

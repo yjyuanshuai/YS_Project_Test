@@ -8,6 +8,7 @@
 
 #import "YSOtherGatherVC.h"
 #import "YSNavController.h"
+#import "YSLoginViewController.h"
 
 #import "YSOtherViewController.h"
 #import "YSHarewareViewController.h"
@@ -100,9 +101,10 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:HasLogin];
     [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:HasKickOut];
     
-    YSNavController * navCon = [YSNavController sharedYSTabBarController];
-    [navCon saveAccountOrPassWord];
-    [UIApplication sharedApplication].keyWindow.rootViewController = navCon;
+    YSLoginViewController * instanceLoginVC = [[YSLoginViewController alloc] init];
+    YSNavController * loginNav = [[YSNavController alloc] initWithRootViewController:instanceLoginVC];
+    [instanceLoginVC saveAccountOrPassWord];
+    [UIApplication sharedApplication].keyWindow.rootViewController = loginNav;
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
