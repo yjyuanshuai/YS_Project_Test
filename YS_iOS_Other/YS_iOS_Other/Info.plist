@@ -45,14 +45,9 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>wtloginmqq2</string>
-		<string>timapi</string>
-		<string>mqqapi</string>
-		<string>mqq</string>
-		<string>mqqopensdkapiV2</string>
-		<string>mqqOpensdkSSoLogin</string>
-		<string>weixin</string>
-		<string>wechat</string>
+		<string>weibosdk2.5</string>
+		<string>weibosdk</string>
+		<string>sinaweibosso</string>
 		<string>sinaweibo</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

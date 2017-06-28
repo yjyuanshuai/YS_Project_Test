@@ -369,9 +369,7 @@
 
 - (void)registerShareSDK
 {
-    [ShareSDK registerActivePlatforms:@[@(SSDKPlatformTypeSinaWeibo),   //微博
-                                        @(SSDKPlatformTypeWechat),      // 微信
-                                        @(SSDKPlatformTypeQQ)]          // qq
+    [ShareSDK registerActivePlatforms:@[@(SSDKPlatformTypeSinaWeibo)]          
                              onImport:^(SSDKPlatformType platformType) {
                                  switch (platformType) {
                                      case SSDKPlatformTypeSinaWeibo:
@@ -379,17 +377,6 @@
                                          [ShareSDKConnector connectWeibo:[WeiboSDK class]];
                                      }
                                          break;
-                                     case SSDKPlatformTypeWechat:
-                                     {
-                                         [ShareSDKConnector connectWeChat:[WXApi class]];
-                                     }
-                                         break;
-                                     case SSDKPlatformTypeQQ:
-                                     {
-                                         [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
-                                     }
-                                         break;
-                                         
                                      default:
                                          break;
                                  }
@@ -404,17 +391,6 @@
                                                              authType:SSDKAuthTypeBoth];
                               }
                                   break;
-                              case SSDKPlatformTypeWechat:
-                              {
-
-                              }
-                                  break;
-                              case SSDKPlatformTypeQQ:
-                              {
-
-                              }
-                                  break;
-                                  
                               default:
                                   break;
                           }

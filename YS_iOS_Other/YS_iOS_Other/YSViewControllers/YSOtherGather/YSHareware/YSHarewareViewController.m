@@ -51,7 +51,7 @@ static NSString * const HarewareCellID = @"HarewareCellID";
     _sectionTitleArr = @[@"1 系统功能", @"2 其他"];
     
     NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件", @"AirPlay", @"3D Touch"];
-    NSArray * sectionTwo  = @[@"陀螺仪", @"加速器"];
+    NSArray * sectionTwo  = @[@"陀螺仪", @"加速器", @"磁力计"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo] mutableCopy];
 }

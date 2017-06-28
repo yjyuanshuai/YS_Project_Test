@@ -15,10 +15,11 @@
 
 // 2
 #import "SixGestureViewController.h"
-#import "JianShuNavAnimationViewController.h"
-
-// 3
 #import "YSTouchViewController.h"
+
+// 3 黑魔法
+#import "GlobalWebVC.h"
+#import "YS3DTouchVC.h"
 
 //test
 #import "YSTestVC.h"
@@ -54,12 +55,13 @@ static NSString * const LanguageCellID = @"LanguageCellID";
 {
     self.title = @"语言";
 
-    _sectionTitleArr = @[@"1 线程", @"2 触摸"];
+    _sectionTitleArr = @[@"1 线程", @"2 触摸", @"3 黑魔法"];
     
     NSArray * sectionOne    = @[@"GCD", @"NSOperation", @"NSThread", @"test"];
     NSArray * sectionTwo    = @[@"手势", @"自定义手势", @"触摸"];
+    NSArray * sectionThird  = @[@"简介", @"扩展系统方法", @"动态添加属性", @"动态添加方法", @"动态变量控制"];
     
-    _sectionCellContent = [@[sectionOne, sectionTwo] mutableCopy];
+    _sectionCellContent = [@[sectionOne, sectionTwo, sectionThird] mutableCopy];
 }
 
 - (void)createTableView
@@ -169,11 +171,15 @@ static NSString * const LanguageCellID = @"LanguageCellID";
         {
             if (indexPath.row == 0)
             {
-                //
+                GlobalWebVC * methodSwizzlingVC = [[GlobalWebVC alloc] initWithTitle:@"黑魔法" webUrl:YSURL_MethodSwizzling];
+                methodSwizzlingVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:methodSwizzlingVC animated:YES];
             }
             else if (indexPath.row == 1)
             {
-                //
+                YS3DTouchVC * useVC = [[YS3DTouchVC alloc] init];
+                useVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:useVC animated:YES];
             }
         }
             break;

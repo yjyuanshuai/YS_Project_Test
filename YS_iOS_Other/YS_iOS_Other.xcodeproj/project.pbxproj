@@ -198,6 +198,8 @@
 		394BCA3F1F03557500EC55FC /* cm2_blogo_sina_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 394BCA391F03557500EC55FC /* cm2_blogo_sina_gray.png */; };
 		394BCA401F03557500EC55FC /* cm2_blogo_sina_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394BCA3A1F03557500EC55FC /* cm2_blogo_sina_gray@2x.png */; };
 		394BCA411F03557500EC55FC /* cm2_blogo_sina_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394BCA3B1F03557500EC55FC /* cm2_blogo_sina_gray@3x.png */; };
+		394BCA431F037B1400EC55FC /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 394BCA421F037B1400EC55FC /* libicucore.tbd */; };
+		394BCA4D1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 394BCA4C1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m */; };
 		395562591D41C3550079CF6B /* MyKeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 395562581D41C3550079CF6B /* MyKeyChainHelper.m */; };
 		395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 395ACEA31D937D4F00C22165 /* UIView+UniformDistribution.m */; };
 		395D48461EFCA55E0022212A /* YSCommenListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395D48451EFCA55E0022212A /* YSCommenListVC.m */; };
@@ -765,6 +767,9 @@
 		394BCA391F03557500EC55FC /* cm2_blogo_sina_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cm2_blogo_sina_gray.png; sourceTree = "<group>"; };
 		394BCA3A1F03557500EC55FC /* cm2_blogo_sina_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm2_blogo_sina_gray@2x.png"; sourceTree = "<group>"; };
 		394BCA3B1F03557500EC55FC /* cm2_blogo_sina_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm2_blogo_sina_gray@3x.png"; sourceTree = "<group>"; };
+		394BCA421F037B1400EC55FC /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		394BCA4B1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageMethodSwizzling.h"; sourceTree = "<group>"; };
+		394BCA4C1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageMethodSwizzling.m"; sourceTree = "<group>"; };
 		395562571D41C3550079CF6B /* MyKeyChainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyKeyChainHelper.h; sourceTree = "<group>"; };
 		395562581D41C3550079CF6B /* MyKeyChainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyKeyChainHelper.m; sourceTree = "<group>"; };
 		395ACEA21D937D4F00C22165 /* UIView+UniformDistribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UniformDistribution.h"; sourceTree = "<group>"; };
@@ -993,6 +998,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				394BCA431F037B1400EC55FC /* libicucore.tbd in Frameworks */,
 				394BCA341F0343B100EC55FC /* libsqlite3.tbd in Frameworks */,
 				394BCA321F0343A400EC55FC /* ImageIO.framework in Frameworks */,
 				39B2694C1E30AE5D0047D6A4 /* JavaScriptCore.framework in Frameworks */,
@@ -1276,6 +1282,7 @@
 				3928DE9A1F02532100A7F38A /* YSLanguageViewController.m */,
 				3928DF761F02595C00A7F38A /* Thread */,
 				3928DF851F02595C00A7F38A /* TouchGesure */,
+				394BCA441F038DC200EC55FC /* MethodSwizzling */,
 			);
 			path = YSLanguage;
 			sourceTree = "<group>";
@@ -2024,6 +2031,15 @@
 			path = YSLoginAndRegist;
 			sourceTree = "<group>";
 		};
+		394BCA441F038DC200EC55FC /* MethodSwizzling */ = {
+			isa = PBXGroup;
+			children = (
+				394BCA4B1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.h */,
+				394BCA4C1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m */,
+			);
+			path = MethodSwizzling;
+			sourceTree = "<group>";
+		};
 		3955624D1D41B94B0079CF6B /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
@@ -2520,6 +2536,7 @@
 		D6C183E4E3E19DB390670CA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				394BCA421F037B1400EC55FC /* libicucore.tbd */,
 				394BCA331F0343B100EC55FC /* libsqlite3.tbd */,
 				394BCA311F0343A400EC55FC /* ImageIO.framework */,
 				394BCA2F1F03436E00EC55FC /* libstdc++.tbd */,
@@ -2975,6 +2992,7 @@
 				3932AA971E7250C20044D681 /* AFAutoPurgingImageCache.m in Sources */,
 				3942A5761EEF8DC000C14E95 /* YSMenuTextField.m in Sources */,
 				3928DF8F1F02595C00A7F38A /* YSGCDViewController.m in Sources */,
+				394BCA4D1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m in Sources */,
 				3932AA991E7250C20044D681 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3928DEE51F0254A700A7F38A /* ViewSearchController.m in Sources */,
 				3946CA331E962673003E0D5B /* NSBundle+TZImagePicker.m in Sources */,

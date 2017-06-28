@@ -119,4 +119,8 @@
 
 
 
+/*-------------------------------------------*/
+#pragma mark - 链接
+#define YSURL_MethodSwizzling @"http://www.cocoachina.com/ios/20170627/19628.html"      // 黑魔法
+
 #endif /* GlobalString_h */

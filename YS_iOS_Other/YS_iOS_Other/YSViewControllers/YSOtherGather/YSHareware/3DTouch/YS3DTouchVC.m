@@ -74,27 +74,37 @@
                                                                                                                                                                                                               
 - (void)setDynamicTouchShortItems
 {
-    UIApplicationShortcutIcon * iconType1 = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeShare];
-    UIApplicationShortcutItem * item1 = [[UIApplicationShortcutItem alloc] initWithType:@"com.yjyuanshuai.ui" localizedTitle:@"item1" localizedSubtitle:nil icon:iconType1 userInfo:nil];
+    if (kSystemVersion > 9.0) {
+        UIApplicationShortcutIcon * iconType1 = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeShare];
+        UIApplicationShortcutItem * item1 = [[UIApplicationShortcutItem alloc] initWithType:@"com.yjyuanshuai.ui" localizedTitle:@"item1" localizedSubtitle:nil icon:iconType1 userInfo:nil];
 
-    UIApplicationShortcutIcon * iconType2 = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeShare];
-    UIApplicationShortcutItem * item2= [[UIApplicationShortcutItem alloc] initWithType:@"com.yjyuanshuai.3dtouch" localizedTitle:@"item2" localizedSubtitle:nil icon:iconType2 userInfo:nil];
+        UIApplicationShortcutIcon * iconType2 = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeShare];
+        UIApplicationShortcutItem * item2= [[UIApplicationShortcutItem alloc] initWithType:@"com.yjyuanshuai.3dtouch" localizedTitle:@"item2" localizedSubtitle:nil icon:iconType2 userInfo:nil];
 
-    [[UIApplication sharedApplication] setShortcutItems:@[item1, item2]];
+        [[UIApplication sharedApplication] setShortcutItems:@[item1, item2]];
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _infoLabel.text = @"changed!";
-        _changeItemBtn.userInteractionEnabled = NO;
-    });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _infoLabel.text = @"changed!";
+            _changeItemBtn.userInteractionEnabled = NO;
+        });
+    }
+    else {
+        DDLogInfo(@"------ Device System Version need update to iOS9 or late.");
+    }
 }
 
 - (void)regist
 {
-    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-        [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    if (kSystemVersion >= 9.0) {
+        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+            [self registerForPreviewingWithDelegate:self sourceView:self.view];
+        }
+        else {
+            NSLog(@"------ 3D Touch unavailable!");
+        }
     }
     else {
-        NSLog(@"------ 3D Touch unavailable!");
+        DDLogInfo(@"------ Device System Version need update to iOS9 or late.");
     }
 }
 
