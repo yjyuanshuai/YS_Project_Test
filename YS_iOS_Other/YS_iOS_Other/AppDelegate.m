@@ -17,6 +17,14 @@
 #import "YSNavController.h"
 #import "YS3DTouchVC.h"
 
+// ShareSDK
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
+
 @interface AppDelegate ()
 
 @end
@@ -38,7 +46,7 @@
     [self login];
     [self startBaiduMap];
     [self notificationApplyToUser];
-    
+    [self registerShareSDK];
     
     return YES;
 }
@@ -356,6 +364,61 @@
 {
     UIRemoteNotificationType t = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:t];
+}
+
+
+- (void)registerShareSDK
+{
+    [ShareSDK registerActivePlatforms:@[@(SSDKPlatformTypeSinaWeibo),   //微博
+                                        @(SSDKPlatformTypeWechat),      // 微信
+                                        @(SSDKPlatformTypeQQ)]          // qq
+                             onImport:^(SSDKPlatformType platformType) {
+                                 switch (platformType) {
+                                     case SSDKPlatformTypeSinaWeibo:
+                                     {
+                                         [ShareSDKConnector connectWeibo:[WeiboSDK class]];
+                                     }
+                                         break;
+                                     case SSDKPlatformTypeWechat:
+                                     {
+                                         [ShareSDKConnector connectWeChat:[WXApi class]];
+                                     }
+                                         break;
+                                     case SSDKPlatformTypeQQ:
+                                     {
+                                         [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                                     }
+                                         break;
+                                         
+                                     default:
+                                         break;
+                                 }
+                             }
+                      onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+                          switch (platformType) {
+                              case SSDKPlatformTypeSinaWeibo:
+                              {
+                                  [appInfo SSDKSetupSinaWeiboByAppKey:kWeiboAppKey
+                                                            appSecret:kWeiboAppSecret
+                                                          redirectUri:@"http://www.sharesdk.cn"
+                                                             authType:SSDKAuthTypeBoth];
+                              }
+                                  break;
+                              case SSDKPlatformTypeWechat:
+                              {
+
+                              }
+                                  break;
+                              case SSDKPlatformTypeQQ:
+                              {
+
+                              }
+                                  break;
+                                  
+                              default:
+                                  break;
+                          }
+                      }];
 }
 
 @end

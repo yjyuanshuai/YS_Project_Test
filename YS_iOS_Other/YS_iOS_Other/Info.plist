@@ -30,11 +30,37 @@
 				<string>YSDevScheme</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb922723031</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>wtloginmqq2</string>
+		<string>timapi</string>
+		<string>mqqapi</string>
+		<string>mqq</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>weixin</string>
+		<string>wechat</string>
+		<string>sinaweibo</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MOBAppKey</key>
+	<string>1f020d843f1f4</string>
+	<key>MOBAppSecret</key>
+	<string>fbd5c00ac3315835351166cd693ee087</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

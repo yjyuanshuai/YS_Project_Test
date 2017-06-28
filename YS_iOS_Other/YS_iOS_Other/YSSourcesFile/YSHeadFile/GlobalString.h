@@ -80,10 +80,13 @@
 
 /*-------------------------------------------*/
 #pragma mark - 第三方有关
-/*********  百度地图 *******************/
-#define kBaiduMapAK     @"0o1W98wXRSCK6dgQoxl2T6XMEnGQIK2L"
-
-
+// 百度地图
+#define kBaiduMapAK             @"0o1W98wXRSCK6dgQoxl2T6XMEnGQIK2L"
+// shareSDK
+#define kShareSDKAppKey         @"1f020d843f1f4"
+#define kShareSDKAppSecret      @"fbd5c00ac3315835351166cd693ee087"
+#define kWeiboAppKey            @"922723031"
+#define kWeiboAppSecret         @"3d84f98ad23cb80d2b25199772aa5bb6"
 
 
 

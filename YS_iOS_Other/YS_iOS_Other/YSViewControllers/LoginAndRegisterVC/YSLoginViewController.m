@@ -13,6 +13,7 @@
 #import "YSRegisterViewController.h"
 #import "MyKeyChainHelper.h"
 #import <LocalAuthentication/LocalAuthentication.h>
+#import <ShareSDK/ShareSDK.h>
 
 @interface YSLoginViewController ()
 
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UITextField * passWordTextFeild;
 @property (nonatomic, strong) UIButton * loginBtn;
 @property (nonatomic, strong) UIButton * registerBtn;
+@property (nonatomic, strong) UIButton * weiboLoginBtn;
 
 @end
 
@@ -32,6 +34,7 @@
     
     [self createScrollView];
     [self createNameAndPassWord];
+    [self createThirdLoginUI];
     [self saveAccountOrPassWord];
 }
 
@@ -100,6 +103,18 @@
     _registerBtn.layer.borderWidth = 1;
 }
 
+- (void)createThirdLoginUI
+{
+    UIView * thirdLoginView = [[UIView alloc] initWithFrame:CGRectMake(10, kScreenHeight - 90, kScreenWidth-20, 80)];
+    [self.view addSubview:thirdLoginView];
+
+    _weiboLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _weiboLoginBtn.frame = CGRectMake(10, 10, 60, 60);
+    [_weiboLoginBtn setBackgroundImage:[UIImage imageNamed:@"cm2_blogo_sina"] forState:UIControlStateNormal];
+    [_weiboLoginBtn addTarget:self action:@selector(clickToWeinoLogin) forControlEvents:UIControlEventTouchUpInside];
+    [thirdLoginView addSubview:_weiboLoginBtn];
+}
+
 - (void)clickToLogin
 {
     [self.view endEditing:YES];
@@ -125,6 +140,24 @@
 {
     YSRegisterViewController * registerVC = [[YSRegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+- (void)clickToWeinoLogin
+{
+    [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+               if (error) {
+                   DDLogInfo(@"------- Third Login (SinaWeibo) error : %@ .", error);
+               }
+
+               if (state == SSDKResponseStateSuccess) {
+                   DDLogInfo(@"------- Third Login (SinaWeibo) success.");
+
+                   YSTabBarController * tabBarCon = [YSTabBarController sharedYSTabBarController];
+                   tabBarCon.selectedIndex = 0;
+                   [UIApplication sharedApplication].keyWindow.rootViewController = tabBarCon;
+               }
+           }];
 }
 
 - (void)saveAccountOrPassWord
