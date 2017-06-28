@@ -9,7 +9,7 @@
 #import "YSTabBarController.h"
 
 #import "YSNavController.h"
-#import "ViewController.h"
+#import "YSUIViewController.h"
 #import "YSSaveDataViewController.h"
 #import "YSLanguageViewController.h"
 #import "YSWebViewController.h"
@@ -82,7 +82,7 @@ NSInteger const TabBarTag = 20160715;
     _languageNavCon.navigationItem.title = _navItemTitles[0];
 
     // UI
-    ViewController * uiVC = [[ViewController alloc] init];
+    YSUIViewController * uiVC = [[YSUIViewController alloc] init];
     uiVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:_tabbarItemTitles[1]
                                                     image:[self deleteMaskImage:@"tab_one_num"]
                                             selectedImage:[UIImage imageNamed:@"tab_one_sel"]];

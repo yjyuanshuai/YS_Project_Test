@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>sectiontitle</key>
+		<string>应用沙盒结构分析</string>
+		<key>sectiondetail</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string>程序包</string>
+				<key>detail</key>
+				<string>包含了所有的资源文件和可执行文件</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Documents</string>
+				<key>detail</key>
+				<string>保存应⽤运行时生成的需要持久化的数据,iTunes同步设备时会备份该目录.@@@@例如,游戏应用可将游戏存档保存在该目录</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>tmp</string>
+				<key>detail</key>
+				<string>保存应⽤运行时所需的临时数据,使⽤完毕后再将相应的文件从该目录删除。应用没有运行时,系统也可能会清除该目录下的文件。@@@@iTunes同步设备时 不会备份该目录</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Library/Caches</string>
+				<key>detail</key>
+				<string>保存应用运行时⽣成的需要持久化的数据,iTunes同步设备时不会备份该目录。一般存储体积大、不需要备份的非重要数据</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Library/Preference</string>
+				<key>detail</key>
+				<string>保存应用的所有偏好设置,iOS的Settings,应⽤会在该目录中查找应⽤的设置信息。@@@@iTunes同步设备时会备份该目录 </string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectiontitle</key>
+		<string>应用沙盒常见的获取方式</string>
+		<key>sectiondetail</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string>沙盒根目录</string>
+				<key>detail</key>
+				<string>NSString *home = NSHomeDirectory(); </string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>利用沙盒根目录拼接”Documents”字符串</string>
+				<key>detail</key>
+				<string>NSString *documents = [home stringByAppendingPathComponent:@&quot;Documents&quot;];</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>利⽤NSSearchPathForDirectoriesInDomains函数</string>
+				<key>detail</key>
+				<string>NSArray * array = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, NO);@@@@在iOS中,只有一个目录跟传入的参数匹配,所以这个集合里面只有一个元素@@@@NSString *documents = [array objectAtIndex:0]; </string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>tmp</string>
+				<key>detail</key>
+				<string>NSString *tmp = NSTemporaryDirectory();</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string> Library/Caches</string>
+				<key>detail</key>
+				<string>1.跟Documents类似的2种⽅方法@@@@2.利⽤NSSearchPathForDirectoriesInDomains函数,将函数的第2个参数改为:NSCachesDirectory即可@@@@3.利用沙盒根目录拼接&quot;Caches&quot;字符串</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string>Library/Preference</string>
+				<key>detail</key>
+				<string>通过NSUserDefaults类存取该目录下的设置信息</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>sectiontitle</key>
+		<string>属性列表</string>
+		<key>sectiondetail</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string></string>
+				<key>detail</key>
+				<string>如果对象是NSString、NSDictionary、NSArray、NSData、 NSNumber等类型,就可以使用writeToFile:atomically:⽅法 直接将对象写到属性列表文件中</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>
