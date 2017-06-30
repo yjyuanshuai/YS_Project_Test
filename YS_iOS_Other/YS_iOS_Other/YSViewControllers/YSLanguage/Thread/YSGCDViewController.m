@@ -106,7 +106,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 0) {
-        GlobalWebVC * webVC = [[GlobalWebVC alloc] initWithTitle:_titleArr[indexPath.row] webUrl:@"https://objccn.io/issue-2-1/"];
+        GlobalWebVC * webVC = [[GlobalWebVC alloc] initWithTitle:_titleArr[indexPath.row] webUrl:YSURL_GCD];
         [self.navigationController pushViewController:webVC animated:YES];
     }
 }

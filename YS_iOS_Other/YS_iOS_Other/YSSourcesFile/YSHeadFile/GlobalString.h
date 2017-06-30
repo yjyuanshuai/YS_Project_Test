@@ -121,6 +121,7 @@
 
 /*-------------------------------------------*/
 #pragma mark - 链接
-#define YSURL_MethodSwizzling @"http://www.cocoachina.com/ios/20170627/19628.html"      // 黑魔法
+#define YSURL_MethodSwizzling   @"http://www.cocoachina.com/ios/20170627/19628.html"      // 黑魔法
+#define YSURL_GCD               @"https://objccn.io/issue-2-1/"
 
 #endif /* GlobalString_h */
