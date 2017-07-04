@@ -280,6 +280,12 @@
 }
 
 #pragma mark - -----------------------------------
+#pragma mark - 
++ (AppDelegate *)defaultAppDelegate
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
 #pragma mark - 自定义的
 /**
  *  初始设置
@@ -301,6 +307,9 @@
     // TabBarItem
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+
+    // 健康
+    self.healthStore = [[HKHealthStore alloc] init];
 }
 
 /**

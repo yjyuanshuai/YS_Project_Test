@@ -369,6 +369,9 @@
 		39B2694C1E30AE5D0047D6A4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39B2694B1E30AE5D0047D6A4 /* JavaScriptCore.framework */; };
 		39B9B0B41E825ED60096A4B4 /* YSTestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B9B0B31E825ED60096A4B4 /* YSTestVC.m */; };
 		39BBEA671D5DA46500F192F2 /* UIImage+YSImageCategare.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BBEA661D5DA46500F192F2 /* UIImage+YSImageCategare.m */; };
+		39C0804B1F0A1EB2001BF399 /* YSHealthKitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C0804A1F0A1EB2001BF399 /* YSHealthKitVC.m */; };
+		39C0804D1F0A3966001BF399 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C0804C1F0A3966001BF399 /* libc++abi.tbd */; };
+		39C080521F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C080511F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m */; };
 		39C25E141E528B6700D3415F /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C25E131E528B6700D3415F /* PhotoCollectionViewCell.m */; };
 		39C46B2C1E9646CB001A7AAB /* YSNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C46B2B1E9646CB001A7AAB /* YSNavController.m */; };
 		39C4F2461D910B9400E4FADE /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C4F2451D910B9400E4FADE /* libCocoaLumberjack.a */; };
@@ -960,6 +963,11 @@
 		39B9B0B31E825ED60096A4B4 /* YSTestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSTestVC.m; sourceTree = "<group>"; };
 		39BBEA651D5DA46500F192F2 /* UIImage+YSImageCategare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+YSImageCategare.h"; sourceTree = "<group>"; };
 		39BBEA661D5DA46500F192F2 /* UIImage+YSImageCategare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+YSImageCategare.m"; sourceTree = "<group>"; };
+		39C080491F0A1EB2001BF399 /* YSHealthKitVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHealthKitVC.h; sourceTree = "<group>"; };
+		39C0804A1F0A1EB2001BF399 /* YSHealthKitVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSHealthKitVC.m; sourceTree = "<group>"; };
+		39C0804C1F0A3966001BF399 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
+		39C080501F0A4875001BF399 /* HKHealthStore+AAPLExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKHealthStore+AAPLExtensions.h"; sourceTree = "<group>"; };
+		39C080511F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HKHealthStore+AAPLExtensions.m"; sourceTree = "<group>"; };
 		39C25E121E528B6700D3415F /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		39C25E131E528B6700D3415F /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		39C46B2A1E9646CB001A7AAB /* YSNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSNavController.h; sourceTree = "<group>"; };
@@ -998,6 +1006,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39C0804D1F0A3966001BF399 /* libc++abi.tbd in Frameworks */,
 				394BCA431F037B1400EC55FC /* libicucore.tbd in Frameworks */,
 				394BCA341F0343B100EC55FC /* libsqlite3.tbd in Frameworks */,
 				394BCA321F0343A400EC55FC /* ImageIO.framework in Frameworks */,
@@ -1462,6 +1471,7 @@
 			children = (
 				3928DF431F0257D200A7F38A /* YSHarewareViewController.h */,
 				3928DF441F0257D200A7F38A /* YSHarewareViewController.m */,
+				39C080481F0A1E8F001BF399 /* HealthKit */,
 				3928DF371F0257D200A7F38A /* 3DTouch */,
 				3928DF3C1F0257D200A7F38A /* Blutooth */,
 			);
@@ -2079,6 +2089,7 @@
 		395E69531D1279E600CBDFE0 /* Categares */ = {
 			isa = PBXGroup;
 			children = (
+				39C0804F1F0A4875001BF399 /* HKHealthKit */,
 				39B097011EF0E23700605D85 /* NSAttributedString */,
 				395ACEA11D937D4F00C22165 /* UIView+UniformDistribute */,
 				39E311401D643F8700A631EA /* NSDateCategory */,
@@ -2447,6 +2458,24 @@
 			path = UIImage;
 			sourceTree = "<group>";
 		};
+		39C080481F0A1E8F001BF399 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				39C080491F0A1EB2001BF399 /* YSHealthKitVC.h */,
+				39C0804A1F0A1EB2001BF399 /* YSHealthKitVC.m */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		39C0804F1F0A4875001BF399 /* HKHealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				39C080501F0A4875001BF399 /* HKHealthStore+AAPLExtensions.h */,
+				39C080511F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m */,
+			);
+			path = HKHealthKit;
+			sourceTree = "<group>";
+		};
 		39C6219C1D0EABA400A34040 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2536,6 +2565,7 @@
 		D6C183E4E3E19DB390670CA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39C0804C1F0A3966001BF399 /* libc++abi.tbd */,
 				394BCA421F037B1400EC55FC /* libicucore.tbd */,
 				394BCA331F0343B100EC55FC /* libsqlite3.tbd */,
 				394BCA311F0343A400EC55FC /* ImageIO.framework */,
@@ -3044,6 +3074,7 @@
 				3928DF931F02595C00A7F38A /* YSOperationVC.m in Sources */,
 				39C25E141E528B6700D3415F /* PhotoCollectionViewCell.m in Sources */,
 				3928DF251F02570A00A7F38A /* FileOrCodeViewController.m in Sources */,
+				39C080521F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m in Sources */,
 				3928DEC11F0253BE00A7F38A /* OnePickerViewController.m in Sources */,
 				3928DECA1F02540900A7F38A /* OneCollectionReusableView.m in Sources */,
 				39333C1B1DE2CF0000035157 /* ImagesShowViewController.m in Sources */,
@@ -3072,6 +3103,7 @@
 				3939864C1E4D915500B1553C /* ImagePickerManager.m in Sources */,
 				39333C201DE2CFA900035157 /* AddIconToDesktopVC.m in Sources */,
 				39DB4C861D5AD75D009D2B1F /* YSEnDecryptionMethod.m in Sources */,
+				39C0804B1F0A1EB2001BF399 /* YSHealthKitVC.m in Sources */,
 				3928DF641F02584900A7F38A /* CALayerAndBerzierVC.m in Sources */,
 				390C593C1DE4393C0087990C /* AudioListVC.m in Sources */,
 				39B097041EF0E26F00605D85 /* NSAttributedString+YSAttrStrCategory.m in Sources */,

@@ -11,6 +11,7 @@
 // 1
 #import "CameraOrImageListVC.h"
 
+#import "YSHealthKitVC.h"
 #import "YSBlueToothVC.h"
 #import "YS3DTouchVC.h"
 
@@ -127,6 +128,9 @@ static NSString * const HarewareCellID = @"HarewareCellID";
                 case 2:
                 {
                     // 健康
+                    YSHealthKitVC * healthVC = [[YSHealthKitVC alloc] init];
+                    healthVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:healthVC animated:YES];
                 }
                     break;
                 case 3:

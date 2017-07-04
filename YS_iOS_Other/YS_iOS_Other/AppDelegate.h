@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
+@import HealthKit;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) BMKMapManager * mapManager;   
+@property (nonatomic, strong) BMKMapManager * mapManager;
+@property (nonatomic) HKHealthStore * healthStore;
+
++ (AppDelegate *)defaultAppDelegate;
 
 @end
 
