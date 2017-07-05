@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 44)];
+        self.headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
         self.headerLabel.textColor = [UIColor blackColor];
         [self addSubview:self.headerLabel];
     }

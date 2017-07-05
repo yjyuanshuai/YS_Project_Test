@@ -79,6 +79,7 @@
     _pickerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_textField.frame), self.view.frame.size.width, self.view.frame.size.height - _textField.frame.size.height) style:UITableViewStylePlain];
     _pickerTableView.delegate = self;
     _pickerTableView.dataSource = self;
+    _pickerTableView.tableFooterView = [UIView new];
     [self.view addSubview:_pickerTableView];
 }
 

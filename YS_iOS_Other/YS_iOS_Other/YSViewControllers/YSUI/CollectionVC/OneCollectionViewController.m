@@ -81,15 +81,13 @@ static NSString * collection_footer = @"collection_footer";
 {
     // 自定义布局
     UICollectionViewFlowLayout * collectionLayout = [[UICollectionViewFlowLayout alloc] init];
-    collectionLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    collectionLayout.scrollDirection = UICollectionViewScrollDirectionVertical; //UICollectionViewScrollDirectionHorizontal;
     
     _collecionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,kScreenHeightNo64) collectionViewLayout:collectionLayout];
     _collecionView.backgroundColor = [UIColor whiteColor];
     _collecionView.delegate = self;
     _collecionView.dataSource = self;
     [self.view addSubview:_collecionView];
-    
-//    _collecionView.transform = CGAffineTransformMakeRotation(M_PI/2*3);
     
     // 注册cell
     [_collecionView registerClass:[OneCollectionCollectionViewCell class] forCellWithReuseIdentifier:collection_cell_id];
@@ -239,7 +237,7 @@ static NSString * collection_footer = @"collection_footer";
     /**
      *  滑动方向为 横向时
      */
-    return CGSizeMake(20, kScreenHeightNo64);
+    return CGSizeMake(kScreenWidth, 20);//CGSizeMake(20, kScreenHeightNo64);
 }
 
 // section footer size
@@ -253,7 +251,7 @@ static NSString * collection_footer = @"collection_footer";
     /**
      *  滑动方向为 横向时
      */
-    return CGSizeMake(20, kScreenHeightNo64);
+    return CGSizeMake(kScreenWidth, 20); //CGSizeMake(20, kScreenWidth);
 }
 
 // 上左下右的间距

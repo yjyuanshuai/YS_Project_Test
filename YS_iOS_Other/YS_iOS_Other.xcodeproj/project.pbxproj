@@ -1309,12 +1309,12 @@
 		3928DEC21F02540900A7F38A /* CollectionVC */ = {
 			isa = PBXGroup;
 			children = (
+				3928DEC71F02540900A7F38A /* OneCollectionViewController.h */,
+				3928DEC81F02540900A7F38A /* OneCollectionViewController.m */,
 				3928DEC31F02540900A7F38A /* OneCollectionCollectionViewCell.h */,
 				3928DEC41F02540900A7F38A /* OneCollectionCollectionViewCell.m */,
 				3928DEC51F02540900A7F38A /* OneCollectionReusableView.h */,
 				3928DEC61F02540900A7F38A /* OneCollectionReusableView.m */,
-				3928DEC71F02540900A7F38A /* OneCollectionViewController.h */,
-				3928DEC81F02540900A7F38A /* OneCollectionViewController.m */,
 			);
 			name = CollectionVC;
 			path = YSUI/CollectionVC;
