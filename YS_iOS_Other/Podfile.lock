@@ -1,12 +1,6 @@
 PODS:
   - BaiduMapKit (3.0.0)
-  - CocoaAsyncSocket (7.4.3):
-    - CocoaAsyncSocket/All (= 7.4.3)
-  - CocoaAsyncSocket/All (7.4.3):
-    - CocoaAsyncSocket/GCD
-    - CocoaAsyncSocket/RunLoop
-  - CocoaAsyncSocket/GCD (7.4.3)
-  - CocoaAsyncSocket/RunLoop (7.4.3)
+  - CocoaAsyncSocket (7.6.1)
   - CocoaHTTPServer (2.3):
     - CocoaAsyncSocket
     - CocoaLumberjack
@@ -25,15 +19,13 @@ PODS:
     - FMDBMigrationManager/System (= 1.4.1)
   - FMDBMigrationManager/System (1.4.1):
     - FMDB/standard (>= 2.3)
-  - JSPatch (1.0):
-    - JSPatch/Core (= 1.0)
-  - JSPatch/Core (1.0)
   - Masonry (1.0.1)
   - QBImagePickerController (3.4.0)
   - RESideMenu (4.0.7)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - TZImagePickerController (1.8.3)
   - UITableView+FDTemplateLayoutCell (1.4)
 
 DEPENDENCIES:
@@ -42,27 +34,27 @@ DEPENDENCIES:
   - CocoaLumberjack (= 2.3.0)
   - FMDB (= 2.6.2)
   - FMDBMigrationManager (= 1.4.1)
-  - JSPatch
   - Masonry (= 1.0.1)
   - QBImagePickerController (= 3.4.0)
   - RESideMenu (= 4.0.7)
   - SDWebImage (= 3.8.1)
+  - TZImagePickerController
   - UITableView+FDTemplateLayoutCell (= 1.4)
 
 SPEC CHECKSUMS:
   BaiduMapKit: de2a726d5296d6b2dc0e974b683af73153608dcd
-  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
+  CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
   CocoaHTTPServer: 5624681fc3473d43b18202f635f9b3abb013b530
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   FMDBMigrationManager: d52007f328ea0665e8985ca8a33500707aef084f
-  JSPatch: c689ea4dde17441f2f4a95d40dfedb8900c20099
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  TZImagePickerController: 8c02d10822404b26c4330cdb79f2e46fb6a61473
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
-PODFILE CHECKSUM: 0ae19d74a1181c48b59264e2d2388848cfab4031
+PODFILE CHECKSUM: 5bee9cba587d5cbeb9f00e302146d7bdc4981e2c
 
 COCOAPODS: 1.1.1
