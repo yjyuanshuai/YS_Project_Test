@@ -19,9 +19,9 @@
 
 @implementation TZImageManager
 
-static CGSize AssetGridThumbnailSize;
-static CGFloat TZScreenWidth;
-static CGFloat TZScreenScale;
+CGSize AssetGridThumbnailSize;
+CGFloat TZScreenWidth;
+CGFloat TZScreenScale;
 
 static TZImageManager *manager;
 static dispatch_once_t onceToken;
@@ -34,12 +34,7 @@ static dispatch_once_t onceToken;
             // manager.cachingImageManager.allowsCachingHighQualityImages = YES;
         }
         
-        TZScreenWidth = [UIScreen mainScreen].bounds.size.width;
-        // 测试发现，如果scale在plus真机上取到3.0，内存会增大特别多。故这里写死成2.0
-        TZScreenScale = 2.0;
-        if (TZScreenWidth > 700) {
-            TZScreenScale = 1.5;
-        }
+        [manager configTZScreenWidth];
     });
     return manager;
 }
@@ -55,10 +50,21 @@ static dispatch_once_t onceToken;
 }
 
 - (void)setColumnNumber:(NSInteger)columnNumber {
+    [self configTZScreenWidth];
+
     _columnNumber = columnNumber;
     CGFloat margin = 4;
     CGFloat itemWH = (TZScreenWidth - 2 * margin - 4) / columnNumber - margin;
     AssetGridThumbnailSize = CGSizeMake(itemWH * TZScreenScale, itemWH * TZScreenScale);
+}
+
+- (void)configTZScreenWidth {
+    TZScreenWidth = [UIScreen mainScreen].bounds.size.width;
+    // 测试发现，如果scale在plus真机上取到3.0，内存会增大特别多。故这里写死成2.0
+    TZScreenScale = 2.0;
+    if (TZScreenWidth > 700) {
+        TZScreenScale = 1.5;
+    }
 }
 
 - (ALAssetsLibrary *)assetLibrary {
@@ -309,24 +315,13 @@ static dispatch_once_t onceToken;
     if (!canSelect) return nil;
     
     TZAssetModel *model;
-    TZAssetModelMediaType type = TZAssetModelMediaTypePhoto;
+    TZAssetModelMediaType type = [self getAssetType:asset];
     if ([asset isKindOfClass:[PHAsset class]]) {
-        PHAsset *phAsset = (PHAsset *)asset;
-        if (phAsset.mediaType == PHAssetMediaTypeVideo)      type = TZAssetModelMediaTypeVideo;
-        else if (phAsset.mediaType == PHAssetMediaTypeAudio) type = TZAssetModelMediaTypeAudio;
-        else if (phAsset.mediaType == PHAssetMediaTypeImage) {
-            if (iOS9_1Later) {
-                // if (asset.mediaSubtypes == PHAssetMediaSubtypePhotoLive) type = TZAssetModelMediaTypeLivePhoto;
-            }
-            // Gif
-            if ([[phAsset valueForKey:@"filename"] hasSuffix:@"GIF"]) {
-                type = TZAssetModelMediaTypePhotoGif;
-            }
-        }
         if (!allowPickingVideo && type == TZAssetModelMediaTypeVideo) return nil;
         if (!allowPickingImage && type == TZAssetModelMediaTypePhoto) return nil;
         if (!allowPickingImage && type == TZAssetModelMediaTypePhotoGif) return nil;
         
+        PHAsset *phAsset = (PHAsset *)asset;
         if (self.hideWhenCanNotSelect) {
             // 过滤掉尺寸不满足要求的图片
             if (![self isPhotoSelectableWithAsset:phAsset]) {
@@ -342,8 +337,7 @@ static dispatch_once_t onceToken;
             return model;
         }
         /// Allow picking video
-        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-            type = TZAssetModelMediaTypeVideo;
+        if (type == TZAssetModelMediaTypeVideo) {
             NSTimeInterval duration = [[asset valueForProperty:ALAssetPropertyDuration] doubleValue];
             NSString *timeLength = [NSString stringWithFormat:@"%0.0f",duration];
             timeLength = [self getNewTimeFromDurationSecond:timeLength.integerValue];
@@ -359,6 +353,29 @@ static dispatch_once_t onceToken;
         }
     }
     return model;
+}
+
+- (TZAssetModelMediaType)getAssetType:(id)asset {
+    TZAssetModelMediaType type = TZAssetModelMediaTypePhoto;
+    if ([asset isKindOfClass:[PHAsset class]]) {
+        PHAsset *phAsset = (PHAsset *)asset;
+        if (phAsset.mediaType == PHAssetMediaTypeVideo)      type = TZAssetModelMediaTypeVideo;
+        else if (phAsset.mediaType == PHAssetMediaTypeAudio) type = TZAssetModelMediaTypeAudio;
+        else if (phAsset.mediaType == PHAssetMediaTypeImage) {
+            if (iOS9_1Later) {
+                // if (asset.mediaSubtypes == PHAssetMediaSubtypePhotoLive) type = TZAssetModelMediaTypeLivePhoto;
+            }
+            // Gif
+            if ([[phAsset valueForKey:@"filename"] hasSuffix:@"GIF"]) {
+                type = TZAssetModelMediaTypePhotoGif;
+            }
+        }
+    } else {
+        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            type = TZAssetModelMediaTypeVideo;
+        }
+    }
+    return type;
 }
 
 - (NSString *)getNewTimeFromDurationSecond:(NSInteger)duration {
@@ -450,7 +467,7 @@ static dispatch_once_t onceToken;
             CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
             CGFloat pixelWidth = photoWidth * TZScreenScale * 1.5;
             // 超宽图片
-            if (aspectRatio > 1) {
+            if (aspectRatio > 1.8) {
                 pixelWidth = pixelWidth * aspectRatio;
             }
             // 超高图片

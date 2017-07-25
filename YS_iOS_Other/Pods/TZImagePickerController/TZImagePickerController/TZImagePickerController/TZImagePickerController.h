@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 1.8.3 - 2017.07.15
+//  version 1.8.5 - 2017.07.25
 //  更多信息，请前往项目的github地址：https://github.com/banchichen/TZImagePickerController
 
 /*
@@ -71,6 +71,8 @@
 /// Default is YES, if set NO, user can't picking video.
 /// 默认为YES，如果设置为NO,用户将不能选择视频
 @property (nonatomic, assign) BOOL allowPickingVideo;
+/// Default is NO / 默认为NO，为YES时可以多选视频/gif图片，和照片共享最大可选张数maxImagesCount的限制
+@property (nonatomic, assign) BOOL allowPickingMultipleVideo;
 
 /// Default is NO, if set YES, user can picking gif image.
 /// 默认为NO，如果设置为YES,用户可以选择gif图片
@@ -108,10 +110,12 @@
 @property (nonatomic, assign) BOOL isStatusBarDefault;
 /// Single selection mode, valid when maxImagesCount = 1
 /// 单选模式,maxImagesCount为1时才生效
-@property (nonatomic, assign) BOOL showSelectBtn;   ///< 在单选模式下，照片列表页中，显示选择按钮,默认为NO
-@property (nonatomic, assign) BOOL allowCrop;       ///< 允许裁剪,默认为YES，showSelectBtn为NO才生效
-@property (nonatomic, assign) CGRect cropRect;      ///< 裁剪框的尺寸
-@property (nonatomic, assign) BOOL needCircleCrop;  ///< 需要圆形裁剪框
+@property (nonatomic, assign) BOOL showSelectBtn;        ///< 在单选模式下，照片列表页中，显示选择按钮,默认为NO
+@property (nonatomic, assign) BOOL allowCrop;            ///< 允许裁剪,默认为YES，showSelectBtn为NO才生效
+@property (nonatomic, assign) CGRect cropRect;           ///< 裁剪框的尺寸
+@property (nonatomic, assign) CGRect cropRectPortrait;   ///< 裁剪框的尺寸(竖屏)
+@property (nonatomic, assign) CGRect cropRectLandscape;  ///< 裁剪框的尺寸(横屏)
+@property (nonatomic, assign) BOOL needCircleCrop;       ///< 需要圆形裁剪框
 @property (nonatomic, assign) NSInteger circleCropRadius;  ///< 圆形裁剪框半径大小
 @property (nonatomic, copy) void (^cropViewSettingBlock)(UIView *cropView);     ///< 自定义裁剪框的其他属性
 

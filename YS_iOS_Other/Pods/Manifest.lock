@@ -25,7 +25,7 @@ PODS:
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
-  - TZImagePickerController (1.8.3)
+  - TZImagePickerController (1.8.5)
   - UITableView+FDTemplateLayoutCell (1.4)
 
 DEPENDENCIES:
@@ -52,7 +52,7 @@ SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  TZImagePickerController: 8c02d10822404b26c4330cdb79f2e46fb6a61473
+  TZImagePickerController: ca4110384c10e25925b9197db8b755da14ebf3db
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
 
 PODFILE CHECKSUM: 5bee9cba587d5cbeb9f00e302146d7bdc4981e2c

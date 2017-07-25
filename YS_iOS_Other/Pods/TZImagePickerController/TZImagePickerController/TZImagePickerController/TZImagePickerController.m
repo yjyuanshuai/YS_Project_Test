@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 1.8.3 - 2017.07.15
+//  version 1.8.5 - 2017.07.25
 //  更多信息，请前往项目的github地址：https://github.com/banchichen/TZImagePickerController
 
 #import "TZImagePickerController.h"
@@ -44,7 +44,6 @@
     self.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationBar.translucent = YES;
     [TZImageManager manager].shouldFixOrientation = NO;
-    
 
     // Default appearance, you can reset these after this method
     // 默认的外观，你可以在这个方法后重置
@@ -55,7 +54,8 @@
         self.navigationBar.barTintColor = [UIColor colorWithRed:(34/255.0) green:(34/255.0)  blue:(34/255.0) alpha:1.0];
         self.navigationBar.tintColor = [UIColor whiteColor];
         self.automaticallyAdjustsScrollViewInsets = NO;
-    }
+        if (!TZ_isGlobalHideStatusBar) [UIApplication sharedApplication].statusBarHidden = NO;
+    }    
 }
 
 - (void)setNaviBgColor:(UIColor *)naviBgColor {
@@ -112,7 +112,6 @@
     }else{
         [UIApplication sharedApplication].statusBarStyle = iOS7Later ? UIStatusBarStyleLightContent : UIStatusBarStyleBlackOpaque;
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -238,6 +237,9 @@
     
     [self configDefaultImageName];
     [self configDefaultBtnTitle];
+    
+    CGFloat cropViewWH = MIN(self.view.tz_width, self.view.tz_height) / 3 * 2;
+    self.cropRect = CGRectMake((self.view.tz_width - cropViewWH) / 2, (self.view.tz_height - cropViewWH) / 2, cropViewWH, cropViewWH);
 }
 
 - (void)configDefaultImageName {
@@ -319,17 +321,14 @@
         [_progressHUD setBackgroundColor:[UIColor clearColor]];
         
         _HUDContainer = [[UIView alloc] init];
-        _HUDContainer.frame = CGRectMake((self.view.tz_width - 120) / 2, (self.view.tz_height - 90) / 2, 120, 90);
         _HUDContainer.layer.cornerRadius = 8;
         _HUDContainer.clipsToBounds = YES;
         _HUDContainer.backgroundColor = [UIColor darkGrayColor];
         _HUDContainer.alpha = 0.7;
         
         _HUDIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        _HUDIndicatorView.frame = CGRectMake(45, 15, 30, 30);
         
         _HUDLabel = [[UILabel alloc] init];
-        _HUDLabel.frame = CGRectMake(0,40, 120, 50);
         _HUDLabel.textAlignment = NSTextAlignmentCenter;
         _HUDLabel.text = self.processHintStr;
         _HUDLabel.font = [UIFont systemFontOfSize:15];
@@ -382,15 +381,14 @@
 
 - (void)setCircleCropRadius:(NSInteger)circleCropRadius {
     _circleCropRadius = circleCropRadius;
-    _cropRect = CGRectMake(self.view.tz_width / 2 - circleCropRadius, self.view.tz_height / 2 - _circleCropRadius, _circleCropRadius * 2, _circleCropRadius * 2);
+    self.cropRect = CGRectMake(self.view.tz_width / 2 - circleCropRadius, self.view.tz_height / 2 - _circleCropRadius, _circleCropRadius * 2, _circleCropRadius * 2);
 }
 
-- (CGRect)cropRect {
-    if (_cropRect.size.width > 0) {
-        return _cropRect;
-    }
-    CGFloat cropViewWH = self.view.tz_width;
-    return CGRectMake(0, (self.view.tz_height - self.view.tz_width) / 2, cropViewWH, cropViewWH);
+- (void)setCropRect:(CGRect)cropRect {
+    _cropRect = cropRect;
+    _cropRectPortrait = cropRect;
+    CGFloat widthHeight = cropRect.size.width;
+    _cropRectLandscape = CGRectMake((self.view.tz_height - widthHeight) / 2, cropRect.origin.x, widthHeight, widthHeight);
 }
 
 - (void)setTimeout:(NSInteger)timeout {
@@ -454,7 +452,7 @@
     _selectedAssets = selectedAssets;
     _selectedModels = [NSMutableArray array];
     for (id asset in selectedAssets) {
-        TZAssetModel *model = [TZAssetModel modelWithAsset:asset type:TZAssetModelMediaTypePhoto];
+        TZAssetModel *model = [TZAssetModel modelWithAsset:asset type:[[TZImageManager manager] getAssetType:asset]];
         model.isSelected = YES;
         [_selectedModels addObject:model];
     }
@@ -500,12 +498,46 @@
     [super pushViewController:viewController animated:animated];
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 - (void)dealloc {
     // NSLog(@"%@ dealloc",NSStringFromClass(self.class));
+}
+
+#pragma mark - UIContentContainer
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self willInterfaceOrientionChange];
+    if (size.width > size.height) {
+        _cropRect = _cropRectLandscape;
+    } else {
+        _cropRect = _cropRectPortrait;
+    }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self willInterfaceOrientionChange];
+    if (toInterfaceOrientation >= 3) {
+        _cropRect = _cropRectLandscape;
+    } else {
+        _cropRect = _cropRectPortrait;
+    }
+}
+
+- (void)willInterfaceOrientionChange {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (![UIApplication sharedApplication].statusBarHidden) {
+            if (iOS7Later && !TZ_isGlobalHideStatusBar) [UIApplication sharedApplication].statusBarHidden = NO;
+        }
+    });
+}
+
+#pragma mark - Layout
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    _HUDContainer.frame = CGRectMake((self.view.tz_width - 120) / 2, (self.view.tz_height - 90) / 2, 120, 90);
+    _HUDIndicatorView.frame = CGRectMake(45, 15, 30, 30);
+    _HUDLabel.frame = CGRectMake(0,40, 120, 50);    
 }
 
 #pragma mark - Public
@@ -521,12 +553,6 @@
 }
 
 - (void)callDelegateMethod {
-    /*
-     // 兼容旧版本
-     if ([self.pickerDelegate respondsToSelector:@selector(imagePickerControllerDidCancel:)]) {
-     [self.pickerDelegate imagePickerControllerDidCancel:self];
-     }
-     */
     if ([self.pickerDelegate respondsToSelector:@selector(tz_imagePickerControllerDidCancel:)]) {
         [self.pickerDelegate tz_imagePickerControllerDidCancel:self];
     }
@@ -586,19 +612,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (!_tableView) {
-                    CGFloat top = 0;
-                    CGFloat tableViewHeight = 0;
-                    if (self.navigationController.navigationBar.isTranslucent) {
-                        top = 44;
-                        if (iOS7Later && !TZ_isGlobalHideStatusBar) top += 20;
-                        tableViewHeight = self.view.tz_height - top;
-                    } else {
-                        CGFloat navigationHeight = 44;
-                        if (iOS7Later && !TZ_isGlobalHideStatusBar) navigationHeight += 20;
-                        tableViewHeight = self.view.tz_height - navigationHeight;
-                    }
-                    
-                    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, top, self.view.tz_width, tableViewHeight) style:UITableViewStylePlain];
+                    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
                     _tableView.rowHeight = 70;
                     _tableView.tableFooterView = [[UIView alloc] init];
                     _tableView.dataSource = self;
@@ -615,6 +629,25 @@
 
 - (void)dealloc {
     // NSLog(@"%@ dealloc",NSStringFromClass(self.class));
+}
+
+#pragma mark - Layout
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    CGFloat top = 0;
+    CGFloat tableViewHeight = 0;
+    CGFloat naviBarHeight = self.navigationController.navigationBar.tz_height;
+    BOOL isStatusBarHidden = [UIApplication sharedApplication].isStatusBarHidden;
+    if (self.navigationController.navigationBar.isTranslucent) {
+        top = naviBarHeight;
+        if (iOS7Later && !isStatusBarHidden) top += 20;
+        tableViewHeight = self.view.tz_height - top;
+    } else {
+        tableViewHeight = self.view.tz_height;
+    }
+    _tableView.frame = CGRectMake(0, top, self.view.tz_width, tableViewHeight);
 }
 
 #pragma mark - UITableViewDataSource && Delegate
