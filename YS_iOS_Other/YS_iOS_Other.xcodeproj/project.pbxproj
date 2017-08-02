@@ -190,6 +190,8 @@
 		395D48461EFCA55E0022212A /* YSCommenListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395D48451EFCA55E0022212A /* YSCommenListVC.m */; };
 		395D48491EFCAE330022212A /* YSCalendarEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 395D48481EFCAE330022212A /* YSCalendarEventTableViewCell.m */; };
 		395D484E1EFD15040022212A /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395D484D1EFD15040022212A /* LocalAuthentication.framework */; };
+		3965E5E91F31A9BF004F7B99 /* YSCustemCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3965E5E81F31A9BF004F7B99 /* YSCustemCollectionVC.m */; };
+		3965E5EC1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3965E5EB1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.m */; };
 		396DC5381E94FD3100AC9787 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC5371E94FD3100AC9787 /* VideoListVC.m */; };
 		396DC53B1E94FE2700AC9787 /* YSVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396DC53A1E94FE2700AC9787 /* YSVideoPlayerView.m */; };
 		39865E5F1E7126900095B6C1 /* GlobalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39865E5E1E7126900095B6C1 /* GlobalWebVC.m */; };
@@ -738,6 +740,10 @@
 		395D48471EFCAE330022212A /* YSCalendarEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCalendarEventTableViewCell.h; sourceTree = "<group>"; };
 		395D48481EFCAE330022212A /* YSCalendarEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCalendarEventTableViewCell.m; sourceTree = "<group>"; };
 		395D484D1EFD15040022212A /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		3965E5E71F31A9BF004F7B99 /* YSCustemCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCustemCollectionVC.h; sourceTree = "<group>"; };
+		3965E5E81F31A9BF004F7B99 /* YSCustemCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCustemCollectionVC.m; sourceTree = "<group>"; };
+		3965E5EA1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSCustemCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		3965E5EB1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCustemCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		396DC5361E94FD3100AC9787 /* VideoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListVC.h; sourceTree = "<group>"; };
 		396DC5371E94FD3100AC9787 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
 		396DC5391E94FE2700AC9787 /* YSVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSVideoPlayerView.h; sourceTree = "<group>"; };
@@ -1271,6 +1277,10 @@
 				3928DEC41F02540900A7F38A /* OneCollectionCollectionViewCell.m */,
 				3928DEC51F02540900A7F38A /* OneCollectionReusableView.h */,
 				3928DEC61F02540900A7F38A /* OneCollectionReusableView.m */,
+				3965E5E71F31A9BF004F7B99 /* YSCustemCollectionVC.h */,
+				3965E5E81F31A9BF004F7B99 /* YSCustemCollectionVC.m */,
+				3965E5EA1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.h */,
+				3965E5EB1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.m */,
 			);
 			name = CollectionVC;
 			path = YSUI/CollectionVC;
@@ -2895,10 +2905,12 @@
 				39EA8ECA1D40BB6C0053EE02 /* YSLoginViewController.m in Sources */,
 				39B9B0B41E825ED60096A4B4 /* YSTestVC.m in Sources */,
 				39D65A1E1E07BF8500FFCF78 /* ChatMsgModel.m in Sources */,
+				3965E5EC1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.m in Sources */,
 				39214A141D05203B0019422D /* AppDelegate.m in Sources */,
 				3928DF311F02570A00A7F38A /* YSSaveDataViewController.m in Sources */,
 				3930F48A1E4B1098006D877F /* ImageTextVC.m in Sources */,
 				3901E7A51EEFCA4A003681FD /* ChatViewTextMsgCell.m in Sources */,
+				3965E5E91F31A9BF004F7B99 /* YSCustemCollectionVC.m in Sources */,
 				39333BF11DE2CE9A00035157 /* FirstSimpleView.m in Sources */,
 				39333BE71DE2CE6C00035157 /* YSOtherViewController.m in Sources */,
 				39294C041EEAA9F90039538F /* YSMenuButton.m in Sources */,

@@ -14,6 +14,7 @@
 
 // 2 滚动
 #import "OneCollectionViewController.h"
+#import "YSCustemCollectionVC.h"
 #import "OneHorizontalTableViewController.h"
 
 
@@ -67,7 +68,7 @@
     
     _sectionTitle = @[@"1 选择", @"2 滚动", @"3 搜索", @"4 Application", @"5 Alert Controller", @"6 Menu Controller"];
     NSArray * sectionOne    = @[@"Picker"];
-    NSArray * sectionTwo    = @[@"CollectionView", @"横向tableView"];
+    NSArray * sectionTwo    = @[@"CollectionView", @"自定义CollectionView布局", @"横向tableView"];
     NSArray * sectionThree  = @[@"UISearchDisplayController", @"UISearchController", @"自定义SearchBar"];
     NSArray * sectionFour   = @[@"UIApplicaton一些设置"];
     NSArray * sectionFive   = @[@"AlertController"];
@@ -146,6 +147,12 @@
                 [self.navigationController pushViewController:collectionVC animated:YES];
             }
             else if (indexPath.row == 1)
+            {
+                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] init];
+                custemCollectionView.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:custemCollectionView animated:YES];
+            }
+            else if (indexPath.row == 2)
             {
                 // 横向 tableview
                 OneHorizontalTableViewController * horizontalVC = [[OneHorizontalTableViewController alloc] init];
