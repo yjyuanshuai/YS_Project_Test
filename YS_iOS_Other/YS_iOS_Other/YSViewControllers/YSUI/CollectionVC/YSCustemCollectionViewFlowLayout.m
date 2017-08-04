@@ -8,10 +8,19 @@
 
 #import "YSCustemCollectionViewFlowLayout.h"
 
+NSString * const YSCustemCollectionView_SectionHeadID = @"YSCustemCollectionView_SectionHeadID";
+NSString * const YSCustemCollectionView_SectionFootID = @"YSCustemCollectionView_SectionFootID";
+NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollectionView_SectionDecorationID";
+
 @interface YSCustemCollectionViewFlowLayout()
 
+//记录瀑布流每列最下面那个cell的底部y值
 @property (nonatomic, strong) NSMutableDictionary * itemsMaxYDic;
-@property (nonatomic, strong) NSMutableArray * attrsArr;
+
+@property (nonatomic, strong) NSMutableDictionary * itemAttrsDic;
+@property (nonatomic, strong) NSMutableDictionary * sectionHeadAttrsDic;
+@property (nonatomic, strong) NSMutableDictionary * sectionFootAttrsDic;
+@property (nonatomic, strong) NSMutableDictionary * sectionDecorationDic;
 
 @end
 
@@ -22,48 +31,202 @@
     self = [super init];
     if (self) {
 
+        self.ysColumntCount = 3;
+        self.ysSpaceHor = 10;
+        self.ysSpaceVer = 20;
+        self.ysSectionInset = UIEdgeInsetsMake(30, 20, 30, 20);
+
+        self.itemsMaxYDic = [NSMutableDictionary dictionary];
+        self.itemAttrsDic = [NSMutableDictionary dictionary];
+        self.sectionHeadAttrsDic = [NSMutableDictionary dictionary];
+        self.sectionFootAttrsDic = [NSMutableDictionary dictionary];
+        self.sectionDecorationDic = [NSMutableDictionary dictionary];
+
+        self.ysSectionHeadHeightArr = [NSMutableArray array];
+        self.ysSectionFootHeightArr = [NSMutableArray array];
     }
     return self;
 }
 
-#pragma mark -
+#pragma mark - 自定义布局
+//预布局方法 所有的布局应该写在这里面
 - (void)prepareLayout
 {
+    [super prepareLayout];
 
+    [self.itemsMaxYDic removeAllObjects];
+    [self.itemAttrsDic removeAllObjects];
+    [self.sectionHeadAttrsDic removeAllObjects];
+    [self.sectionFootAttrsDic removeAllObjects];
+    [self.sectionDecorationDic removeAllObjects];
+
+    // item 宽度
+    CGFloat itemWidth = (self.collectionView.frame.size.width - self.ysSectionInset.left - self.ysSectionInset.right - (self.ysColumntCount-1)*self.ysSpaceHor)/self.ysColumntCount;
+
+    NSInteger sectionNum = self.collectionView.numberOfSections;
+    for (int i = 0; i < sectionNum; i++) {
+
+        NSIndexPath * currentSectionIndexPath = [NSIndexPath indexPathForRow:0 inSection:i];
+        // 段头
+        CGFloat currentSectionHeadHeight = 0;
+        if (i < [self.ysSectionHeadHeightArr count]) {
+            currentSectionHeadHeight = [self.ysSectionHeadHeightArr[i] floatValue];
+        }
+        if (currentSectionHeadHeight > 0 && [self.collectionView respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadID withIndexPath:currentSectionIndexPath];
+            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionHeadHeight);
+            // 保存段头
+            self.sectionHeadAttrsDic[currentSectionIndexPath] = attr;
+            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top + currentSectionHeadHeight];
+        }
+        else {
+            // 没有段头时，加上段边距
+            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top];
+        }
+
+        // 段尾
+        CGFloat currentSectionFootHeight = 0;
+        if (i < [self.ysSectionFootHeightArr count]) {
+            currentSectionFootHeight = [self.ysSectionFootHeightArr[i] floatValue];
+        }
+        if (currentSectionFootHeight > 0 && [self.collectionView respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionFootID withIndexPath:currentSectionIndexPath];
+            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionFootHeight);
+            // 保存段尾
+            self.sectionFootAttrsDic[currentSectionIndexPath] = attr;
+            [self setCurrentMaxY:[self currentMaxY] + currentSectionFootHeight];
+        }
+
+        // cell
+        NSInteger itemNum = [self.collectionView numberOfItemsInSection:i];
+        for (int j = 0; j < itemNum; j++) {
+            NSIndexPath * currentItemIndexPath = [NSIndexPath indexPathForRow:j inSection:i];
+
+            // 下一个 item 是接在当前 最短的 item 下面的
+            __block CGFloat currentMinY = [self.itemsMaxYDic[@(0)] floatValue];
+            __block NSInteger currentRow = 0;
+            [self.itemsMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSNumber * row, NSNumber * columntY, BOOL * _Nonnull stop) {
+                if (currentMinY > [columntY floatValue]) {
+                    currentMinY = [columntY floatValue];
+                    currentRow = [row integerValue];
+                }
+            }];
+            CGFloat currentItemX = self.ysSectionInset.left + (itemWidth + self.ysSpaceHor)*currentRow;
+            CGFloat currentItemY = currentMinY + self.ysSpaceVer;
+            CGFloat currentItemHeight = 0;
+            if (self.delegate && [self.delegate respondsToSelector:@selector(ysCustemCollectionView:itemHeightWithIndexPath: itemWidth:)]) {
+                currentItemHeight = [self.delegate ysCustemCollectionView:self.collectionView itemHeightWithIndexPath:currentItemIndexPath itemWidth:itemWidth];
+            }
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:currentItemIndexPath];
+            attr.frame = CGRectMake(currentItemX, currentItemY, itemWidth, currentItemHeight);
+            self.itemAttrsDic[currentItemIndexPath] = attr;
+            if ((currentMinY + currentItemHeight + self.ysSpaceVer) > [self currentMaxY]) {
+                [self setCurrentMaxY:currentMinY + currentItemHeight + self.ysSpaceVer];
+            }
+        }
+    }
 }
 
+//返回当前的ContentSize
 - (CGSize)collectionViewContentSize
 {
+    CGFloat maxY = [self currentMaxY];
 
-    return CGSizeZero;
+    return CGSizeMake(self.collectionView.frame.size.width, MAX(maxY, self.collectionView.frame.size.height));
 }
 
 
-
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
+//此方法应该返回当前屏幕正在显示的视图（cell 头尾视图）的布局属性集合（UICollectionViewLayoutAttributes 对象集合）
+- (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    return NO;
+    // 添加当前屏幕可见的 cell / 头 / 尾 视图
+    NSMutableArray * allAttrsArr = [NSMutableArray array];
+
+    // cell
+    [_itemAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
+
+        if (CGRectIntersectsRect(rect, attr.frame)) {
+            [allAttrsArr addObject:attr];
+        }
+    }];
+
+    // 头
+    [_sectionHeadAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
+
+        if (CGRectIntersectsRect(rect, attr.frame)) {
+            [allAttrsArr addObject:attr];
+        }
+    }];
+
+    // 尾
+    [_sectionFootAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
+
+        if (CGRectIntersectsRect(rect, attr.frame)) {
+            [allAttrsArr addObject:attr];
+        }
+    }];
+
+    return allAttrsArr;
 }
 
+//根据indexPath去对应的UICollectionViewLayoutAttributes  这个是取值的，要重写，在移动删除的时候系统会调用改方法重新去UICollectionViewLayoutAttributes然后布局
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes * itemAttr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-
+    UICollectionViewLayoutAttributes * itemAttr = _itemAttrsDic[indexPath];
     return itemAttr;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes * supplementAttr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:elementKind withIndexPath:indexPath];
-
+    UICollectionViewLayoutAttributes * supplementAttr = nil;
+    if ([elementKind isEqualToString:YSCustemCollectionView_SectionHeadID]) {
+        supplementAttr = _sectionHeadAttrsDic[indexPath];
+    }
+    else if ([elementKind isEqualToString:YSCustemCollectionView_SectionFootID]) {
+        supplementAttr = _sectionFootAttrsDic[indexPath];
+    }
     return supplementAttr;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes * decorationAttr = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:elementKind withIndexPath:indexPath];
-
+    UICollectionViewLayoutAttributes * decorationAttr = _sectionDecorationDic[indexPath];
     return decorationAttr;
+}
+
+//是否重新布局
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
+{
+    CGRect oldBounds = self.collectionView.bounds;
+    if (!CGSizeEqualToSize(oldBounds.size, newBounds.size)) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - 插入、删除、移动
+
+
+#pragma mark - custem method
+- (CGFloat)currentMaxY
+{
+    __block CGFloat lastRowMaxY = 0;
+    [self.itemsMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSNumber * columnt, NSNumber * columntMaxY, BOOL * _Nonnull stop) {
+        if (lastRowMaxY < [columntMaxY floatValue]) {
+            lastRowMaxY = [columntMaxY floatValue];
+        }
+    }];
+    return lastRowMaxY;
+}
+
+- (void)setCurrentMaxY:(CGFloat)currentMaxY
+{
+    for (int i = 0; i < self.ysColumntCount; i++) {
+        self.itemsMaxYDic[@(i)] = @(currentMaxY);
+    }
 }
 
 @end
