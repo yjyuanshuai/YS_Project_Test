@@ -10,4 +10,6 @@
 
 @interface YSCustemCollectionViewFootCell : UICollectionViewCell
 
+@property (nonatomic, strong) UILabel * footLabel;
+
 @end

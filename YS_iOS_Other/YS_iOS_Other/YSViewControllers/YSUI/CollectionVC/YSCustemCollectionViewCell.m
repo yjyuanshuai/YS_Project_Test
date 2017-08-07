@@ -15,10 +15,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         _imageView = [UIImageView new];
+        _imageView.layer.borderColor = [UIColor blackColor].CGColor;
+        _imageView.layer.borderWidth = 1;
         [self.contentView addSubview:_imageView];
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView);
-            make.centerX.equalTo(self.contentView);
+            make.left.equalTo(self.contentView);
+            make.right.equalTo(self.contentView);
         }];
 
         _itemLabel = [UILabel new];
@@ -31,15 +34,17 @@
             make.right.equalTo(self.contentView);
             make.bottom.equalTo(self.contentView);
         }];
+
+        _itemLabel.backgroundColor = [UIColor yellowColor];
     }
     return self;
 }
 
 - (void)setYSCustemCollectionViewCellContent:(NSString *)imageStr itemStr:(NSString *)itemStr
 {
-    UIImage * image = [UIImage imageNamed:imageStr];
+    NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
     _imageView.image = image;
-
     _itemLabel.text = itemStr;
 }
 

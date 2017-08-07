@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionHeadID;
-UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionFootID;
-UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionDecorationID;
+UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionHeadKind;
+UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionFootKind;
+UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionDecorationKind;
 
 @protocol YSCustemCollectionViewFlowLayoutDelegate;
 
@@ -34,5 +34,10 @@ UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionDecorationID;
 - (CGFloat)ysCustemCollectionView:(UICollectionView *)collectionView
           itemHeightWithIndexPath:(NSIndexPath *)indexPath
                         itemWidth:(CGFloat)itemWidth;
+
+// 移动时
+- (void)ysCustemCollectionView:(UICollectionView *)collectionView
+                beginIndexPath:(NSIndexPath *)beginIndexPath
+                  endIndexPath:(NSIndexPath *)endIndexPath;
 
 @end

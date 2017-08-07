@@ -42,6 +42,8 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+
 - (void)initUIAndData
 {
     self.title = @"自定义 CollectionView 布局";
@@ -58,8 +60,8 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 {
     _ysCollectionViewFlowLayout = [[YSCustemCollectionViewFlowLayout alloc] init];
     _ysCollectionViewFlowLayout.delegate = self;
-    _ysCollectionViewFlowLayout.ysSectionHeadHeightArr = [NSMutableArray arrayWithArray:@[@(80)]];
-    _ysCollectionViewFlowLayout.ysSectionFootHeightArr = [NSMutableArray arrayWithArray:@[@(45)]];
+    _ysCollectionViewFlowLayout.ysSectionHeadHeightArr = [NSMutableArray arrayWithArray:@[@(80), @(20)]];
+    _ysCollectionViewFlowLayout.ysSectionFootHeightArr = [NSMutableArray arrayWithArray:@[@(45), @(20)]];
 
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewFlowLayout];
     _collectionView.delegate = self;
@@ -72,8 +74,41 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
     }];
 
     [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewCellID];
-    [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadID withReuseIdentifier:YSCustemCollectionViewHeadCellID];
-    [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootID withReuseIdentifier:YSCustemCollectionViewFootCellID];
+    [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
+    [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
+
+    UILongPressGestureRecognizer * longGesureToMove = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesureToMove:)];
+    [_collectionView addGestureRecognizer:longGesureToMove];
+}
+
+- (void)longGesureToMove:(UILongPressGestureRecognizer *)longGesure
+{
+    UIGestureRecognizerState state = longGesure.state;
+    switch (state) {
+        case UIGestureRecognizerStateBegan:
+        {
+            NSIndexPath * indexPath = [_collectionView indexPathForItemAtPoint:[longGesure locationInView:_collectionView]];
+            if (indexPath) {
+                [_collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
+            }
+            else {
+                [_collectionView cancelInteractiveMovement];
+            }
+        }
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            [_collectionView updateInteractiveMovementTargetPosition:[longGesure locationInView:_collectionView]];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            [_collectionView endInteractiveMovement];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - YSCustemCollectionViewFlowLayoutDelegate
@@ -81,14 +116,27 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
           itemHeightWithIndexPath:(NSIndexPath *)indexPath
                         itemWidth:(CGFloat)itemWidth
 {
-    UIImage * image = [UIImage imageNamed:_imagesArr[indexPath.row]];
-    return (image.size.height/image.size.width)*itemWidth;
+    NSString * path = [[NSBundle mainBundle] pathForResource:_imagesArr[indexPath.row] ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
+    CGFloat itemHeight = (image.size.height/image.size.width)*itemWidth;
+    return itemHeight;
 }
 
-#pragma mark - UICollectionViewDelegate / UICollectionViewDataSource
+- (void)ysCustemCollectionView:(UICollectionView *)collectionView
+                beginIndexPath:(NSIndexPath *)beginIndexPath
+                  endIndexPath:(NSIndexPath *)endIndexPath
+{
+    if (beginIndexPath.row != endIndexPath.row) {
+        NSString * value = _imagesArr[beginIndexPath.row];
+        [_imagesArr removeObjectAtIndex:beginIndexPath.row];
+        [_imagesArr insertObject:value atIndex:endIndexPath.row];
+    }
+}
+
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -96,11 +144,55 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
     return [_imagesArr count];
 }
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YSCustemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:YSCustemCollectionViewCellID forIndexPath:indexPath];
     [cell setYSCustemCollectionViewCellContent:_imagesArr[indexPath.row] itemStr:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:YSCustemCollectionView_SectionHeadKind]) {
+        YSCustemCollectionViewHeadCell * headCell = [collectionView dequeueReusableSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID forIndexPath:indexPath];
+        headCell.headLabel.text = @"段头文字";
+        return headCell;
+    }
+    else if ([kind isEqualToString:YSCustemCollectionView_SectionFootKind]) {
+        YSCustemCollectionViewFootCell * footCell = [collectionView dequeueReusableSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID forIndexPath:indexPath];
+        footCell.footLabel.text = @"段尾文字";
+        return footCell;
+    }
+    return nil;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 加显示动画
+    cell.contentView.alpha = 0;
+    cell.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(0, 0), 0);
+
+
+    [UIView animateKeyframesWithDuration:.5 delay:0.0 options:0 animations:^{
+
+        /**
+         *  分步动画   第一个参数是该动画开始的百分比时间  第二个参数是该动画持续的百分比时间
+         */
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.8 animations:^{
+            cell.contentView.alpha = .5;
+            cell.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(1.2, 1.2), 0);
+
+        }];
+        [UIView addKeyframeWithRelativeStartTime:0.8 relativeDuration:0.2 animations:^{
+            cell.contentView.alpha = 1;
+            cell.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(1, 1), 0);
+
+        }];
+
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 @end

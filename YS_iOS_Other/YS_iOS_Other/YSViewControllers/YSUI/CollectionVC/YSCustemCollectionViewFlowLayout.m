@@ -8,9 +8,9 @@
 
 #import "YSCustemCollectionViewFlowLayout.h"
 
-NSString * const YSCustemCollectionView_SectionHeadID = @"YSCustemCollectionView_SectionHeadID";
-NSString * const YSCustemCollectionView_SectionFootID = @"YSCustemCollectionView_SectionFootID";
-NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollectionView_SectionDecorationID";
+NSString * const YSCustemCollectionView_SectionHeadKind = @"YSCustemCollectionView_SectionHeadID";
+NSString * const YSCustemCollectionView_SectionFootKind = @"YSCustemCollectionView_SectionFootID";
+NSString * const YSCustemCollectionView_SectionDecorationKind = @"YSCustemCollectionView_SectionDecorationID";
 
 @interface YSCustemCollectionViewFlowLayout()
 
@@ -72,31 +72,17 @@ NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollecti
         if (i < [self.ysSectionHeadHeightArr count]) {
             currentSectionHeadHeight = [self.ysSectionHeadHeightArr[i] floatValue];
         }
-        if (currentSectionHeadHeight > 0 && [self.collectionView respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+        if (currentSectionHeadHeight > 0 && [self.collectionView.delegate respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
 
-            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadID withIndexPath:currentSectionIndexPath];
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withIndexPath:currentSectionIndexPath];
             attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionHeadHeight);
             // 保存段头
             self.sectionHeadAttrsDic[currentSectionIndexPath] = attr;
-            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top + currentSectionHeadHeight];
+            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top + currentSectionHeadHeight row:nil];
         }
         else {
             // 没有段头时，加上段边距
-            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top];
-        }
-
-        // 段尾
-        CGFloat currentSectionFootHeight = 0;
-        if (i < [self.ysSectionFootHeightArr count]) {
-            currentSectionFootHeight = [self.ysSectionFootHeightArr[i] floatValue];
-        }
-        if (currentSectionFootHeight > 0 && [self.collectionView respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
-
-            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionFootID withIndexPath:currentSectionIndexPath];
-            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionFootHeight);
-            // 保存段尾
-            self.sectionFootAttrsDic[currentSectionIndexPath] = attr;
-            [self setCurrentMaxY:[self currentMaxY] + currentSectionFootHeight];
+            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top row:nil];
         }
 
         // cell
@@ -106,15 +92,16 @@ NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollecti
 
             // 下一个 item 是接在当前 最短的 item 下面的
             __block CGFloat currentMinY = [self.itemsMaxYDic[@(0)] floatValue];
-            __block NSInteger currentRow = 0;
-            [self.itemsMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSNumber * row, NSNumber * columntY, BOOL * _Nonnull stop) {
-                if (currentMinY > [columntY floatValue]) {
-                    currentMinY = [columntY floatValue];
+            __block NSInteger currentRow = 0;   // 列号
+            [self.itemsMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSNumber * row, NSNumber * rowMaxY, BOOL * _Nonnull stop) {
+                if (currentMinY > [rowMaxY floatValue]) {
+                    currentMinY = [rowMaxY floatValue];
                     currentRow = [row integerValue];
                 }
             }];
+
             CGFloat currentItemX = self.ysSectionInset.left + (itemWidth + self.ysSpaceHor)*currentRow;
-            CGFloat currentItemY = currentMinY + self.ysSpaceVer;
+            CGFloat currentItemY = currentMinY;
             CGFloat currentItemHeight = 0;
             if (self.delegate && [self.delegate respondsToSelector:@selector(ysCustemCollectionView:itemHeightWithIndexPath: itemWidth:)]) {
                 currentItemHeight = [self.delegate ysCustemCollectionView:self.collectionView itemHeightWithIndexPath:currentItemIndexPath itemWidth:itemWidth];
@@ -123,10 +110,26 @@ NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollecti
             UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:currentItemIndexPath];
             attr.frame = CGRectMake(currentItemX, currentItemY, itemWidth, currentItemHeight);
             self.itemAttrsDic[currentItemIndexPath] = attr;
-            if ((currentMinY + currentItemHeight + self.ysSpaceVer) > [self currentMaxY]) {
-                [self setCurrentMaxY:currentMinY + currentItemHeight + self.ysSpaceVer];
-            }
+            [self setCurrentMaxY:currentMinY + currentItemHeight + self.ysSpaceVer row:@(currentRow)];
         }
+
+        // 最后一排 与 段尾 距离为 self.ysSectionInset.bottom
+        [self setCurrentMaxY:[self currentMaxY] - self.ysSpaceVer + self.ysSectionInset.bottom row:nil];
+
+        // 段尾
+        CGFloat currentSectionFootHeight = 0;
+        if (i < [self.ysSectionFootHeightArr count]) {
+            currentSectionFootHeight = [self.ysSectionFootHeightArr[i] floatValue];
+        }
+        if (currentSectionFootHeight > 0 && [self.collectionView.delegate respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withIndexPath:currentSectionIndexPath];
+            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionFootHeight);
+            // 保存段尾
+            self.sectionFootAttrsDic[currentSectionIndexPath] = attr;
+            [self setCurrentMaxY:[self currentMaxY] + currentSectionFootHeight row:nil];
+        }
+
     }
 }
 
@@ -182,10 +185,10 @@ NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollecti
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes * supplementAttr = nil;
-    if ([elementKind isEqualToString:YSCustemCollectionView_SectionHeadID]) {
+    if ([elementKind isEqualToString:YSCustemCollectionView_SectionHeadKind]) {
         supplementAttr = _sectionHeadAttrsDic[indexPath];
     }
-    else if ([elementKind isEqualToString:YSCustemCollectionView_SectionFootID]) {
+    else if ([elementKind isEqualToString:YSCustemCollectionView_SectionFootKind]) {
         supplementAttr = _sectionFootAttrsDic[indexPath];
     }
     return supplementAttr;
@@ -208,7 +211,36 @@ NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollecti
 }
 
 #pragma mark - 插入、删除、移动
+- (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems
+{
 
+}
+
+- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
+{
+
+}
+
+- (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
+{
+
+}
+
+- (void)finalizeCollectionViewUpdates
+{
+
+}
+
+#pragma mark - 9.0后移动相关
+- (UICollectionViewLayoutInvalidationContext *)invalidationContextForInteractivelyMovingItems:(NSArray<NSIndexPath *> *)targetIndexPaths withTargetPosition:(CGPoint)targetPosition previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths previousPosition:(CGPoint)previousPosition
+{
+
+}
+
+- (UICollectionViewLayoutInvalidationContext *)invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:(NSArray<NSIndexPath *> *)indexPaths previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths movementCancelled:(BOOL)movementCancelled
+{
+
+}
 
 #pragma mark - custem method
 - (CGFloat)currentMaxY
@@ -222,10 +254,15 @@ NSString * const YSCustemCollectionView_SectionDecorationID = @"YSCustemCollecti
     return lastRowMaxY;
 }
 
-- (void)setCurrentMaxY:(CGFloat)currentMaxY
+- (void)setCurrentMaxY:(CGFloat)currentMaxY row:(NSNumber *)rowNum
 {
-    for (int i = 0; i < self.ysColumntCount; i++) {
-        self.itemsMaxYDic[@(i)] = @(currentMaxY);
+    if (rowNum == nil) {
+        for (int i = 0; i < self.ysColumntCount; i++) {
+            self.itemsMaxYDic[@(i)] = @(currentMaxY);
+        }
+    }
+    else {
+        self.itemsMaxYDic[rowNum] = @(currentMaxY);
     }
 }
 
