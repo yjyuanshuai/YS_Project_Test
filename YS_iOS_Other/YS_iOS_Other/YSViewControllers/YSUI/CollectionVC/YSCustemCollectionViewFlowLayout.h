@@ -24,6 +24,8 @@ UIKIT_EXTERN NSString * const YSCustemCollectionView_SectionDecorationKind;
 @property (nonatomic, strong) NSMutableArray * ysSectionHeadHeightArr;
 @property (nonatomic, strong) NSMutableArray * ysSectionFootHeightArr;
 
+@property (nonatomic, strong) NSMutableArray * needAnimationIndexPaths;
+
 @property (nonatomic, weak) id<YSCustemCollectionViewFlowLayoutDelegate> delegate;
 
 @end

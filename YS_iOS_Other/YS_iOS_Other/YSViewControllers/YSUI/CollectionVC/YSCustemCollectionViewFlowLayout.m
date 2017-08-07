@@ -30,7 +30,6 @@ NSString * const YSCustemCollectionView_SectionDecorationKind = @"YSCustemCollec
 {
     self = [super init];
     if (self) {
-
         self.ysColumntCount = 3;
         self.ysSpaceHor = 10;
         self.ysSpaceVer = 20;
@@ -44,6 +43,8 @@ NSString * const YSCustemCollectionView_SectionDecorationKind = @"YSCustemCollec
 
         self.ysSectionHeadHeightArr = [NSMutableArray array];
         self.ysSectionFootHeightArr = [NSMutableArray array];
+
+        self.needAnimationIndexPaths = [NSMutableArray array];
     }
     return self;
 }
@@ -213,33 +214,89 @@ NSString * const YSCustemCollectionView_SectionDecorationKind = @"YSCustemCollec
 #pragma mark - 插入、删除、移动
 - (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems
 {
+    [super prepareForCollectionViewUpdates:updateItems];
 
+    NSMutableArray * needAnimations = [NSMutableArray array];
+
+    for (UICollectionViewUpdateItem * updateItem in updateItems) {
+        switch (updateItem.updateAction) {
+            case UICollectionUpdateActionInsert:
+            {
+                [needAnimations addObject:updateItem.indexPathAfterUpdate];
+            }
+                break;
+            case UICollectionUpdateActionDelete:
+            {
+                [needAnimations addObject:updateItem.indexPathBeforeUpdate];
+            }
+                break;
+            case UICollectionUpdateActionMove:
+            {
+
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+
+    self.needAnimationIndexPaths = needAnimations;
 }
 
+//对应UICollectionViewUpdateItem 的indexPathBeforeUpdate 设置调用
 - (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
 {
+    if ([self.needAnimationIndexPaths containsObject:itemIndexPath]) {
+        UICollectionViewLayoutAttributes *attr = self.itemAttrsDic[itemIndexPath];
 
+        attr.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(0.2, 0.2), M_PI);
+        attr.center = CGPointMake(CGRectGetMidX(self.collectionView.bounds), CGRectGetMaxY(self.collectionView.bounds));
+        attr.alpha = 1;
+        [self.needAnimationIndexPaths removeObject:itemIndexPath];
+        return attr;
+    }
+    return nil;
 }
 
+//对应UICollectionViewUpdateItem 的indexPathAfterUpdate 设置调用
 - (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
 {
+    if ([self.needAnimationIndexPaths containsObject:itemIndexPath]) {
+        UICollectionViewLayoutAttributes *attr = self.itemAttrsDic[itemIndexPath];
+        attr.transform = CGAffineTransformRotate(CGAffineTransformMakeScale(2, 2), 0);
+        attr.alpha = 0;
+        [self.needAnimationIndexPaths removeObject:itemIndexPath];
+        return attr;
+    }
+    return nil;
 
 }
 
 - (void)finalizeCollectionViewUpdates
 {
-
+    self.needAnimationIndexPaths = nil;
 }
 
 #pragma mark - 9.0后移动相关
 - (UICollectionViewLayoutInvalidationContext *)invalidationContextForInteractivelyMovingItems:(NSArray<NSIndexPath *> *)targetIndexPaths withTargetPosition:(CGPoint)targetPosition previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths previousPosition:(CGPoint)previousPosition
 {
+    UICollectionViewLayoutInvalidationContext *context = [super invalidationContextForInteractivelyMovingItems:targetIndexPaths withTargetPosition:targetPosition previousIndexPaths:previousIndexPaths previousPosition:previousPosition];
 
+    if([self.delegate respondsToSelector:@selector(ysCustemCollectionView:beginIndexPath:endIndexPath:)]){
+        [self.delegate ysCustemCollectionView:self.collectionView beginIndexPath:previousIndexPaths[0] endIndexPath:targetIndexPaths[0]];
+    }
+    return context;
 }
 
 - (UICollectionViewLayoutInvalidationContext *)invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:(NSArray<NSIndexPath *> *)indexPaths previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths movementCancelled:(BOOL)movementCancelled
 {
+    UICollectionViewLayoutInvalidationContext *context = [super invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:indexPaths previousIndexPaths:previousIndexPaths movementCancelled:movementCancelled];
 
+    if(!movementCancelled){
+
+    }
+    return context;
 }
 
 #pragma mark - custem method
