@@ -26,7 +26,7 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 
 @implementation YSCustemCollectionVC
 {
-    NSMutableArray * _imagesArr;
+    NSMutableArray * _allSectionDataArr;
 }
 
 - (void)viewDidLoad {
@@ -47,13 +47,17 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 - (void)initUIAndData
 {
     self.title = @"自定义 CollectionView 布局";
-    if (!_imagesArr) {
-        _imagesArr = [NSMutableArray array];
-        for (int i = 0; i < 20; i++) {
-            NSString * str = [NSString stringWithFormat:@"collection_%d", (int)i];
-            [_imagesArr addObject:str];
-        }
+
+    _allSectionDataArr = [NSMutableArray array];
+
+    NSMutableArray * sectionZeroImagesMutArr = [NSMutableArray array];
+    for (int i = 0; i < 20; i++) {
+        NSString * str = [NSString stringWithFormat:@"collection_%d", (int)i];
+        [sectionZeroImagesMutArr addObject:str];
     }
+    NSMutableArray * sectionOneImageMutArr = [NSMutableArray arrayWithArray:sectionZeroImagesMutArr];
+
+    _allSectionDataArr = [NSMutableArray arrayWithArray:@[sectionZeroImagesMutArr, sectionOneImageMutArr]];
 }
 
 - (void)createCollectionView
@@ -83,6 +87,10 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 
 - (void)longGesureToMove:(UILongPressGestureRecognizer *)longGesure
 {
+    if (kSystemVersion < 9.0) {
+        return;
+    }
+    
     UIGestureRecognizerState state = longGesure.state;
     switch (state) {
         case UIGestureRecognizerStateBegan:
@@ -116,9 +124,10 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
           itemHeightWithIndexPath:(NSIndexPath *)indexPath
                         itemWidth:(CGFloat)itemWidth
 {
-    NSString * path = [[NSBundle mainBundle] pathForResource:_imagesArr[indexPath.row] ofType:@"jpg"];
+    NSMutableArray * images = _allSectionDataArr[indexPath.section];
+    NSString * path = [[NSBundle mainBundle] pathForResource:images[indexPath.row] ofType:@"jpg"];
     UIImage * image = [UIImage imageWithContentsOfFile:path];
-    CGFloat itemHeight = (image.size.height/image.size.width)*itemWidth;
+    CGFloat itemHeight = (image.size.height/image.size.width)*itemWidth + 20;
     return itemHeight;
 }
 
@@ -126,28 +135,32 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
                 beginIndexPath:(NSIndexPath *)beginIndexPath
                   endIndexPath:(NSIndexPath *)endIndexPath
 {
-    if (beginIndexPath.row != endIndexPath.row) {
-        NSString * value = _imagesArr[beginIndexPath.row];
-        [_imagesArr removeObjectAtIndex:beginIndexPath.row];
-        [_imagesArr insertObject:value atIndex:endIndexPath.row];
+    if ((beginIndexPath.section == endIndexPath.section) && (beginIndexPath.row != endIndexPath.row)) {
+        NSMutableArray * images = _allSectionDataArr[beginIndexPath.section];
+        NSString * value = images[beginIndexPath.row];
+        [images removeObjectAtIndex:beginIndexPath.row];
+        [images insertObject:value atIndex:endIndexPath.row];
     }
 }
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return [_allSectionDataArr count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [_imagesArr count];
+    return [[_allSectionDataArr objectAtIndex:section] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YSCustemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:YSCustemCollectionViewCellID forIndexPath:indexPath];
-    [cell setYSCustemCollectionViewCellContent:_imagesArr[indexPath.row] itemStr:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+    NSMutableArray * images = _allSectionDataArr[indexPath.section];
+    if (indexPath.row < [images count]) {
+        [cell setYSCustemCollectionViewCellContent:images[indexPath.row] itemStr:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+    }
     return cell;
 }
 
@@ -165,6 +178,17 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
     }
     return nil;
 }
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(9_0)
+{
+    return YES;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath NS_AVAILABLE_IOS(9_0)
+{
+    
+}
+
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -193,6 +217,44 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
     } completion:^(BOOL finished) {
         
     }];
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender
+{
+    if ([NSStringFromSelector(action) isEqualToString:@"cut:"] ||
+        [NSStringFromSelector(action) isEqualToString:@"paste:"] ||
+        [NSStringFromSelector(action) isEqualToString:@"copy:"]) {
+        return YES;
+    }
+
+    return NO;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender
+{
+    if ([NSStringFromSelector(action) isEqualToString:@"cut:"]) {
+        NSArray* itemPaths = @[indexPath];
+        for (NSIndexPath * index in itemPaths) {
+            NSMutableArray * images = [_allSectionDataArr objectAtIndex:index.section];
+            [images removeObjectAtIndex:index.row];
+        }
+        [_collectionView deleteItemsAtIndexPaths:itemPaths];
+    }else if ([NSStringFromSelector(action) isEqualToString:@"paste:"]){
+
+    }else if ([NSStringFromSelector(action) isEqualToString:@"copy:"]){
+        NSArray* itemPaths = @[indexPath];
+        for (NSIndexPath * index in itemPaths) {
+            NSMutableArray * images = [_allSectionDataArr objectAtIndex:index.section];
+            UIImage * image = images[index.row];
+            [images insertObject:image atIndex:index.row];
+        }
+        [_collectionView insertItemsAtIndexPaths:itemPaths];
+    }
 }
 
 @end

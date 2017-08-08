@@ -14,27 +14,30 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentView.layer.borderColor = [UIColor blackColor].CGColor;
+        self.contentView.layer.borderWidth = 1;
+
         _imageView = [UIImageView new];
-        _imageView.layer.borderColor = [UIColor blackColor].CGColor;
-        _imageView.layer.borderWidth = 1;
         [self.contentView addSubview:_imageView];
-        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView);
-            make.left.equalTo(self.contentView);
-            make.right.equalTo(self.contentView);
-        }];
 
         _itemLabel = [UILabel new];
         _itemLabel.textAlignment = NSTextAlignmentCenter;
         _itemLabel.font = YSFont_Sys(15);
         [self.contentView addSubview:_itemLabel];
+
+        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView);
+            make.left.equalTo(self.contentView);
+            make.right.equalTo(self.contentView);
+            make.bottom.equalTo(self.contentView).offset(-20);
+        }];
+
         [_itemLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_imageView.mas_bottom);
             make.left.equalTo(self.contentView);
             make.right.equalTo(self.contentView);
             make.bottom.equalTo(self.contentView);
         }];
-
         _itemLabel.backgroundColor = [UIColor yellowColor];
     }
     return self;

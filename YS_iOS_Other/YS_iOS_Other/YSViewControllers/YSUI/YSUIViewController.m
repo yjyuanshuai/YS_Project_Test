@@ -148,6 +148,7 @@
             }
             else if (indexPath.row == 1)
             {
+                // 自定义ColectionView布局，瀑布流
                 YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] init];
                 custemCollectionView.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:custemCollectionView animated:YES];

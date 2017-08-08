@@ -212,8 +212,6 @@ static NSString * const ChatViewTextMsgCellID = @"ChatViewTextMsgCellID";
     UIMenuItem * copyItem = [[UIMenuItem alloc] initWithTitle:@"cus粘贴" action:@selector(copyMenu:)];
     [menu setMenuItems:@[deleteItem, copyItem]];
 
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillHidden) name:UIMenuControllerWillHideMenuNotification object:nil];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MenuWillShow) name: UIMenuControllerWillShowMenuNotification object:nil];
 
     return YES;

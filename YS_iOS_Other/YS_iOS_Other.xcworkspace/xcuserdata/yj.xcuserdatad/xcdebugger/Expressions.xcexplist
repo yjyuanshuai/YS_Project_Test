@@ -127,6 +127,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[YSCustemCollectionVC collectionView:performAction:forItemAtIndexPath:withSender:]:YSCustemCollectionVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_allSectionDataArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[YSOperationDetailUserVC operationQueue]:YSOperationDetailUserVC.m">
          <PersistentStrings>
             <PersistentString
