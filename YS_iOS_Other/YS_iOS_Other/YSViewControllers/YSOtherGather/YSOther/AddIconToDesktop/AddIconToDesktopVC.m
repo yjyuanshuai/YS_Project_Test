@@ -57,9 +57,7 @@
     [_server setPort:12345];
     
     NSString * webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-    
     [_server setDocumentRoot:webPath];
-    
     [self startServer];
 }
 

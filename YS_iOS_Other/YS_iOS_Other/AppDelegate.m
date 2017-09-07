@@ -224,11 +224,9 @@
      */
     
     // 自定义了 URL scheme，另一个应用通过 url 向本应用传递参数 或 发起调用
-    
     if ([sourceApplication isEqualToString:@"com.3Sixty.CallCustomURL"])
     {
         // 限定只有某一个应用可以传参
-        
         NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
         NSLog(@"URL scheme:%@", [url scheme]);
         NSLog(@"URL query: %@", [url query]);
