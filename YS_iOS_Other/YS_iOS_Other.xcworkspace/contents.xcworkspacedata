@@ -5,6 +5,9 @@
       location = "group:YS_iOS_Other.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:YS_URLScheme_Tmp/YS_URLScheme_Tmp.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

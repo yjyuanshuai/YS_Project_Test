@@ -207,7 +207,6 @@
 		394BCA401F03557500EC55FC /* cm2_blogo_sina_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394BCA3A1F03557500EC55FC /* cm2_blogo_sina_gray@2x.png */; };
 		394BCA411F03557500EC55FC /* cm2_blogo_sina_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394BCA3B1F03557500EC55FC /* cm2_blogo_sina_gray@3x.png */; };
 		394BCA431F037B1400EC55FC /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 394BCA421F037B1400EC55FC /* libicucore.tbd */; };
-		394BCA4D1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 394BCA4C1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m */; };
 		395562591D41C3550079CF6B /* MyKeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 395562581D41C3550079CF6B /* MyKeyChainHelper.m */; };
 		395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 395ACEA31D937D4F00C22165 /* UIView+UniformDistribution.m */; };
 		395D48461EFCA55E0022212A /* YSCommenListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 395D48451EFCA55E0022212A /* YSCommenListVC.m */; };
@@ -395,6 +394,7 @@
 		39EA8ECA1D40BB6C0053EE02 /* YSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8EC91D40BB6C0053EE02 /* YSLoginViewController.m */; };
 		39EA8ECD1D40BB7D0053EE02 /* YSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8ECC1D40BB7D0053EE02 /* YSRegisterViewController.m */; };
 		39EA8ED11D40BC060053EE02 /* YSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8ED01D40BC060053EE02 /* YSScrollView.m */; };
+		39EB21C41F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EB21C31F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m */; };
 		39FAEA8D1DE564CF000B37E0 /* AudioPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FAEA8C1DE564CF000B37E0 /* AudioPlayerVC.m */; };
 		39FAEA951DE5714A000B37E0 /* YSDDLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FAEA941DE5714A000B37E0 /* YSDDLogManager.m */; };
 		50D75D14D975D3AE20792831 /* libPods-YS_iOS_Other.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD2527BB6BD7D815F0CCF07 /* libPods-YS_iOS_Other.a */; };
@@ -778,8 +778,6 @@
 		394BCA3A1F03557500EC55FC /* cm2_blogo_sina_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm2_blogo_sina_gray@2x.png"; sourceTree = "<group>"; };
 		394BCA3B1F03557500EC55FC /* cm2_blogo_sina_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cm2_blogo_sina_gray@3x.png"; sourceTree = "<group>"; };
 		394BCA421F037B1400EC55FC /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		394BCA4B1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageMethodSwizzling.h"; sourceTree = "<group>"; };
-		394BCA4C1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageMethodSwizzling.m"; sourceTree = "<group>"; };
 		395562571D41C3550079CF6B /* MyKeyChainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyKeyChainHelper.h; sourceTree = "<group>"; };
 		395562581D41C3550079CF6B /* MyKeyChainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyKeyChainHelper.m; sourceTree = "<group>"; };
 		395ACEA21D937D4F00C22165 /* UIView+UniformDistribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UniformDistribution.h"; sourceTree = "<group>"; };
@@ -1004,6 +1002,8 @@
 		39EA8ECC1D40BB7D0053EE02 /* YSRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRegisterViewController.m; sourceTree = "<group>"; };
 		39EA8ECF1D40BC060053EE02 /* YSScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSScrollView.h; sourceTree = "<group>"; };
 		39EA8ED01D40BC060053EE02 /* YSScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSScrollView.m; sourceTree = "<group>"; };
+		39EB21C21F62927F00470B89 /* UIImage+UIImageMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageMethodSwizzling.h"; sourceTree = "<group>"; };
+		39EB21C31F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageMethodSwizzling.m"; sourceTree = "<group>"; };
 		39FAEA8B1DE564CF000B37E0 /* AudioPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayerVC.h; sourceTree = "<group>"; };
 		39FAEA8C1DE564CF000B37E0 /* AudioPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayerVC.m; sourceTree = "<group>"; };
 		39FAEA931DE5714A000B37E0 /* YSDDLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSDDLogManager.h; sourceTree = "<group>"; };
@@ -2056,8 +2056,6 @@
 		394BCA441F038DC200EC55FC /* MethodSwizzling */ = {
 			isa = PBXGroup;
 			children = (
-				394BCA4B1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.h */,
-				394BCA4C1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m */,
 			);
 			path = MethodSwizzling;
 			sourceTree = "<group>";
@@ -2464,6 +2462,8 @@
 		39BBEA641D5DA42E00F192F2 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
+				39EB21C21F62927F00470B89 /* UIImage+UIImageMethodSwizzling.h */,
+				39EB21C31F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m */,
 				39BBEA651D5DA46500F192F2 /* UIImage+YSImageCategare.h */,
 				39BBEA661D5DA46500F192F2 /* UIImage+YSImageCategare.m */,
 			);
@@ -2999,6 +2999,7 @@
 				3928DEF21F02556000A7F38A /* CustemSearchViewController.m in Sources */,
 				391A2EA21E093EA30075CFD3 /* FriendCircleTableViewCell.m in Sources */,
 				3928DF2F1F02570A00A7F38A /* YSDefaultsViewController.m in Sources */,
+				39EB21C41F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m in Sources */,
 				393986491E4D8E9900B1553C /* CameraOrImageListVC.m in Sources */,
 				3928DF281F02570A00A7F38A /* XmlViewController.m in Sources */,
 				3928DF6B1F02584900A7F38A /* ViewSimpleViewController.m in Sources */,
@@ -3052,7 +3053,6 @@
 				3937CCD11F33049500345242 /* YSCustemCollectionViewHeadCell.m in Sources */,
 				3942A5761EEF8DC000C14E95 /* YSMenuTextField.m in Sources */,
 				3928DF8F1F02595C00A7F38A /* YSGCDViewController.m in Sources */,
-				394BCA4D1F038ED100EC55FC /* UIImage+UIImageMethodSwizzling.m in Sources */,
 				3937CCD41F3304A500345242 /* YSCustemCollectionViewFootCell.m in Sources */,
 				3932AA991E7250C20044D681 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3928DEE51F0254A700A7F38A /* ViewSearchController.m in Sources */,

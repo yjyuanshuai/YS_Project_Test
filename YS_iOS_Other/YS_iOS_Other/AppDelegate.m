@@ -257,6 +257,7 @@
         UIApplicationOpenURLOptionsAnnotationKey
         UIApplicationOpenURLOptionsOpenInPlaceKey
      */
+    NSLog(@"------ openURL: %@\n option: %@", url, options);
 
     return YES;
 }
@@ -272,7 +273,7 @@
      */
 
     // 自定义了 URL scheme，另一个应用通过 url 向本应用传递参数 或 发起调用
-    if ([sourceApplication isEqualToString:@"com.3Sixty.CallCustomURL"])
+    if ([sourceApplication isEqualToString:@"com.yjyuanshuai.YSURLSchemeTmp"])
     {
         // 限定只有某一个应用可以传参
         NSLog(@"Calling Application Bundle ID: %@", sourceApplication);

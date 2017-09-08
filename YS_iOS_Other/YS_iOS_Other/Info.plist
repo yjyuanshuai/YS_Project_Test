@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSHealthShareUsageDescription</key>
-	<string>YS请求读取“健康”数据权限</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>YS请求更新“健康”数据权限</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
@@ -49,6 +45,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>YSDevTmpScheme</string>
 		<string>weibosdk2.5</string>
 		<string>weibosdk</string>
 		<string>sinaweibosso</string>
@@ -69,6 +66,10 @@
 	<string>YS 需要日历的访问权限</string>
 	<key>NSCameraUsageDescription</key>
 	<string>YS 需要访问你的相机</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>YS请求读取“健康”数据权限</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>YS请求更新“健康”数据权限</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>YS 需要您的同意才能读取媒体资料库</string>
 	<key>UIApplicationShortcutItems</key>

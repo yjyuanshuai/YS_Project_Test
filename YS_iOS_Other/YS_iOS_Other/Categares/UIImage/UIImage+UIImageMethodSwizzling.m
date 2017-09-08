@@ -21,10 +21,10 @@
 {
     UIImage * retImage = [UIImage ys_imagedName:imageName];
     if (retImage) {
-        NSLog(@"___ Method Swizzling exchange method success!");
+//        NSLog(@"___ Method Swizzling exchange method success!");
     }
     else {
-        NSLog(@"___ Method Swizzling exchange method fail!");
+//        NSLog(@"___ Method Swizzling exchange method fail!");
     }
     return retImage;
 }
