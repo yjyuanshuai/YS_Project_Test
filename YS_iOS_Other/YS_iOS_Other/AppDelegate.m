@@ -141,12 +141,6 @@
     // 当StatusBar框变化完成后执行
 }
 
-- (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
-{
-    // 当通过url执行
-    return YES;
-}
-
 #pragma mark -
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
@@ -217,32 +211,6 @@
     }
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    /**
-     *  有一点要特别注意，你不能阻止其他应用通过自定义 URL scheme 调用你的应用，然而你可以跳过后续的操作并返回 NO，就像下面的代码那样。也就是说，如果你想阻止其它应用调用你的应用，创建一个与众不同的 URL scheme。尽管这不能保证你的应用不会被调用，但至少大大降低了这种可能性
-     */
-    
-    // 自定义了 URL scheme，另一个应用通过 url 向本应用传递参数 或 发起调用
-    if ([sourceApplication isEqualToString:@"com.3Sixty.CallCustomURL"])
-    {
-        // 限定只有某一个应用可以传参
-        NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
-        NSLog(@"URL scheme:%@", [url scheme]);
-        NSLog(@"URL query: %@", [url query]);
-        
-        return YES;
-    }
-    else 
-        return NO;
-}
-
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
-{
-    return YES;
-}
-
-
 /**
  3D Touch 快捷功能
  */
@@ -275,6 +243,55 @@
             self.window.rootViewController = ysTabBarCon;
         }
     }
+}
+
+#pragma mark - openURL回调
+/**
+    iOS 9 后有效，3个回调方法中优先级最高
+ */
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    /*
+     options:
+        UIApplicationOpenURLOptionsSourceApplicationKey
+        UIApplicationOpenURLOptionsAnnotationKey
+        UIApplicationOpenURLOptionsOpenInPlaceKey
+     */
+
+    return YES;
+}
+
+
+/**
+    iOS 4.2 - 9 有效，优先级次之
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    /**
+     有一点要特别注意，你不能阻止其他应用通过自定义 URL scheme 调用你的应用，然而你可以跳过后续的操作并返回 NO，就像下面的代码那样。也就是说，如果你想阻止其它应用调用你的应用，创建一个与众不同的 URL scheme。尽管这不能保证你的应用不会被调用，但至少大大降低了这种可能性
+     */
+
+    // 自定义了 URL scheme，另一个应用通过 url 向本应用传递参数 或 发起调用
+    if ([sourceApplication isEqualToString:@"com.3Sixty.CallCustomURL"])
+    {
+        // 限定只有某一个应用可以传参
+        NSLog(@"Calling Application Bundle ID: %@", sourceApplication);
+        NSLog(@"URL scheme:%@", [url scheme]);
+        NSLog(@"URL query: %@", [url query]);
+
+        return YES;
+    }
+    else
+        return NO;
+}
+
+
+/**
+    iOS 2 - 9 有效，优先级最低
+ */
+- (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
+{
+    return YES;
 }
 
 #pragma mark - -----------------------------------
