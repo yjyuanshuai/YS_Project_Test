@@ -381,6 +381,8 @@
 		39C0804B1F0A1EB2001BF399 /* YSHealthKitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C0804A1F0A1EB2001BF399 /* YSHealthKitVC.m */; };
 		39C0804D1F0A3966001BF399 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C0804C1F0A3966001BF399 /* libc++abi.tbd */; };
 		39C080521F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C080511F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m */; };
+		39C1C4291F6A206E00AF836B /* YSNotificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C1C4281F6A206E00AF836B /* YSNotificationVC.m */; };
+		39C1C42C1F6A276D00AF836B /* YSLocalNotificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C1C42B1F6A276D00AF836B /* YSLocalNotificationVC.m */; };
 		39C25E141E528B6700D3415F /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C25E131E528B6700D3415F /* PhotoCollectionViewCell.m */; };
 		39C46B2C1E9646CB001A7AAB /* YSNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C46B2B1E9646CB001A7AAB /* YSNavController.m */; };
 		39C4F2461D910B9400E4FADE /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C4F2451D910B9400E4FADE /* libCocoaLumberjack.a */; };
@@ -977,6 +979,10 @@
 		39C0804C1F0A3966001BF399 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		39C080501F0A4875001BF399 /* HKHealthStore+AAPLExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HKHealthStore+AAPLExtensions.h"; sourceTree = "<group>"; };
 		39C080511F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HKHealthStore+AAPLExtensions.m"; sourceTree = "<group>"; };
+		39C1C4271F6A206E00AF836B /* YSNotificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSNotificationVC.h; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSHareware/Notification/YSNotificationVC.h; sourceTree = SOURCE_ROOT; };
+		39C1C4281F6A206E00AF836B /* YSNotificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSNotificationVC.m; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSHareware/Notification/YSNotificationVC.m; sourceTree = SOURCE_ROOT; };
+		39C1C42A1F6A276D00AF836B /* YSLocalNotificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSLocalNotificationVC.h; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSHareware/YSLocalNotificationVC.h; sourceTree = SOURCE_ROOT; };
+		39C1C42B1F6A276D00AF836B /* YSLocalNotificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSLocalNotificationVC.m; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSHareware/YSLocalNotificationVC.m; sourceTree = SOURCE_ROOT; };
 		39C25E121E528B6700D3415F /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		39C25E131E528B6700D3415F /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		39C46B2A1E9646CB001A7AAB /* YSNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSNavController.h; sourceTree = "<group>"; };
@@ -1495,6 +1501,7 @@
 				39C080481F0A1E8F001BF399 /* HealthKit */,
 				3928DF371F0257D200A7F38A /* 3DTouch */,
 				3928DF3C1F0257D200A7F38A /* Blutooth */,
+				39C1C4261F6A201500AF836B /* Notification */,
 			);
 			path = YSHareware;
 			sourceTree = "<group>";
@@ -2488,6 +2495,18 @@
 			path = HKHealthKit;
 			sourceTree = "<group>";
 		};
+		39C1C4261F6A201500AF836B /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				39C1C4271F6A206E00AF836B /* YSNotificationVC.h */,
+				39C1C4281F6A206E00AF836B /* YSNotificationVC.m */,
+				39C1C42A1F6A276D00AF836B /* YSLocalNotificationVC.h */,
+				39C1C42B1F6A276D00AF836B /* YSLocalNotificationVC.m */,
+			);
+			name = Notification;
+			path = ../YSOther/Notification;
+			sourceTree = "<group>";
+		};
 		39C6219C1D0EABA400A34040 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -3012,6 +3031,7 @@
 				3965E5EC1F31BA75004F7B99 /* YSCustemCollectionViewFlowLayout.m in Sources */,
 				39214A141D05203B0019422D /* AppDelegate.m in Sources */,
 				3928DF311F02570A00A7F38A /* YSSaveDataViewController.m in Sources */,
+				39C1C42C1F6A276D00AF836B /* YSLocalNotificationVC.m in Sources */,
 				3930F48A1E4B1098006D877F /* ImageTextVC.m in Sources */,
 				3901E7A51EEFCA4A003681FD /* ChatViewTextMsgCell.m in Sources */,
 				3965E5E91F31A9BF004F7B99 /* YSCustemCollectionVC.m in Sources */,
@@ -3042,6 +3062,7 @@
 				390DCE421DD318E800D8F733 /* NSString+YSStringDo.m in Sources */,
 				3948BBD61E7A669D00D5CE84 /* AssetSaveInPlist.m in Sources */,
 				395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */,
+				39C1C4291F6A206E00AF836B /* YSNotificationVC.m in Sources */,
 				3928DF661F02584900A7F38A /* PictureAnimateViewController.m in Sources */,
 				3928DEE91F02550A00A7F38A /* ApplicationSettingViewController.m in Sources */,
 				39333BF41DE2CE9A00035157 /* YSCoreTextViewController.m in Sources */,

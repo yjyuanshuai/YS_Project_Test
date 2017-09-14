@@ -17,6 +17,7 @@
 
 //2
 #import "CanlenderViewController.h"
+#import "YSNotificationVC.h"
 
 static NSString * const HarewareCellID = @"HarewareCellID";
 
@@ -51,7 +52,7 @@ static NSString * const HarewareCellID = @"HarewareCellID";
     
     _sectionTitleArr = @[@"1 系统功能", @"2 其他"];
     
-    NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件", @"AirPlay", @"3D Touch"];
+    NSArray * sectionOne  = @[@"相册相机", @"闹钟", @"健康", @"日历", @"硬件连接", @"蓝牙", @"耳机", @"麦克风", @"邮件", @"AirPlay", @"3D Touch", @"通知"];
     NSArray * sectionTwo  = @[@"陀螺仪", @"加速器", @"磁力计"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo] mutableCopy];
@@ -178,6 +179,14 @@ static NSString * const HarewareCellID = @"HarewareCellID";
                     // 3D Touch
                     YS3DTouchVC * threeDTouchVC = [[YS3DTouchVC alloc] init];
                     [self.navigationController pushViewController:threeDTouchVC animated:YES];
+                }
+                    break;
+                case 11:
+                {
+                    // 通知
+                    YSNotificationVC * notificationVC = [[YSNotificationVC alloc] init];
+                    notificationVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:notificationVC animated:YES];
                 }
                     break;
             }
