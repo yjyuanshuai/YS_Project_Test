@@ -173,6 +173,9 @@
 		394594511D3875A70017F4A3 /* YSTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945944F1D3875A70017F4A3 /* YSTabBarController.m */; };
 		394594611D3877AE0017F4A3 /* YSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 394594601D3877AE0017F4A3 /* YSWebViewController.m */; };
 		3945948C1D38785D0017F4A3 /* YSUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945948B1D38785D0017F4A3 /* YSUIViewController.m */; };
+		3945ABF21F72054200B01BC8 /* YSAQYPlayOrPauseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945ABF11F72054200B01BC8 /* YSAQYPlayOrPauseVC.m */; };
+		3945ABF51F72135E00B01BC8 /* YSiQiYiPlayBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945ABF41F72135E00B01BC8 /* YSiQiYiPlayBtn.m */; };
+		3945ABF81F72137300B01BC8 /* YSYouKuPlayBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945ABF71F72137300B01BC8 /* YSYouKuPlayBtn.m */; };
 		3946404D1D46031B00124587 /* YSTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3946404C1D46031B00124587 /* YSTableHeaderView.m */; };
 		3948BBD61E7A669D00D5CE84 /* AssetSaveInPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3948BBD51E7A669D00D5CE84 /* AssetSaveInPlist.m */; };
 		394B6D8A1E0A178D00206CBB /* jsandoc.html in Resources */ = {isa = PBXBuildFile; fileRef = 394B6D891E0A178D00206CBB /* jsandoc.html */; };
@@ -733,6 +736,12 @@
 		394594601D3877AE0017F4A3 /* YSWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSWebViewController.m; path = YSWeb/YSWebViewController.m; sourceTree = "<group>"; };
 		3945948A1D38785D0017F4A3 /* YSUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSUIViewController.h; path = YSUI/YSUIViewController.h; sourceTree = "<group>"; };
 		3945948B1D38785D0017F4A3 /* YSUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSUIViewController.m; path = YSUI/YSUIViewController.m; sourceTree = "<group>"; };
+		3945ABF01F72054200B01BC8 /* YSAQYPlayOrPauseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSAQYPlayOrPauseVC.h; sourceTree = "<group>"; };
+		3945ABF11F72054200B01BC8 /* YSAQYPlayOrPauseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSAQYPlayOrPauseVC.m; sourceTree = "<group>"; };
+		3945ABF31F72135E00B01BC8 /* YSiQiYiPlayBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSiQiYiPlayBtn.h; sourceTree = "<group>"; };
+		3945ABF41F72135E00B01BC8 /* YSiQiYiPlayBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSiQiYiPlayBtn.m; sourceTree = "<group>"; };
+		3945ABF61F72137300B01BC8 /* YSYouKuPlayBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSYouKuPlayBtn.h; sourceTree = "<group>"; };
+		3945ABF71F72137300B01BC8 /* YSYouKuPlayBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSYouKuPlayBtn.m; sourceTree = "<group>"; };
 		3946404B1D46031B00124587 /* YSTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSTableHeaderView.h; sourceTree = "<group>"; };
 		3946404C1D46031B00124587 /* YSTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSTableHeaderView.m; sourceTree = "<group>"; };
 		3948BBD41E7A669D00D5CE84 /* AssetSaveInPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetSaveInPlist.h; sourceTree = "<group>"; };
@@ -1297,6 +1306,10 @@
 			children = (
 				3926FB4E1D6557FD00E67C30 /* YSButton.h */,
 				3926FB4F1D6557FD00E67C30 /* YSButton.m */,
+				3945ABF31F72135E00B01BC8 /* YSiQiYiPlayBtn.h */,
+				3945ABF41F72135E00B01BC8 /* YSiQiYiPlayBtn.m */,
+				3945ABF61F72137300B01BC8 /* YSYouKuPlayBtn.h */,
+				3945ABF71F72137300B01BC8 /* YSYouKuPlayBtn.m */,
 			);
 			path = YSButton;
 			sourceTree = "<group>";
@@ -1544,6 +1557,7 @@
 		3928DF4C1F02584900A7F38A /* YSAnimationEffects */ = {
 			isa = PBXGroup;
 			children = (
+				3945ABEF1F72052300B01BC8 /* AQYPlayOrPauseEffect */,
 				3928DF4D1F02584900A7F38A /* NavigationBarEffect */,
 			);
 			path = YSAnimationEffects;
@@ -1910,6 +1924,15 @@
 			);
 			name = YSOther;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		3945ABEF1F72052300B01BC8 /* AQYPlayOrPauseEffect */ = {
+			isa = PBXGroup;
+			children = (
+				3945ABF01F72054200B01BC8 /* YSAQYPlayOrPauseVC.h */,
+				3945ABF11F72054200B01BC8 /* YSAQYPlayOrPauseVC.m */,
+			);
+			path = AQYPlayOrPauseEffect;
 			sourceTree = "<group>";
 		};
 		3946404A1D4602FE00124587 /* YSTableHeaderView */ = {
@@ -3075,6 +3098,7 @@
 				3942A5761EEF8DC000C14E95 /* YSMenuTextField.m in Sources */,
 				3928DF8F1F02595C00A7F38A /* YSGCDViewController.m in Sources */,
 				3937CCD41F3304A500345242 /* YSCustemCollectionViewFootCell.m in Sources */,
+				3945ABF51F72135E00B01BC8 /* YSiQiYiPlayBtn.m in Sources */,
 				3932AA991E7250C20044D681 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3928DEE51F0254A700A7F38A /* ViewSearchController.m in Sources */,
 				3921488C1DDED3EB00EBCFC1 /* YSOtherGatherVC.m in Sources */,
@@ -3122,6 +3146,7 @@
 				39C080521F0A4875001BF399 /* HKHealthStore+AAPLExtensions.m in Sources */,
 				3928DEC11F0253BE00A7F38A /* OnePickerViewController.m in Sources */,
 				3928DECA1F02540900A7F38A /* OneCollectionReusableView.m in Sources */,
+				3945ABF21F72054200B01BC8 /* YSAQYPlayOrPauseVC.m in Sources */,
 				39333C1B1DE2CF0000035157 /* ImagesShowViewController.m in Sources */,
 				3928DF731F0258D100A7F38A /* SevenAppleLocationViewController.m in Sources */,
 				39294BFC1EEA95360039538F /* YSMenuLabel.m in Sources */,
@@ -3140,6 +3165,7 @@
 				3928DF6A1F02584900A7F38A /* TwoDemotionViewController.m in Sources */,
 				39294BFF1EEA954C0039538F /* YSMenuTextView.m in Sources */,
 				39C6219F1D0EABDF00A34040 /* CollectionTestModel.m in Sources */,
+				3945ABF81F72137300B01BC8 /* YSYouKuPlayBtn.m in Sources */,
 				39D65A221E07C2E000FFCF78 /* Utility.m in Sources */,
 				3928DF8E1F02595C00A7F38A /* YSGCDTableViewCell.m in Sources */,
 				3923F86F1E03D68C005A02D7 /* EmotionCollectionViewCell.m in Sources */,

@@ -20,6 +20,7 @@
 
 // 2
 #import "JianShuNavAnimationViewController.h"
+#import "YSAQYPlayOrPauseVC.h"
 
 static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
 
@@ -56,7 +57,7 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     _sectionTitlesArr = [@[@"各种动画", @"一些效果"] mutableCopy];
     
     NSArray * sectionOne = @[@"帧动画", @"2D", @"3D", @"翻页", @"UIView简单", @"模态跳转", @"CoreAnimation", @"CALayer+UIBezierPath"];
-    NSArray * sectionTwo = @[@"导航栏效果"];
+    NSArray * sectionTwo = @[@"导航栏效果", @"爱奇艺播放/暂停按钮"];
     
     if (_animationsArr == nil) {
         _animationsArr = [@[sectionOne, sectionTwo] mutableCopy];
@@ -187,9 +188,16 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     }
     else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
+            // navigationBar
             JianShuNavAnimationViewController * navigationVC = [JianShuNavAnimationViewController new];
             navigationVC.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:navigationVC animated:YES];
+        }
+        else {
+            // 爱奇艺播放/暂停动画
+            YSAQYPlayOrPauseVC * aqyVC = [[YSAQYPlayOrPauseVC alloc] init];
+            aqyVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aqyVC animated:YES];
         }
     }
     else {
