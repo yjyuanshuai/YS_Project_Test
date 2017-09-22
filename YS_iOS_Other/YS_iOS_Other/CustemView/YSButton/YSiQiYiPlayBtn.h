@@ -16,6 +16,6 @@ typedef NS_ENUM(NSInteger, YSiQiYiPlayBtnStatus)
 
 @interface YSiQiYiPlayBtn : UIButton
 
-@property (nonatomic, assign) YSiQiYiPlayBtnStatus status;
+@property (nonatomic, assign) YSiQiYiPlayBtnStatus iQiYiState;
 
 @end

@@ -7,6 +7,11 @@
 //
 
 #import "YSAQYPlayOrPauseVC.h"
+#import "YSiQiYiPlayBtn.h"
+#import "YSYouKuPlayBtn.h"
+
+static NSInteger iQiYiBtnTag = 2017092001;
+static NSInteger YouKuBtnTag = 2017092002;
 
 @interface YSAQYPlayOrPauseVC ()
 
@@ -20,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    YSiQiYiPlayBtn * iQiYiBtn = [[YSiQiYiPlayBtn alloc] initWithFrame:CGRectMake((kScreenWidth-200)/2, 100, 200, 200)];
+    iQiYiBtn.tag = iQiYiBtnTag;
+    [iQiYiBtn addTarget:self action:@selector(clickToBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:iQiYiBtn];
+
+//    YSYouKuPlayBtn * youkuBtn = [[YSYouKuPlayBtn alloc] initWithFrame:CGRectMake((kScreenWidth-200)/2, 100+200+100, 200, 200)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,6 +39,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
+- (void)clickToBtn:(UIButton *)btn
+{
+    if (btn.tag == iQiYiBtnTag) {
+        YSiQiYiPlayBtn * iQiYiBtn = (YSiQiYiPlayBtn *)btn;
+        if (iQiYiBtn.iQiYiState == YSiQiYiPlayBtnStatusPause) {
+            iQiYiBtn.iQiYiState = YSiQiYiPlayBtnStatusPlay;
+        }
+        else {
+            iQiYiBtn.iQiYiState = YSiQiYiPlayBtnStatusPause;
+        }
+    }
+    else if (btn.tag == YouKuBtnTag) {
+
+    }
+}
 
 @end
