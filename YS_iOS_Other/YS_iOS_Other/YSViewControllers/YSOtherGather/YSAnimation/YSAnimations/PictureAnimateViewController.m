@@ -37,7 +37,7 @@
 
 - (void)initUI
 {
-    self.title = @"帧动画";
+    self.title = @"Image帧动画";
 }
 
 - (void)createUI

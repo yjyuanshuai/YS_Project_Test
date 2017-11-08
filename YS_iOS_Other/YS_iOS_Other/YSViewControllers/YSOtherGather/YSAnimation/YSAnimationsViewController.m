@@ -56,7 +56,7 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     
     _sectionTitlesArr = [@[@"各种动画", @"一些效果"] mutableCopy];
     
-    NSArray * sectionOne = @[@"帧动画", @"2D", @"3D", @"翻页", @"UIView简单", @"模态跳转", @"CoreAnimation", @"CALayer+UIBezierPath"];
+    NSArray * sectionOne = @[@"Image帧动画", @"2D", @"3D", @"翻页", @"UIView简单", @"模态跳转", @"CoreAnimation", @"CALayer+UIBezierPath"];
     NSArray * sectionTwo = @[@"导航栏效果", @"爱奇艺播放/暂停按钮"];
     
     if (_animationsArr == nil) {
