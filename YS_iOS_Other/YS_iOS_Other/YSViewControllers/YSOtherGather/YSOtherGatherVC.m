@@ -48,9 +48,9 @@
     
     NSArray * one = @[@"其他"];
     NSArray * two = @[@"硬件&系统"];
-    NSArray * third = @[@"各种动画"];
+    NSArray * third = @[@"文字", @"图片", @"动画"];
     
-    _sectionTitleArr = [@[@"其他", @"硬件&系统", @"各种动画"] mutableCopy];
+    _sectionTitleArr = [@[@"其他", @"硬件&系统", @"渲染"] mutableCopy];
     _dataArr = [@[one, two, third] mutableCopy];
 }
 
@@ -118,16 +118,6 @@
     return [_dataArr[section] count];
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-//        [cell setLayoutMargins:UIEdgeInsetsZero];
-//    }
-//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [cell setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * cell_id = @"CELL_ID";
@@ -178,10 +168,18 @@
             break;
         case 2:
         {
-            // 动画效果
-            YSAnimationsViewController * animationVC = [[YSAnimationsViewController alloc] init];
-            animationVC.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:animationVC animated:YES];
+            if (indexPath.row == 0) {
+                // 文字
+            }
+            else if (indexPath.row == 1) {
+                // 图片处理
+            }
+            else if (indexPath.row == 2) {
+                // 动画
+                YSAnimationsViewController * animationVC = [[YSAnimationsViewController alloc] init];
+                animationVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:animationVC animated:YES];
+            }
         }
             break;
     }

@@ -23,6 +23,7 @@
 #import "YSAQYPlayOrPauseVC.h"
 
 static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
+static NSInteger const SectionTag = 20171109;
 
 @interface YSAnimationsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -33,7 +34,9 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
 @implementation YSAnimationsViewController
 {
     NSMutableArray * _sectionTitlesArr;
+    NSMutableArray * _sectionOpenArr;
     NSMutableArray * _animationsArr;
+    NSInteger _clickSection;
 }
 
 - (void)viewDidLoad {
@@ -42,7 +45,6 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     
     [self initUIAndData];
     [self createTableView];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,16 +54,16 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
 
 - (void)initUIAndData
 {
-    self.title = @"各种动画效果";
+    self.title = @"动画";
     
-    _sectionTitlesArr = [@[@"各种动画", @"一些效果"] mutableCopy];
+    _sectionTitlesArr = [@[@"Image帧动画", @"普通2D/3D", @"转场动画", @"一些动画效果"] mutableCopy];
+    _sectionOpenArr = [@[@(NO), @(NO), @(NO), @(NO)] mutableCopy];
     
-    NSArray * sectionOne = @[@"Image帧动画", @"2D", @"3D", @"翻页", @"UIView简单", @"模态跳转", @"CoreAnimation", @"CALayer+UIBezierPath"];
-    NSArray * sectionTwo = @[@"导航栏效果", @"爱奇艺播放/暂停按钮"];
-    
-    if (_animationsArr == nil) {
-        _animationsArr = [@[sectionOne, sectionTwo] mutableCopy];
-    }
+    _animationsArr = [@[@[@"Image帧动画"],
+                        @[@"属性实现", @"UIView动画", @"核心动画"],
+                        @[@"UIView", @"CATrantion"],
+                        @[@"导航栏效果", @"爱奇艺播放/暂停按钮"]] mutableCopy];
+    _clickSection = -1;
 }
 
 - (void)createTableView
@@ -78,15 +80,31 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     [_animationTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:AnimationTableViewCellID];
 }
 
+- (void)clickSectionView:(UITapGestureRecognizer *)tap
+{
+    NSInteger clickSection = tap.view.tag - SectionTag;
+    Boolean isOpen = [_sectionOpenArr[clickSection] boolValue];
+    [_sectionOpenArr replaceObjectAtIndex:clickSection withObject:@(!isOpen)];
+    NSIndexSet * indexSet = [NSIndexSet indexSetWithIndex:clickSection];
+    [_animationTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+}
+
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_animationsArr count];
+    return [_sectionTitlesArr count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_animationsArr[section] count];
+    NSArray * animationSection = _animationsArr[section];
+    if (section == [_sectionTitlesArr count] - 1) {
+        return [animationSection count];
+    }
+    else if ([animationSection count] > 0 && [_sectionOpenArr[section] boolValue]) {
+        return [animationSection count];
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,6 +125,21 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     return 30;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    sectionView.tag = SectionTag + section;
+    
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 30)];
+    titleLabel.text = _sectionTitlesArr[section];
+    [sectionView addSubview:titleLabel];
+    
+    UITapGestureRecognizer * tapGesure = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickSectionView:)];
+    [sectionView addGestureRecognizer:tapGesure];
+    
+    return sectionView;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
@@ -115,17 +148,45 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        // Image 帧动画
+        PictureAnimateViewController * pictureVC = [PictureAnimateViewController new];
+        pictureVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:pictureVC animated:YES];
+    }
+    else if (indexPath.section == 1) {
+        // 2D/3D 动画
+        switch (indexPath.row) {
+            case 0:
+            {
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else if (indexPath.section == 2) {
+        // 转场动画
+        
+    }
+    else if (indexPath.section == 3) {
+        // 其他效果动画
+        
+    }
     
+     /*
     if (indexPath.section == 0) {
         NSInteger index = indexPath.row;
         
         switch (index) {
+            
+           
             case 0:
             {
                 // 帧动画
-                PictureAnimateViewController * pictureVC = [PictureAnimateViewController new];
-                pictureVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:pictureVC animated:YES];
+      
             }
                 break;
             case 1:
@@ -203,6 +264,7 @@ static NSString * const AnimationTableViewCellID = @"AnimationTableViewCellID";
     else {
     
     }
+      */
 }
 
 @end

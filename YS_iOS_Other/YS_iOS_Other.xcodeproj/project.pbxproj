@@ -396,6 +396,8 @@
 		39D65A281E07E0A200FFCF78 /* YSTestDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D65A271E07E0A200FFCF78 /* YSTestDataBase.m */; };
 		39DB4C861D5AD75D009D2B1F /* YSEnDecryptionMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DB4C851D5AD75D009D2B1F /* YSEnDecryptionMethod.m */; };
 		39E311461D643F8700A631EA /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E311441D643F8700A631EA /* NSDate+Utilities.m */; };
+		39E9C2F81FB42EE800E86D7A /* YSAnimationDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E9C2F71FB42EE800E86D7A /* YSAnimationDetailVC.m */; };
+		39E9C3001FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E9C2FF1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m */; };
 		39EA8ECA1D40BB6C0053EE02 /* YSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8EC91D40BB6C0053EE02 /* YSLoginViewController.m */; };
 		39EA8ECD1D40BB7D0053EE02 /* YSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8ECC1D40BB7D0053EE02 /* YSRegisterViewController.m */; };
 		39EA8ED11D40BC060053EE02 /* YSScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8ED01D40BC060053EE02 /* YSScrollView.m */; };
@@ -1011,6 +1013,10 @@
 		39DB4C851D5AD75D009D2B1F /* YSEnDecryptionMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSEnDecryptionMethod.m; sourceTree = "<group>"; };
 		39E311431D643F8700A631EA /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		39E311441D643F8700A631EA /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
+		39E9C2F61FB42EE800E86D7A /* YSAnimationDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSAnimationDetailVC.h; sourceTree = "<group>"; };
+		39E9C2F71FB42EE800E86D7A /* YSAnimationDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSAnimationDetailVC.m; sourceTree = "<group>"; };
+		39E9C2FE1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSAnimationDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		39E9C2FF1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSAnimationDetailCollectionViewCell.m; sourceTree = "<group>"; };
 		39EA8EC81D40BB6C0053EE02 /* YSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSLoginViewController.h; sourceTree = "<group>"; };
 		39EA8EC91D40BB6C0053EE02 /* YSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSLoginViewController.m; sourceTree = "<group>"; };
 		39EA8ECB1D40BB7D0053EE02 /* YSRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRegisterViewController.h; sourceTree = "<group>"; };
@@ -1575,12 +1581,16 @@
 		3928DF501F02584900A7F38A /* YSAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				39E9C2F61FB42EE800E86D7A /* YSAnimationDetailVC.h */,
+				39E9C2F71FB42EE800E86D7A /* YSAnimationDetailVC.m */,
+				39E9C2FE1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.h */,
+				39E9C2FF1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m */,
+				3928DF551F02584900A7F38A /* PictureAnimateViewController.h */,
+				3928DF561F02584900A7F38A /* PictureAnimateViewController.m */,
 				3928DF511F02584900A7F38A /* CALayerAndBerzierVC.h */,
 				3928DF521F02584900A7F38A /* CALayerAndBerzierVC.m */,
 				3928DF531F02584900A7F38A /* CoreAnimationViewController.h */,
 				3928DF541F02584900A7F38A /* CoreAnimationViewController.m */,
-				3928DF551F02584900A7F38A /* PictureAnimateViewController.h */,
-				3928DF561F02584900A7F38A /* PictureAnimateViewController.m */,
 				3928DF571F02584900A7F38A /* PresentViewController.h */,
 				3928DF581F02584900A7F38A /* PresentViewController.m */,
 				3928DF591F02584900A7F38A /* ThreeDemotionViewController.h */,
@@ -3019,7 +3029,9 @@
 				3928DEE41F0254A700A7F38A /* TableHeadSearchController.m in Sources */,
 				3932AA9F1E7250C20044D681 /* UIWebView+AFNetworking.m in Sources */,
 				391B89BD1E56DC9D0033108A /* YSActivityIndicatorManager.m in Sources */,
+				39E9C3001FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m in Sources */,
 				3998D8791DCC7A6500704E26 /* YSNetRequestManager.m in Sources */,
+				39E9C2F81FB42EE800E86D7A /* YSAnimationDetailVC.m in Sources */,
 				39333C0F1DE2CEDA00035157 /* RightMenuViewController.m in Sources */,
 				390C2B4A1EFBC498003269D3 /* YSCommenInputVC.m in Sources */,
 				39333C0D1DE2CEDA00035157 /* AudioAndVideoMainViewController.m in Sources */,
