@@ -7,6 +7,7 @@
 //
 
 #import "YSAnimationsViewController.h"
+#import "YSAnimationDetailVC.h"
 
 // 1
 #import "PictureAnimateViewController.h"
@@ -83,6 +84,9 @@ static NSInteger const SectionTag = 20171109;
 - (void)clickSectionView:(UITapGestureRecognizer *)tap
 {
     NSInteger clickSection = tap.view.tag - SectionTag;
+    if (clickSection == [_sectionOpenArr count]-1) {
+        return;
+    }
     Boolean isOpen = [_sectionOpenArr[clickSection] boolValue];
     [_sectionOpenArr replaceObjectAtIndex:clickSection withObject:@(!isOpen)];
     NSIndexSet * indexSet = [NSIndexSet indexSetWithIndex:clickSection];
@@ -122,15 +126,19 @@ static NSInteger const SectionTag = 20171109;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    return 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    UIView * sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
     sectionView.tag = SectionTag + section;
     
-    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 30)];
+    UIView * bottemLine = [[UIView alloc] initWithFrame:CGRectMake(0, 50-0.5, kScreenWidth, 0.5)];
+    bottemLine.backgroundColor = [UIColor blackColor];
+    [sectionView addSubview:bottemLine];
+    
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 50)];
     titleLabel.text = _sectionTitlesArr[section];
     [sectionView addSubview:titleLabel];
     
@@ -148,32 +156,51 @@ static NSInteger const SectionTag = 20171109;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0) {
-        // Image 帧动画
-        PictureAnimateViewController * pictureVC = [PictureAnimateViewController new];
-        pictureVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:pictureVC animated:YES];
-    }
-    else if (indexPath.section == 1) {
-        // 2D/3D 动画
-        switch (indexPath.row) {
-            case 0:
-            {
+    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2) {
+        
+        NSString * title = _animationsArr[indexPath.section][indexPath.row];
+        YSAnimationType type = -1;
+        YSAnimationWay way = -1;
+        
+        if (indexPath.section == 0) {
+            type = YSAnimationTypeImageKey;
+            way = YSAnimationWayDefault;
+        }
+        else if (indexPath.section == 1) {
+            type = YSAnimationType2or3D;
+            if (indexPath.row == 0) {
                 
             }
-                break;
+            else if (indexPath.row == 1) {
                 
-            default:
-                break;
+            }
+            else if (indexPath.row == 2) {
+                
+            }
         }
-    }
-    else if (indexPath.section == 2) {
-        // 转场动画
+        else if (indexPath.section == 2) {
+            type = YSAnimationTypeTurnArounds;
+            way = YSAnimationWayCATransition;
+        }
         
+        YSAnimationDetailVC * animationDetailVC = [[YSAnimationDetailVC alloc] initWithAnimationType:type animationWay:way title:title];
+        animationDetailVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:animationDetailVC animated:YES];
     }
     else if (indexPath.section == 3) {
         // 其他效果动画
-        
+        if (indexPath.row == 0) {
+            // navigationBar
+            JianShuNavAnimationViewController * navigationVC = [JianShuNavAnimationViewController new];
+            navigationVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:navigationVC animated:YES];
+        }
+        else {
+            // 爱奇艺播放/暂停动画
+            YSAQYPlayOrPauseVC * aqyVC = [[YSAQYPlayOrPauseVC alloc] init];
+            aqyVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:aqyVC animated:YES];
+        }
     }
     
      /*

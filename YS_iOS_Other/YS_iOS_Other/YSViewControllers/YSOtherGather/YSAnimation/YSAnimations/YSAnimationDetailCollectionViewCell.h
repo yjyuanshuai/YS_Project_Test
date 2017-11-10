@@ -10,6 +10,8 @@
 
 @interface YSAnimationDetailCollectionViewCell : UICollectionViewCell
 
-//@property (   )
+@property (nonatomic, strong) UILabel * nameLabel;
+
+- (void)setContent:(NSString *)content;
 
 @end
