@@ -100,30 +100,21 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
 
 - (UIView *)createBgView
 {
-    UIView * bgView = [UIView new];
-    bgView.backgroundColor = YSDefaultGrayColor;
-    [self.view addSubview:bgView];
-    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 180, 0));
-    }];
-    
     _bgImageView = [UIImageView new];
     _bgImageView.backgroundColor = YSDefaultGrayColor;
     _bgImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [bgView addSubview:_bgImageView];
+    [self.view addSubview:_bgImageView];
     [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bgView);
-        make.bottom.equalTo(bgView);
-        make.centerX.equalTo(bgView);
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 180, 0));
     }];
     
     _animationView = [UIView new];
     _animationView.backgroundColor = YSColorDefault;
     _animationView.hidden = YES;
-    [bgView addSubview:_animationView];
+    [self.view addSubview:_animationView];
     [_animationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bgView);
-        make.left.equalTo(bgView);
+        make.top.equalTo(_bgImageView);
+        make.left.equalTo(_bgImageView);
         make.size.mas_equalTo(CGSizeMake(80, 80));
     }];
     
@@ -179,7 +170,7 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
         [self animationImageKey];
     }
     else if (_type == YSAnimationType2or3D) {
-        
+        [self animation2or3DWithIndexPath:indexPath];
     }
     else if (_type == YSAnimationTypeTurnArounds) {
         [self animationTurnAroundsWithIndexPath:indexPath];
@@ -213,10 +204,34 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
  */
 - (void)animation2or3DWithIndexPath:(NSIndexPath *)indexPath
 {
+    if (_way == YSAnimationWayDefault) {
+        
+    }
+    else if (_way == YSAnimationWayUIViewAPI) {
+        
+    }
+    else if (_way == YSAnimationWayUIViewBlock) {
+        
+    }
+    else if (_way == YSAnimationWayCABasicAnimation) {
+        
+    }
+    
     switch (indexPath.row) {
         case 0:     // 位移
         {
-            
+            if (_way == YSAnimationWayDefault) {
+                
+            }
+            else if (_way == YSAnimationWayUIViewAPI) {
+                [self positionByUIViewAPI];
+            }
+            else if (_way == YSAnimationWayUIViewBlock) {
+                [self positionByUIViewBlock];
+            }
+            else if (_way == YSAnimationWayCABasicAnimation) {
+                [self positionByCAAnimation];
+            }
         }
             break;
         case 1:     // 缩放
@@ -271,6 +286,51 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     
 }
 
+#pragma mark - 位移动画
+- (void)positionByDefault
+{
+    
+}
+
+- (void)positionByUIViewAPI
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0f];
+    [_animationView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+    }];
+}
+
+- (void)positionByUIViewBlock
+{
+    [UIView animateWithDuration:1.0 animations:^{
+        [_animationView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_bgImageView.mas_bottom).offset(-80);
+            make.left.equalTo(_bgImageView.mas_right).offset(-80);
+        }];
+    } completion:^(BOOL finished) {
+        [_animationView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_bgImageView);
+            make.left.equalTo(_bgImageView);
+        }];
+    }];
+}
+
+- (void)positionByCAAnimation
+{
+    CABasicAnimation * positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+    positionAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
+    positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMaxX(_bgImageView.frame)-80, CGRectGetMaxY(_bgImageView.frame)-80)];
+    positionAnimation.duration = 1.0f;
+    //如果fillMode=kCAFillModeForwards和removedOnComletion=NO，那么在动画执行完毕后，图层会保持显示动画执行后的状态。但在实质上，图层的属性值还是动画执行前的初始值，并没有真正被改变。
+    //positionAnimation.fillMode = kCAFillModeForwards;
+    //positionAnimation.removedOnCompletion = NO;
+    positionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    [_animationView.layer addAnimation:positionAnimation forKey:@"positionAnimationYS"];
+}
+
+
+#pragma mark - 转场动画
 - (NSString *)catransitionTypeWithIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
