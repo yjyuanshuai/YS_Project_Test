@@ -357,7 +357,7 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
         animationTransition = UIViewAnimationTransitionFlipFromLeft;
     }
     
-    [UIView setAnimationTransition:animationTransition forView:_bgImageView cache:YES];
+    [UIView setAnimationTransition:animationTransition forView:_bgImageView cache:NO];
 }
 
 - (void)turnAroundByUIViewBlockWithIndexPath:(NSIndexPath *)indexPath
