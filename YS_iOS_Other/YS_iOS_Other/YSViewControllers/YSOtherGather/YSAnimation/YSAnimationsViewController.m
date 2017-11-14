@@ -61,8 +61,8 @@ static NSInteger const SectionTag = 20171109;
     _sectionOpenArr = [@[@(NO), @(NO), @(NO), @(NO)] mutableCopy];
     
     _animationsArr = [@[@[@"Image帧动画"],
-                        @[@"属性实现", @"UIView动画", @"核心动画"],
-                        @[@"UIView", @"CATrantion"],
+                        @[@"属性实现", @"UIView-API", @"UIView-Block", @"核心动画"],
+                        @[@"UIView-API", @"UIView-Block", @"CATrantion"],
                         @[@"导航栏效果", @"爱奇艺播放/暂停按钮"]] mutableCopy];
     _clickSection = -1;
 }
@@ -134,10 +134,6 @@ static NSInteger const SectionTag = 20171109;
     UIView * sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
     sectionView.tag = SectionTag + section;
     
-    UIView * bottemLine = [[UIView alloc] initWithFrame:CGRectMake(0, 50-0.5, kScreenWidth, 0.5)];
-    bottemLine.backgroundColor = [UIColor blackColor];
-    [sectionView addSubview:bottemLine];
-    
     UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, kScreenWidth-30, 50)];
     titleLabel.text = _sectionTitlesArr[section];
     [sectionView addSubview:titleLabel];
@@ -169,18 +165,29 @@ static NSInteger const SectionTag = 20171109;
         else if (indexPath.section == 1) {
             type = YSAnimationType2or3D;
             if (indexPath.row == 0) {
-                
+                way = YSAnimationWayDefault;
             }
             else if (indexPath.row == 1) {
-                
+                way = YSAnimationWayUIViewAPI;
             }
             else if (indexPath.row == 2) {
-                
+                way = YSAnimationWayUIViewBlock;
+            }
+            else if (indexPath.row == 3) {
+                way = YSAnimationWayCABasicAnimation;
             }
         }
         else if (indexPath.section == 2) {
             type = YSAnimationTypeTurnArounds;
-            way = YSAnimationWayCATransition;
+            if (indexPath.row == 0) {
+                way = YSAnimationWayUIViewAPI;
+            }
+            else if (indexPath.row == 1) {
+                way = YSAnimationWayUIViewBlock;
+            }
+            else if (indexPath.row == 2) {
+                way = YSAnimationWayCATransition;
+            }
         }
         
         YSAnimationDetailVC * animationDetailVC = [[YSAnimationDetailVC alloc] initWithAnimationType:type animationWay:way title:title];

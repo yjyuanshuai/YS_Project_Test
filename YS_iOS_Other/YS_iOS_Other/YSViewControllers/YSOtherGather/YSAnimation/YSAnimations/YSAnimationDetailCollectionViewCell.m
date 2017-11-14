@@ -28,9 +28,18 @@
     return self;
 }
 
-- (void)setContent:(NSString *)content
+- (void)setContent:(NSString *)content canClick:(BOOL)canClick
 {
     _nameLabel.text = content;
+    
+    if (canClick) {
+        self.contentView.backgroundColor = YSDefaultGrayColor;
+        _nameLabel.textColor = [UIColor blackColor];
+    }
+    else {
+        self.contentView.backgroundColor = [UIColor whiteColor];
+        _nameLabel.textColor = YSDefaultGrayColor;
+    }
 }
 
 @end

@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong) UILabel * nameLabel;
 
-- (void)setContent:(NSString *)content;
+- (void)setContent:(NSString *)content canClick:(BOOL)canClick;
 
 @end

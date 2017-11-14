@@ -8,13 +8,14 @@
 
 #import "YSAnimationDetailVC.h"
 #import "YSAnimationDetailCollectionViewCell.h"
+#import "NSString+YSStringDo.h"
 
 static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDetailCollectionViewCellID";
 
 @interface YSAnimationDetailVC ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIImageView * bgImageView;
-@property (nonatomic, strong) UIView * animationView;
+@property (nonatomic, strong) UIImageView * animationView;
 @property (nonatomic, strong) UICollectionView * animationCollectionView;
 
 @end
@@ -26,6 +27,7 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     
     NSMutableArray * _imagesArr;
     NSMutableArray * _animationArr;
+    NSMutableArray * _animationCanClickArr;
 }
 
 - (instancetype)initWithAnimationType:(YSAnimationType)type
@@ -60,12 +62,21 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
 {
     if (_type == YSAnimationTypeImageKey) {
         _animationArr = [@[@"image帧"] mutableCopy];
-    }
-    else if (_type == YSAnimationType2or3D) {
-        _animationArr = [@[@"位移", @"缩放", @"2d旋转", @"3d旋转", @"关键帧", @"颜色", @"路径", @"抖动", @"弹簧"] mutableCopy];
+        _animationCanClickArr = [@[@(YES)] mutableCopy];
     }
     else if (_type == YSAnimationTypeTurnArounds) {
         _animationArr = [@[@"fade", @"moveIn", @"push", @"reveal", @"cube", @"suck", @"flip", @"ripple", @"curl", @"uncurl", @"cameraOn", @"cameraOff"] mutableCopy];
+        
+        if (_way == YSAnimationWayUIViewAPI || _way == YSAnimationWayUIViewBlock) {
+            _animationCanClickArr = [@[@(NO), @(NO), @(NO), @(NO), @(NO), @(NO), @(YES), @(NO), @(YES), @(YES), @(NO), @(NO)] mutableCopy];
+        }
+        else if (_way == YSAnimationWayCATransition) {
+            _animationCanClickArr = [@[@(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES)] mutableCopy];
+        }
+    }
+    else {
+        _animationArr = [@[@"位移", @"缩放", @"2d旋转", @"3d旋转", @"关键帧", @"颜色", @"路径", @"抖动", @"弹簧"] mutableCopy];
+        _animationCanClickArr = [@[@(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES), @(YES)] mutableCopy];
     }
     
     _imagesArr = [NSMutableArray array];
@@ -108,10 +119,10 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
         make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 180, 0));
     }];
     
-    _animationView = [UIView new];
-    _animationView.backgroundColor = YSColorDefault;
+    _animationView = [UIImageView new];
+    _animationView.image = [UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"5" ofType:@"jpg"]];
     _animationView.hidden = YES;
-    [self.view addSubview:_animationView];
+    [_bgImageView addSubview:_animationView];
     [_animationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_bgImageView);
         make.left.equalTo(_bgImageView);
@@ -155,7 +166,7 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YSAnimationDetailCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:YSAnimationDetailCollectionViewCellID forIndexPath:indexPath];
-    [cell setContent:_animationArr[indexPath.row]];
+    [cell setContent:_animationArr[indexPath.row] canClick:[_animationCanClickArr[indexPath.row] boolValue]];
     return cell;
 }
 
@@ -169,19 +180,13 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     if (_type == YSAnimationTypeImageKey) {
         [self animationImageKey];
     }
-    else if (_type == YSAnimationType2or3D) {
-        [self animation2or3DWithIndexPath:indexPath];
-    }
     else if (_type == YSAnimationTypeTurnArounds) {
         [self animationTurnAroundsWithIndexPath:indexPath];
     }
+    else {
+        [self animation2or3DWithIndexPath:indexPath];
+    }
 }
-
-#pragma mark - UICollectionViewDelegateFlowLayout
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//
-//}
 
 #pragma mark - 方法
 /**
@@ -282,8 +287,15 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
 
 - (void)animationTurnAroundsWithIndexPath:(NSIndexPath *)indexPath
 {
-    [self turnAroundByCATransitionType:[self catransitionTypeWithIndexPath:indexPath]];
-    
+    if (_way == YSAnimationWayUIViewAPI) {
+        [self turnAroundByUIViewAPIWithIndexPath:indexPath];
+    }
+    else if (_way == YSAnimationWayUIViewBlock) {
+        [self turnAroundByUIViewBlockWithIndexPath:indexPath];
+    }
+    else if (_way ==  YSAnimationWayCATransition) {
+        [self turnAroundByCATransitionWithIndexPath:indexPath];
+    }
 }
 
 #pragma mark - 位移动画
@@ -331,46 +343,105 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
 
 
 #pragma mark - 转场动画
-- (NSString *)catransitionTypeWithIndexPath:(NSIndexPath *)indexPath
+- (void)turnAroundByUIViewAPIWithIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger animationType = indexPath.row;
+    UIViewAnimationTransition animationTransition = UIViewAnimationTransitionNone;
+    if (animationType == 8) {
+        animationTransition = UIViewAnimationTransitionCurlUp;
+    }
+    else if (animationType == 9) {
+        animationTransition = UIViewAnimationTransitionCurlDown;
+    }
+    else if (animationType == 6) {
+        animationTransition = UIViewAnimationTransitionFlipFromLeft;
+    }
+    
+    [UIView setAnimationTransition:animationTransition forView:_bgImageView cache:YES];
+}
+
+- (void)turnAroundByUIViewBlockWithIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger animationType = indexPath.row;
+    UIViewAnimationOptions option = UIViewAnimationOptionTransitionNone;
+    if (animationType == 6) {
+        option = UIViewAnimationOptionTransitionFlipFromTop;
+    }
+    else if (animationType == 8) {
+        option = UIViewAnimationOptionTransitionCurlUp;
+    }
+    else if (animationType == 9) {
+        option = UIViewAnimationOptionTransitionCurlDown;
+    }
+    
+    [UIView transitionWithView:_bgImageView duration:1.0 options:option animations:^{
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+/**
+ CATransition
+ */
+- (void)turnAroundByCATransitionWithIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * type = @"";
+    NSString * subType = @"";
+    
     switch (indexPath.row) {
         case 0:     // fade - 淡入淡出
-            return kCATransitionFade;
-        case 1:     // moveIn - 覆盖
-            return kCATransitionMoveIn;
-        case 2:     // push - 推出
-            return kCATransitionPush;
-        case 3:     // reveal - 揭开
-            return kCATransitionReveal;
-        case 4:     // cube - 立体旋转
-            return @"cube";
-        case 5:     // suck - 飘缩
-            return @"suckEffect";
-        case 6:     // flip - 翻转
-            return @"oglFlip";
-        case 7:     // ripple - 水滴波纹
-            return @"rippleEffect";
-        case 8:     // curl - 翻页翻过
-            return @"pageCurl";
-        case 9:     // uncurl - 翻页翻回
-            return @"pageUnCurl";
-        case 10:     // curl - 相机打开
-            return @"cameraIrisHollowOpen";
-        case 11:     // curl - 相机关闭
-            return @"cameraIrisHollowClose";
-        default:
-            return @"";
+            type = kCATransitionFade;
             break;
+        case 1:     // moveIn - 覆盖
+            type = kCATransitionMoveIn;
+            break;
+        case 2:     // push - 推出
+            type = kCATransitionPush;
+            break;
+        case 3:     // reveal - 揭开
+            type = kCATransitionReveal;
+            break;
+        case 4:     // cube - 立体旋转
+            type = @"cube";
+            break;
+        case 5:     // suck - 飘缩
+            type = @"suckEffect";
+            break;
+        case 6:     // flip - 翻转
+            type = @"oglFlip";
+            subType = kCATransitionFromTop;
+            break;
+        case 7:     // ripple - 水滴波纹
+            type = @"rippleEffect";
+            break;
+        case 8:     // curl - 翻页翻过
+            type = @"pageCurl";
+            subType = kCATransitionFromBottom;
+            break;
+        case 9:     // uncurl - 翻页翻回
+            type = @"pageUnCurl";
+            break;
+        case 10:     // curl - 相机打开
+            type = @"cameraIrisHollowOpen";
+            break;
+        case 11:     // curl - 相机关闭
+            type = @"cameraIrisHollowClose";
+            break;
+        default:
+            type = @"";
+            break;
+    }
+    if (![type isBlank]) {
+        CATransition * tran = [CATransition animation];
+        tran.type = type;
+        if (![subType isBlank]) {
+            tran.subtype = subType;
+        }
+        tran.duration = 1;
+        [_bgImageView.layer addAnimation:tran forKey:nil];
     }
 }
 
-- (void)turnAroundByCATransitionType:(NSString *)type
-{
-    CATransition * tran = [CATransition animation];
-    tran.type = type;
-    tran.subtype = kCATransitionFromLeft;
-    tran.duration = 1;
-    [_bgImageView.layer addAnimation:tran forKey:nil];
-}
 
 @end
