@@ -10,11 +10,8 @@
 #import "YSAnimationDetailVC.h"
 
 // 1
-#import "PictureAnimateViewController.h"
 #import "TwoDemotionViewController.h"
 #import "ThreeDemotionViewController.h"
-#import "TurnPageViewController.h"
-#import "ViewSimpleViewController.h"
 #import "CoreAnimationViewController.h"
 #import "CALayerAndBerzierVC.h"
 #import "PresentViewController.h"
@@ -57,12 +54,13 @@ static NSInteger const SectionTag = 20171109;
 {
     self.title = @"动画";
     
-    _sectionTitlesArr = [@[@"Image帧动画", @"普通2D/3D", @"转场动画", @"一些动画效果"] mutableCopy];
+    _sectionTitlesArr = [@[@"Image帧动画", @"普通2D/3D", @"转场动画", @"弹簧", @"一些动画效果"] mutableCopy];
     _sectionOpenArr = [@[@(NO), @(NO), @(NO), @(NO)] mutableCopy];
     
     _animationsArr = [@[@[@"Image帧动画"],
                         @[@"属性实现", @"UIView-API", @"UIView-Block", @"核心动画"],
                         @[@"UIView-API", @"UIView-Block", @"CATrantion"],
+                        @[@"UIView-API", @"UIView-Block", @"CA"],
                         @[@"导航栏效果", @"爱奇艺播放/暂停按钮"]] mutableCopy];
     _clickSection = -1;
 }
@@ -159,10 +157,12 @@ static NSInteger const SectionTag = 20171109;
         YSAnimationWay way = -1;
         
         if (indexPath.section == 0) {
+            // Image 帧
             type = YSAnimationTypeImageKey;
             way = YSAnimationWayDefault;
         }
         else if (indexPath.section == 1) {
+            // 2D/3D 动画
             type = YSAnimationType2or3D;
             if (indexPath.row == 0) {
                 way = YSAnimationWayDefault;
@@ -178,6 +178,7 @@ static NSInteger const SectionTag = 20171109;
             }
         }
         else if (indexPath.section == 2) {
+            // 转场动画
             type = YSAnimationTypeTurnArounds;
             if (indexPath.row == 0) {
                 way = YSAnimationWayUIViewAPI;
@@ -188,6 +189,10 @@ static NSInteger const SectionTag = 20171109;
             else if (indexPath.row == 2) {
                 way = YSAnimationWayCATransition;
             }
+        }
+        else if (indexPath.section == 3) {
+            // 弹簧
+            
         }
         
         YSAnimationDetailVC * animationDetailVC = [[YSAnimationDetailVC alloc] initWithAnimationType:type animationWay:way title:title];

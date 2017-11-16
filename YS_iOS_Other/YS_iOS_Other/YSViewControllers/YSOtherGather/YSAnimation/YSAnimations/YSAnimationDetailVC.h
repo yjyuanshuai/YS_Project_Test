@@ -12,20 +12,20 @@ typedef NS_ENUM(NSInteger, YSAnimationType)
 {
     YSAnimationTypeImageKey,    // Image帧
     YSAnimationType2or3D,       
-    YSAnimationTypeTurnArounds  // 转场动画
+    YSAnimationTypeTurnArounds, // 转场动画
+    YSAnimationTypeSpring       // 弹簧
 };
 
 typedef NS_ENUM(NSInteger, YSAnimation2or3DType)
 {
-    YSAnimationTypePosition,    // 位移
-    YSAnimationTypeScale,       // 缩放
-    YSAnimationType2DRotation,  // 2d 旋转
-    YSAnimationType3DRotation,  // 3d 旋转
-    YSAnimationTypePath,        // 路径
-    YSAnimationTypeKey,         // 关键帧
-    YSAnimationTypeColor,       // 渐变色
-    YSAnimationTypeShake,       // 抖动
-    YSAnimationTypeSpring       // 弹簧
+    YSAnimation2or3DTypePosition,    // 位移
+    YSAnimation2or3DTypeScale,       // 缩放
+    YSAnimation2or3DType2DRotation,  // 2d 旋转
+    YSAnimation2or3DType3DRotation,  // 3d 旋转
+    YSAnimation2or3DTypePath,        // 路径
+    YSAnimation2or3DTypeKey,         // 关键帧
+    YSAnimation2or3DTypeColor,       // 渐变色
+    YSAnimation2or3DTypeShake,       // 抖动
 };
 
 typedef NS_ENUM(NSInteger, YSAnimationWay)

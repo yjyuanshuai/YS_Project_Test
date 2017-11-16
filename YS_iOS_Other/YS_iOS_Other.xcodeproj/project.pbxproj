@@ -82,12 +82,9 @@
 		3928DF631F02584900A7F38A /* JianShuNavAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF4F1F02584900A7F38A /* JianShuNavAnimationViewController.m */; };
 		3928DF641F02584900A7F38A /* CALayerAndBerzierVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF521F02584900A7F38A /* CALayerAndBerzierVC.m */; };
 		3928DF651F02584900A7F38A /* CoreAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF541F02584900A7F38A /* CoreAnimationViewController.m */; };
-		3928DF661F02584900A7F38A /* PictureAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF561F02584900A7F38A /* PictureAnimateViewController.m */; };
 		3928DF671F02584900A7F38A /* PresentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF581F02584900A7F38A /* PresentViewController.m */; };
 		3928DF681F02584900A7F38A /* ThreeDemotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF5A1F02584900A7F38A /* ThreeDemotionViewController.m */; };
-		3928DF691F02584900A7F38A /* TurnPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF5C1F02584900A7F38A /* TurnPageViewController.m */; };
 		3928DF6A1F02584900A7F38A /* TwoDemotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF5E1F02584900A7F38A /* TwoDemotionViewController.m */; };
-		3928DF6B1F02584900A7F38A /* ViewSimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF601F02584900A7F38A /* ViewSimpleViewController.m */; };
 		3928DF6C1F02584900A7F38A /* YSAnimationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF621F02584900A7F38A /* YSAnimationsViewController.m */; };
 		3928DF731F0258D100A7F38A /* SevenAppleLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF6E1F0258D100A7F38A /* SevenAppleLocationViewController.m */; };
 		3928DF741F0258D100A7F38A /* SevenBaiduViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3928DF701F0258D100A7F38A /* SevenBaiduViewController.m */; };
@@ -574,18 +571,12 @@
 		3928DF521F02584900A7F38A /* CALayerAndBerzierVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CALayerAndBerzierVC.m; sourceTree = "<group>"; };
 		3928DF531F02584900A7F38A /* CoreAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAnimationViewController.h; sourceTree = "<group>"; };
 		3928DF541F02584900A7F38A /* CoreAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreAnimationViewController.m; sourceTree = "<group>"; };
-		3928DF551F02584900A7F38A /* PictureAnimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureAnimateViewController.h; sourceTree = "<group>"; };
-		3928DF561F02584900A7F38A /* PictureAnimateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureAnimateViewController.m; sourceTree = "<group>"; };
 		3928DF571F02584900A7F38A /* PresentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentViewController.h; sourceTree = "<group>"; };
 		3928DF581F02584900A7F38A /* PresentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentViewController.m; sourceTree = "<group>"; };
 		3928DF591F02584900A7F38A /* ThreeDemotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeDemotionViewController.h; sourceTree = "<group>"; };
 		3928DF5A1F02584900A7F38A /* ThreeDemotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeDemotionViewController.m; sourceTree = "<group>"; };
-		3928DF5B1F02584900A7F38A /* TurnPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnPageViewController.h; sourceTree = "<group>"; };
-		3928DF5C1F02584900A7F38A /* TurnPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TurnPageViewController.m; sourceTree = "<group>"; };
 		3928DF5D1F02584900A7F38A /* TwoDemotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoDemotionViewController.h; sourceTree = "<group>"; };
 		3928DF5E1F02584900A7F38A /* TwoDemotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoDemotionViewController.m; sourceTree = "<group>"; };
-		3928DF5F1F02584900A7F38A /* ViewSimpleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSimpleViewController.h; sourceTree = "<group>"; };
-		3928DF601F02584900A7F38A /* ViewSimpleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSimpleViewController.m; sourceTree = "<group>"; };
 		3928DF611F02584900A7F38A /* YSAnimationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSAnimationsViewController.h; sourceTree = "<group>"; };
 		3928DF621F02584900A7F38A /* YSAnimationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSAnimationsViewController.m; sourceTree = "<group>"; };
 		3928DF6D1F0258D100A7F38A /* SevenAppleLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SevenAppleLocationViewController.h; path = YS_iOS_Other/YSViewControllers/YSOtherGather/YSOther/Map/SevenAppleLocationViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1585,8 +1576,6 @@
 				39E9C2F71FB42EE800E86D7A /* YSAnimationDetailVC.m */,
 				39E9C2FE1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.h */,
 				39E9C2FF1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m */,
-				3928DF551F02584900A7F38A /* PictureAnimateViewController.h */,
-				3928DF561F02584900A7F38A /* PictureAnimateViewController.m */,
 				3928DF511F02584900A7F38A /* CALayerAndBerzierVC.h */,
 				3928DF521F02584900A7F38A /* CALayerAndBerzierVC.m */,
 				3928DF531F02584900A7F38A /* CoreAnimationViewController.h */,
@@ -1595,12 +1584,8 @@
 				3928DF581F02584900A7F38A /* PresentViewController.m */,
 				3928DF591F02584900A7F38A /* ThreeDemotionViewController.h */,
 				3928DF5A1F02584900A7F38A /* ThreeDemotionViewController.m */,
-				3928DF5B1F02584900A7F38A /* TurnPageViewController.h */,
-				3928DF5C1F02584900A7F38A /* TurnPageViewController.m */,
 				3928DF5D1F02584900A7F38A /* TwoDemotionViewController.h */,
 				3928DF5E1F02584900A7F38A /* TwoDemotionViewController.m */,
-				3928DF5F1F02584900A7F38A /* ViewSimpleViewController.h */,
-				3928DF601F02584900A7F38A /* ViewSimpleViewController.m */,
 			);
 			path = YSAnimations;
 			sourceTree = "<group>";
@@ -3056,7 +3041,6 @@
 				39EB21C41F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m in Sources */,
 				393986491E4D8E9900B1553C /* CameraOrImageListVC.m in Sources */,
 				3928DF281F02570A00A7F38A /* XmlViewController.m in Sources */,
-				3928DF6B1F02584900A7F38A /* ViewSimpleViewController.m in Sources */,
 				396DC5381E94FD3100AC9787 /* VideoListVC.m in Sources */,
 				396DC53B1E94FE2700AC9787 /* YSVideoPlayerView.m in Sources */,
 				39EA8ED11D40BC060053EE02 /* YSScrollView.m in Sources */,
@@ -3075,7 +3059,6 @@
 				39294C041EEAA9F90039538F /* YSMenuButton.m in Sources */,
 				3928DF4A1F0257D200A7F38A /* YSHarewareViewController.m in Sources */,
 				3928DEF31F02556000A7F38A /* YSCustemSearchBar.m in Sources */,
-				3928DF691F02584900A7F38A /* TurnPageViewController.m in Sources */,
 				390C59391DE432970087990C /* YSSongModel.m in Sources */,
 				3932AA9C1E7250C20044D681 /* UIImageView+AFNetworking.m in Sources */,
 				39333BF31DE2CE9A00035157 /* AttributeBaseView.m in Sources */,
@@ -3098,7 +3081,6 @@
 				3948BBD61E7A669D00D5CE84 /* AssetSaveInPlist.m in Sources */,
 				395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */,
 				39C1C4291F6A206E00AF836B /* YSNotificationVC.m in Sources */,
-				3928DF661F02584900A7F38A /* PictureAnimateViewController.m in Sources */,
 				3928DEE91F02550A00A7F38A /* ApplicationSettingViewController.m in Sources */,
 				39333BF41DE2CE9A00035157 /* YSCoreTextViewController.m in Sources */,
 				3928DEE31F0254A700A7F38A /* SearchResultViewController.m in Sources */,

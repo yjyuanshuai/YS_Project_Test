@@ -111,13 +111,10 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
 
 - (UIView *)createBgView
 {
-    _bgImageView = [UIImageView new];
+    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 300)];
     _bgImageView.backgroundColor = YSDefaultGrayColor;
     _bgImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:_bgImageView];
-    [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, 180, 0));
-    }];
     
     _animationView = [UIImageView new];
     _animationView.image = [UIImage imageNamed:[[NSBundle mainBundle] pathForResource:@"5" ofType:@"jpg"]];
@@ -128,6 +125,8 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
         make.left.equalTo(_bgImageView);
         make.size.mas_equalTo(CGSizeMake(80, 80));
     }];
+    
+    MASAttachKeys(_bgImageView, _animationView);
     
     return _bgImageView;
 }
@@ -202,89 +201,6 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     }
 }
 
-
-/**
-     2D / 3D动画
- @param indexPath
- */
-- (void)animation2or3DWithIndexPath:(NSIndexPath *)indexPath
-{
-    if (_way == YSAnimationWayDefault) {
-        
-    }
-    else if (_way == YSAnimationWayUIViewAPI) {
-        
-    }
-    else if (_way == YSAnimationWayUIViewBlock) {
-        
-    }
-    else if (_way == YSAnimationWayCABasicAnimation) {
-        
-    }
-    
-    switch (indexPath.row) {
-        case 0:     // 位移
-        {
-            if (_way == YSAnimationWayDefault) {
-                
-            }
-            else if (_way == YSAnimationWayUIViewAPI) {
-                [self positionByUIViewAPI];
-            }
-            else if (_way == YSAnimationWayUIViewBlock) {
-                [self positionByUIViewBlock];
-            }
-            else if (_way == YSAnimationWayCABasicAnimation) {
-                [self positionByCAAnimation];
-            }
-        }
-            break;
-        case 1:     // 缩放
-        {
-            
-        }
-            break;
-        case 2:     // 2d旋转
-        {
-            
-        }
-            break;
-        case 3:     // 3d旋转
-        {
-            
-        }
-            break;
-        case 4:     // 关键帧
-        {
-            
-        }
-            break;
-        case 5:     // 颜色
-        {
-            
-        }
-            break;
-        case 6:     // 路径
-        {
-            
-        }
-            break;
-        case 7:     // 抖动
-        {
-            
-        }
-            break;
-        case 8:     // 弹簧
-        {
-            
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
-
 - (void)animationTurnAroundsWithIndexPath:(NSIndexPath *)indexPath
 {
     if (_way == YSAnimationWayUIViewAPI) {
@@ -298,49 +214,309 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     }
 }
 
+/**
+     2D / 3D动画
+ */
+- (void)animation2or3DWithIndexPath:(NSIndexPath *)indexPath
+{
+    YSAnimation2or3DType type = -1;
+    switch (indexPath.row) {
+        case 0:     // 位移
+        {
+            type = YSAnimation2or3DTypePosition;
+        }
+            break;
+        case 1:     // 缩放
+        {
+            type = YSAnimation2or3DTypeScale;
+        }
+            break;
+        case 2:     // 2d旋转
+        {
+            type = YSAnimation2or3DType2DRotation;
+        }
+            break;
+        case 3:     // 3d旋转
+        {
+            type = YSAnimation2or3DType3DRotation;
+        }
+            break;
+        case 4:     // 关键帧
+        {
+            type = YSAnimation2or3DTypeKey;
+        }
+            break;
+        case 5:     // 颜色
+        {
+            type = YSAnimation2or3DTypeColor;
+        }
+            break;
+        case 6:     // 路径
+        {
+            type = YSAnimation2or3DTypePath;
+        }
+            break;
+        case 7:     // 抖动
+        {
+            type = YSAnimation2or3DTypeShake;
+        }
+            break;
+        default:
+            break;
+    }
+    
+    [self animation2Or3DWithType:type way:_way];
+}
+
+- (void)animation2Or3DWithType:(YSAnimation2or3DType)type way:(YSAnimationWay)way
+{
+    if (type == YSAnimation2or3DTypePosition) {
+        if (way == YSAnimationWayDefault) {
+            [self positionByDefault];
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            [self positionByUIViewAPI];
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            [self positionByUIViewBlock];
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            [self positionByCAAnimation];
+        }
+    }
+    else if (type == YSAnimation2or3DTypeScale) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+    else if (type == YSAnimation2or3DType2DRotation) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+    else if (type == YSAnimation2or3DType3DRotation) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+    else if (type == YSAnimation2or3DTypePath) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+    else if (type == YSAnimation2or3DTypeKey) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+    else if (type == YSAnimation2or3DTypeColor) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+    else if (type == YSAnimation2or3DTypeShake) {
+        if (way == YSAnimationWayDefault) {
+            
+        }
+        else if (way == YSAnimationWayUIViewAPI) {
+            
+        }
+        else if (way == YSAnimationWayUIViewBlock) {
+            
+        }
+        else if (way == YSAnimationWayCABasicAnimation) {
+            
+        }
+    }
+}
+
+
 #pragma mark - 位移动画
+- (void)resetPosition
+{
+    [_animationView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_bgImageView);
+        make.left.equalTo(_bgImageView);
+        make.size.mas_equalTo(CGSizeMake(80, 80));
+    }];
+}
+
 - (void)positionByDefault
 {
-    
+    if ((CGRectGetMaxX(_animationView.frame) < CGRectGetMaxX(_bgImageView.frame)) &&
+        (CGRectGetMaxY(_animationView.frame) < CGRectGetMaxY(_bgImageView.frame))) {
+        _animationView.transform = CGAffineTransformTranslate(_animationView.transform, (CGRectGetMaxX(_bgImageView.frame)-80)/10, (CGRectGetMaxY(_bgImageView.frame)-80)/10);
+    }
+    // CGAffineTransformMakeTranslation(CGRectGetMaxX(_bgImageView.frame)-80, CGRectGetMaxY(_bgImageView.frame)-80);
 }
 
 - (void)positionByUIViewAPI
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0f];
-    [_animationView mas_updateConstraints:^(MASConstraintMaker *make) {
-        
+    [self resetPosition];
+    [UIView beginAnimations:@"positionUIViewAPI" context:nil];
+    [UIView setAnimationDuration:3.0f];
+    [UIView setAnimationRepeatCount:1];
+    // 只能用 mas_remakeConstraints 方法，update 没效果。
+    [_animationView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_bgImageView.mas_bottom).offset(-80);
+        make.left.equalTo(_bgImageView.mas_right).offset(-80);
+        make.size.mas_equalTo(CGSizeMake(80, 80));
     }];
+    [UIView commitAnimations];
 }
 
 - (void)positionByUIViewBlock
 {
+    [self resetPosition];
     [UIView animateWithDuration:1.0 animations:^{
-        [_animationView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [_animationView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_bgImageView.mas_bottom).offset(-80);
             make.left.equalTo(_bgImageView.mas_right).offset(-80);
+            make.size.mas_equalTo(CGSizeMake(80, 80));
         }];
     } completion:^(BOOL finished) {
-        [_animationView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [_animationView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_bgImageView);
             make.left.equalTo(_bgImageView);
+            make.size.mas_equalTo(CGSizeMake(80, 80));
         }];
     }];
 }
 
 - (void)positionByCAAnimation
 {
+    [self resetPosition];
+    
     CABasicAnimation * positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    positionAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
-    positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMaxX(_bgImageView.frame)-80, CGRectGetMaxY(_bgImageView.frame)-80)];
+    // 这个 value 指的是 center 点
+    positionAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(40, 40)];
+    positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMaxX(_bgImageView.frame)-40, CGRectGetMaxY(_bgImageView.frame)-40)];
     positionAnimation.duration = 1.0f;
     //如果fillMode=kCAFillModeForwards和removedOnComletion=NO，那么在动画执行完毕后，图层会保持显示动画执行后的状态。但在实质上，图层的属性值还是动画执行前的初始值，并没有真正被改变。
-    //positionAnimation.fillMode = kCAFillModeForwards;
-    //positionAnimation.removedOnCompletion = NO;
+    positionAnimation.fillMode = kCAFillModeForwards;
+    positionAnimation.removedOnCompletion = NO;
     positionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [_animationView.layer addAnimation:positionAnimation forKey:@"positionAnimationYS"];
 }
 
+#pragma mark - 缩放
+- (void)scaleByDefault
+{
+    if (CGRectGetWidth(_animationView.frame) < CGRectGetWidth(_animationView.frame)*3) {
+        _animationView.transform = CGAffineTransformScale(_animationView.transform, 1.5, 1.5);
+    }
+}
+
+- (void)scaleByUIViewAPI
+{
+    
+}
+
+- (void)scaleByUIViewBlock
+{
+    
+}
+
+- (void)scaleByCAAnimation
+{
+    
+}
+
+#pragma mark - 旋转 2D
+- (void)rotation2DByDefault
+{
+    _animationView.transform = CGAffineTransformRotate(_animationView.transform, M_PI_4);
+}
+
+- (void)rotation2DByUIViewAPI
+{
+    
+}
+
+- (void)rotation2DByUIViewBlock
+{
+    
+}
+
+- (void)rotation2DByCAAnimation
+{
+    
+}
+
+#pragma mark - 旋转 3D
+- (void)rotation3DByDefault
+{
+    
+}
+
+- (void)rotation3DByUIViewAPI
+{
+    
+}
+
+- (void)rotation3DByUIViewBlock
+{
+    
+}
+
+- (void)rotation3DByCAAnimation
+{
+    
+}
 
 #pragma mark - 转场动画
 - (void)turnAroundByUIViewAPIWithIndexPath:(NSIndexPath *)indexPath
@@ -356,8 +532,16 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     else if (animationType == 6) {
         animationTransition = UIViewAnimationTransitionFlipFromLeft;
     }
-    
-    [UIView setAnimationTransition:animationTransition forView:_bgImageView cache:NO];
+
+    [UIView beginAnimations:@"YSUIViewAPITurnAround" context:nil];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationWillStartSelector:@selector(uiviewAPIStartAni:)];
+    [UIView setAnimationDidStopSelector:@selector(uiviewAPIStopAni:)];
+    [UIView setAnimationRepeatCount:1];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationTransition:animationTransition forView:_bgImageView cache:YES];
+    [UIView commitAnimations];
 }
 
 - (void)turnAroundByUIViewBlockWithIndexPath:(NSIndexPath *)indexPath
@@ -443,5 +627,15 @@ static NSString * const YSAnimationDetailCollectionViewCellID = @"YSAnimationDet
     }
 }
 
+#pragma mark -
+- (void)uiviewAPIStartAni:(NSString *)aniID
+{
+    
+}
+
+- (void)uiviewAPIStopAni:(NSString *)aniID
+{
+    
+}
 
 @end
