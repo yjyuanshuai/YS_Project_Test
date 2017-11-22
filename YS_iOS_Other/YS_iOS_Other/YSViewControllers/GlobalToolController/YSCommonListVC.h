@@ -14,4 +14,6 @@
 
 @interface YSCommonListVC : YSRootViewController
 
+- (instancetype)initWithTitle:(NSString *)title view:(UIView *)view;
+
 @end

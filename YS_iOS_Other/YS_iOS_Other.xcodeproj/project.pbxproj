@@ -220,6 +220,7 @@
 		3983C2661FC54ACD00F6B377 /* YSCustemCollectionViewFootCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3983C25E1FC54ACC00F6B377 /* YSCustemCollectionViewFootCell.m */; };
 		3983C2671FC54ACD00F6B377 /* YSCustemCollectionViewHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3983C2601FC54ACC00F6B377 /* YSCustemCollectionViewHeadCell.m */; };
 		3983C26A1FC54AFE00F6B377 /* YSCustemCollectionViewListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3983C2691FC54AFE00F6B377 /* YSCustemCollectionViewListView.m */; };
+		3983C26E1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3983C26D1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.m */; };
 		39865E5F1E7126900095B6C1 /* GlobalWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39865E5E1E7126900095B6C1 /* GlobalWebVC.m */; };
 		39865E611E713D690095B6C1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39865E601E713D690095B6C1 /* WebKit.framework */; };
 		398D189C1F025CA9001734C3 /* custemsound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 398D17F51F025CA9001734C3 /* custemsound.wav */; };
@@ -811,6 +812,8 @@
 		3983C2601FC54ACC00F6B377 /* YSCustemCollectionViewHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSCustemCollectionViewHeadCell.m; sourceTree = "<group>"; };
 		3983C2681FC54AFE00F6B377 /* YSCustemCollectionViewListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCustemCollectionViewListView.h; sourceTree = "<group>"; };
 		3983C2691FC54AFE00F6B377 /* YSCustemCollectionViewListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCustemCollectionViewListView.m; sourceTree = "<group>"; };
+		3983C26C1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSCustemCollectionViewCardLayout.h; sourceTree = "<group>"; };
+		3983C26D1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YSCustemCollectionViewCardLayout.m; sourceTree = "<group>"; };
 		39865E5D1E7126900095B6C1 /* GlobalWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalWebVC.h; sourceTree = "<group>"; };
 		39865E5E1E7126900095B6C1 /* GlobalWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalWebVC.m; sourceTree = "<group>"; };
 		39865E601E713D690095B6C1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -2189,6 +2192,7 @@
 				3983C2501FC54ACC00F6B377 /* Circle */,
 				3983C2531FC54ACC00F6B377 /* FallWater */,
 				3983C2561FC54ACC00F6B377 /* Stack */,
+				3983C26B1FC55E5200F6B377 /* Card */,
 			);
 			path = YSCustemCollectionView;
 			sourceTree = "<group>";
@@ -2218,6 +2222,15 @@
 				3983C2581FC54ACC00F6B377 /* YSCustemCollectionStackLayout.m */,
 			);
 			path = Stack;
+			sourceTree = "<group>";
+		};
+		3983C26B1FC55E5200F6B377 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				3983C26C1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.h */,
+				3983C26D1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.m */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		3985944B1D13F06A00863A14 /* Map */ = {
@@ -3143,6 +3156,7 @@
 				3948BBD61E7A669D00D5CE84 /* AssetSaveInPlist.m in Sources */,
 				395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */,
 				39C1C4291F6A206E00AF836B /* YSNotificationVC.m in Sources */,
+				3983C26E1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.m in Sources */,
 				3928DEE91F02550A00A7F38A /* ApplicationSettingViewController.m in Sources */,
 				39333BF41DE2CE9A00035157 /* YSCoreTextViewController.m in Sources */,
 				3928DEE31F0254A700A7F38A /* SearchResultViewController.m in Sources */,

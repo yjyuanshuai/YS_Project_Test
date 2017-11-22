@@ -108,7 +108,6 @@ static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectio
     }
     else if (_type == YSCustemCollectionViewTypeStack) {
         _ysCollectionViewStackLayout = [[YSCustemCollectionStackLayout alloc] init];
-        _ysCollectionViewStackLayout.itemSize = CGSizeMake(400, 400);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewStackLayout];
         _collectionView.delegate = self;

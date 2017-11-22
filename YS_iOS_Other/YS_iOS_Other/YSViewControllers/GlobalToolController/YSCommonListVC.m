@@ -10,25 +10,25 @@
 
 @interface YSCommonListVC ()
 
-@property (strong, nonatomic) Class viewClass;
+@property (strong, nonatomic) UIView * custemView;
 
 @end
 
 @implementation YSCommonListVC
 
-- (instancetype)initWithTitle:(NSString *)title viewClass:(Class)viewClass
+- (instancetype)initWithTitle:(NSString *)title view:(UIView *)view
 {
     self = [super init];
     if (self) {
         self.title = title;
-        self.viewClass = viewClass;
+        self.custemView = view;
     }
     return self;
 }
 
 - (void)loadView
 {
-    self.view = self.viewClass.new;
+    self.view = self.custemView;
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YSCustemCollectionStackLayout : UICollectionViewFlowLayout
+@interface YSCustemCollectionStackLayout : UICollectionViewLayout
 
 @end

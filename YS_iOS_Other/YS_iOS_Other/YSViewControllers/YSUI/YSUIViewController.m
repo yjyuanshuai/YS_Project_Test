@@ -14,7 +14,8 @@
 
 // 2 滚动
 #import "OneCollectionViewController.h"
-#import "YSCustemCollectionVC.h"
+#import "YSCommonListVC.h"
+#import "YSCustemCollectionViewListView.h"
 #import "OneHorizontalTableViewController.h"
 
 
@@ -148,24 +149,15 @@
             }
             else if (indexPath.row == 1)
             {
-                // 自定义 ColectionView 布局，瀑布流
-                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] initWithType:YSCustemCollectionViewTypeFallWater title:@"瀑布流"];
-                custemCollectionView.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:custemCollectionView animated:YES];
+                // 自定义
+                YSCustemCollectionViewListView * listView = [[YSCustemCollectionViewListView alloc] init];
+                listView.navigationCon = self.navigationController;
+                
+                YSCommonListVC * commonListVC = [[YSCommonListVC alloc] initWithTitle:@"自定义CollectionView布局" view:listView];
+                commonListVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:commonListVC animated:YES];
             }
-            else if (indexPath.row == 2) {
-                // 自定义 CollectionView 布局，堆叠
-                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] initWithType:YSCustemCollectionViewTypeStack title:@"堆叠"];
-                custemCollectionView.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:custemCollectionView animated:YES];
-            }
-            else if (indexPath.row == 3) {
-                // 自定义 CollectionView 布局，圆形
-                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] initWithType:YSCustemCollectionViewTypeCircle title:@"圆形"];
-                custemCollectionView.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:custemCollectionView animated:YES];
-            }
-            else if (indexPath.row == 4)
+            else if (indexPath.row == 2)
             {
                 // 横向 tableview
                 OneHorizontalTableViewController * horizontalVC = [[OneHorizontalTableViewController alloc] init];

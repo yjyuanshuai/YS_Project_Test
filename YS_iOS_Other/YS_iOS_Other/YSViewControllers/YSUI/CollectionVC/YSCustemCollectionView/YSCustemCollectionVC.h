@@ -10,9 +10,10 @@
 
 typedef NS_ENUM(NSInteger, YSCustemCollectionViewType)
 {
-    YSCustemCollectionViewTypeFallWater,    // 瀑布流
+    YSCustemCollectionViewTypeFallWater = 0,    // 瀑布流
     YSCustemCollectionViewTypeStack,        // 堆叠
-    YSCustemCollectionViewTypeCircle        // 
+    YSCustemCollectionViewTypeCircle,        // 圆形
+    YSCustemCollectionViewTypeCard
 };
 
 @interface YSCustemCollectionVC : YSRootViewController

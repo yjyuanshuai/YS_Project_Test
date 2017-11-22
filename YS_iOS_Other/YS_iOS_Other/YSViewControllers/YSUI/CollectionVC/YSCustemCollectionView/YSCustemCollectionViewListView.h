@@ -11,5 +11,7 @@
 @interface YSCustemCollectionViewListView : UIView <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)  UITableView * listTableView;
+@property (nonatomic, strong)  NSMutableArray * dataArr;
+@property (nonatomic, weak) UINavigationController * navigationCon;
 
 @end

@@ -15,9 +15,13 @@ NSString * const YSCustemCollectionView_SectionDecorationKind = @"YSCustemCollec
 @interface YSCustemCollectionViewFlowLayout()
 
 //记录瀑布流每列最下面那个cell的底部y值
+// 列号 : 当前 y
 @property (nonatomic, strong) NSMutableDictionary * itemsMaxYDic;
 
+// indexPath : attr
 @property (nonatomic, strong) NSMutableDictionary * itemAttrsDic;
+
+// [NSIndexPath indexPathForRow:0 inSection:列号] : attr
 @property (nonatomic, strong) NSMutableDictionary * sectionHeadAttrsDic;
 @property (nonatomic, strong) NSMutableDictionary * sectionFootAttrsDic;
 @property (nonatomic, strong) NSMutableDictionary * sectionDecorationDic;
