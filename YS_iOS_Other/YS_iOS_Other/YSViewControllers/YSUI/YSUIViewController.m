@@ -148,12 +148,24 @@
             }
             else if (indexPath.row == 1)
             {
-                // 自定义ColectionView布局，瀑布流
-                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] init];
+                // 自定义 ColectionView 布局，瀑布流
+                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] initWithType:YSCustemCollectionViewTypeFallWater title:@"瀑布流"];
                 custemCollectionView.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:custemCollectionView animated:YES];
             }
-            else if (indexPath.row == 2)
+            else if (indexPath.row == 2) {
+                // 自定义 CollectionView 布局，堆叠
+                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] initWithType:YSCustemCollectionViewTypeStack title:@"堆叠"];
+                custemCollectionView.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:custemCollectionView animated:YES];
+            }
+            else if (indexPath.row == 3) {
+                // 自定义 CollectionView 布局，圆形
+                YSCustemCollectionVC * custemCollectionView = [[YSCustemCollectionVC alloc] initWithType:YSCustemCollectionViewTypeCircle title:@"圆形"];
+                custemCollectionView.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:custemCollectionView animated:YES];
+            }
+            else if (indexPath.row == 4)
             {
                 // 横向 tableview
                 OneHorizontalTableViewController * horizontalVC = [[OneHorizontalTableViewController alloc] init];

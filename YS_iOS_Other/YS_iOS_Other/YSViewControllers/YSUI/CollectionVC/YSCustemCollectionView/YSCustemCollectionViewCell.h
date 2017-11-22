@@ -15,4 +15,9 @@
 
 - (void)setYSCustemCollectionViewCellContent:(NSString *)imageStr itemStr:(NSString *)itemStr;
 
+- (void)setStackCellContent:(NSString *)imageStr;
+
+// 圆形
+- (void)setCircleCellContent:(NSString *)imageStr;
+
 @end

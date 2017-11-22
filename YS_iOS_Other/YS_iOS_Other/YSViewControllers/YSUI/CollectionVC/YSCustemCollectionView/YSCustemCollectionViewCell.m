@@ -43,12 +43,29 @@
     return self;
 }
 
+// 瀑布流
 - (void)setYSCustemCollectionViewCellContent:(NSString *)imageStr itemStr:(NSString *)itemStr
 {
     NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
     UIImage * image = [UIImage imageWithContentsOfFile:path];
     _imageView.image = image;
     _itemLabel.text = itemStr;
+}
+
+// 堆叠
+- (void)setStackCellContent:(NSString *)imageStr
+{
+    NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
+    _imageView.image = image;
+}
+
+// 圆形
+- (void)setCircleCellContent:(NSString *)imageStr
+{
+    NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
+    _imageView.image = image;
 }
 
 @end

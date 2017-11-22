@@ -12,13 +12,25 @@
 #import "YSCustemCollectionViewHeadCell.h"
 #import "YSCustemCollectionViewFootCell.h"
 
+#import "YSCustemCollectionStackLayout.h"
+#import "YSCustemCollectionCircleLayout.h"
+
+// 瀑布流
 static NSString * const YSCustemCollectionViewCellID = @"YSCustemCollectionViewCellID";
 static NSString * const YSCustemCollectionViewHeadCellID = @"YSCustemCollectionViewHeadCellID";
 static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionViewFootCellID";
 
+// 堆叠
+static NSString * const YSCustemCollectionViewStackCellID = @"YSCustemCollectionViewStackCellID";
+
+// 圆形
+static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectionViewCircleCellID";
+
 @interface YSCustemCollectionVC ()<YSCustemCollectionViewFlowLayoutDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong) YSCustemCollectionViewFlowLayout * ysCollectionViewFlowLayout;
+@property (nonatomic, strong) YSCustemCollectionStackLayout * ysCollectionViewStackLayout;
+@property (strong, nonatomic)  YSCustemCollectionCircleLayout * ysCollectionViewCircleLayout;
 @property (nonatomic, strong) UICollectionView * collectionView;
 
 
@@ -26,7 +38,18 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 
 @implementation YSCustemCollectionVC
 {
+    YSCustemCollectionViewType _type;
     NSMutableArray * _allSectionDataArr;
+}
+
+- (instancetype)initWithType:(YSCustemCollectionViewType)type title:(NSString *)title
+{
+    self = [super init];
+    if (self) {
+        _type = type;
+        self.title = title;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -46,8 +69,6 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 
 - (void)initUIAndData
 {
-    self.title = @"自定义 CollectionView 布局";
-
     _allSectionDataArr = [NSMutableArray array];
 
     NSMutableArray * sectionZeroImagesMutArr = [NSMutableArray array];
@@ -62,27 +83,65 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 
 - (void)createCollectionView
 {
-    _ysCollectionViewFlowLayout = [[YSCustemCollectionViewFlowLayout alloc] init];
-    _ysCollectionViewFlowLayout.delegate = self;
-    _ysCollectionViewFlowLayout.ysSectionHeadHeightArr = [NSMutableArray arrayWithArray:@[@(80), @(20)]];
-    _ysCollectionViewFlowLayout.ysSectionFootHeightArr = [NSMutableArray arrayWithArray:@[@(45), @(20)]];
-
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewFlowLayout];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_collectionView];
-
-    [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-
-    [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewCellID];
-    [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
-    [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
-
-    UILongPressGestureRecognizer * longGesureToMove = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesureToMove:)];
-    [_collectionView addGestureRecognizer:longGesureToMove];
+    if (_type == YSCustemCollectionViewTypeFallWater) {
+        _ysCollectionViewFlowLayout = [[YSCustemCollectionViewFlowLayout alloc] init];
+        _ysCollectionViewFlowLayout.delegate = self;
+        _ysCollectionViewFlowLayout.ysSectionHeadHeightArr = [NSMutableArray arrayWithArray:@[@(80), @(20)]];
+        _ysCollectionViewFlowLayout.ysSectionFootHeightArr = [NSMutableArray arrayWithArray:@[@(45), @(20)]];
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewFlowLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_collectionView];
+        
+        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
+        
+        UILongPressGestureRecognizer * longGesureToMove = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesureToMove:)];
+        [_collectionView addGestureRecognizer:longGesureToMove];
+    }
+    else if (_type == YSCustemCollectionViewTypeStack) {
+        _ysCollectionViewStackLayout = [[YSCustemCollectionStackLayout alloc] init];
+        _ysCollectionViewStackLayout.itemSize = CGSizeMake(400, 400);
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewStackLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_collectionView];
+        
+        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewStackCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
+    }
+    else if (_type == YSCustemCollectionViewTypeCircle) {
+        _ysCollectionViewCircleLayout = [[YSCustemCollectionCircleLayout alloc] init];
+        _ysCollectionViewCircleLayout.itemSize = CGSizeMake(200, 200);
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewCircleLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_collectionView];
+        
+        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewCircleCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
+    }
 }
 
 - (void)longGesureToMove:(UILongPressGestureRecognizer *)longGesure
@@ -119,6 +178,7 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
     }
 }
 
+// 瀑布流
 #pragma mark - YSCustemCollectionViewFlowLayoutDelegate
 - (CGFloat)ysCustemCollectionView:(UICollectionView *)collectionView
           itemHeightWithIndexPath:(NSIndexPath *)indexPath
@@ -146,20 +206,55 @@ static NSString * const YSCustemCollectionViewFootCellID = @"YSCustemCollectionV
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return [_allSectionDataArr count];
+    if (_type == YSCustemCollectionViewTypeFallWater) {
+        return [_allSectionDataArr count];
+    }
+    else if (_type == YSCustemCollectionViewTypeStack) {
+        return 1;
+    }
+    else {
+        return 1;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[_allSectionDataArr objectAtIndex:section] count];
+    if (_type == YSCustemCollectionViewTypeFallWater) {
+        return [[_allSectionDataArr objectAtIndex:section] count];
+    }
+    else if (_type == YSCustemCollectionViewTypeStack) {
+        return [[_allSectionDataArr objectAtIndex:0] count];
+    }
+    else {
+        return [[_allSectionDataArr objectAtIndex:0] count];
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    YSCustemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:YSCustemCollectionViewCellID forIndexPath:indexPath];
+    NSString * cellid = @"";
+    if (_type == YSCustemCollectionViewTypeFallWater) {
+        cellid = YSCustemCollectionViewCellID;
+    }
+    else if (_type == YSCustemCollectionViewTypeStack) {
+        cellid = YSCustemCollectionViewStackCellID;
+    }
+    else if (_type == YSCustemCollectionViewTypeCircle) {
+        cellid = YSCustemCollectionViewCircleCellID;
+    }
+    
+    YSCustemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellid forIndexPath:indexPath];
     NSMutableArray * images = _allSectionDataArr[indexPath.section];
     if (indexPath.row < [images count]) {
-        [cell setYSCustemCollectionViewCellContent:images[indexPath.row] itemStr:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        if (_type == YSCustemCollectionViewTypeFallWater) {
+            [cell setYSCustemCollectionViewCellContent:images[indexPath.row] itemStr:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        }
+        else if (_type == YSCustemCollectionViewTypeStack) {
+            [cell setStackCellContent:images[indexPath.row]];
+        }
+        else if (_type == YSCustemCollectionViewTypeCircle) {
+            [cell setCircleCellContent:images[indexPath.row]];
+        }
     }
     return cell;
 }
