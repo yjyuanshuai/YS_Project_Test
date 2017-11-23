@@ -14,6 +14,7 @@
 
 #import "YSCustemCollectionStackLayout.h"
 #import "YSCustemCollectionCircleLayout.h"
+#import "YSCustemCollectionViewCardLayout.h"
 
 // 瀑布流
 static NSString * const YSCustemCollectionViewCellID = @"YSCustemCollectionViewCellID";
@@ -26,11 +27,15 @@ static NSString * const YSCustemCollectionViewStackCellID = @"YSCustemCollection
 // 圆形
 static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectionViewCircleCellID";
 
+// 卡片
+static NSString * const YSCustemCollectionViewCardCellID = @"YSCustemCollectionViewCardCellID";
+
 @interface YSCustemCollectionVC ()<YSCustemCollectionViewFlowLayoutDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong) YSCustemCollectionViewFlowLayout * ysCollectionViewFlowLayout;
 @property (nonatomic, strong) YSCustemCollectionStackLayout * ysCollectionViewStackLayout;
 @property (strong, nonatomic)  YSCustemCollectionCircleLayout * ysCollectionViewCircleLayout;
+@property (nonatomic, strong) YSCustemCollectionViewCardLayout * ysCollectionViewCardLayout;
 @property (nonatomic, strong) UICollectionView * collectionView;
 
 
@@ -142,6 +147,26 @@ static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectio
         [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
         [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
     }
+    else if (_type == YSCustemCollectionViewTypeCard) {
+        _ysCollectionViewCardLayout = [[YSCustemCollectionViewCardLayout alloc] init];
+        _ysCollectionViewCardLayout.ysItemSpace = 10;
+        _ysCollectionViewCardLayout.ysSectionEdgeInsets = UIEdgeInsetsMake(10, 0, 10, 0);
+        _ysCollectionViewCardLayout.ysItemSize = CGSizeMake(kScreenWidth - 100, (kScreenWidth - 100)*2);
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewCircleLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_collectionView];
+        
+        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewCardCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
+        [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
+    }
 }
 
 - (void)longGesureToMove:(UILongPressGestureRecognizer *)longGesure
@@ -242,6 +267,9 @@ static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectio
     else if (_type == YSCustemCollectionViewTypeCircle) {
         cellid = YSCustemCollectionViewCircleCellID;
     }
+    else if (_type == YSCustemCollectionViewTypeCard) {
+        cellid = YSCustemCollectionViewCardCellID;
+    }
     
     YSCustemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellid forIndexPath:indexPath];
     NSMutableArray * images = _allSectionDataArr[indexPath.section];
@@ -254,6 +282,9 @@ static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectio
         }
         else if (_type == YSCustemCollectionViewTypeCircle) {
             [cell setCircleCellContent:images[indexPath.row]];
+        }
+        else if (_type == YSCustemCollectionViewTypeCard) {
+            [cell setCardCellContent:images[indexPath.row]];
         }
     }
     return cell;

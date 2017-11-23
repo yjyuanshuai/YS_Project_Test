@@ -15,14 +15,12 @@ UIKIT_EXTERN NSString * const YSCardLayout_SectionFooterKind;
 
 @interface YSCustemCollectionViewCardLayout : UICollectionViewLayout
 
-@property (nonatomic, strong)  NSMutableArray * ysSectionHeadHeightArr;
-@property (nonatomic, strong)  NSMutableArray * ysSectionFootHeightArr;
-
+@property (nonatomic, assign) CGFloat ysSectionHeaderHeight;
+@property (nonatomic, assign) CGFloat ysSectionFooterHeight;
 @property (nonatomic, assign) UIEdgeInsets ysSectionEdgeInsets;
-@property (nonatomic, assign)  CGFloat ysItemSpace;     // item 间间隙
-@property (nonatomic, assign)  CGFloat ysItemScale;     // 缩放比例，仅当只有一个完整的 item 在屏幕可见区域时才有效
-
-@property (nonatomic, assign)  CGSize ysItemSize;       // item size
+@property (nonatomic, assign) CGFloat ysItemSpace;     // item 间间隙
+@property (nonatomic, assign) CGFloat ysItemScale;     // 缩放比例，仅当只有一个完整的 item 在屏幕可见区域时才有效
+@property (nonatomic, assign) CGSize ysItemSize;       // item size
 
 @property (nonatomic, weak) id<YSCustemCollectionViewCardLayoutDelegate> delegate;
 
@@ -38,18 +36,18 @@ UIKIT_EXTERN NSString * const YSCardLayout_SectionFooterKind;
 
 // section header height
 - (CGFloat)ysCollectionView:(UICollectionView *)collectionView
-                    layout:(YSCustemCollectionViewCardLayout *)layout
-  heightForHeaderInSection:(NSInteger)section;
+                     layout:(YSCustemCollectionViewCardLayout *)layout
+   heightForHeaderInSection:(NSInteger)section;
 
 // section footer height
 - (CGFloat)ysCollectionView:(UICollectionView *)collectionView
                     layout:(YSCustemCollectionViewCardLayout *)layout
-  heightForFooterInSection:(NSInteger)section;
+   heightForFooterInSection:(NSInteger)section;;
 
 // section edge insets
 - (UIEdgeInsets)ysCollectionView:(UICollectionView *)collectionView
                           layout:(YSCustemCollectionViewCardLayout *)layout
-             edgeInsetsInSection:(NSInteger)section;
+             edgeInsetsInSection:(NSInteger)section;;
 
 @end
 
