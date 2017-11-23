@@ -87,7 +87,8 @@ static NSString * const YSCustemCollectionViewCircleCellID = @"YSCustemCollectio
         _ysCollectionViewFlowLayout = [[YSCustemCollectionViewFlowLayout alloc] init];
         _ysCollectionViewFlowLayout.delegate = self;
         _ysCollectionViewFlowLayout.ysSectionHeadHeightArr = [NSMutableArray arrayWithArray:@[@(80), @(20)]];
-        _ysCollectionViewFlowLayout.ysSectionFootHeightArr = [NSMutableArray arrayWithArray:@[@(45), @(20)]];
+        _ysCollectionViewFlowLayout.ysSectionFootHeightArr = [NSMutableArray arrayWithArray:@[@(25), @(20)]];
+        _ysCollectionViewFlowLayout.ysColumntCount = 4;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewFlowLayout];
         _collectionView.delegate = self;

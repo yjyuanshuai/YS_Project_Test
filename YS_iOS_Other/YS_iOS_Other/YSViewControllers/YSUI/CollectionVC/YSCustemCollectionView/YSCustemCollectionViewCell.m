@@ -55,6 +55,19 @@
 // 堆叠
 - (void)setStackCellContent:(NSString *)imageStr
 {
+    _itemLabel.hidden = YES;
+    NSArray * consInItemLabel = [MASViewConstraint installedConstraintsForView:_itemLabel];
+    for (MASViewConstraint * con in consInItemLabel) {
+        [con uninstall];
+    }
+    
+    [_imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView);
+        make.left.equalTo(self.contentView);
+        make.right.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView);
+    }];
+    
     NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
     UIImage * image = [UIImage imageWithContentsOfFile:path];
     _imageView.image = image;
@@ -63,9 +76,39 @@
 // 圆形
 - (void)setCircleCellContent:(NSString *)imageStr
 {
+    _itemLabel.hidden = YES;
+    NSArray * consInItemLabel = [MASViewConstraint installedConstraintsForView:_itemLabel];
+    for (MASViewConstraint * con in consInItemLabel) {
+        [con uninstall];
+    }
+    
+    [_imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView);
+        make.left.equalTo(self.contentView);
+        make.right.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView);
+    }];
+    
     NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
     UIImage * image = [UIImage imageWithContentsOfFile:path];
     _imageView.image = image;
+}
+
+// 卡片
+- (void)setCardCellContent:(NSString *)imageStr
+{
+    NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
+    _imageView.image = image;
+}
+
+// 导航风火轮
+- (void)setNavWheelsCellContent:(NSString *)imageStr itemStr:(NSString *)itemStr
+{
+    NSString * path = [[NSBundle mainBundle] pathForResource:imageStr ofType:@"jpg"];
+    UIImage * image = [UIImage imageWithContentsOfFile:path];
+    _imageView.image = image;
+    _itemLabel.text = itemStr;
 }
 
 @end

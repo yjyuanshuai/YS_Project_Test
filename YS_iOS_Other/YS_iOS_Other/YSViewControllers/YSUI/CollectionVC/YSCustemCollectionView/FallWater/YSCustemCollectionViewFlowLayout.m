@@ -153,16 +153,16 @@ NSString * const YSCustemCollectionView_SectionDecorationKind = @"YSCustemCollec
     // 添加当前屏幕可见的 cell / 头 / 尾 视图
     NSMutableArray * allAttrsArr = [NSMutableArray array];
 
-    // cell
-    [_itemAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
-
+    // 头
+    [_sectionHeadAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
+        
         if (CGRectIntersectsRect(rect, attr.frame)) {
             [allAttrsArr addObject:attr];
         }
     }];
-
-    // 头
-    [_sectionHeadAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
+    
+    // cell
+    [_itemAttrsDic enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPath, UICollectionViewLayoutAttributes * attr, BOOL * _Nonnull stop) {
 
         if (CGRectIntersectsRect(rect, attr.frame)) {
             [allAttrsArr addObject:attr];

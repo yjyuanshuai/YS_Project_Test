@@ -2193,6 +2193,7 @@
 				3983C2531FC54ACC00F6B377 /* FallWater */,
 				3983C2561FC54ACC00F6B377 /* Stack */,
 				3983C26B1FC55E5200F6B377 /* Card */,
+				39C5998C1FC672DF0003196B /* NavWheel */,
 			);
 			path = YSCustemCollectionView;
 			sourceTree = "<group>";
@@ -2596,6 +2597,13 @@
 			);
 			name = Notification;
 			path = ../YSOther/Notification;
+			sourceTree = "<group>";
+		};
+		39C5998C1FC672DF0003196B /* NavWheel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NavWheel;
 			sourceTree = "<group>";
 		};
 		39C6219C1D0EABA400A34040 /* Models */ = {
