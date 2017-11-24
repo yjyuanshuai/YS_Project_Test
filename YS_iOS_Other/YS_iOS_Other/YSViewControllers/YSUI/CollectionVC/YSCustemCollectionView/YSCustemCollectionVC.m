@@ -153,7 +153,7 @@ static NSString * const YSCustemCollectionViewCardCellID = @"YSCustemCollectionV
         _ysCollectionViewCardLayout.ysSectionEdgeInsets = UIEdgeInsetsMake(10, 0, 10, 0);
         _ysCollectionViewCardLayout.ysItemSize = CGSizeMake(kScreenWidth - 100, (kScreenWidth - 100)*2);
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewCircleLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_ysCollectionViewCardLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
@@ -164,8 +164,6 @@ static NSString * const YSCustemCollectionViewCardCellID = @"YSCustemCollectionV
         }];
         
         [_collectionView registerClass:[YSCustemCollectionViewCell class] forCellWithReuseIdentifier:YSCustemCollectionViewCardCellID];
-        [_collectionView registerClass:[YSCustemCollectionViewHeadCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID];
-        [_collectionView registerClass:[YSCustemCollectionViewFootCell class] forSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID];
     }
 }
 
@@ -292,15 +290,17 @@ static NSString * const YSCustemCollectionViewCardCellID = @"YSCustemCollectionV
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([kind isEqualToString:YSCustemCollectionView_SectionHeadKind]) {
-        YSCustemCollectionViewHeadCell * headCell = [collectionView dequeueReusableSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID forIndexPath:indexPath];
-        headCell.headLabel.text = @"段头文字";
-        return headCell;
-    }
-    else if ([kind isEqualToString:YSCustemCollectionView_SectionFootKind]) {
-        YSCustemCollectionViewFootCell * footCell = [collectionView dequeueReusableSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID forIndexPath:indexPath];
-        footCell.footLabel.text = @"段尾文字";
-        return footCell;
+    if (_type == YSCustemCollectionViewTypeFallWater) {
+        if ([kind isEqualToString:YSCustemCollectionView_SectionHeadKind]) {
+            YSCustemCollectionViewHeadCell * headCell = [collectionView dequeueReusableSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withReuseIdentifier:YSCustemCollectionViewHeadCellID forIndexPath:indexPath];
+            headCell.headLabel.text = @"段头文字";
+            return headCell;
+        }
+        else if ([kind isEqualToString:YSCustemCollectionView_SectionFootKind]) {
+            YSCustemCollectionViewFootCell * footCell = [collectionView dequeueReusableSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withReuseIdentifier:YSCustemCollectionViewFootCellID forIndexPath:indexPath];
+            footCell.footLabel.text = @"段尾文字";
+            return footCell;
+        }
     }
     return nil;
 }
