@@ -18,7 +18,9 @@
 #import "YSTouchViewController.h"
 
 // 3 黑魔法
+#import "YSRuntimeUse.h"
 #import "GlobalWebVC.h"
+#import "YSCommonListVC.h"
 #import "YS3DTouchVC.h"
 
 //test
@@ -36,6 +38,10 @@ static NSString * const LanguageCellID = @"LanguageCellID";
 {
     NSArray * _sectionTitleArr;
     NSMutableArray * _sectionCellContent;
+    
+    // temp
+    NSMutableArray * _runtimeClassTitleArr;
+    NSMutableArray * _runtimeClassContentArr;
 }
 
 - (void)viewDidLoad {
@@ -44,6 +50,7 @@ static NSString * const LanguageCellID = @"LanguageCellID";
     
     [self initUIAndData];
     [self createTableView];
+    [self getClassContentList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,11 +62,11 @@ static NSString * const LanguageCellID = @"LanguageCellID";
 {
     self.title = @"语言";
 
-    _sectionTitleArr = @[@"1 线程", @"2 触摸", @"3 黑魔法"];
+    _sectionTitleArr = @[@"1 线程", @"2 触摸", @"3 Runtime"];
     
     NSArray * sectionOne    = @[@"GCD", @"NSOperation", @"NSThread", @"test"];
     NSArray * sectionTwo    = @[@"手势", @"自定义手势", @"触摸"];
-    NSArray * sectionThird  = @[@"简介", @"扩展系统方法", @"动态添加属性", @"动态添加方法", @"动态变量控制"];
+    NSArray * sectionThird  = @[@"简介", @"获取列表", @"扩展系统方法", @"动态添加属性", @"动态添加方法", @"动态变量控制"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo, sectionThird] mutableCopy];
 }
@@ -77,6 +84,26 @@ static NSString * const LanguageCellID = @"LanguageCellID";
     [_languageTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:LanguageCellID];
 }
 
+#pragma mark - 数据
+// runtime 获取 class 的各种列表
+- (void)getClassContentList
+{
+    if(!_runtimeClassTitleArr) {
+        _runtimeClassTitleArr = [NSMutableArray array];
+    }
+    if(!_runtimeClassContentArr) {
+        _runtimeClassContentArr = [NSMutableArray array];
+    }
+    
+    _runtimeClassTitleArr = [NSMutableArray arrayWithArray:@[@"属性列表", @"方法列表", @"变量列表", @"协议列表"]];
+    
+    NSMutableArray * propertyList = [YSRuntimeUse getPropertyListForClass:[self class]];
+    NSMutableArray * methodList = [YSRuntimeUse getMethodListForClass:[self class]];
+    NSMutableArray * ivarList = [YSRuntimeUse getIvarListForClass:[self class]];
+    NSMutableArray * protocolList = [YSRuntimeUse getProtocolListForClass:[self class]];
+    
+    [_runtimeClassContentArr addObjectsFromArray:@[propertyList, methodList, ivarList, propertyList]];
+}
 
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -175,7 +202,14 @@ static NSString * const LanguageCellID = @"LanguageCellID";
                 methodSwizzlingVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:methodSwizzlingVC animated:YES];
             }
-            else if (indexPath.row == 1)
+            else if (indexPath.row == 1) {
+                YSCommonListVC * commonListVC = [[YSCommonListVC alloc] initWithType:YSListTypeRuntimeClass title:[NSString stringWithFormat:@"%@列表", NSStringFromClass([self class])]];
+                commonListVC.sectionTitleArr = _runtimeClassTitleArr;
+                commonListVC.contentArr = _runtimeClassContentArr;
+                commonListVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:commonListVC animated:YES];
+            }
+            else if (indexPath.row == 2)
             {
                 YS3DTouchVC * useVC = [[YS3DTouchVC alloc] init];
                 useVC.hidesBottomBarWhenPushed = YES;
@@ -188,5 +222,7 @@ static NSString * const LanguageCellID = @"LanguageCellID";
             break;
     }
 }
+
+
 
 @end

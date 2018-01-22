@@ -66,8 +66,6 @@
 	<string>YS 需要日历的访问权限</string>
 	<key>NSCameraUsageDescription</key>
 	<string>YS 需要访问你的相机</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>YS请求读取“健康”数据权限</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>YS请求更新“健康”数据权限</string>
 	<key>NSPhotoLibraryUsageDescription</key>
