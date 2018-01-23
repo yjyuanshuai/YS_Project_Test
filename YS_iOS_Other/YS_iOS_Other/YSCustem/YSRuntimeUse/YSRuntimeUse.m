@@ -11,8 +11,40 @@
 
 @implementation YSRuntimeUse
 
+#pragma mark - 动态添加方法
+// 隐式调用方法
+- (void)ysPerformSelector
+{
+    [self performSelector:@selector(tempMethod:)];
+}
 
-#pragma mark - class
++ (BOOL)resolveInstanceMethod:(SEL)sel
+{
+    if ([NSStringFromSelector(sel) isEqualToString:@"tempMethod:"]) {
+        // 第4个参数，v->void;   @->对象，self;   :->SEL，_cmd
+        class_addMethod(self, sel, (IMP)runtimeAddMethod, "v@:");
+    }
+    return YES;
+}
+
+// 实际的方法
+void runtimeAddMethod(id self, SEL sel)
+{
+    NSLog(@"---- Runtime 动态添加方法，%@ ---- %@", self, NSStringFromSelector(sel));
+}
+
+#pragma mark - 动态增加类
+- (void)runtimeAddClassWithName:(NSString *)name
+{
+    const char * className = [name cStringUsingEncoding:NSASCIIStringEncoding];
+    // 从类名得到一个类
+    Class newClass = objc_getClass(className);
+    if (!newClass) {
+        // 创建一个类
+    }
+}
+
+#pragma mark - class 列表
 /** 获取属性列表 */
 + (NSMutableArray *)getPropertyListForClass:(Class)currentClass
 {
@@ -25,6 +57,7 @@
         NSString *propertyNameUTF8 = [NSString stringWithUTF8String:propertyName];
         [retArr addObject:propertyNameUTF8];
     }
+    free(propertyList);
     return retArr;
 }
 
@@ -39,6 +72,7 @@
         SEL methodSEL = method_getName(method);
         [retArr addObject:NSStringFromSelector(methodSEL)];
     }
+    free(methodList);
     return retArr;
 }
 
@@ -54,6 +88,7 @@
         NSString *ivarNameUTF8 = [NSString stringWithUTF8String:ivarName];
         [retArr addObject:ivarNameUTF8];
     }
+    free(ivarList);
     return retArr;
 }
 
@@ -69,7 +104,7 @@
         NSString * protocolNameUTF8 = [NSString stringWithUTF8String:protocolName];
         [retArr addObject:protocolNameUTF8];
     }
-    
+    free(protocolList);
     return retArr;
 }
 

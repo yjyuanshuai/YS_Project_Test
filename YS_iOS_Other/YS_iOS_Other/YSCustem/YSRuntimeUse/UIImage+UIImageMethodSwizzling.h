@@ -10,4 +10,6 @@
 
 @interface UIImage (UIImageMethodSwizzling)
 
+@property (nonatomic, copy) NSString * name;
+
 @end

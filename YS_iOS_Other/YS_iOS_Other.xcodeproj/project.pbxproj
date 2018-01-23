@@ -150,6 +150,7 @@
 		3939864C1E4D915500B1553C /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3939864B1E4D915500B1553C /* ImagePickerManager.m */; };
 		393A07841D475B15005114B1 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 393A07831D475B15005114B1 /* MBProgressHUD.m */; };
 		393A07871D475B4A005114B1 /* YSHudView.m in Sources */ = {isa = PBXBuildFile; fileRef = 393A07861D475B4A005114B1 /* YSHudView.m */; };
+		393F67E220172966002EEA37 /* UIImage+UIImageMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 393F67E120172966002EEA37 /* UIImage+UIImageMethodSwizzling.m */; };
 		3942A5761EEF8DC000C14E95 /* YSMenuTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3942A5751EEF8DC000C14E95 /* YSMenuTextField.m */; };
 		394594501D3875A70017F4A3 /* YSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945944D1D3875A70017F4A3 /* YSRootViewController.m */; };
 		394594511D3875A70017F4A3 /* YSTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3945944F1D3875A70017F4A3 /* YSTabBarController.m */; };
@@ -403,7 +404,6 @@
 		39E9C3001FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E9C2FF1FB4543400E86D7A /* YSAnimationDetailCollectionViewCell.m */; };
 		39EA8ECA1D40BB6C0053EE02 /* YSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8EC91D40BB6C0053EE02 /* YSLoginViewController.m */; };
 		39EA8ECD1D40BB7D0053EE02 /* YSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EA8ECC1D40BB7D0053EE02 /* YSRegisterViewController.m */; };
-		39EB21C41F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EB21C31F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m */; };
 		39FAEA8D1DE564CF000B37E0 /* AudioPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FAEA8C1DE564CF000B37E0 /* AudioPlayerVC.m */; };
 		50D75D14D975D3AE20792831 /* libPods-YS_iOS_Other.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD2527BB6BD7D815F0CCF07 /* libPods-YS_iOS_Other.a */; };
 /* End PBXBuildFile section */
@@ -693,6 +693,8 @@
 		393A07831D475B15005114B1 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		393A07851D475B4A005114B1 /* YSHudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHudView.h; sourceTree = "<group>"; };
 		393A07861D475B4A005114B1 /* YSHudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSHudView.m; sourceTree = "<group>"; };
+		393F67E020172966002EEA37 /* UIImage+UIImageMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageMethodSwizzling.h"; sourceTree = "<group>"; };
+		393F67E120172966002EEA37 /* UIImage+UIImageMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageMethodSwizzling.m"; sourceTree = "<group>"; };
 		3942A5741EEF8DC000C14E95 /* YSMenuTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMenuTextField.h; sourceTree = "<group>"; };
 		3942A5751EEF8DC000C14E95 /* YSMenuTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSMenuTextField.m; sourceTree = "<group>"; };
 		3945944C1D3875A70017F4A3 /* YSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRootViewController.h; sourceTree = "<group>"; };
@@ -1028,8 +1030,6 @@
 		39EA8EC91D40BB6C0053EE02 /* YSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSLoginViewController.m; sourceTree = "<group>"; };
 		39EA8ECB1D40BB7D0053EE02 /* YSRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSRegisterViewController.h; sourceTree = "<group>"; };
 		39EA8ECC1D40BB7D0053EE02 /* YSRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSRegisterViewController.m; sourceTree = "<group>"; };
-		39EB21C21F62927F00470B89 /* UIImage+UIImageMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImageMethodSwizzling.h"; sourceTree = "<group>"; };
-		39EB21C31F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImageMethodSwizzling.m"; sourceTree = "<group>"; };
 		39FAEA8B1DE564CF000B37E0 /* AudioPlayerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayerVC.h; sourceTree = "<group>"; };
 		39FAEA8C1DE564CF000B37E0 /* AudioPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayerVC.m; sourceTree = "<group>"; };
 		63927F4C004D73FD33E1F045 /* Pods-YS_iOS_Other.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YS_iOS_Other.release.xcconfig"; path = "Pods/Target Support Files/Pods-YS_iOS_Other/Pods-YS_iOS_Other.release.xcconfig"; sourceTree = "<group>"; };
@@ -2445,8 +2445,6 @@
 		39BBEA641D5DA42E00F192F2 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
-				39EB21C21F62927F00470B89 /* UIImage+UIImageMethodSwizzling.h */,
-				39EB21C31F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m */,
 				39BBEA651D5DA46500F192F2 /* UIImage+YSImageCategare.h */,
 				39BBEA661D5DA46500F192F2 /* UIImage+YSImageCategare.m */,
 			);
@@ -2590,6 +2588,8 @@
 		39D7A3A22015D4800038DA80 /* YSRuntimeUse */ = {
 			isa = PBXGroup;
 			children = (
+				393F67E020172966002EEA37 /* UIImage+UIImageMethodSwizzling.h */,
+				393F67E120172966002EEA37 /* UIImage+UIImageMethodSwizzling.m */,
 				39D7A3A32015D4A50038DA80 /* YSRuntimeUse.h */,
 				39D7A3A42015D4A50038DA80 /* YSRuntimeUse.m */,
 			);
@@ -3126,7 +3126,6 @@
 				3928DEF21F02556000A7F38A /* CustemSearchViewController.m in Sources */,
 				391A2EA21E093EA30075CFD3 /* FriendCircleTableViewCell.m in Sources */,
 				3928DF2F1F02570A00A7F38A /* YSDefaultsViewController.m in Sources */,
-				39EB21C41F62927F00470B89 /* UIImage+UIImageMethodSwizzling.m in Sources */,
 				393986491E4D8E9900B1553C /* CameraOrImageListVC.m in Sources */,
 				3928DF281F02570A00A7F38A /* XmlViewController.m in Sources */,
 				3983C2651FC54ACD00F6B377 /* YSCustemCollectionViewCell.m in Sources */,
@@ -3173,6 +3172,7 @@
 				39D7A3B72015ED6A0038DA80 /* FriendCircleModel.m in Sources */,
 				395ACEA41D937D4F00C22165 /* UIView+UniformDistribution.m in Sources */,
 				39C1C4291F6A206E00AF836B /* YSNotificationVC.m in Sources */,
+				393F67E220172966002EEA37 /* UIImage+UIImageMethodSwizzling.m in Sources */,
 				3983C26E1FC55E8600F6B377 /* YSCustemCollectionViewCardLayout.m in Sources */,
 				3928DEE91F02550A00A7F38A /* ApplicationSettingViewController.m in Sources */,
 				39333BF41DE2CE9A00035157 /* YSCoreTextViewController.m in Sources */,

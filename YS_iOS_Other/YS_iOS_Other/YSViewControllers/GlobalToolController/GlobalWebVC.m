@@ -51,11 +51,10 @@
     NSURL * url = [NSURL URLWithString:_currentUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [_webView loadRequest:request];
-    
-    _webView.navigationDelegate = self;
-    _webView.UIDelegate = self;
-    
     [self.view addSubview:_webView];
+    
+//    _webView.navigationDelegate = self;
+//    _webView.UIDelegate = self;
 }
 
 #pragma mark - WKUIDelegate
@@ -66,14 +65,21 @@
 /// 创建一个新的WebView
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
 {return nil;}
-/// 输入框
+
+/// 弹出一个输入框（与JS交互的）
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler
 {}
-/// 确认框
+
+/// 显示一个确认框（JS的）
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler
 {}
-/// 警告框
+
+/// 显示一个JS的Alert（与JS交互）
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{}
+
+/// WebVeiw关闭（9.0中的新方法）
+- (void)webViewDidClose:(WKWebView *)webView
 {}
 
 
@@ -92,33 +98,37 @@
  *  最常用，和UIWebViewDelegate功能类似，追踪加载过程，有是否允许加载、开始加载、加载完成、加载失败。下面会对函数做简单的说明，并用数字标出调用的先后次序：1-2-3-4-5
  */
 
-
 //------------------------ 追踪加载过程的函数 ----------------------//
 // 2 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {}
+
 // 4 开始获取到网页内容时返回
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {}
+
 // 5 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {}
+
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation
 {}
-
-
 
 //------------------------ 是否允许加载的函数 ----------------------//
 // 接收到服务器跳转请求之后调用(服务器端redirect)，不一定调用
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation
 {}
+
 // 3 在收到服务器的响应头，根据response相关信息，决定是否跳转。decisionHandler必须调用，来决定是否跳转，参数WKNavigationActionPolicyCancel取消跳转，WKNavigationActionPolicyAllow允许跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler
 {}
+
 // 1 在发送请求之前，决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {}
+
+
 
 
 @end

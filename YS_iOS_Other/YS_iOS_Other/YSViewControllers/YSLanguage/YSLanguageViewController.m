@@ -66,7 +66,7 @@ static NSString * const LanguageCellID = @"LanguageCellID";
     
     NSArray * sectionOne    = @[@"GCD", @"NSOperation", @"NSThread", @"test"];
     NSArray * sectionTwo    = @[@"手势", @"自定义手势", @"触摸"];
-    NSArray * sectionThird  = @[@"简介", @"获取列表", @"扩展系统方法", @"动态添加属性", @"动态添加方法", @"动态变量控制"];
+    NSArray * sectionThird  = @[@"简介", @"1.获取列表", @"2.扩展系统方法（黑魔法）", @"3.动态添加方法", @"4.动态添加属性"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo, sectionThird] mutableCopy];
 }
@@ -102,9 +102,8 @@ static NSString * const LanguageCellID = @"LanguageCellID";
     NSMutableArray * ivarList = [YSRuntimeUse getIvarListForClass:[self class]];
     NSMutableArray * protocolList = [YSRuntimeUse getProtocolListForClass:[self class]];
     
-    [_runtimeClassContentArr addObjectsFromArray:@[propertyList, methodList, ivarList, propertyList]];
+    [_runtimeClassContentArr addObjectsFromArray:@[propertyList, methodList, ivarList, protocolList]];
 }
-
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -198,23 +197,34 @@ static NSString * const LanguageCellID = @"LanguageCellID";
         {
             if (indexPath.row == 0)
             {
+                // 简介
                 GlobalWebVC * methodSwizzlingVC = [[GlobalWebVC alloc] initWithTitle:@"黑魔法" webUrl:YSURL_MethodSwizzling];
                 methodSwizzlingVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:methodSwizzlingVC animated:YES];
             }
             else if (indexPath.row == 1) {
+                // 1.获取列表
                 YSCommonListVC * commonListVC = [[YSCommonListVC alloc] initWithType:YSListTypeRuntimeClass title:[NSString stringWithFormat:@"%@列表", NSStringFromClass([self class])]];
                 commonListVC.sectionTitleArr = _runtimeClassTitleArr;
                 commonListVC.contentArr = _runtimeClassContentArr;
                 commonListVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:commonListVC animated:YES];
             }
-            else if (indexPath.row == 2)
-            {
-                YS3DTouchVC * useVC = [[YS3DTouchVC alloc] init];
-                useVC.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:useVC animated:YES];
+            else if (indexPath.row == 2 || indexPath.row == 4) {
+                // 2.扩展系统方法（黑魔法）
+                // 4.动态添加属性
             }
+            else if (indexPath.row == 3) {
+                // 3.动态添加方法
+                YSRuntimeUse * runtimeUse = [[YSRuntimeUse alloc] init];
+                [runtimeUse ysPerformSelector];
+            }
+//            else if (indexPath.row == 2)
+//            {
+//                YS3DTouchVC * useVC = [[YS3DTouchVC alloc] init];
+//                useVC.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:useVC animated:YES];
+//            }
         }
             break;
             
@@ -222,7 +232,6 @@ static NSString * const LanguageCellID = @"LanguageCellID";
             break;
     }
 }
-
 
 
 @end

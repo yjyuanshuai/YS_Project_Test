@@ -28,7 +28,6 @@ static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
     self = [super init];
     if (self) {
         self.title = title;
-        self.custemView = nil;
         _type = type;
     }
     return self;
@@ -45,13 +44,16 @@ static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
     return self;
 }
 
-//- (void)loadView
-//{
-//    if (self.custemView) {
-//        self.view = self.custemView;
-//        self.view.backgroundColor = [UIColor whiteColor];
-//    }
-//}
+- (void)loadView
+{
+    if (self.custemView) {
+        self.view = self.custemView;
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
+    else {
+        [super loadView];
+    }
+}
 
 #ifdef __IPHONE_7_0
 - (UIRectEdge)edgesForExtendedLayout {
@@ -91,7 +93,7 @@ static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
     _listTableView.delegate = self;
     _listTableView.dataSource = self;
     _listTableView.tableFooterView = [UIView new];
-    _listTableView.rowHeight = 80;
+    _listTableView.rowHeight = 40;
     _listTableView.estimatedRowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:_listTableView];
     
@@ -131,7 +133,7 @@ static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
 {
     NSString * sectionTitle = _sectionTitleArr[section];
     if(![sectionTitle isBlank]){
-        return 50;
+        return 45;
     }
     return 0.01;
 }
@@ -148,10 +150,10 @@ static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
 {
     NSString * sectionTitle = _sectionTitleArr[section];
     if(![sectionTitle isBlank]){
-        UIView * sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+        UIView * sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45)];
         sectionHeaderView.backgroundColor = YSColorDefault;
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, kScreenWidth-20, 50)];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, kScreenWidth-20, 45)];
         label.backgroundColor = [UIColor clearColor];
         label.font = YSFont_Sys(14);
         label.textAlignment = NSTextAlignmentLeft;
