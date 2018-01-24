@@ -2170,7 +2170,6 @@
 				398D17FA1F025CA9001734C3 /* YSHeadFile */,
 				398D18001F025CA9001734C3 /* YSImages */,
 				398D18931F025CA9001734C3 /* YSProjectSetting */,
-				398D189B1F025CA9001734C3 /* YSVideos */,
 			);
 			path = YSSourcesFile;
 			sourceTree = "<group>";
@@ -2406,13 +2405,6 @@
 				398D18991F025CA9001734C3 /* sqlKnowledge.plist */,
 			);
 			path = YSProjectSetting;
-			sourceTree = "<group>";
-		};
-		398D189B1F025CA9001734C3 /* YSVideos */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = YSVideos;
 			sourceTree = "<group>";
 		};
 		39B097011EF0E23700605D85 /* NSAttributedString */ = {

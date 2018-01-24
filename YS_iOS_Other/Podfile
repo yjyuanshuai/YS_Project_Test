@@ -1,5 +1,6 @@
 
 platform:ios,'8.3'
+
 target "YS_iOS_Other" do
 pod 'BaiduMapKit','~>3.0.0'
 pod 'Masonry','~>1.1.0'

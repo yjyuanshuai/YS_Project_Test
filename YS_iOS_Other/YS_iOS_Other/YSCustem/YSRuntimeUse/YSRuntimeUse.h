@@ -17,6 +17,7 @@
 - (void)ysPerformSelector;
 
 #pragma mark - 动态增加类
+- (void)runtimeAddClassWithName:(NSString *)name;
 
 #pragma mark - class 列表
 /** 获取属性列表 */

@@ -66,7 +66,7 @@ static NSString * const LanguageCellID = @"LanguageCellID";
     
     NSArray * sectionOne    = @[@"GCD", @"NSOperation", @"NSThread", @"test"];
     NSArray * sectionTwo    = @[@"手势", @"自定义手势", @"触摸"];
-    NSArray * sectionThird  = @[@"简介", @"1.获取列表", @"2.扩展系统方法（黑魔法）", @"3.动态添加方法", @"4.动态添加属性"];
+    NSArray * sectionThird  = @[@"简介", @"1.获取列表", @"2.扩展系统方法（黑魔法）", @"3.动态添加方法", @"4.动态添加属性", @"5.动态加类"];
     
     _sectionCellContent = [@[sectionOne, sectionTwo, sectionThird] mutableCopy];
 }
@@ -210,15 +210,25 @@ static NSString * const LanguageCellID = @"LanguageCellID";
                 commonListVC.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:commonListVC animated:YES];
             }
-            else if (indexPath.row == 2 || indexPath.row == 4) {
+            else if (indexPath.row == 2 ||
+                     indexPath.row == 4) {
                 // 2.扩展系统方法（黑魔法）
                 // 4.动态添加属性
             }
-            else if (indexPath.row == 3) {
+            else if (indexPath.row == 3 ||
+                     indexPath.row == 5) {
                 // 3.动态添加方法
+                // 5.动态加类
                 YSRuntimeUse * runtimeUse = [[YSRuntimeUse alloc] init];
-                [runtimeUse ysPerformSelector];
+                if (indexPath.row == 3) {
+                    [runtimeUse ysPerformSelector];
+                }
+                else if (indexPath.row == 5) {
+                    [runtimeUse runtimeAddClassWithName:@"YSRuntimeAddClass"];
+                }
+                
             }
+            
 //            else if (indexPath.row == 2)
 //            {
 //                YS3DTouchVC * useVC = [[YS3DTouchVC alloc] init];

@@ -40,8 +40,32 @@ void runtimeAddMethod(id self, SEL sel)
     // 从类名得到一个类
     Class newClass = objc_getClass(className);
     if (!newClass) {
-        // 创建一个类
+        // 1. 创建一个类
+        /**
+         参数3：size_t extraBytes，该参数是分配给类和元类对象尾部的索引ivars的字节数，通常指定为 0.
+         */
+        newClass = objc_allocateClassPair([NSObject class], className, 0);
+        
+        // 2. 添加 ivar
+        class_addIvar(newClass, "_name", sizeof(NSString *), log2(sizeof(NSString *)), @encode(NSString *));
+        class_addIvar(newClass, "_age", sizeof(NSUInteger), log2(sizeof(NSUInteger)), @encode(NSUInteger));
+        
+        // 3. 注册类
+        objc_registerClassPair(newClass);
     }
+    
+    // 创建实例
+    id newClassInstance = [[newClass alloc] init];
+    // 设置 ivar
+    [newClassInstance setValue:@"Nancey" forKey:@"name"];
+    Ivar ageIvar = class_getInstanceVariable(newClass, "_age");
+    object_setIvar(newClassInstance, ageIvar, @18);
+    // 打印对象的属性值
+    NSLog(@"class: %@, name = %@, age = %@", newClassInstance, [newClassInstance valueForKey:@"name"], object_getIvar(newClassInstance, ageIvar));
+    // 当类或者它的子类的实例还存在，则不能调用objc_disposeClassPair方法
+    newClassInstance = nil;
+    // 销毁类
+    objc_disposeClassPair(newClass);
 }
 
 #pragma mark - class 列表
