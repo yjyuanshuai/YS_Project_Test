@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, YSListType)
 {
     YSListTypeDefault,          // 默认，传入 View
     YSListTypeCalendarEvent,    // 日历事件
-    YSListTypeRuntimeClass      // 获取 class 中各种列表
+    YSListTypeRuntimeClass,      // 获取 class 中各种列表
+    YSListTypePicture           // 图片
 };
 
 @interface YSCommonListVC : YSRootViewController

@@ -8,6 +8,7 @@
 
 #import "YSCommonListVC.h"
 #import "NSString+YSStringDo.h"
+#import "UIImage+YSImageCategare.h"
 
 static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
 
@@ -169,6 +170,32 @@ static NSString * const YSCommonListVCCellID = @"YSCommonListVCCellID";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    switch (_type) {
+        case YSListTypePicture:
+        {
+            // 图片
+            switch (indexPath.section) {
+                case 0: // 截屏
+                {
+                    if (indexPath.row == 0) {
+                        // layer
+                        UIImage *screenShotView = [UIImage screenshotWithCurrentView:self.view saveInPhoneLibrary:YES];
+                    }
+                    else if (indexPath.row == 1) {
+                        // Sprite
+                    }
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

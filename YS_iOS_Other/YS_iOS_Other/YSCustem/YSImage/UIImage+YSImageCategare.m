@@ -10,6 +10,7 @@
 
 @implementation UIImage (YSImageCategare)
 
+#pragma mark - 图片操作
 /**
  *  颜色转图片
  */
@@ -40,6 +41,26 @@
     // 生成可以拉伸指定位置的图片
     UIImage *newImage = [originImage resizableImageWithCapInsets:UIEdgeInsetsMake(top, w, bottom, w) resizingMode:UIImageResizingModeStretch];
     return newImage;
+}
+
+#pragma mark - 截屏
+/**
+ *  layer
+ */
++ (UIImage *)screenshotWithCurrentView:(UIView *)currentView saveInPhoneLibrary:(BOOL)saveInPhoneLibrary
+{
+    UIGraphicsBeginImageContext(currentView.frame.size); //currentView 当前的view
+    [currentView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    dispatch_async(dispatch_queue_create("com.yjyuanshuai.Temp.screenShot", NULL), ^{
+        if (saveInPhoneLibrary) {
+            UIImageWriteToSavedPhotosAlbum(viewImage,nil,nil,nil);
+        }
+    });
+    
+    return viewImage;
 }
 
 @end

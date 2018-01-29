@@ -10,6 +10,7 @@
 
 @interface UIImage (YSImageCategare)
 
+#pragma mark - 图片操作
 /**
  *  颜色转图片
  */
@@ -24,5 +25,11 @@
  *  对话气泡
  */
 + (UIImage *)chatImageWithOriginImage:(NSString *)image;
+
+#pragma mark - 截屏
+/**
+ *  layer
+ */
++ (UIImage *)screenshotWithCurrentView:(UIView *)currentView saveInPhoneLibrary:(BOOL)saveInPhoneLibrary;
 
 @end

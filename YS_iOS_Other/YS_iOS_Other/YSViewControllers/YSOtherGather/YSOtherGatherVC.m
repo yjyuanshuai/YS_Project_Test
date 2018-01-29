@@ -14,6 +14,10 @@
 #import "YSHarewareViewController.h"
 #import "YSAnimationsViewController.h"
 
+// 2 渲染
+// 2-2 图片
+#import "YSCommonListVC.h"
+
 
 @interface YSOtherGatherVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -172,7 +176,12 @@
                 // 文字
             }
             else if (indexPath.row == 1) {
-                // 图片处理
+                // 图片
+                YSCommonListVC * picVC = [[YSCommonListVC alloc] initWithType:(YSListType)YSListTypePicture title:@"图片"];
+                picVC.hidesBottomBarWhenPushed = YES;
+                picVC.sectionTitleArr = [NSMutableArray arrayWithArray:@[@"截屏"]];
+                picVC.contentArr = [NSMutableArray arrayWithArray:@[@[@"layer", @"Sprite"]]];
+                [self.navigationController pushViewController:picVC animated:YES];
             }
             else if (indexPath.row == 2) {
                 // 动画
