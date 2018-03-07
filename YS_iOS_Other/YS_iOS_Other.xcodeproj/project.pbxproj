@@ -1246,14 +1246,15 @@
 		39214A421D05449D0019422D /* YSViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				398D17FD1F025CA9001734C3 /* IntroduceFile.h */,
 				39214A121D05203B0019422D /* AppDelegate.h */,
 				39214A131D05203B0019422D /* AppDelegate.m */,
 				3945944B1D3875A70017F4A3 /* GlobalCustemController */,
 				39865E5C1E71266B0095B6C1 /* GlobalToolController */,
 				39EA8EC71D40BB4A0053EE02 /* LoginAndRegisterVC */,
-				3928DE981F02532100A7F38A /* YSLanguage */,
 				39214A471D0548D90019422D /* YSUI */,
 				3928DEF61F02570A00A7F38A /* YSSaveData */,
+				3928DE981F02532100A7F38A /* YSLanguage */,
 				394594561D38766C0017F4A3 /* YSWeb */,
 				392148861DDED36500EBCFC1 /* YSOtherGather */,
 			);
@@ -2190,7 +2191,6 @@
 			children = (
 				398D17FB1F025CA9001734C3 /* GlobalEnum.h */,
 				398D17FC1F025CA9001734C3 /* GlobalString.h */,
-				398D17FD1F025CA9001734C3 /* IntroduceFile.h */,
 				398D17FE1F025CA9001734C3 /* YSDevSettingFile.h */,
 				398D17FF1F025CA9001734C3 /* YSSetting.pch */,
 			);
@@ -2758,8 +2758,8 @@
 				TargetAttributes = {
 					39214A0B1D05203B0019422D = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = MNH692X4AB;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 4F89HP74FZ;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
 								enabled = 1;
@@ -3413,10 +3413,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YS_iOS_Other/YS_iOS_Other.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MNH692X4AB;
+				CODE_SIGN_IDENTITY = "iPhone Developer: JUAN YUAN (VXR55GNZJL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JUAN YUAN (VXR55GNZJL)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 4F89HP74FZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/YS_iOS_Other/Libs/ShareSDK/Required",
@@ -3437,10 +3437,10 @@
 					"$(PROJECT_DIR)/YS_iOS_Other/Libs/ShareSDK/SDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/YS_iOS_Other/Libs/ShareSDK/SDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yjyuanshuai.yjoctest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuanshuaijy.yjoctest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "28d36e1b-5e75-4325-978d-beafcf4c6fd3";
+				PROVISIONING_PROFILE_SPECIFIER = YJDemoDevProfile;
 			};
 			name = Debug;
 		};
@@ -3451,10 +3451,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YS_iOS_Other/YS_iOS_Other.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MNH692X4AB;
+				CODE_SIGN_IDENTITY = "iPhone Developer: JUAN YUAN (VXR55GNZJL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: JUAN YUAN (VXR55GNZJL)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 4F89HP74FZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/YS_iOS_Other/Libs/ShareSDK/Required",
@@ -3475,10 +3475,10 @@
 					"$(PROJECT_DIR)/YS_iOS_Other/Libs/ShareSDK/SDK/Support/PlatformSDK/SinaWeiboSDK",
 					"$(PROJECT_DIR)/YS_iOS_Other/Libs/ShareSDK/SDK/Support/PlatformSDK/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yjyuanshuai.yjoctest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuanshuaijy.yjoctest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "28d36e1b-5e75-4325-978d-beafcf4c6fd3";
+				PROVISIONING_PROFILE_SPECIFIER = YJDemoDevProfile;
 			};
 			name = Release;
 		};
